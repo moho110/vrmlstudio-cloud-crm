@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfDictDanyuanzhuangtaiMapper">
+    
+    <resultMap type="CmfDictDanyuanzhuangtai" id="CmfDictDanyuanzhuangtaiResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfDictDanyuanzhuangtaiVo">
+        select id, Name from cmf_dict_danyuanzhuangtai
+    </sql>
+
+    <select id="selectCmfDictDanyuanzhuangtaiList" parameterType="CmfDictDanyuanzhuangtai" resultMap="CmfDictDanyuanzhuangtaiResult">
+        <include refid="selectCmfDictDanyuanzhuangtaiVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDictDanyuanzhuangtaiById" parameterType="Integer" resultMap="CmfDictDanyuanzhuangtaiResult">
+        <include refid="selectCmfDictDanyuanzhuangtaiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDictDanyuanzhuangtai" parameterType="CmfDictDanyuanzhuangtai" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dict_danyuanzhuangtai
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDictDanyuanzhuangtai" parameterType="CmfDictDanyuanzhuangtai">
+        update cmf_dict_danyuanzhuangtai
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDictDanyuanzhuangtaiById" parameterType="Integer">
+        delete from cmf_dict_danyuanzhuangtai where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDictDanyuanzhuangtaiByIds" parameterType="String">
+        delete from cmf_dict_danyuanzhuangtai where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfUnitpropMapper">
+    
+    <resultMap type="CmfUnitprop" id="CmfUnitpropResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfUnitpropVo">
+        select id, name, user_id, code, user_flag from cmf_unitprop
+    </sql>
+
+    <select id="selectCmfUnitpropList" parameterType="CmfUnitprop" resultMap="CmfUnitpropResult">
+        <include refid="selectCmfUnitpropVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfUnitpropById" parameterType="Integer" resultMap="CmfUnitpropResult">
+        <include refid="selectCmfUnitpropVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfUnitprop" parameterType="CmfUnitprop" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_unitprop
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfUnitprop" parameterType="CmfUnitprop">
+        update cmf_unitprop
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfUnitpropById" parameterType="Integer">
+        delete from cmf_unitprop where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfUnitpropByIds" parameterType="String">
+        delete from cmf_unitprop where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfCallchuliMapper">
+    
+    <resultMap type="CmfCallchuli" id="CmfCallchuliResult">
+        <result property="id"    column="id"    />
+        <result property="tel"    column="tel"    />
+        <result property="customer"    column="customer"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="content"    column="content"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="ifchuli"    column="ifchuli"    />
+        <result property="chulitime"    column="chulitime"    />
+        <result property="calltype"    column="calltype"    />
+        <result property="callertype"    column="callertype"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="chulicontent"    column="chulicontent"    />
+        <result property="linkmanid"    column="linkmanid"    />
+    </resultMap>
+
+    <sql id="selectCmfCallchuliVo">
+        select id, tel, customer, linkman, content, createman, createtime, ifchuli, chulitime, calltype, callertype, customerid, chulicontent, linkmanid from cmf_callchuli
+    </sql>
+
+    <select id="selectCmfCallchuliList" parameterType="CmfCallchuli" resultMap="CmfCallchuliResult">
+        <include refid="selectCmfCallchuliVo"/>
+        <where>  
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="customer != null  and customer != ''"> and customer = #{customer}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="ifchuli != null "> and ifchuli = #{ifchuli}</if>
+            <if test="chulitime != null "> and chulitime = #{chulitime}</if>
+            <if test="calltype != null  and calltype != ''"> and calltype = #{calltype}</if>
+            <if test="callertype != null  and callertype != ''"> and callertype = #{callertype}</if>
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="chulicontent != null  and chulicontent != ''"> and chulicontent = #{chulicontent}</if>
+            <if test="linkmanid != null "> and linkmanid = #{linkmanid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCallchuliById" parameterType="Integer" resultMap="CmfCallchuliResult">
+        <include refid="selectCmfCallchuliVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCallchuli" parameterType="CmfCallchuli" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_callchuli
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="customer != null and customer != ''">customer,</if>
+            <if test="linkman != null and linkman != ''">linkman,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="ifchuli != null">ifchuli,</if>
+            <if test="chulitime != null">chulitime,</if>
+            <if test="calltype != null and calltype != ''">calltype,</if>
+            <if test="callertype != null and callertype != ''">callertype,</if>
+            <if test="customerid != null">customerid,</if>
+            <if test="chulicontent != null and chulicontent != ''">chulicontent,</if>
+            <if test="linkmanid != null">linkmanid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="customer != null and customer != ''">#{customer},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="ifchuli != null">#{ifchuli},</if>
+            <if test="chulitime != null">#{chulitime},</if>
+            <if test="calltype != null and calltype != ''">#{calltype},</if>
+            <if test="callertype != null and callertype != ''">#{callertype},</if>
+            <if test="customerid != null">#{customerid},</if>
+            <if test="chulicontent != null and chulicontent != ''">#{chulicontent},</if>
+            <if test="linkmanid != null">#{linkmanid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCallchuli" parameterType="CmfCallchuli">
+        update cmf_callchuli
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="customer != null and customer != ''">customer = #{customer},</if>
+            <if test="linkman != null and linkman != ''">linkman = #{linkman},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="ifchuli != null">ifchuli = #{ifchuli},</if>
+            <if test="chulitime != null">chulitime = #{chulitime},</if>
+            <if test="calltype != null and calltype != ''">calltype = #{calltype},</if>
+            <if test="callertype != null and callertype != ''">callertype = #{callertype},</if>
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="chulicontent != null and chulicontent != ''">chulicontent = #{chulicontent},</if>
+            <if test="linkmanid != null">linkmanid = #{linkmanid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCallchuliById" parameterType="Integer">
+        delete from cmf_callchuli where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCallchuliByIds" parameterType="String">
+        delete from cmf_callchuli where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

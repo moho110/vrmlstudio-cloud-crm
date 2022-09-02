@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomeroriginMapper">
+    
+    <resultMap type="CmfCustomerorigin" id="CmfCustomeroriginResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomeroriginVo">
+        select id, name, user_id, code, user_flag from cmf_customerorigin
+    </sql>
+
+    <select id="selectCmfCustomeroriginList" parameterType="CmfCustomerorigin" resultMap="CmfCustomeroriginResult">
+        <include refid="selectCmfCustomeroriginVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomeroriginById" parameterType="Integer" resultMap="CmfCustomeroriginResult">
+        <include refid="selectCmfCustomeroriginVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerorigin" parameterType="CmfCustomerorigin" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customerorigin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerorigin" parameterType="CmfCustomerorigin">
+        update cmf_customerorigin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomeroriginById" parameterType="Integer">
+        delete from cmf_customerorigin where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomeroriginByIds" parameterType="String">
+        delete from cmf_customerorigin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

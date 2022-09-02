@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfSalemodeMapper">
+    
+    <resultMap type="CmfSalemode" id="CmfSalemodeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfSalemodeVo">
+        select id, name, user_id, code, user_flag from cmf_salemode
+    </sql>
+
+    <select id="selectCmfSalemodeList" parameterType="CmfSalemode" resultMap="CmfSalemodeResult">
+        <include refid="selectCmfSalemodeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSalemodeById" parameterType="Integer" resultMap="CmfSalemodeResult">
+        <include refid="selectCmfSalemodeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSalemode" parameterType="CmfSalemode" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_salemode
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSalemode" parameterType="CmfSalemode">
+        update cmf_salemode
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSalemodeById" parameterType="Integer">
+        delete from cmf_salemode where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSalemodeByIds" parameterType="String">
+        delete from cmf_salemode where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfFeiyongtypeMapper">
+    
+    <resultMap type="CmfFeiyongtype" id="CmfFeiyongtypeResult">
+        <result property="id"    column="id"    />
+        <result property="typename"    column="typename"    />
+        <result property="classid"    column="classid"    />
+        <result property="iflock"    column="iflock"    />
+    </resultMap>
+
+    <sql id="selectCmfFeiyongtypeVo">
+        select id, typename, classid, iflock from cmf_feiyongtype
+    </sql>
+
+    <select id="selectCmfFeiyongtypeList" parameterType="CmfFeiyongtype" resultMap="CmfFeiyongtypeResult">
+        <include refid="selectCmfFeiyongtypeVo"/>
+        <where>  
+            <if test="typename != null  and typename != ''"> and typename like concat('%', #{typename}, '%')</if>
+            <if test="classid != null "> and classid = #{classid}</if>
+            <if test="iflock != null "> and iflock = #{iflock}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFeiyongtypeById" parameterType="Integer" resultMap="CmfFeiyongtypeResult">
+        <include refid="selectCmfFeiyongtypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFeiyongtype" parameterType="CmfFeiyongtype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_feiyongtype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typename != null and typename != ''">typename,</if>
+            <if test="classid != null">classid,</if>
+            <if test="iflock != null">iflock,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typename != null and typename != ''">#{typename},</if>
+            <if test="classid != null">#{classid},</if>
+            <if test="iflock != null">#{iflock},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFeiyongtype" parameterType="CmfFeiyongtype">
+        update cmf_feiyongtype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typename != null and typename != ''">typename = #{typename},</if>
+            <if test="classid != null">classid = #{classid},</if>
+            <if test="iflock != null">iflock = #{iflock},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFeiyongtypeById" parameterType="Integer">
+        delete from cmf_feiyongtype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFeiyongtypeByIds" parameterType="String">
+        delete from cmf_feiyongtype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

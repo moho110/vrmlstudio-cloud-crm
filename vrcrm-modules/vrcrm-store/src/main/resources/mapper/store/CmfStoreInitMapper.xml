@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStoreInitMapper">
+    
+    <resultMap type="CmfStoreInit" id="CmfStoreInitResult">
+        <result property="id"    column="id"    />
+        <result property="prodid"    column="prodid"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="price"    column="price"    />
+        <result property="num"    column="num"    />
+        <result property="jine"    column="jine"    />
+        <result property="memo"    column="memo"    />
+        <result property="flag"    column="flag"    />
+        <result property="prodname"    column="prodname"    />
+        <result property="guige"    column="guige"    />
+        <result property="xinghao"    column="xinghao"    />
+        <result property="danwei"    column="danwei"    />
+        <result property="typename"    column="typename"    />
+    </resultMap>
+
+    <sql id="selectCmfStoreInitVo">
+        select id, prodid, storeid, price, num, jine, memo, flag, prodname, guige, xinghao, danwei, typename from cmf_store_init
+    </sql>
+
+    <select id="selectCmfStoreInitList" parameterType="CmfStoreInit" resultMap="CmfStoreInitResult">
+        <include refid="selectCmfStoreInitVo"/>
+        <where>  
+            <if test="prodid != null  and prodid != ''"> and prodid = #{prodid}</if>
+            <if test="storeid != null "> and storeid = #{storeid}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="flag != null "> and flag = #{flag}</if>
+            <if test="prodname != null  and prodname != ''"> and prodname like concat('%', #{prodname}, '%')</if>
+            <if test="guige != null  and guige != ''"> and guige = #{guige}</if>
+            <if test="xinghao != null  and xinghao != ''"> and xinghao = #{xinghao}</if>
+            <if test="danwei != null  and danwei != ''"> and danwei = #{danwei}</if>
+            <if test="typename != null  and typename != ''"> and typename like concat('%', #{typename}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStoreInitById" parameterType="Integer" resultMap="CmfStoreInitResult">
+        <include refid="selectCmfStoreInitVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStoreInit" parameterType="CmfStoreInit" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_store_init
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">prodid,</if>
+            <if test="storeid != null">storeid,</if>
+            <if test="price != null">price,</if>
+            <if test="num != null">num,</if>
+            <if test="jine != null">jine,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="flag != null">flag,</if>
+            <if test="prodname != null and prodname != ''">prodname,</if>
+            <if test="guige != null and guige != ''">guige,</if>
+            <if test="xinghao != null and xinghao != ''">xinghao,</if>
+            <if test="danwei != null and danwei != ''">danwei,</if>
+            <if test="typename != null and typename != ''">typename,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">#{prodid},</if>
+            <if test="storeid != null">#{storeid},</if>
+            <if test="price != null">#{price},</if>
+            <if test="num != null">#{num},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="flag != null">#{flag},</if>
+            <if test="prodname != null and prodname != ''">#{prodname},</if>
+            <if test="guige != null and guige != ''">#{guige},</if>
+            <if test="xinghao != null and xinghao != ''">#{xinghao},</if>
+            <if test="danwei != null and danwei != ''">#{danwei},</if>
+            <if test="typename != null and typename != ''">#{typename},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStoreInit" parameterType="CmfStoreInit">
+        update cmf_store_init
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">prodid = #{prodid},</if>
+            <if test="storeid != null">storeid = #{storeid},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="flag != null">flag = #{flag},</if>
+            <if test="prodname != null and prodname != ''">prodname = #{prodname},</if>
+            <if test="guige != null and guige != ''">guige = #{guige},</if>
+            <if test="xinghao != null and xinghao != ''">xinghao = #{xinghao},</if>
+            <if test="danwei != null and danwei != ''">danwei = #{danwei},</if>
+            <if test="typename != null and typename != ''">typename = #{typename},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStoreInitById" parameterType="Integer">
+        delete from cmf_store_init where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStoreInitByIds" parameterType="String">
+        delete from cmf_store_init where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,3 @@
+com\vrcrm\common\datasource\annotation\Master.class
+com\vrcrm\common\datasource\env\ApplicationSeataInitializer.class
+com\vrcrm\common\datasource\annotation\Slave.class

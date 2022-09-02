@@ -1,0 +1,5 @@
+com\vrcrm\auth\controller\TokenController.class
+com\vrcrm\auth\form\LoginBody.class
+com\vrcrm\auth\service\SysLoginService.class
+com\vrcrm\auth\form\RegisterBody.class
+com\vrcrm\auth\VrCrmAuthApplication.class

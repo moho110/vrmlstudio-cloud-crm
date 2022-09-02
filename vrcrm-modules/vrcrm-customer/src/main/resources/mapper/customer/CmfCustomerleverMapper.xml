@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerleverMapper">
+    
+    <resultMap type="CmfCustomerlever" id="CmfCustomerleverResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="relateprice"    column="relatePrice"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerleverVo">
+        select id, name, user_id, code, user_flag, relatePrice from cmf_customerlever
+    </sql>
+
+    <select id="selectCmfCustomerleverList" parameterType="CmfCustomerlever" resultMap="CmfCustomerleverResult">
+        <include refid="selectCmfCustomerleverVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="relateprice != null  and relateprice != ''"> and relatePrice = #{relateprice}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerleverById" parameterType="Integer" resultMap="CmfCustomerleverResult">
+        <include refid="selectCmfCustomerleverVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerlever" parameterType="CmfCustomerlever" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customerlever
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="relateprice != null and relateprice != ''">relatePrice,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="relateprice != null and relateprice != ''">#{relateprice},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerlever" parameterType="CmfCustomerlever">
+        update cmf_customerlever
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="relateprice != null and relateprice != ''">relatePrice = #{relateprice},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerleverById" parameterType="Integer">
+        delete from cmf_customerlever where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerleverByIds" parameterType="String">
+        delete from cmf_customerlever where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfCommlogMapper">
+    
+    <resultMap type="CmfCommlog" id="CmfCommlogResult">
+        <result property="id"    column="id"    />
+        <result property="sysuser"    column="sysuser"    />
+        <result property="userId"    column="user_id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="commdate"    column="commdate"    />
+        <result property="linkmanid"    column="linkmanid"    />
+        <result property="project"    column="project"    />
+        <result property="productid"    column="productid"    />
+        <result property="projectphase"    column="projectphase"    />
+        <result property="iscompete"    column="iscompete"    />
+        <result property="comminfo"    column="comminfo"    />
+        <result property="moniterinfo"    column="moniterinfo"    />
+        <result property="moniterman"    column="moniterman"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfCommlogVo">
+        select id, sysuser, user_id, customerid, commdate, linkmanid, project, productid, projectphase, iscompete, comminfo, moniterinfo, moniterman, user_flag from cmf_commlog
+    </sql>
+
+    <select id="selectCmfCommlogList" parameterType="CmfCommlog" resultMap="CmfCommlogResult">
+        <include refid="selectCmfCommlogVo"/>
+        <where>  
+            <if test="sysuser != null  and sysuser != ''"> and sysuser = #{sysuser}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="commdate != null  and commdate != ''"> and commdate = #{commdate}</if>
+            <if test="linkmanid != null  and linkmanid != ''"> and linkmanid = #{linkmanid}</if>
+            <if test="project != null  and project != ''"> and project = #{project}</if>
+            <if test="productid != null  and productid != ''"> and productid = #{productid}</if>
+            <if test="projectphase != null  and projectphase != ''"> and projectphase = #{projectphase}</if>
+            <if test="iscompete != null  and iscompete != ''"> and iscompete = #{iscompete}</if>
+            <if test="comminfo != null  and comminfo != ''"> and comminfo = #{comminfo}</if>
+            <if test="moniterinfo != null  and moniterinfo != ''"> and moniterinfo = #{moniterinfo}</if>
+            <if test="moniterman != null  and moniterman != ''"> and moniterman = #{moniterman}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCommlogById" parameterType="Integer" resultMap="CmfCommlogResult">
+        <include refid="selectCmfCommlogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCommlog" parameterType="CmfCommlog" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_commlog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sysuser != null and sysuser != ''">sysuser,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="customerid != null">customerid,</if>
+            <if test="commdate != null and commdate != ''">commdate,</if>
+            <if test="linkmanid != null and linkmanid != ''">linkmanid,</if>
+            <if test="project != null and project != ''">project,</if>
+            <if test="productid != null and productid != ''">productid,</if>
+            <if test="projectphase != null and projectphase != ''">projectphase,</if>
+            <if test="iscompete != null and iscompete != ''">iscompete,</if>
+            <if test="comminfo != null and comminfo != ''">comminfo,</if>
+            <if test="moniterinfo != null and moniterinfo != ''">moniterinfo,</if>
+            <if test="moniterman != null and moniterman != ''">moniterman,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sysuser != null and sysuser != ''">#{sysuser},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="customerid != null">#{customerid},</if>
+            <if test="commdate != null and commdate != ''">#{commdate},</if>
+            <if test="linkmanid != null and linkmanid != ''">#{linkmanid},</if>
+            <if test="project != null and project != ''">#{project},</if>
+            <if test="productid != null and productid != ''">#{productid},</if>
+            <if test="projectphase != null and projectphase != ''">#{projectphase},</if>
+            <if test="iscompete != null and iscompete != ''">#{iscompete},</if>
+            <if test="comminfo != null and comminfo != ''">#{comminfo},</if>
+            <if test="moniterinfo != null and moniterinfo != ''">#{moniterinfo},</if>
+            <if test="moniterman != null and moniterman != ''">#{moniterman},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCommlog" parameterType="CmfCommlog">
+        update cmf_commlog
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="sysuser != null and sysuser != ''">sysuser = #{sysuser},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="commdate != null and commdate != ''">commdate = #{commdate},</if>
+            <if test="linkmanid != null and linkmanid != ''">linkmanid = #{linkmanid},</if>
+            <if test="project != null and project != ''">project = #{project},</if>
+            <if test="productid != null and productid != ''">productid = #{productid},</if>
+            <if test="projectphase != null and projectphase != ''">projectphase = #{projectphase},</if>
+            <if test="iscompete != null and iscompete != ''">iscompete = #{iscompete},</if>
+            <if test="comminfo != null and comminfo != ''">comminfo = #{comminfo},</if>
+            <if test="moniterinfo != null and moniterinfo != ''">moniterinfo = #{moniterinfo},</if>
+            <if test="moniterman != null and moniterman != ''">moniterman = #{moniterman},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCommlogById" parameterType="Integer">
+        delete from cmf_commlog where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCommlogByIds" parameterType="String">
+        delete from cmf_commlog where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

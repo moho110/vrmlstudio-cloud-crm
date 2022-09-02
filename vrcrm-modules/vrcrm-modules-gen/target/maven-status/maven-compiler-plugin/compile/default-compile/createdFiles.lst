@@ -1,0 +1,14 @@
+com\vrcrm\gen\util\GenUtils.class
+com\vrcrm\gen\VrCrmGenApplication.class
+com\vrcrm\gen\controller\GenController.class
+com\vrcrm\gen\mapper\GenTableColumnMapper.class
+com\vrcrm\gen\domain\GenTableColumn.class
+com\vrcrm\gen\service\GenTableColumnServiceImpl.class
+com\vrcrm\gen\service\IGenTableService.class
+com\vrcrm\gen\mapper\GenTableMapper.class
+com\vrcrm\gen\util\VelocityUtils.class
+com\vrcrm\gen\service\IGenTableColumnService.class
+com\vrcrm\gen\config\GenConfig.class
+com\vrcrm\gen\util\VelocityInitializer.class
+com\vrcrm\gen\domain\GenTable.class
+com\vrcrm\gen\service\GenTableServiceImpl.class

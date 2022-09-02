@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfSellplanstateMapper">
+    
+    <resultMap type="CmfSellplanstate" id="CmfSellplanstateResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectCmfSellplanstateVo">
+        select id, name from cmf_sellplanstate
+    </sql>
+
+    <select id="selectCmfSellplanstateList" parameterType="CmfSellplanstate" resultMap="CmfSellplanstateResult">
+        <include refid="selectCmfSellplanstateVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSellplanstateById" parameterType="Integer" resultMap="CmfSellplanstateResult">
+        <include refid="selectCmfSellplanstateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSellplanstate" parameterType="CmfSellplanstate" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sellplanstate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSellplanstate" parameterType="CmfSellplanstate">
+        update cmf_sellplanstate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSellplanstateById" parameterType="Integer">
+        delete from cmf_sellplanstate where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSellplanstateByIds" parameterType="String">
+        delete from cmf_sellplanstate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

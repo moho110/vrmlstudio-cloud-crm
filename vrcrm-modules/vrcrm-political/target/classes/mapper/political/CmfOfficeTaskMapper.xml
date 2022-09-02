@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeTaskMapper">
+    
+    <resultMap type="CmfOfficeTask" id="CmfOfficeTaskResult">
+        <result property="id"    column="id"    />
+        <result property="taskType"    column="TASK_TYPE"    />
+        <result property="interval"    column="INTERVAL"    />
+        <result property="execTime"    column="EXEC_TIME"    />
+        <result property="lastExec"    column="LAST_EXEC"    />
+        <result property="taskUrl"    column="TASK_URL"    />
+        <result property="taskName"    column="TASK_NAME"    />
+        <result property="taskDesc"    column="TASK_DESC"    />
+        <result property="taskCode"    column="TASK_CODE"    />
+        <result property="useFlag"    column="USE_FLAG"    />
+        <result property="sysTask"    column="SYS_TASK"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeTaskVo">
+        select id, TASK_TYPE, INTERVAL, EXEC_TIME, LAST_EXEC, TASK_URL, TASK_NAME, TASK_DESC, TASK_CODE, USE_FLAG, SYS_TASK from cmf_office_task
+    </sql>
+
+    <select id="selectCmfOfficeTaskList" parameterType="CmfOfficeTask" resultMap="CmfOfficeTaskResult">
+        <include refid="selectCmfOfficeTaskVo"/>
+        <where>  
+            <if test="taskType != null  and taskType != ''"> and TASK_TYPE = #{taskType}</if>
+            <if test="interval != null "> and INTERVAL = #{interval}</if>
+            <if test="execTime != null "> and EXEC_TIME = #{execTime}</if>
+            <if test="lastExec != null "> and LAST_EXEC = #{lastExec}</if>
+            <if test="taskUrl != null  and taskUrl != ''"> and TASK_URL = #{taskUrl}</if>
+            <if test="taskName != null  and taskName != ''"> and TASK_NAME like concat('%', #{taskName}, '%')</if>
+            <if test="taskDesc != null  and taskDesc != ''"> and TASK_DESC = #{taskDesc}</if>
+            <if test="taskCode != null  and taskCode != ''"> and TASK_CODE = #{taskCode}</if>
+            <if test="useFlag != null  and useFlag != ''"> and USE_FLAG = #{useFlag}</if>
+            <if test="sysTask != null  and sysTask != ''"> and SYS_TASK = #{sysTask}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeTaskById" parameterType="Integer" resultMap="CmfOfficeTaskResult">
+        <include refid="selectCmfOfficeTaskVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeTask" parameterType="CmfOfficeTask" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_office_task
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="taskType != null and taskType != ''">TASK_TYPE,</if>
+            <if test="interval != null">INTERVAL,</if>
+            <if test="execTime != null">EXEC_TIME,</if>
+            <if test="lastExec != null">LAST_EXEC,</if>
+            <if test="taskUrl != null and taskUrl != ''">TASK_URL,</if>
+            <if test="taskName != null and taskName != ''">TASK_NAME,</if>
+            <if test="taskDesc != null and taskDesc != ''">TASK_DESC,</if>
+            <if test="taskCode != null and taskCode != ''">TASK_CODE,</if>
+            <if test="useFlag != null and useFlag != ''">USE_FLAG,</if>
+            <if test="sysTask != null and sysTask != ''">SYS_TASK,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="taskType != null and taskType != ''">#{taskType},</if>
+            <if test="interval != null">#{interval},</if>
+            <if test="execTime != null">#{execTime},</if>
+            <if test="lastExec != null">#{lastExec},</if>
+            <if test="taskUrl != null and taskUrl != ''">#{taskUrl},</if>
+            <if test="taskName != null and taskName != ''">#{taskName},</if>
+            <if test="taskDesc != null and taskDesc != ''">#{taskDesc},</if>
+            <if test="taskCode != null and taskCode != ''">#{taskCode},</if>
+            <if test="useFlag != null and useFlag != ''">#{useFlag},</if>
+            <if test="sysTask != null and sysTask != ''">#{sysTask},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeTask" parameterType="CmfOfficeTask">
+        update cmf_office_task
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="taskType != null and taskType != ''">TASK_TYPE = #{taskType},</if>
+            <if test="interval != null">INTERVAL = #{interval},</if>
+            <if test="execTime != null">EXEC_TIME = #{execTime},</if>
+            <if test="lastExec != null">LAST_EXEC = #{lastExec},</if>
+            <if test="taskUrl != null and taskUrl != ''">TASK_URL = #{taskUrl},</if>
+            <if test="taskName != null and taskName != ''">TASK_NAME = #{taskName},</if>
+            <if test="taskDesc != null and taskDesc != ''">TASK_DESC = #{taskDesc},</if>
+            <if test="taskCode != null and taskCode != ''">TASK_CODE = #{taskCode},</if>
+            <if test="useFlag != null and useFlag != ''">USE_FLAG = #{useFlag},</if>
+            <if test="sysTask != null and sysTask != ''">SYS_TASK = #{sysTask},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeTaskById" parameterType="Integer">
+        delete from cmf_office_task where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeTaskByIds" parameterType="String">
+        delete from cmf_office_task where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

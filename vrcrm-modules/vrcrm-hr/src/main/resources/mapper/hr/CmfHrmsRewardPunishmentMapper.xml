@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsRewardPunishmentMapper">
+    
+    <resultMap type="CmfHrmsRewardPunishment" id="CmfHrmsRewardPunishmentResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+        <result property="status"    column="status"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="punishmentname"    column="punishmentName"    />
+        <result property="punishmentreason"    column="punishmentReason"    />
+        <result property="punishmentcontent"    column="punishmentContent"    />
+        <result property="approvaldep"    column="approvalDep"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="approvaltime"    column="approvalTime"    />
+        <result property="shengxiaobydate"    column="shengxiaobyDate"    />
+        <result property="memo"    column="memo"    />
+        <result property="canceltime"    column="cancelTime"    />
+        <result property="cancelreason"    column="cancelReason"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsRewardPunishmentVo">
+        select id, type, status, workId, name, inDepartment, punishmentName, punishmentReason, punishmentContent, approvalDep, approvalMan, approvalTime, shengxiaobyDate, memo, cancelTime, cancelReason, creator, createTime from cmf_hrms_reward_punishment
+    </sql>
+
+    <select id="selectCmfHrmsRewardPunishmentList" parameterType="CmfHrmsRewardPunishment" resultMap="CmfHrmsRewardPunishmentResult">
+        <include refid="selectCmfHrmsRewardPunishmentVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="punishmentname != null  and punishmentname != ''"> and punishmentName like concat('%', #{punishmentname}, '%')</if>
+            <if test="punishmentreason != null  and punishmentreason != ''"> and punishmentReason = #{punishmentreason}</if>
+            <if test="punishmentcontent != null  and punishmentcontent != ''"> and punishmentContent = #{punishmentcontent}</if>
+            <if test="approvaldep != null  and approvaldep != ''"> and approvalDep = #{approvaldep}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="approvaltime != null "> and approvalTime = #{approvaltime}</if>
+            <if test="shengxiaobydate != null "> and shengxiaobyDate = #{shengxiaobydate}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="canceltime != null  and canceltime != ''"> and cancelTime = #{canceltime}</if>
+            <if test="cancelreason != null  and cancelreason != ''"> and cancelReason = #{cancelreason}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsRewardPunishmentById" parameterType="Integer" resultMap="CmfHrmsRewardPunishmentResult">
+        <include refid="selectCmfHrmsRewardPunishmentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsRewardPunishment" parameterType="CmfHrmsRewardPunishment" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_reward_punishment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">type,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="punishmentname != null and punishmentname != ''">punishmentName,</if>
+            <if test="punishmentreason != null and punishmentreason != ''">punishmentReason,</if>
+            <if test="punishmentcontent != null and punishmentcontent != ''">punishmentContent,</if>
+            <if test="approvaldep != null and approvaldep != ''">approvalDep,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="approvaltime != null">approvalTime,</if>
+            <if test="shengxiaobydate != null">shengxiaobyDate,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="canceltime != null and canceltime != ''">cancelTime,</if>
+            <if test="cancelreason != null and cancelreason != ''">cancelReason,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="punishmentname != null and punishmentname != ''">#{punishmentname},</if>
+            <if test="punishmentreason != null and punishmentreason != ''">#{punishmentreason},</if>
+            <if test="punishmentcontent != null and punishmentcontent != ''">#{punishmentcontent},</if>
+            <if test="approvaldep != null and approvaldep != ''">#{approvaldep},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="approvaltime != null">#{approvaltime},</if>
+            <if test="shengxiaobydate != null">#{shengxiaobydate},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="canceltime != null and canceltime != ''">#{canceltime},</if>
+            <if test="cancelreason != null and cancelreason != ''">#{cancelreason},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsRewardPunishment" parameterType="CmfHrmsRewardPunishment">
+        update cmf_hrms_reward_punishment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="punishmentname != null and punishmentname != ''">punishmentName = #{punishmentname},</if>
+            <if test="punishmentreason != null and punishmentreason != ''">punishmentReason = #{punishmentreason},</if>
+            <if test="punishmentcontent != null and punishmentcontent != ''">punishmentContent = #{punishmentcontent},</if>
+            <if test="approvaldep != null and approvaldep != ''">approvalDep = #{approvaldep},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="approvaltime != null">approvalTime = #{approvaltime},</if>
+            <if test="shengxiaobydate != null">shengxiaobyDate = #{shengxiaobydate},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="canceltime != null and canceltime != ''">cancelTime = #{canceltime},</if>
+            <if test="cancelreason != null and cancelreason != ''">cancelReason = #{cancelreason},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsRewardPunishmentById" parameterType="Integer">
+        delete from cmf_hrms_reward_punishment where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsRewardPunishmentByIds" parameterType="String">
+        delete from cmf_hrms_reward_punishment where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

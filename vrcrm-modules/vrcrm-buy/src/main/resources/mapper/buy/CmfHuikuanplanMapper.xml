@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfHuikuanplanMapper">
+    
+    <resultMap type="CmfHuikuanplan" id="CmfHuikuanplanResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="dingdanbillid"    column="dingdanbillid"    />
+        <result property="plandate"    column="plandate"    />
+        <result property="qici"    column="qici"    />
+        <result property="jine"    column="jine"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="ifpay"    column="ifpay"    />
+        <result property="billtype"    column="billtype"    />
+    </resultMap>
+
+    <sql id="selectCmfHuikuanplanVo">
+        select id, customerid, dingdanbillid, plandate, qici, jine, createman, createtime, ifpay, billtype from cmf_huikuanplan
+    </sql>
+
+    <select id="selectCmfHuikuanplanList" parameterType="CmfHuikuanplan" resultMap="CmfHuikuanplanResult">
+        <include refid="selectCmfHuikuanplanVo"/>
+        <where>  
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="dingdanbillid != null "> and dingdanbillid = #{dingdanbillid}</if>
+            <if test="plandate != null "> and plandate = #{plandate}</if>
+            <if test="qici != null "> and qici = #{qici}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="ifpay != null  and ifpay != ''"> and ifpay = #{ifpay}</if>
+            <if test="billtype != null "> and billtype = #{billtype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHuikuanplanById" parameterType="Integer" resultMap="CmfHuikuanplanResult">
+        <include refid="selectCmfHuikuanplanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHuikuanplan" parameterType="CmfHuikuanplan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_huikuanplan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">customerid,</if>
+            <if test="dingdanbillid != null">dingdanbillid,</if>
+            <if test="plandate != null">plandate,</if>
+            <if test="qici != null">qici,</if>
+            <if test="jine != null">jine,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="ifpay != null and ifpay != ''">ifpay,</if>
+            <if test="billtype != null">billtype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">#{customerid},</if>
+            <if test="dingdanbillid != null">#{dingdanbillid},</if>
+            <if test="plandate != null">#{plandate},</if>
+            <if test="qici != null">#{qici},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="ifpay != null and ifpay != ''">#{ifpay},</if>
+            <if test="billtype != null">#{billtype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHuikuanplan" parameterType="CmfHuikuanplan">
+        update cmf_huikuanplan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="dingdanbillid != null">dingdanbillid = #{dingdanbillid},</if>
+            <if test="plandate != null">plandate = #{plandate},</if>
+            <if test="qici != null">qici = #{qici},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="ifpay != null and ifpay != ''">ifpay = #{ifpay},</if>
+            <if test="billtype != null">billtype = #{billtype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHuikuanplanById" parameterType="Integer">
+        delete from cmf_huikuanplan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHuikuanplanByIds" parameterType="String">
+        delete from cmf_huikuanplan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

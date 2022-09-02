@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfDictHuxingMapper">
+    
+    <resultMap type="CmfDictHuxing" id="CmfDictHuxingResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfDictHuxingVo">
+        select id, Name from cmf_dict_huxing
+    </sql>
+
+    <select id="selectCmfDictHuxingList" parameterType="CmfDictHuxing" resultMap="CmfDictHuxingResult">
+        <include refid="selectCmfDictHuxingVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDictHuxingById" parameterType="Integer" resultMap="CmfDictHuxingResult">
+        <include refid="selectCmfDictHuxingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDictHuxing" parameterType="CmfDictHuxing" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dict_huxing
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDictHuxing" parameterType="CmfDictHuxing">
+        update cmf_dict_huxing
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDictHuxingById" parameterType="Integer">
+        delete from cmf_dict_huxing where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDictHuxingByIds" parameterType="String">
+        delete from cmf_dict_huxing where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

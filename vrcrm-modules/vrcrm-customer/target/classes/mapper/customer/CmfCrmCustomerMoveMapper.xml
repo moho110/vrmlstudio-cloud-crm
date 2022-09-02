@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCrmCustomerMoveMapper">
+    
+    <resultMap type="CmfCrmCustomerMove" id="CmfCrmCustomerMoveResult">
+        <result property="id"    column="id"    />
+        <result property="clientid"    column="clientId"    />
+        <result property="preuser"    column="preUser"    />
+        <result property="nextuser"    column="nextUser"    />
+        <result property="operator"    column="operator"    />
+        <result property="operatetime"    column="operateTime"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmCustomerMoveVo">
+        select id, clientId, preUser, nextUser, operator, operateTime from cmf_crm_customer_move
+    </sql>
+
+    <select id="selectCmfCrmCustomerMoveList" parameterType="CmfCrmCustomerMove" resultMap="CmfCrmCustomerMoveResult">
+        <include refid="selectCmfCrmCustomerMoveVo"/>
+        <where>  
+            <if test="clientid != null "> and clientId = #{clientid}</if>
+            <if test="preuser != null  and preuser != ''"> and preUser = #{preuser}</if>
+            <if test="nextuser != null  and nextuser != ''"> and nextUser = #{nextuser}</if>
+            <if test="operator != null  and operator != ''"> and operator = #{operator}</if>
+            <if test="operatetime != null "> and operateTime = #{operatetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmCustomerMoveById" parameterType="Integer" resultMap="CmfCrmCustomerMoveResult">
+        <include refid="selectCmfCrmCustomerMoveVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmCustomerMove" parameterType="CmfCrmCustomerMove" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_customer_move
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="clientid != null">clientId,</if>
+            <if test="preuser != null and preuser != ''">preUser,</if>
+            <if test="nextuser != null and nextuser != ''">nextUser,</if>
+            <if test="operator != null and operator != ''">operator,</if>
+            <if test="operatetime != null">operateTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="clientid != null">#{clientid},</if>
+            <if test="preuser != null and preuser != ''">#{preuser},</if>
+            <if test="nextuser != null and nextuser != ''">#{nextuser},</if>
+            <if test="operator != null and operator != ''">#{operator},</if>
+            <if test="operatetime != null">#{operatetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmCustomerMove" parameterType="CmfCrmCustomerMove">
+        update cmf_crm_customer_move
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="clientid != null">clientId = #{clientid},</if>
+            <if test="preuser != null and preuser != ''">preUser = #{preuser},</if>
+            <if test="nextuser != null and nextuser != ''">nextUser = #{nextuser},</if>
+            <if test="operator != null and operator != ''">operator = #{operator},</if>
+            <if test="operatetime != null">operateTime = #{operatetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmCustomerMoveById" parameterType="Integer">
+        delete from cmf_crm_customer_move where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmCustomerMoveByIds" parameterType="String">
+        delete from cmf_crm_customer_move where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

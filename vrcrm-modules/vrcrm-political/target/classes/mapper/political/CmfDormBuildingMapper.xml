@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfDormBuildingMapper">
+    
+    <resultMap type="CmfDormBuilding" id="CmfDormBuildingResult">
+        <result property="id"    column="id"    />
+        <result property="buildingname"    column="buildingName"    />
+        <result property="buildingsum"    column="buildingSum"    />
+        <result property="floornumber"    column="floorNumber"    />
+        <result property="masterteacherone"    column="masterTeacherOne"    />
+        <result property="manageboundaryone"    column="manageBoundaryOne"    />
+        <result property="masterteachertwo"    column="masterTeacherTwo"    />
+        <result property="manageboundarytwo"    column="manageBoundaryTwo"    />
+        <result property="masterteacherthree"    column="masterTeacherThree"    />
+        <result property="manageboundarythree"    column="manageBoundaryThree"    />
+        <result property="masterteacherfour"    column="masterTeacherFour"    />
+        <result property="manageboundaryfour"    column="manageBoundaryFour"    />
+        <result property="stusex"    column="stuSex"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfDormBuildingVo">
+        select id, buildingName, buildingSum, floorNumber, masterTeacherOne, manageBoundaryOne, masterTeacherTwo, manageBoundaryTwo, masterTeacherThree, manageBoundaryThree, masterTeacherFour, manageBoundaryFour, stuSex, memo from cmf_dorm_building
+    </sql>
+
+    <select id="selectCmfDormBuildingList" parameterType="CmfDormBuilding" resultMap="CmfDormBuildingResult">
+        <include refid="selectCmfDormBuildingVo"/>
+        <where>  
+            <if test="buildingname != null  and buildingname != ''"> and buildingName like concat('%', #{buildingname}, '%')</if>
+            <if test="buildingsum != null  and buildingsum != ''"> and buildingSum = #{buildingsum}</if>
+            <if test="floornumber != null "> and floorNumber = #{floornumber}</if>
+            <if test="masterteacherone != null  and masterteacherone != ''"> and masterTeacherOne = #{masterteacherone}</if>
+            <if test="manageboundaryone != null "> and manageBoundaryOne = #{manageboundaryone}</if>
+            <if test="masterteachertwo != null  and masterteachertwo != ''"> and masterTeacherTwo = #{masterteachertwo}</if>
+            <if test="manageboundarytwo != null  and manageboundarytwo != ''"> and manageBoundaryTwo = #{manageboundarytwo}</if>
+            <if test="masterteacherthree != null  and masterteacherthree != ''"> and masterTeacherThree = #{masterteacherthree}</if>
+            <if test="manageboundarythree != null  and manageboundarythree != ''"> and manageBoundaryThree = #{manageboundarythree}</if>
+            <if test="masterteacherfour != null  and masterteacherfour != ''"> and masterTeacherFour = #{masterteacherfour}</if>
+            <if test="manageboundaryfour != null  and manageboundaryfour != ''"> and manageBoundaryFour = #{manageboundaryfour}</if>
+            <if test="stusex != null  and stusex != ''"> and stuSex = #{stusex}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDormBuildingById" parameterType="Integer" resultMap="CmfDormBuildingResult">
+        <include refid="selectCmfDormBuildingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDormBuilding" parameterType="CmfDormBuilding" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dorm_building
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buildingname != null and buildingname != ''">buildingName,</if>
+            <if test="buildingsum != null and buildingsum != ''">buildingSum,</if>
+            <if test="floornumber != null">floorNumber,</if>
+            <if test="masterteacherone != null and masterteacherone != ''">masterTeacherOne,</if>
+            <if test="manageboundaryone != null">manageBoundaryOne,</if>
+            <if test="masterteachertwo != null and masterteachertwo != ''">masterTeacherTwo,</if>
+            <if test="manageboundarytwo != null and manageboundarytwo != ''">manageBoundaryTwo,</if>
+            <if test="masterteacherthree != null and masterteacherthree != ''">masterTeacherThree,</if>
+            <if test="manageboundarythree != null and manageboundarythree != ''">manageBoundaryThree,</if>
+            <if test="masterteacherfour != null and masterteacherfour != ''">masterTeacherFour,</if>
+            <if test="manageboundaryfour != null and manageboundaryfour != ''">manageBoundaryFour,</if>
+            <if test="stusex != null and stusex != ''">stuSex,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buildingname != null and buildingname != ''">#{buildingname},</if>
+            <if test="buildingsum != null and buildingsum != ''">#{buildingsum},</if>
+            <if test="floornumber != null">#{floornumber},</if>
+            <if test="masterteacherone != null and masterteacherone != ''">#{masterteacherone},</if>
+            <if test="manageboundaryone != null">#{manageboundaryone},</if>
+            <if test="masterteachertwo != null and masterteachertwo != ''">#{masterteachertwo},</if>
+            <if test="manageboundarytwo != null and manageboundarytwo != ''">#{manageboundarytwo},</if>
+            <if test="masterteacherthree != null and masterteacherthree != ''">#{masterteacherthree},</if>
+            <if test="manageboundarythree != null and manageboundarythree != ''">#{manageboundarythree},</if>
+            <if test="masterteacherfour != null and masterteacherfour != ''">#{masterteacherfour},</if>
+            <if test="manageboundaryfour != null and manageboundaryfour != ''">#{manageboundaryfour},</if>
+            <if test="stusex != null and stusex != ''">#{stusex},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDormBuilding" parameterType="CmfDormBuilding">
+        update cmf_dorm_building
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buildingname != null and buildingname != ''">buildingName = #{buildingname},</if>
+            <if test="buildingsum != null and buildingsum != ''">buildingSum = #{buildingsum},</if>
+            <if test="floornumber != null">floorNumber = #{floornumber},</if>
+            <if test="masterteacherone != null and masterteacherone != ''">masterTeacherOne = #{masterteacherone},</if>
+            <if test="manageboundaryone != null">manageBoundaryOne = #{manageboundaryone},</if>
+            <if test="masterteachertwo != null and masterteachertwo != ''">masterTeacherTwo = #{masterteachertwo},</if>
+            <if test="manageboundarytwo != null and manageboundarytwo != ''">manageBoundaryTwo = #{manageboundarytwo},</if>
+            <if test="masterteacherthree != null and masterteacherthree != ''">masterTeacherThree = #{masterteacherthree},</if>
+            <if test="manageboundarythree != null and manageboundarythree != ''">manageBoundaryThree = #{manageboundarythree},</if>
+            <if test="masterteacherfour != null and masterteacherfour != ''">masterTeacherFour = #{masterteacherfour},</if>
+            <if test="manageboundaryfour != null and manageboundaryfour != ''">manageBoundaryFour = #{manageboundaryfour},</if>
+            <if test="stusex != null and stusex != ''">stuSex = #{stusex},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDormBuildingById" parameterType="Integer">
+        delete from cmf_dorm_building where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDormBuildingByIds" parameterType="String">
+        delete from cmf_dorm_building where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfFixedassetbaofeiMapper">
+    
+    <resultMap type="CmfFixedassetbaofei" id="CmfFixedassetbaofeiResult">
+        <result property="id"    column="id"    />
+        <result property="setname"    column="setName"    />
+        <result property="setno"    column="setNo"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="baofeitime"    column="baofeiTime"    />
+        <result property="baofeiapplyman"    column="baofeiApplyMan"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectCmfFixedassetbaofeiVo">
+        select id, setName, setNo, inDepartment, baofeiTime, baofeiApplyMan, approvalMan, memo, creator, createTime, price, quantity, count from cmf_fixedassetbaofei
+    </sql>
+
+    <select id="selectCmfFixedassetbaofeiList" parameterType="CmfFixedassetbaofei" resultMap="CmfFixedassetbaofeiResult">
+        <include refid="selectCmfFixedassetbaofeiVo"/>
+        <where>  
+            <if test="setname != null  and setname != ''"> and setName like concat('%', #{setname}, '%')</if>
+            <if test="setno != null  and setno != ''"> and setNo = #{setno}</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="baofeitime != null "> and baofeiTime = #{baofeitime}</if>
+            <if test="baofeiapplyman != null  and baofeiapplyman != ''"> and baofeiApplyMan = #{baofeiapplyman}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFixedassetbaofeiById" parameterType="Integer" resultMap="CmfFixedassetbaofeiResult">
+        <include refid="selectCmfFixedassetbaofeiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFixedassetbaofei" parameterType="CmfFixedassetbaofei" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fixedassetbaofei
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName,</if>
+            <if test="setno != null and setno != ''">setNo,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="baofeitime != null">baofeiTime,</if>
+            <if test="baofeiapplyman != null and baofeiapplyman != ''">baofeiApplyMan,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="count != null">count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">#{setname},</if>
+            <if test="setno != null and setno != ''">#{setno},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="baofeitime != null">#{baofeitime},</if>
+            <if test="baofeiapplyman != null and baofeiapplyman != ''">#{baofeiapplyman},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFixedassetbaofei" parameterType="CmfFixedassetbaofei">
+        update cmf_fixedassetbaofei
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName = #{setname},</if>
+            <if test="setno != null and setno != ''">setNo = #{setno},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="baofeitime != null">baofeiTime = #{baofeitime},</if>
+            <if test="baofeiapplyman != null and baofeiapplyman != ''">baofeiApplyMan = #{baofeiapplyman},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFixedassetbaofeiById" parameterType="Integer">
+        delete from cmf_fixedassetbaofei where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFixedassetbaofeiByIds" parameterType="String">
+        delete from cmf_fixedassetbaofei where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

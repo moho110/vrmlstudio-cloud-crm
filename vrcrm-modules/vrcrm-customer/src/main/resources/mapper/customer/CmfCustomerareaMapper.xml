@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerareaMapper">
+    
+    <resultMap type="CmfCustomerarea" id="CmfCustomerareaResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="leverno"    column="leverno"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerareaVo">
+        select id, name, user_id, user_flag, leverno from cmf_customerarea
+    </sql>
+
+    <select id="selectCmfCustomerareaList" parameterType="CmfCustomerarea" resultMap="CmfCustomerareaResult">
+        <include refid="selectCmfCustomerareaVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="leverno != null  and leverno != ''"> and leverno = #{leverno}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerareaById" parameterType="Integer" resultMap="CmfCustomerareaResult">
+        <include refid="selectCmfCustomerareaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerarea" parameterType="CmfCustomerarea" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customerarea
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="leverno != null and leverno != ''">leverno,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="leverno != null and leverno != ''">#{leverno},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerarea" parameterType="CmfCustomerarea">
+        update cmf_customerarea
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="leverno != null and leverno != ''">leverno = #{leverno},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerareaById" parameterType="Integer">
+        delete from cmf_customerarea where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerareaByIds" parameterType="String">
+        delete from cmf_customerarea where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

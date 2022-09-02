@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfDictNotifyMapper">
+    
+    <resultMap type="CmfDictNotify" id="CmfDictNotifyResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfDictNotifyVo">
+        select id, Name from cmf_dict_notify
+    </sql>
+
+    <select id="selectCmfDictNotifyList" parameterType="CmfDictNotify" resultMap="CmfDictNotifyResult">
+        <include refid="selectCmfDictNotifyVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDictNotifyById" parameterType="Integer" resultMap="CmfDictNotifyResult">
+        <include refid="selectCmfDictNotifyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDictNotify" parameterType="CmfDictNotify" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dict_notify
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDictNotify" parameterType="CmfDictNotify">
+        update cmf_dict_notify
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDictNotifyById" parameterType="Integer">
+        delete from cmf_dict_notify where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDictNotifyByIds" parameterType="String">
+        delete from cmf_dict_notify where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

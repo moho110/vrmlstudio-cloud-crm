@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduZhongcengxingmuMapper">
+    
+    <resultMap type="CmfEduZhongcengxingmu" id="CmfEduZhongcengxingmuResult">
+        <result property="id"    column="id"    />
+        <result property="projects"    column="projects"    />
+        <result property="scoreinvalue"    column="scoreinvalue"    />
+    </resultMap>
+
+    <sql id="selectCmfEduZhongcengxingmuVo">
+        select id, projects, scoreinvalue from cmf_edu_zhongcengxingmu
+    </sql>
+
+    <select id="selectCmfEduZhongcengxingmuList" parameterType="CmfEduZhongcengxingmu" resultMap="CmfEduZhongcengxingmuResult">
+        <include refid="selectCmfEduZhongcengxingmuVo"/>
+        <where>  
+            <if test="projects != null  and projects != ''"> and projects = #{projects}</if>
+            <if test="scoreinvalue != null "> and scoreinvalue = #{scoreinvalue}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduZhongcengxingmuById" parameterType="Integer" resultMap="CmfEduZhongcengxingmuResult">
+        <include refid="selectCmfEduZhongcengxingmuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduZhongcengxingmu" parameterType="CmfEduZhongcengxingmu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_zhongcengxingmu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="projects != null and projects != ''">projects,</if>
+            <if test="scoreinvalue != null">scoreinvalue,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="projects != null and projects != ''">#{projects},</if>
+            <if test="scoreinvalue != null">#{scoreinvalue},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduZhongcengxingmu" parameterType="CmfEduZhongcengxingmu">
+        update cmf_edu_zhongcengxingmu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projects != null and projects != ''">projects = #{projects},</if>
+            <if test="scoreinvalue != null">scoreinvalue = #{scoreinvalue},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduZhongcengxingmuById" parameterType="Integer">
+        delete from cmf_edu_zhongcengxingmu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduZhongcengxingmuByIds" parameterType="String">
+        delete from cmf_edu_zhongcengxingmu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

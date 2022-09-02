@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemconfigMapper">
+    
+    <resultMap type="CmfSystemconfig" id="CmfSystemconfigResult">
+        <result property="id"    column="id"    />
+        <result property="content"    column="CONTENT"    />
+        <result property="unit"    column="UNIT"    />
+        <result property="status"    column="STATUS"    />
+        <result property="memo"    column="MEMO"    />
+        <result property="shortcode"    column="SHORTCODE"    />
+        <result property="transcode"    column="TRANSCODE"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemconfigVo">
+        select id, CONTENT, UNIT, STATUS, MEMO, SHORTCODE, TRANSCODE from cmf_systemconfig
+    </sql>
+
+    <select id="selectCmfSystemconfigList" parameterType="CmfSystemconfig" resultMap="CmfSystemconfigResult">
+        <include refid="selectCmfSystemconfigVo"/>
+        <where>  
+            <if test="content != null  and content != ''"> and CONTENT = #{content}</if>
+            <if test="unit != null  and unit != ''"> and UNIT = #{unit}</if>
+            <if test="status != null  and status != ''"> and STATUS = #{status}</if>
+            <if test="memo != null  and memo != ''"> and MEMO = #{memo}</if>
+            <if test="shortcode != null  and shortcode != ''"> and SHORTCODE = #{shortcode}</if>
+            <if test="transcode != null  and transcode != ''"> and TRANSCODE = #{transcode}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemconfigById" parameterType="Integer" resultMap="CmfSystemconfigResult">
+        <include refid="selectCmfSystemconfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemconfig" parameterType="CmfSystemconfig" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_systemconfig
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="content != null and content != ''">CONTENT,</if>
+            <if test="unit != null and unit != ''">UNIT,</if>
+            <if test="status != null and status != ''">STATUS,</if>
+            <if test="memo != null and memo != ''">MEMO,</if>
+            <if test="shortcode != null and shortcode != ''">SHORTCODE,</if>
+            <if test="transcode != null and transcode != ''">TRANSCODE,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="shortcode != null and shortcode != ''">#{shortcode},</if>
+            <if test="transcode != null and transcode != ''">#{transcode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemconfig" parameterType="CmfSystemconfig">
+        update cmf_systemconfig
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="content != null and content != ''">CONTENT = #{content},</if>
+            <if test="unit != null and unit != ''">UNIT = #{unit},</if>
+            <if test="status != null and status != ''">STATUS = #{status},</if>
+            <if test="memo != null and memo != ''">MEMO = #{memo},</if>
+            <if test="shortcode != null and shortcode != ''">SHORTCODE = #{shortcode},</if>
+            <if test="transcode != null and transcode != ''">TRANSCODE = #{transcode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemconfigById" parameterType="Integer">
+        delete from cmf_systemconfig where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemconfigByIds" parameterType="String">
+        delete from cmf_systemconfig where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

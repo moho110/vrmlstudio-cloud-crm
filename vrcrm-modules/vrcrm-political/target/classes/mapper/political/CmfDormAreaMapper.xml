@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfDormAreaMapper">
+    
+    <resultMap type="CmfDormArea" id="CmfDormAreaResult">
+        <result property="id"    column="id"    />
+        <result property="dormareaname"    column="dormAreaName"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfDormAreaVo">
+        select id, dormAreaName, Name from cmf_dorm_area
+    </sql>
+
+    <select id="selectCmfDormAreaList" parameterType="CmfDormArea" resultMap="CmfDormAreaResult">
+        <include refid="selectCmfDormAreaVo"/>
+        <where>  
+            <if test="dormareaname != null  and dormareaname != ''"> and dormAreaName like concat('%', #{dormareaname}, '%')</if>
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDormAreaById" parameterType="Integer" resultMap="CmfDormAreaResult">
+        <include refid="selectCmfDormAreaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDormArea" parameterType="CmfDormArea" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dorm_area
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dormareaname != null and dormareaname != ''">dormAreaName,</if>
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dormareaname != null and dormareaname != ''">#{dormareaname},</if>
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDormArea" parameterType="CmfDormArea">
+        update cmf_dorm_area
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dormareaname != null and dormareaname != ''">dormAreaName = #{dormareaname},</if>
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDormAreaById" parameterType="Integer">
+        delete from cmf_dorm_area where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDormAreaByIds" parameterType="String">
+        delete from cmf_dorm_area where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

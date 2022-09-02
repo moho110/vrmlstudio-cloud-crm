@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsWorkexperienceMapper">
+    
+    <resultMap type="CmfHrmsWorkexperience" id="CmfHrmsWorkexperienceResult">
+        <result property="id"    column="id"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="starttime"    column="startTime"    />
+        <result property="endtime"    column="endTime"    />
+        <result property="company"    column="company"    />
+        <result property="department"    column="department"    />
+        <result property="staff"    column="staff"    />
+        <result property="proveman"    column="proveMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="quitreason"    column="quitReason"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsWorkexperienceVo">
+        select id, workId, name, inDepartment, startTime, endTime, company, department, staff, proveMan, memo, creator, createTime, quitReason from cmf_hrms_workexperience
+    </sql>
+
+    <select id="selectCmfHrmsWorkexperienceList" parameterType="CmfHrmsWorkexperience" resultMap="CmfHrmsWorkexperienceResult">
+        <include refid="selectCmfHrmsWorkexperienceVo"/>
+        <where>  
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="starttime != null "> and startTime = #{starttime}</if>
+            <if test="endtime != null "> and endTime = #{endtime}</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="staff != null  and staff != ''"> and staff = #{staff}</if>
+            <if test="proveman != null  and proveman != ''"> and proveMan = #{proveman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="quitreason != null  and quitreason != ''"> and quitReason = #{quitreason}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsWorkexperienceById" parameterType="Integer" resultMap="CmfHrmsWorkexperienceResult">
+        <include refid="selectCmfHrmsWorkexperienceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsWorkexperience" parameterType="CmfHrmsWorkexperience" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_workexperience
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="starttime != null">startTime,</if>
+            <if test="endtime != null">endTime,</if>
+            <if test="company != null and company != ''">company,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="staff != null and staff != ''">staff,</if>
+            <if test="proveman != null and proveman != ''">proveMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="quitreason != null and quitreason != ''">quitReason,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="starttime != null">#{starttime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="company != null and company != ''">#{company},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="staff != null and staff != ''">#{staff},</if>
+            <if test="proveman != null and proveman != ''">#{proveman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="quitreason != null and quitreason != ''">#{quitreason},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsWorkexperience" parameterType="CmfHrmsWorkexperience">
+        update cmf_hrms_workexperience
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="starttime != null">startTime = #{starttime},</if>
+            <if test="endtime != null">endTime = #{endtime},</if>
+            <if test="company != null and company != ''">company = #{company},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="staff != null and staff != ''">staff = #{staff},</if>
+            <if test="proveman != null and proveman != ''">proveMan = #{proveman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="quitreason != null and quitreason != ''">quitReason = #{quitreason},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsWorkexperienceById" parameterType="Integer">
+        delete from cmf_hrms_workexperience where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsWorkexperienceByIds" parameterType="String">
+        delete from cmf_hrms_workexperience where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

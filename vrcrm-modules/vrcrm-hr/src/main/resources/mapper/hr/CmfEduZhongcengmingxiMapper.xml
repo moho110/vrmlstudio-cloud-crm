@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduZhongcengmingxiMapper">
+    
+    <resultMap type="CmfEduZhongcengmingxi" id="CmfEduZhongcengmingxiResult">
+        <result property="id"    column="id"    />
+        <result property="testname"    column="testName"    />
+        <result property="testmanby"    column="testManBy"    />
+        <result property="uit"    column="uit"    />
+        <result property="staff"    column="staff"    />
+        <result property="pindeevl"    column="pindeEvl"    />
+        <result property="pindememo"    column="pindeMemo"    />
+        <result property="abillitypingjia"    column="abillityPingjia"    />
+        <result property="abillitymemo"    column="abillityMemo"    />
+        <result property="studypingjia"    column="studyPingjia"    />
+        <result property="studymemo"    column="studyMemo"    />
+        <result property="jixiaopingjia"    column="jixiaoPingjia"    />
+        <result property="jixiaomemo"    column="jixiaoMemo"    />
+        <result property="lianzhengpingjia"    column="lianzhengPingjia"    />
+        <result property="lianzhengmemo"    column="lianzhengMemo"    />
+        <result property="pingjiaman"    column="PingjiaMan"    />
+        <result property="pingjiatime"    column="pingjiaTime"    />
+    </resultMap>
+
+    <sql id="selectCmfEduZhongcengmingxiVo">
+        select id, testName, testManBy, uit, staff, pindeEvl, pindeMemo, abillityPingjia, abillityMemo, studyPingjia, studyMemo, jixiaoPingjia, jixiaoMemo, lianzhengPingjia, lianzhengMemo, PingjiaMan, pingjiaTime from cmf_edu_zhongcengmingxi
+    </sql>
+
+    <select id="selectCmfEduZhongcengmingxiList" parameterType="CmfEduZhongcengmingxi" resultMap="CmfEduZhongcengmingxiResult">
+        <include refid="selectCmfEduZhongcengmingxiVo"/>
+        <where>  
+            <if test="testname != null  and testname != ''"> and testName like concat('%', #{testname}, '%')</if>
+            <if test="testmanby != null  and testmanby != ''"> and testManBy = #{testmanby}</if>
+            <if test="uit != null  and uit != ''"> and uit = #{uit}</if>
+            <if test="staff != null  and staff != ''"> and staff = #{staff}</if>
+            <if test="pindeevl != null  and pindeevl != ''"> and pindeEvl = #{pindeevl}</if>
+            <if test="pindememo != null  and pindememo != ''"> and pindeMemo = #{pindememo}</if>
+            <if test="abillitypingjia != null  and abillitypingjia != ''"> and abillityPingjia = #{abillitypingjia}</if>
+            <if test="abillitymemo != null  and abillitymemo != ''"> and abillityMemo = #{abillitymemo}</if>
+            <if test="studypingjia != null  and studypingjia != ''"> and studyPingjia = #{studypingjia}</if>
+            <if test="studymemo != null  and studymemo != ''"> and studyMemo = #{studymemo}</if>
+            <if test="jixiaopingjia != null  and jixiaopingjia != ''"> and jixiaoPingjia = #{jixiaopingjia}</if>
+            <if test="jixiaomemo != null  and jixiaomemo != ''"> and jixiaoMemo = #{jixiaomemo}</if>
+            <if test="lianzhengpingjia != null  and lianzhengpingjia != ''"> and lianzhengPingjia = #{lianzhengpingjia}</if>
+            <if test="lianzhengmemo != null  and lianzhengmemo != ''"> and lianzhengMemo = #{lianzhengmemo}</if>
+            <if test="pingjiaman != null  and pingjiaman != ''"> and PingjiaMan = #{pingjiaman}</if>
+            <if test="pingjiatime != null  and pingjiatime != ''"> and pingjiaTime = #{pingjiatime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduZhongcengmingxiById" parameterType="Integer" resultMap="CmfEduZhongcengmingxiResult">
+        <include refid="selectCmfEduZhongcengmingxiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduZhongcengmingxi" parameterType="CmfEduZhongcengmingxi" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_zhongcengmingxi
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="testname != null and testname != ''">testName,</if>
+            <if test="testmanby != null and testmanby != ''">testManBy,</if>
+            <if test="uit != null and uit != ''">uit,</if>
+            <if test="staff != null and staff != ''">staff,</if>
+            <if test="pindeevl != null and pindeevl != ''">pindeEvl,</if>
+            <if test="pindememo != null and pindememo != ''">pindeMemo,</if>
+            <if test="abillitypingjia != null and abillitypingjia != ''">abillityPingjia,</if>
+            <if test="abillitymemo != null and abillitymemo != ''">abillityMemo,</if>
+            <if test="studypingjia != null and studypingjia != ''">studyPingjia,</if>
+            <if test="studymemo != null and studymemo != ''">studyMemo,</if>
+            <if test="jixiaopingjia != null and jixiaopingjia != ''">jixiaoPingjia,</if>
+            <if test="jixiaomemo != null and jixiaomemo != ''">jixiaoMemo,</if>
+            <if test="lianzhengpingjia != null and lianzhengpingjia != ''">lianzhengPingjia,</if>
+            <if test="lianzhengmemo != null and lianzhengmemo != ''">lianzhengMemo,</if>
+            <if test="pingjiaman != null and pingjiaman != ''">PingjiaMan,</if>
+            <if test="pingjiatime != null and pingjiatime != ''">pingjiaTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="testname != null and testname != ''">#{testname},</if>
+            <if test="testmanby != null and testmanby != ''">#{testmanby},</if>
+            <if test="uit != null and uit != ''">#{uit},</if>
+            <if test="staff != null and staff != ''">#{staff},</if>
+            <if test="pindeevl != null and pindeevl != ''">#{pindeevl},</if>
+            <if test="pindememo != null and pindememo != ''">#{pindememo},</if>
+            <if test="abillitypingjia != null and abillitypingjia != ''">#{abillitypingjia},</if>
+            <if test="abillitymemo != null and abillitymemo != ''">#{abillitymemo},</if>
+            <if test="studypingjia != null and studypingjia != ''">#{studypingjia},</if>
+            <if test="studymemo != null and studymemo != ''">#{studymemo},</if>
+            <if test="jixiaopingjia != null and jixiaopingjia != ''">#{jixiaopingjia},</if>
+            <if test="jixiaomemo != null and jixiaomemo != ''">#{jixiaomemo},</if>
+            <if test="lianzhengpingjia != null and lianzhengpingjia != ''">#{lianzhengpingjia},</if>
+            <if test="lianzhengmemo != null and lianzhengmemo != ''">#{lianzhengmemo},</if>
+            <if test="pingjiaman != null and pingjiaman != ''">#{pingjiaman},</if>
+            <if test="pingjiatime != null and pingjiatime != ''">#{pingjiatime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduZhongcengmingxi" parameterType="CmfEduZhongcengmingxi">
+        update cmf_edu_zhongcengmingxi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="testname != null and testname != ''">testName = #{testname},</if>
+            <if test="testmanby != null and testmanby != ''">testManBy = #{testmanby},</if>
+            <if test="uit != null and uit != ''">uit = #{uit},</if>
+            <if test="staff != null and staff != ''">staff = #{staff},</if>
+            <if test="pindeevl != null and pindeevl != ''">pindeEvl = #{pindeevl},</if>
+            <if test="pindememo != null and pindememo != ''">pindeMemo = #{pindememo},</if>
+            <if test="abillitypingjia != null and abillitypingjia != ''">abillityPingjia = #{abillitypingjia},</if>
+            <if test="abillitymemo != null and abillitymemo != ''">abillityMemo = #{abillitymemo},</if>
+            <if test="studypingjia != null and studypingjia != ''">studyPingjia = #{studypingjia},</if>
+            <if test="studymemo != null and studymemo != ''">studyMemo = #{studymemo},</if>
+            <if test="jixiaopingjia != null and jixiaopingjia != ''">jixiaoPingjia = #{jixiaopingjia},</if>
+            <if test="jixiaomemo != null and jixiaomemo != ''">jixiaoMemo = #{jixiaomemo},</if>
+            <if test="lianzhengpingjia != null and lianzhengpingjia != ''">lianzhengPingjia = #{lianzhengpingjia},</if>
+            <if test="lianzhengmemo != null and lianzhengmemo != ''">lianzhengMemo = #{lianzhengmemo},</if>
+            <if test="pingjiaman != null and pingjiaman != ''">PingjiaMan = #{pingjiaman},</if>
+            <if test="pingjiatime != null and pingjiatime != ''">pingjiaTime = #{pingjiatime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduZhongcengmingxiById" parameterType="Integer">
+        delete from cmf_edu_zhongcengmingxi where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduZhongcengmingxiByIds" parameterType="String">
+        delete from cmf_edu_zhongcengmingxi where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

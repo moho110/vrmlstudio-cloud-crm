@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfNotifyMapper">
+    
+    <resultMap type="CmfNotify" id="CmfNotifyResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="content"    column="content"    />
+        <result property="toUser"    column="to_user"    />
+        <result property="fromUser"    column="from_user"    />
+        <result property="attachment"    column="ATTACHMENT"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="ifread"    column="ifread"    />
+        <result property="ifsms"    column="ifsms"    />
+        <result property="grade"    column="grade"    />
+        <result property="ifemail"    column="ifemail"    />
+    </resultMap>
+
+    <sql id="selectCmfNotifyVo">
+        select id, title, content, to_user, from_user, ATTACHMENT, createtime, ifread, ifsms, grade, ifemail from cmf_notify
+    </sql>
+
+    <select id="selectCmfNotifyList" parameterType="CmfNotify" resultMap="CmfNotifyResult">
+        <include refid="selectCmfNotifyVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="toUser != null  and toUser != ''"> and to_user = #{toUser}</if>
+            <if test="fromUser != null "> and from_user = #{fromUser}</if>
+            <if test="attachment != null "> and ATTACHMENT = #{attachment}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="ifread != null  and ifread != ''"> and ifread = #{ifread}</if>
+            <if test="ifsms != null  and ifsms != ''"> and ifsms = #{ifsms}</if>
+            <if test="grade != null "> and grade = #{grade}</if>
+            <if test="ifemail != null "> and ifemail = #{ifemail}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfNotifyById" parameterType="Integer" resultMap="CmfNotifyResult">
+        <include refid="selectCmfNotifyVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfNotify" parameterType="CmfNotify" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_notify
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">title,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="toUser != null and toUser != ''">to_user,</if>
+            <if test="fromUser != null">from_user,</if>
+            <if test="attachment != null">ATTACHMENT,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="ifread != null and ifread != ''">ifread,</if>
+            <if test="ifsms != null and ifsms != ''">ifsms,</if>
+            <if test="grade != null">grade,</if>
+            <if test="ifemail != null">ifemail,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="toUser != null and toUser != ''">#{toUser},</if>
+            <if test="fromUser != null">#{fromUser},</if>
+            <if test="attachment != null">#{attachment},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="ifread != null and ifread != ''">#{ifread},</if>
+            <if test="ifsms != null and ifsms != ''">#{ifsms},</if>
+            <if test="grade != null">#{grade},</if>
+            <if test="ifemail != null">#{ifemail},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfNotify" parameterType="CmfNotify">
+        update cmf_notify
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="toUser != null and toUser != ''">to_user = #{toUser},</if>
+            <if test="fromUser != null">from_user = #{fromUser},</if>
+            <if test="attachment != null">ATTACHMENT = #{attachment},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="ifread != null and ifread != ''">ifread = #{ifread},</if>
+            <if test="ifsms != null and ifsms != ''">ifsms = #{ifsms},</if>
+            <if test="grade != null">grade = #{grade},</if>
+            <if test="ifemail != null">ifemail = #{ifemail},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfNotifyById" parameterType="Integer">
+        delete from cmf_notify where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfNotifyByIds" parameterType="String">
+        delete from cmf_notify where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

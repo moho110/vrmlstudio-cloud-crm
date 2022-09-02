@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsBooleanMapper">
+    
+    <resultMap type="CmfHrmsBoolean" id="CmfHrmsBooleanResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsBooleanVo">
+        select id, Name from cmf_hrms_boolean
+    </sql>
+
+    <select id="selectCmfHrmsBooleanList" parameterType="CmfHrmsBoolean" resultMap="CmfHrmsBooleanResult">
+        <include refid="selectCmfHrmsBooleanVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsBooleanById" parameterType="Integer" resultMap="CmfHrmsBooleanResult">
+        <include refid="selectCmfHrmsBooleanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsBoolean" parameterType="CmfHrmsBoolean" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_boolean
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsBoolean" parameterType="CmfHrmsBoolean">
+        update cmf_hrms_boolean
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsBooleanById" parameterType="Integer">
+        delete from cmf_hrms_boolean where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsBooleanByIds" parameterType="String">
+        delete from cmf_hrms_boolean where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfWuBooleanMapper">
+    
+    <resultMap type="CmfWuBoolean" id="CmfWuBooleanResult">
+        <result property="id"    column="id"    />
+        <result property="yesorno"    column="yesorno"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfWuBooleanVo">
+        select id, yesorno, memo, creator, createTime from cmf_wu_boolean
+    </sql>
+
+    <select id="selectCmfWuBooleanList" parameterType="CmfWuBoolean" resultMap="CmfWuBooleanResult">
+        <include refid="selectCmfWuBooleanVo"/>
+        <where>  
+            <if test="yesorno != null  and yesorno != ''"> and yesorno = #{yesorno}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfWuBooleanById" parameterType="Integer" resultMap="CmfWuBooleanResult">
+        <include refid="selectCmfWuBooleanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfWuBoolean" parameterType="CmfWuBoolean" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_wu_boolean
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="yesorno != null and yesorno != ''">yesorno,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="yesorno != null and yesorno != ''">#{yesorno},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfWuBoolean" parameterType="CmfWuBoolean">
+        update cmf_wu_boolean
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="yesorno != null and yesorno != ''">yesorno = #{yesorno},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfWuBooleanById" parameterType="Integer">
+        delete from cmf_wu_boolean where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfWuBooleanByIds" parameterType="String">
+        delete from cmf_wu_boolean where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

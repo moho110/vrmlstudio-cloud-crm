@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStockoutmainMapper">
+    
+    <resultMap type="CmfStockoutmain" id="CmfStockoutmainResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="state"    column="state"    />
+        <result property="totalnum"    column="totalnum"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="dingdanbillid"    column="dingdanbillid"    />
+        <result property="outdate"    column="outdate"    />
+        <result property="outstoreshenhe"    column="outstoreshenhe"    />
+        <result property="memo"    column="memo"    />
+        <result property="outtype"    column="outtype"    />
+    </resultMap>
+
+    <sql id="selectCmfStockoutmainVo">
+        select id, zhuti, storeid, createman, createtime, state, totalnum, totalmoney, dingdanbillid, outdate, outstoreshenhe, memo, outtype from cmf_stockoutmain
+    </sql>
+
+    <select id="selectCmfStockoutmainList" parameterType="CmfStockoutmain" resultMap="CmfStockoutmainResult">
+        <include refid="selectCmfStockoutmainVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="storeid != null "> and storeid = #{storeid}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="totalnum != null "> and totalnum = #{totalnum}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="dingdanbillid != null "> and dingdanbillid = #{dingdanbillid}</if>
+            <if test="outdate != null "> and outdate = #{outdate}</if>
+            <if test="outstoreshenhe != null  and outstoreshenhe != ''"> and outstoreshenhe = #{outstoreshenhe}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="outtype != null  and outtype != ''"> and outtype = #{outtype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStockoutmainById" parameterType="Integer" resultMap="CmfStockoutmainResult">
+        <include refid="selectCmfStockoutmainVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStockoutmain" parameterType="CmfStockoutmain" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_stockoutmain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="storeid != null">storeid,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="state != null and state != ''">state,</if>
+            <if test="totalnum != null">totalnum,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="dingdanbillid != null">dingdanbillid,</if>
+            <if test="outdate != null">outdate,</if>
+            <if test="outstoreshenhe != null and outstoreshenhe != ''">outstoreshenhe,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="outtype != null and outtype != ''">outtype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="storeid != null">#{storeid},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="totalnum != null">#{totalnum},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="dingdanbillid != null">#{dingdanbillid},</if>
+            <if test="outdate != null">#{outdate},</if>
+            <if test="outstoreshenhe != null and outstoreshenhe != ''">#{outstoreshenhe},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="outtype != null and outtype != ''">#{outtype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStockoutmain" parameterType="CmfStockoutmain">
+        update cmf_stockoutmain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="storeid != null">storeid = #{storeid},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="state != null and state != ''">state = #{state},</if>
+            <if test="totalnum != null">totalnum = #{totalnum},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="dingdanbillid != null">dingdanbillid = #{dingdanbillid},</if>
+            <if test="outdate != null">outdate = #{outdate},</if>
+            <if test="outstoreshenhe != null and outstoreshenhe != ''">outstoreshenhe = #{outstoreshenhe},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="outtype != null and outtype != ''">outtype = #{outtype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStockoutmainById" parameterType="Integer">
+        delete from cmf_stockoutmain where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStockoutmainByIds" parameterType="String">
+        delete from cmf_stockoutmain where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfProducttypeMapper">
+    
+    <resultMap type="CmfProducttype" id="CmfProducttypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="Code"    />
+        <result property="viewtype"    column="viewtype"    />
+        <result property="userId"    column="user_id"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="leverno"    column="leverno"    />
+        <result property="isbuyplan"    column="isbuyplan"    />
+        <result property="isautoout"    column="isautoout"    />
+        <result property="parentid"    column="parentid"    />
+    </resultMap>
+
+    <sql id="selectCmfProducttypeVo">
+        select id, name, Code, viewtype, user_id, user_flag, leverno, isbuyplan, isautoout, parentid from cmf_producttype
+    </sql>
+
+    <select id="selectCmfProducttypeList" parameterType="CmfProducttype" resultMap="CmfProducttypeResult">
+        <include refid="selectCmfProducttypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null "> and Code = #{code}</if>
+            <if test="viewtype != null  and viewtype != ''"> and viewtype = #{viewtype}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="leverno != null  and leverno != ''"> and leverno = #{leverno}</if>
+            <if test="isbuyplan != null  and isbuyplan != ''"> and isbuyplan = #{isbuyplan}</if>
+            <if test="isautoout != null  and isautoout != ''"> and isautoout = #{isautoout}</if>
+            <if test="parentid != null "> and parentid = #{parentid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfProducttypeById" parameterType="Integer" resultMap="CmfProducttypeResult">
+        <include refid="selectCmfProducttypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfProducttype" parameterType="CmfProducttype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_producttype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="code != null">Code,</if>
+            <if test="viewtype != null and viewtype != ''">viewtype,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="leverno != null and leverno != ''">leverno,</if>
+            <if test="isbuyplan != null and isbuyplan != ''">isbuyplan,</if>
+            <if test="isautoout != null and isautoout != ''">isautoout,</if>
+            <if test="parentid != null">parentid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="viewtype != null and viewtype != ''">#{viewtype},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="leverno != null and leverno != ''">#{leverno},</if>
+            <if test="isbuyplan != null and isbuyplan != ''">#{isbuyplan},</if>
+            <if test="isautoout != null and isautoout != ''">#{isautoout},</if>
+            <if test="parentid != null">#{parentid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfProducttype" parameterType="CmfProducttype">
+        update cmf_producttype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="code != null">Code = #{code},</if>
+            <if test="viewtype != null and viewtype != ''">viewtype = #{viewtype},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="leverno != null and leverno != ''">leverno = #{leverno},</if>
+            <if test="isbuyplan != null and isbuyplan != ''">isbuyplan = #{isbuyplan},</if>
+            <if test="isautoout != null and isautoout != ''">isautoout = #{isautoout},</if>
+            <if test="parentid != null">parentid = #{parentid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfProducttypeById" parameterType="Integer">
+        delete from cmf_producttype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfProducttypeByIds" parameterType="String">
+        delete from cmf_producttype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemlangMapper">
+    
+    <resultMap type="CmfSystemlang" id="CmfSystemlangResult">
+        <result property="id"    column="id"    />
+        <result property="fieldname"    column="fieldname"    />
+        <result property="tablename"    column="tablename"    />
+        <result property="chinese"    column="chinese"    />
+        <result property="english"    column="english"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemlangVo">
+        select id, fieldname, tablename, chinese, english, remark from cmf_systemlang
+    </sql>
+
+    <select id="selectCmfSystemlangList" parameterType="CmfSystemlang" resultMap="CmfSystemlangResult">
+        <include refid="selectCmfSystemlangVo"/>
+        <where>  
+            <if test="fieldname != null  and fieldname != ''"> and fieldname like concat('%', #{fieldname}, '%')</if>
+            <if test="tablename != null  and tablename != ''"> and tablename like concat('%', #{tablename}, '%')</if>
+            <if test="chinese != null  and chinese != ''"> and chinese = #{chinese}</if>
+            <if test="english != null  and english != ''"> and english = #{english}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemlangById" parameterType="Integer" resultMap="CmfSystemlangResult">
+        <include refid="selectCmfSystemlangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemlang" parameterType="CmfSystemlang" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_systemlang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fieldname != null and fieldname != ''">fieldname,</if>
+            <if test="tablename != null and tablename != ''">tablename,</if>
+            <if test="chinese != null and chinese != ''">chinese,</if>
+            <if test="english != null and english != ''">english,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fieldname != null and fieldname != ''">#{fieldname},</if>
+            <if test="tablename != null and tablename != ''">#{tablename},</if>
+            <if test="chinese != null and chinese != ''">#{chinese},</if>
+            <if test="english != null and english != ''">#{english},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemlang" parameterType="CmfSystemlang">
+        update cmf_systemlang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fieldname != null and fieldname != ''">fieldname = #{fieldname},</if>
+            <if test="tablename != null and tablename != ''">tablename = #{tablename},</if>
+            <if test="chinese != null and chinese != ''">chinese = #{chinese},</if>
+            <if test="english != null and english != ''">english = #{english},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemlangById" parameterType="Integer">
+        delete from cmf_systemlang where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemlangByIds" parameterType="String">
+        delete from cmf_systemlang where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfProductzuzhuangMapper">
+    
+    <resultMap type="CmfProductzuzhuang" id="CmfProductzuzhuangResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="outstoreid"    column="outstoreid"    />
+        <result property="instoreid"    column="instoreid"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="state"    column="state"    />
+        <result property="outstoreshenhe"    column="outstoreshenhe"    />
+        <result property="instoreshenhe"    column="instoreshenhe"    />
+        <result property="outshenhetime"    column="outshenhetime"    />
+        <result property="inshenhetime"    column="inshenhetime"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfProductzuzhuangVo">
+        select id, zhuti, outstoreid, instoreid, createman, createtime, totalmoney, state, outstoreshenhe, instoreshenhe, outshenhetime, inshenhetime, memo from cmf_productzuzhuang
+    </sql>
+
+    <select id="selectCmfProductzuzhuangList" parameterType="CmfProductzuzhuang" resultMap="CmfProductzuzhuangResult">
+        <include refid="selectCmfProductzuzhuangVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="outstoreid != null "> and outstoreid = #{outstoreid}</if>
+            <if test="instoreid != null "> and instoreid = #{instoreid}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="outstoreshenhe != null  and outstoreshenhe != ''"> and outstoreshenhe = #{outstoreshenhe}</if>
+            <if test="instoreshenhe != null  and instoreshenhe != ''"> and instoreshenhe = #{instoreshenhe}</if>
+            <if test="outshenhetime != null "> and outshenhetime = #{outshenhetime}</if>
+            <if test="inshenhetime != null "> and inshenhetime = #{inshenhetime}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfProductzuzhuangById" parameterType="Integer" resultMap="CmfProductzuzhuangResult">
+        <include refid="selectCmfProductzuzhuangVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfProductzuzhuang" parameterType="CmfProductzuzhuang" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_productzuzhuang
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="outstoreid != null">outstoreid,</if>
+            <if test="instoreid != null">instoreid,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="state != null">state,</if>
+            <if test="outstoreshenhe != null and outstoreshenhe != ''">outstoreshenhe,</if>
+            <if test="instoreshenhe != null and instoreshenhe != ''">instoreshenhe,</if>
+            <if test="outshenhetime != null">outshenhetime,</if>
+            <if test="inshenhetime != null">inshenhetime,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="outstoreid != null">#{outstoreid},</if>
+            <if test="instoreid != null">#{instoreid},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="state != null">#{state},</if>
+            <if test="outstoreshenhe != null and outstoreshenhe != ''">#{outstoreshenhe},</if>
+            <if test="instoreshenhe != null and instoreshenhe != ''">#{instoreshenhe},</if>
+            <if test="outshenhetime != null">#{outshenhetime},</if>
+            <if test="inshenhetime != null">#{inshenhetime},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfProductzuzhuang" parameterType="CmfProductzuzhuang">
+        update cmf_productzuzhuang
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="outstoreid != null">outstoreid = #{outstoreid},</if>
+            <if test="instoreid != null">instoreid = #{instoreid},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="outstoreshenhe != null and outstoreshenhe != ''">outstoreshenhe = #{outstoreshenhe},</if>
+            <if test="instoreshenhe != null and instoreshenhe != ''">instoreshenhe = #{instoreshenhe},</if>
+            <if test="outshenhetime != null">outshenhetime = #{outshenhetime},</if>
+            <if test="inshenhetime != null">inshenhetime = #{inshenhetime},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfProductzuzhuangById" parameterType="Integer">
+        delete from cmf_productzuzhuang where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfProductzuzhuangByIds" parameterType="String">
+        delete from cmf_productzuzhuang where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfFahuodanMapper">
+    
+    <resultMap type="CmfFahuodan" id="CmfFahuodanResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="dingdanbillid"    column="dingdanbillid"    />
+        <result property="fahuodan"    column="fahuodan"    />
+        <result property="fahuoren"    column="fahuoren"    />
+        <result property="fahuodate"    column="fahuodate"    />
+        <result property="shouhuoren"    column="shouhuoren"    />
+        <result property="tel"    column="tel"    />
+        <result property="address"    column="address"    />
+        <result property="mailcode"    column="mailcode"    />
+        <result property="fahuotype"    column="fahuotype"    />
+        <result property="state"    column="state"    />
+        <result property="package"    column="package"    />
+        <result property="weight"    column="weight"    />
+        <result property="yunfei"    column="yunfei"    />
+        <result property="jiesuantype"    column="jiesuantype"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="totalnum"    column="totalnum"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="outtype"    column="outtype"    />
+    </resultMap>
+
+    <sql id="selectCmfFahuodanVo">
+        select id, customerid, dingdanbillid, fahuodan, fahuoren, fahuodate, shouhuoren, tel, address, mailcode, fahuotype, state, package, weight, yunfei, jiesuantype, beizhu, totalnum, totalmoney, outtype from cmf_fahuodan
+    </sql>
+
+    <select id="selectCmfFahuodanList" parameterType="CmfFahuodan" resultMap="CmfFahuodanResult">
+        <include refid="selectCmfFahuodanVo"/>
+        <where>  
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="dingdanbillid != null "> and dingdanbillid = #{dingdanbillid}</if>
+            <if test="fahuodan != null  and fahuodan != ''"> and fahuodan = #{fahuodan}</if>
+            <if test="fahuoren != null  and fahuoren != ''"> and fahuoren = #{fahuoren}</if>
+            <if test="fahuodate != null "> and fahuodate = #{fahuodate}</if>
+            <if test="shouhuoren != null  and shouhuoren != ''"> and shouhuoren = #{shouhuoren}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="mailcode != null  and mailcode != ''"> and mailcode = #{mailcode}</if>
+            <if test="fahuotype != null  and fahuotype != ''"> and fahuotype = #{fahuotype}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="package != null "> and package = #{package}</if>
+            <if test="weight != null "> and weight = #{weight}</if>
+            <if test="yunfei != null "> and yunfei = #{yunfei}</if>
+            <if test="jiesuantype != null  and jiesuantype != ''"> and jiesuantype = #{jiesuantype}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="totalnum != null "> and totalnum = #{totalnum}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="outtype != null  and outtype != ''"> and outtype = #{outtype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFahuodanById" parameterType="Integer" resultMap="CmfFahuodanResult">
+        <include refid="selectCmfFahuodanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFahuodan" parameterType="CmfFahuodan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fahuodan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">customerid,</if>
+            <if test="dingdanbillid != null">dingdanbillid,</if>
+            <if test="fahuodan != null and fahuodan != ''">fahuodan,</if>
+            <if test="fahuoren != null and fahuoren != ''">fahuoren,</if>
+            <if test="fahuodate != null">fahuodate,</if>
+            <if test="shouhuoren != null and shouhuoren != ''">shouhuoren,</if>
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="mailcode != null and mailcode != ''">mailcode,</if>
+            <if test="fahuotype != null and fahuotype != ''">fahuotype,</if>
+            <if test="state != null and state != ''">state,</if>
+            <if test="package != null">package,</if>
+            <if test="weight != null">weight,</if>
+            <if test="yunfei != null">yunfei,</if>
+            <if test="jiesuantype != null and jiesuantype != ''">jiesuantype,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="totalnum != null">totalnum,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="outtype != null and outtype != ''">outtype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">#{customerid},</if>
+            <if test="dingdanbillid != null">#{dingdanbillid},</if>
+            <if test="fahuodan != null and fahuodan != ''">#{fahuodan},</if>
+            <if test="fahuoren != null and fahuoren != ''">#{fahuoren},</if>
+            <if test="fahuodate != null">#{fahuodate},</if>
+            <if test="shouhuoren != null and shouhuoren != ''">#{shouhuoren},</if>
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="mailcode != null and mailcode != ''">#{mailcode},</if>
+            <if test="fahuotype != null and fahuotype != ''">#{fahuotype},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="package != null">#{package},</if>
+            <if test="weight != null">#{weight},</if>
+            <if test="yunfei != null">#{yunfei},</if>
+            <if test="jiesuantype != null and jiesuantype != ''">#{jiesuantype},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="totalnum != null">#{totalnum},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="outtype != null and outtype != ''">#{outtype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFahuodan" parameterType="CmfFahuodan">
+        update cmf_fahuodan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="dingdanbillid != null">dingdanbillid = #{dingdanbillid},</if>
+            <if test="fahuodan != null and fahuodan != ''">fahuodan = #{fahuodan},</if>
+            <if test="fahuoren != null and fahuoren != ''">fahuoren = #{fahuoren},</if>
+            <if test="fahuodate != null">fahuodate = #{fahuodate},</if>
+            <if test="shouhuoren != null and shouhuoren != ''">shouhuoren = #{shouhuoren},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="mailcode != null and mailcode != ''">mailcode = #{mailcode},</if>
+            <if test="fahuotype != null and fahuotype != ''">fahuotype = #{fahuotype},</if>
+            <if test="state != null and state != ''">state = #{state},</if>
+            <if test="package != null">package = #{package},</if>
+            <if test="weight != null">weight = #{weight},</if>
+            <if test="yunfei != null">yunfei = #{yunfei},</if>
+            <if test="jiesuantype != null and jiesuantype != ''">jiesuantype = #{jiesuantype},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="totalnum != null">totalnum = #{totalnum},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="outtype != null and outtype != ''">outtype = #{outtype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFahuodanById" parameterType="Integer">
+        delete from cmf_fahuodan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFahuodanByIds" parameterType="String">
+        delete from cmf_fahuodan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

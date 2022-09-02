@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeproductgroupMapper">
+    
+    <resultMap type="CmfOfficeproductgroup" id="CmfOfficeproductgroupResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+        <result property="sort"    column="sort"    />
+        <result property="preclasstype"    column="preClassType"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeproductgroupVo">
+        select id, Name, sort, preClassType from cmf_officeproductgroup
+    </sql>
+
+    <select id="selectCmfOfficeproductgroupList" parameterType="CmfOfficeproductgroup" resultMap="CmfOfficeproductgroupResult">
+        <include refid="selectCmfOfficeproductgroupVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="preclasstype != null  and preclasstype != ''"> and preClassType = #{preclasstype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeproductgroupById" parameterType="Integer" resultMap="CmfOfficeproductgroupResult">
+        <include refid="selectCmfOfficeproductgroupVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeproductgroup" parameterType="CmfOfficeproductgroup" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_officeproductgroup
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+            <if test="sort != null">sort,</if>
+            <if test="preclasstype != null and preclasstype != ''">preClassType,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="preclasstype != null and preclasstype != ''">#{preclasstype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeproductgroup" parameterType="CmfOfficeproductgroup">
+        update cmf_officeproductgroup
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="preclasstype != null and preclasstype != ''">preClassType = #{preclasstype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeproductgroupById" parameterType="Integer">
+        delete from cmf_officeproductgroup where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeproductgroupByIds" parameterType="String">
+        delete from cmf_officeproductgroup where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

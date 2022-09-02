@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemLogMapper">
+    
+    <resultMap type="CmfSystemLog" id="CmfSystemLogResult">
+        <result property="id"    column="id"    />
+        <result property="loginaction"    column="loginaction"    />
+        <result property="date"    column="DATE"    />
+        <result property="remoteAddr"    column="REMOTE_ADDR"    />
+        <result property="httpUserAgent"    column="HTTP_USER_AGENT"    />
+        <result property="queryString"    column="QUERY_STRING"    />
+        <result property="scriptName"    column="SCRIPT_NAME"    />
+        <result property="userid"    column="USERID"    />
+        <result property="sqltext"    column="SQLTEXT"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemLogVo">
+        select id, loginaction, DATE, REMOTE_ADDR, HTTP_USER_AGENT, QUERY_STRING, SCRIPT_NAME, USERID, SQLTEXT from cmf_system_log
+    </sql>
+
+    <select id="selectCmfSystemLogList" parameterType="CmfSystemLog" resultMap="CmfSystemLogResult">
+        <include refid="selectCmfSystemLogVo"/>
+        <where>  
+            <if test="loginaction != null  and loginaction != ''"> and loginaction = #{loginaction}</if>
+            <if test="date != null "> and DATE = #{date}</if>
+            <if test="remoteAddr != null  and remoteAddr != ''"> and REMOTE_ADDR = #{remoteAddr}</if>
+            <if test="httpUserAgent != null "> and HTTP_USER_AGENT = #{httpUserAgent}</if>
+            <if test="queryString != null "> and QUERY_STRING = #{queryString}</if>
+            <if test="scriptName != null "> and SCRIPT_NAME like concat('%', #{scriptName}, '%')</if>
+            <if test="userid != null  and userid != ''"> and USERID = #{userid}</if>
+            <if test="sqltext != null  and sqltext != ''"> and SQLTEXT = #{sqltext}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemLogById" parameterType="Integer" resultMap="CmfSystemLogResult">
+        <include refid="selectCmfSystemLogVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemLog" parameterType="CmfSystemLog" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_system_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="loginaction != null and loginaction != ''">loginaction,</if>
+            <if test="date != null">DATE,</if>
+            <if test="remoteAddr != null and remoteAddr != ''">REMOTE_ADDR,</if>
+            <if test="httpUserAgent != null">HTTP_USER_AGENT,</if>
+            <if test="queryString != null">QUERY_STRING,</if>
+            <if test="scriptName != null">SCRIPT_NAME,</if>
+            <if test="userid != null and userid != ''">USERID,</if>
+            <if test="sqltext != null and sqltext != ''">SQLTEXT,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="loginaction != null and loginaction != ''">#{loginaction},</if>
+            <if test="date != null">#{date},</if>
+            <if test="remoteAddr != null and remoteAddr != ''">#{remoteAddr},</if>
+            <if test="httpUserAgent != null">#{httpUserAgent},</if>
+            <if test="queryString != null">#{queryString},</if>
+            <if test="scriptName != null">#{scriptName},</if>
+            <if test="userid != null and userid != ''">#{userid},</if>
+            <if test="sqltext != null and sqltext != ''">#{sqltext},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemLog" parameterType="CmfSystemLog">
+        update cmf_system_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="loginaction != null and loginaction != ''">loginaction = #{loginaction},</if>
+            <if test="date != null">DATE = #{date},</if>
+            <if test="remoteAddr != null and remoteAddr != ''">REMOTE_ADDR = #{remoteAddr},</if>
+            <if test="httpUserAgent != null">HTTP_USER_AGENT = #{httpUserAgent},</if>
+            <if test="queryString != null">QUERY_STRING = #{queryString},</if>
+            <if test="scriptName != null">SCRIPT_NAME = #{scriptName},</if>
+            <if test="userid != null and userid != ''">USERID = #{userid},</if>
+            <if test="sqltext != null and sqltext != ''">SQLTEXT = #{sqltext},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemLogById" parameterType="Integer">
+        delete from cmf_system_log where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemLogByIds" parameterType="String">
+        delete from cmf_system_log where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

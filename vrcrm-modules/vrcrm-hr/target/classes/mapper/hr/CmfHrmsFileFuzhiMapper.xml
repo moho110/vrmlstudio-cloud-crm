@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsFileFuzhiMapper">
+    
+    <resultMap type="CmfHrmsFileFuzhi" id="CmfHrmsFileFuzhiResult">
+        <result property="id"    column="id"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="sex"    column="sex"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="studyexp"    column="studyExp"    />
+        <result property="national"    column="national"    />
+        <result property="memo"    column="memo"    />
+        <result property="recoverdate"    column="recoverDate"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsFileFuzhiVo">
+        select id, workId, name, inDepartment, sex, birthday, telephone, studyExp, national, memo, recoverDate, creator, createTime from cmf_hrms_file_fuzhi
+    </sql>
+
+    <select id="selectCmfHrmsFileFuzhiList" parameterType="CmfHrmsFileFuzhi" resultMap="CmfHrmsFileFuzhiResult">
+        <include refid="selectCmfHrmsFileFuzhiVo"/>
+        <where>  
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+            <if test="studyexp != null  and studyexp != ''"> and studyExp = #{studyexp}</if>
+            <if test="national != null  and national != ''"> and national = #{national}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="recoverdate != null "> and recoverDate = #{recoverdate}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsFileFuzhiById" parameterType="Integer" resultMap="CmfHrmsFileFuzhiResult">
+        <include refid="selectCmfHrmsFileFuzhiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsFileFuzhi" parameterType="CmfHrmsFileFuzhi" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_file_fuzhi
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="telephone != null and telephone != ''">telephone,</if>
+            <if test="studyexp != null and studyexp != ''">studyExp,</if>
+            <if test="national != null and national != ''">national,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="recoverdate != null">recoverDate,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="telephone != null and telephone != ''">#{telephone},</if>
+            <if test="studyexp != null and studyexp != ''">#{studyexp},</if>
+            <if test="national != null and national != ''">#{national},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="recoverdate != null">#{recoverdate},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsFileFuzhi" parameterType="CmfHrmsFileFuzhi">
+        update cmf_hrms_file_fuzhi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="telephone != null and telephone != ''">telephone = #{telephone},</if>
+            <if test="studyexp != null and studyexp != ''">studyExp = #{studyexp},</if>
+            <if test="national != null and national != ''">national = #{national},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="recoverdate != null">recoverDate = #{recoverdate},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsFileFuzhiById" parameterType="Integer">
+        delete from cmf_hrms_file_fuzhi where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsFileFuzhiByIds" parameterType="String">
+        delete from cmf_hrms_file_fuzhi where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

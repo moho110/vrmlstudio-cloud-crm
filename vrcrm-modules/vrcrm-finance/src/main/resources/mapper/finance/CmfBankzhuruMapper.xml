@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.finance.mapper.CmfBankzhuruMapper">
+    
+    <resultMap type="CmfBankzhuru" id="CmfBankzhuruResult">
+        <result property="id"    column="id"    />
+        <result property="accountid"    column="accountid"    />
+        <result property="jine"    column="jine"    />
+        <result property="userid"    column="userid"    />
+        <result property="opertime"    column="opertime"    />
+        <result property="inouttype"    column="inouttype"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfBankzhuruVo">
+        select id, accountid, jine, userid, opertime, inouttype, memo from cmf_bankzhuru
+    </sql>
+
+    <select id="selectCmfBankzhuruList" parameterType="CmfBankzhuru" resultMap="CmfBankzhuruResult">
+        <include refid="selectCmfBankzhuruVo"/>
+        <where>  
+            <if test="accountid != null "> and accountid = #{accountid}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="userid != null  and userid != ''"> and userid = #{userid}</if>
+            <if test="opertime != null "> and opertime = #{opertime}</if>
+            <if test="inouttype != null "> and inouttype = #{inouttype}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfBankzhuruById" parameterType="Integer" resultMap="CmfBankzhuruResult">
+        <include refid="selectCmfBankzhuruVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfBankzhuru" parameterType="CmfBankzhuru" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_bankzhuru
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="accountid != null">accountid,</if>
+            <if test="jine != null">jine,</if>
+            <if test="userid != null and userid != ''">userid,</if>
+            <if test="opertime != null">opertime,</if>
+            <if test="inouttype != null">inouttype,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="accountid != null">#{accountid},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="userid != null and userid != ''">#{userid},</if>
+            <if test="opertime != null">#{opertime},</if>
+            <if test="inouttype != null">#{inouttype},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfBankzhuru" parameterType="CmfBankzhuru">
+        update cmf_bankzhuru
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="accountid != null">accountid = #{accountid},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="userid != null and userid != ''">userid = #{userid},</if>
+            <if test="opertime != null">opertime = #{opertime},</if>
+            <if test="inouttype != null">inouttype = #{inouttype},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfBankzhuruById" parameterType="Integer">
+        delete from cmf_bankzhuru where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfBankzhuruByIds" parameterType="String">
+        delete from cmf_bankzhuru where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

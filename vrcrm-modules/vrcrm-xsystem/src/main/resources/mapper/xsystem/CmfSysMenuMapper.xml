@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSysMenuMapper">
+    
+    <resultMap type="CmfSysMenu" id="CmfSysMenuResult">
+        <result property="id"    column="id"    />
+        <result property="menuName"    column="MENU_NAME"    />
+        <result property="image"    column="IMAGE"    />
+        <result property="englishname"    column="ENGLISHNAME"    />
+    </resultMap>
+
+    <sql id="selectCmfSysMenuVo">
+        select id, MENU_NAME, IMAGE, ENGLISHNAME from cmf_sys_menu
+    </sql>
+
+    <select id="selectCmfSysMenuList" parameterType="CmfSysMenu" resultMap="CmfSysMenuResult">
+        <include refid="selectCmfSysMenuVo"/>
+        <where>  
+            <if test="menuName != null  and menuName != ''"> and MENU_NAME like concat('%', #{menuName}, '%')</if>
+            <if test="image != null  and image != ''"> and IMAGE = #{image}</if>
+            <if test="englishname != null  and englishname != ''"> and ENGLISHNAME like concat('%', #{englishname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSysMenuById" parameterType="Integer" resultMap="CmfSysMenuResult">
+        <include refid="selectCmfSysMenuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSysMenu" parameterType="CmfSysMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">MENU_NAME,</if>
+            <if test="image != null and image != ''">IMAGE,</if>
+            <if test="englishname != null and englishname != ''">ENGLISHNAME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">#{menuName},</if>
+            <if test="image != null and image != ''">#{image},</if>
+            <if test="englishname != null and englishname != ''">#{englishname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSysMenu" parameterType="CmfSysMenu">
+        update cmf_sys_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuName != null and menuName != ''">MENU_NAME = #{menuName},</if>
+            <if test="image != null and image != ''">IMAGE = #{image},</if>
+            <if test="englishname != null and englishname != ''">ENGLISHNAME = #{englishname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSysMenuById" parameterType="Integer">
+        delete from cmf_sys_menu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSysMenuByIds" parameterType="String">
+        delete from cmf_sys_menu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeproductMapper">
+    
+    <resultMap type="CmfOfficeproduct" id="CmfOfficeproductResult">
+        <result property="id"    column="id"    />
+        <result property="officename"    column="officeName"    />
+        <result property="officeno"    column="officeNo"    />
+        <result property="officetype"    column="officeType"    />
+        <result property="specsize"    column="specSize"    />
+        <result property="unit"    column="unit"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="warehouseinfo"    column="warehouseInfo"    />
+        <result property="price"    column="price"    />
+        <result property="totalcount"    column="totalCount"    />
+        <result property="brand"    column="brand"    />
+        <result property="savedplace"    column="savedPlace"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeproductVo">
+        select id, officeName, officeNo, officeType, specSize, unit, quantity, warehouseInfo, price, totalCount, brand, savedPlace, memo, creator, createTime from cmf_officeproduct
+    </sql>
+
+    <select id="selectCmfOfficeproductList" parameterType="CmfOfficeproduct" resultMap="CmfOfficeproductResult">
+        <include refid="selectCmfOfficeproductVo"/>
+        <where>  
+            <if test="officename != null  and officename != ''"> and officeName like concat('%', #{officename}, '%')</if>
+            <if test="officeno != null  and officeno != ''"> and officeNo = #{officeno}</if>
+            <if test="officetype != null  and officetype != ''"> and officeType = #{officetype}</if>
+            <if test="specsize != null  and specsize != ''"> and specSize = #{specsize}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="warehouseinfo != null  and warehouseinfo != ''"> and warehouseInfo = #{warehouseinfo}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="totalcount != null "> and totalCount = #{totalcount}</if>
+            <if test="brand != null  and brand != ''"> and brand = #{brand}</if>
+            <if test="savedplace != null  and savedplace != ''"> and savedPlace = #{savedplace}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeproductById" parameterType="Integer" resultMap="CmfOfficeproductResult">
+        <include refid="selectCmfOfficeproductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeproduct" parameterType="CmfOfficeproduct" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_officeproduct
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName,</if>
+            <if test="officeno != null and officeno != ''">officeNo,</if>
+            <if test="officetype != null and officetype != ''">officeType,</if>
+            <if test="specsize != null and specsize != ''">specSize,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="warehouseinfo != null and warehouseinfo != ''">warehouseInfo,</if>
+            <if test="price != null">price,</if>
+            <if test="totalcount != null">totalCount,</if>
+            <if test="brand != null and brand != ''">brand,</if>
+            <if test="savedplace != null and savedplace != ''">savedPlace,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">#{officename},</if>
+            <if test="officeno != null and officeno != ''">#{officeno},</if>
+            <if test="officetype != null and officetype != ''">#{officetype},</if>
+            <if test="specsize != null and specsize != ''">#{specsize},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="warehouseinfo != null and warehouseinfo != ''">#{warehouseinfo},</if>
+            <if test="price != null">#{price},</if>
+            <if test="totalcount != null">#{totalcount},</if>
+            <if test="brand != null and brand != ''">#{brand},</if>
+            <if test="savedplace != null and savedplace != ''">#{savedplace},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeproduct" parameterType="CmfOfficeproduct">
+        update cmf_officeproduct
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName = #{officename},</if>
+            <if test="officeno != null and officeno != ''">officeNo = #{officeno},</if>
+            <if test="officetype != null and officetype != ''">officeType = #{officetype},</if>
+            <if test="specsize != null and specsize != ''">specSize = #{specsize},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="warehouseinfo != null and warehouseinfo != ''">warehouseInfo = #{warehouseinfo},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="totalcount != null">totalCount = #{totalcount},</if>
+            <if test="brand != null and brand != ''">brand = #{brand},</if>
+            <if test="savedplace != null and savedplace != ''">savedPlace = #{savedplace},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeproductById" parameterType="Integer">
+        delete from cmf_officeproduct where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeproductByIds" parameterType="String">
+        delete from cmf_officeproduct where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfMessageMapper">
+    
+    <resultMap type="CmfMessage" id="CmfMessageResult">
+        <result property="id"    column="id"    />
+        <result property="userid"    column="userid"    />
+        <result property="msgtype"    column="msgtype"    />
+        <result property="content"    column="content"    />
+        <result property="url"    column="url"    />
+        <result property="guanlianid"    column="guanlianid"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="readtime"    column="readtime"    />
+        <result property="flag"    column="flag"    />
+        <result property="attime"    column="attime"    />
+    </resultMap>
+
+    <sql id="selectCmfMessageVo">
+        select id, userid, msgtype, content, url, guanlianid, createtime, readtime, flag, attime from cmf_message
+    </sql>
+
+    <select id="selectCmfMessageList" parameterType="CmfMessage" resultMap="CmfMessageResult">
+        <include refid="selectCmfMessageVo"/>
+        <where>  
+            <if test="userid != null  and userid != ''"> and userid = #{userid}</if>
+            <if test="msgtype != null  and msgtype != ''"> and msgtype = #{msgtype}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="guanlianid != null "> and guanlianid = #{guanlianid}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="readtime != null "> and readtime = #{readtime}</if>
+            <if test="flag != null "> and flag = #{flag}</if>
+            <if test="attime != null "> and attime = #{attime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfMessageById" parameterType="Integer" resultMap="CmfMessageResult">
+        <include refid="selectCmfMessageVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfMessage" parameterType="CmfMessage" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userid != null and userid != ''">userid,</if>
+            <if test="msgtype != null and msgtype != ''">msgtype,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="url != null and url != ''">url,</if>
+            <if test="guanlianid != null">guanlianid,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="readtime != null">readtime,</if>
+            <if test="flag != null">flag,</if>
+            <if test="attime != null">attime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userid != null and userid != ''">#{userid},</if>
+            <if test="msgtype != null and msgtype != ''">#{msgtype},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="guanlianid != null">#{guanlianid},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="readtime != null">#{readtime},</if>
+            <if test="flag != null">#{flag},</if>
+            <if test="attime != null">#{attime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfMessage" parameterType="CmfMessage">
+        update cmf_message
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userid != null and userid != ''">userid = #{userid},</if>
+            <if test="msgtype != null and msgtype != ''">msgtype = #{msgtype},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="url != null and url != ''">url = #{url},</if>
+            <if test="guanlianid != null">guanlianid = #{guanlianid},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="readtime != null">readtime = #{readtime},</if>
+            <if test="flag != null">flag = #{flag},</if>
+            <if test="attime != null">attime = #{attime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfMessageById" parameterType="Integer">
+        delete from cmf_message where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfMessageByIds" parameterType="String">
+        delete from cmf_message where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

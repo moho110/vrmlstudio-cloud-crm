@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfBankMapper">
+    
+    <resultMap type="CmfBank" id="CmfBankResult">
+        <result property="id"    column="id"    />
+        <result property="bankid"    column="bankid"    />
+        <result property="bankcode"    column="bankcode"    />
+        <result property="bankname"    column="bankname"    />
+        <result property="syslock"    column="syslock"    />
+        <result property="jine"    column="jine"    />
+        <result property="belong"    column="belong"    />
+    </resultMap>
+
+    <sql id="selectCmfBankVo">
+        select id, bankid, bankcode, bankname, syslock, jine, belong from cmf_bank
+    </sql>
+
+    <select id="selectCmfBankList" parameterType="CmfBank" resultMap="CmfBankResult">
+        <include refid="selectCmfBankVo"/>
+        <where>  
+            <if test="bankid != null  and bankid != ''"> and bankid = #{bankid}</if>
+            <if test="bankcode != null  and bankcode != ''"> and bankcode = #{bankcode}</if>
+            <if test="bankname != null  and bankname != ''"> and bankname like concat('%', #{bankname}, '%')</if>
+            <if test="syslock != null "> and syslock = #{syslock}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="belong != null  and belong != ''"> and belong = #{belong}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfBankById" parameterType="Integer" resultMap="CmfBankResult">
+        <include refid="selectCmfBankVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfBank" parameterType="CmfBank" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_bank
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="bankid != null and bankid != ''">bankid,</if>
+            <if test="bankcode != null and bankcode != ''">bankcode,</if>
+            <if test="bankname != null and bankname != ''">bankname,</if>
+            <if test="syslock != null">syslock,</if>
+            <if test="jine != null">jine,</if>
+            <if test="belong != null and belong != ''">belong,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="bankid != null and bankid != ''">#{bankid},</if>
+            <if test="bankcode != null and bankcode != ''">#{bankcode},</if>
+            <if test="bankname != null and bankname != ''">#{bankname},</if>
+            <if test="syslock != null">#{syslock},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="belong != null and belong != ''">#{belong},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfBank" parameterType="CmfBank">
+        update cmf_bank
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="bankid != null and bankid != ''">bankid = #{bankid},</if>
+            <if test="bankcode != null and bankcode != ''">bankcode = #{bankcode},</if>
+            <if test="bankname != null and bankname != ''">bankname = #{bankname},</if>
+            <if test="syslock != null">syslock = #{syslock},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="belong != null and belong != ''">belong = #{belong},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfBankById" parameterType="Integer">
+        delete from cmf_bank where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfBankByIds" parameterType="String">
+        delete from cmf_bank where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

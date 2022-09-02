@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStockMapper">
+    
+    <resultMap type="CmfStock" id="CmfStockResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="isclock"    column="isClock"    />
+        <result property="leverno"    column="leverno"    />
+        <result property="costtype"    column="costtype"    />
+    </resultMap>
+
+    <sql id="selectCmfStockVo">
+        select id, name, user_flag, user_id, isClock, leverno, costtype from cmf_stock
+    </sql>
+
+    <select id="selectCmfStockList" parameterType="CmfStock" resultMap="CmfStockResult">
+        <include refid="selectCmfStockVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="isclock != null  and isclock != ''"> and isClock = #{isclock}</if>
+            <if test="leverno != null  and leverno != ''"> and leverno = #{leverno}</if>
+            <if test="costtype != null  and costtype != ''"> and costtype = #{costtype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStockById" parameterType="Integer" resultMap="CmfStockResult">
+        <include refid="selectCmfStockVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStock" parameterType="CmfStock" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_stock
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="isclock != null and isclock != ''">isClock,</if>
+            <if test="leverno != null and leverno != ''">leverno,</if>
+            <if test="costtype != null and costtype != ''">costtype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="isclock != null and isclock != ''">#{isclock},</if>
+            <if test="leverno != null and leverno != ''">#{leverno},</if>
+            <if test="costtype != null and costtype != ''">#{costtype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStock" parameterType="CmfStock">
+        update cmf_stock
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="isclock != null and isclock != ''">isClock = #{isclock},</if>
+            <if test="leverno != null and leverno != ''">leverno = #{leverno},</if>
+            <if test="costtype != null and costtype != ''">costtype = #{costtype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStockById" parameterType="Integer">
+        delete from cmf_stock where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStockByIds" parameterType="String">
+        delete from cmf_stock where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

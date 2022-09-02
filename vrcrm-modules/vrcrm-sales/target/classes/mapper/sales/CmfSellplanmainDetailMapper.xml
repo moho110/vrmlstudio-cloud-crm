@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfSellplanmainDetailMapper">
+    
+    <resultMap type="CmfSellplanmainDetail" id="CmfSellplanmainDetailResult">
+        <result property="id"    column="id"    />
+        <result property="prodid"    column="prodid"    />
+        <result property="prodname"    column="prodname"    />
+        <result property="prodguige"    column="prodguige"    />
+        <result property="prodxinghao"    column="prodxinghao"    />
+        <result property="proddanwei"    column="proddanwei"    />
+        <result property="price"    column="price"    />
+        <result property="zhekou"    column="zhekou"    />
+        <result property="num"    column="num"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="mainrowid"    column="mainrowid"    />
+        <result property="jine"    column="jine"    />
+        <result property="chukunum"    column="chukunum"    />
+        <result property="plandate"    column="plandate"    />
+        <result property="qici"    column="qici"    />
+        <result property="yaoqiu"    column="yaoqiu"    />
+        <result property="iftixing"    column="iftixing"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="lirun"    column="lirun"    />
+        <result property="oldprodid"    column="oldprodid"    />
+        <result property="opertype"    column="opertype"    />
+    </resultMap>
+
+    <sql id="selectCmfSellplanmainDetailVo">
+        select id, prodid, prodname, prodguige, prodxinghao, proddanwei, price, zhekou, num, beizhu, mainrowid, jine, chukunum, plandate, qici, yaoqiu, iftixing, createtime, lirun, oldprodid, opertype from cmf_sellplanmain_detail
+    </sql>
+
+    <select id="selectCmfSellplanmainDetailList" parameterType="CmfSellplanmainDetail" resultMap="CmfSellplanmainDetailResult">
+        <include refid="selectCmfSellplanmainDetailVo"/>
+        <where>  
+            <if test="prodid != null  and prodid != ''"> and prodid = #{prodid}</if>
+            <if test="prodname != null  and prodname != ''"> and prodname like concat('%', #{prodname}, '%')</if>
+            <if test="prodguige != null  and prodguige != ''"> and prodguige = #{prodguige}</if>
+            <if test="prodxinghao != null  and prodxinghao != ''"> and prodxinghao = #{prodxinghao}</if>
+            <if test="proddanwei != null  and proddanwei != ''"> and proddanwei = #{proddanwei}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="zhekou != null "> and zhekou = #{zhekou}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="mainrowid != null "> and mainrowid = #{mainrowid}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="chukunum != null "> and chukunum = #{chukunum}</if>
+            <if test="plandate != null "> and plandate = #{plandate}</if>
+            <if test="qici != null  and qici != ''"> and qici = #{qici}</if>
+            <if test="yaoqiu != null  and yaoqiu != ''"> and yaoqiu = #{yaoqiu}</if>
+            <if test="iftixing != null  and iftixing != ''"> and iftixing = #{iftixing}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="lirun != null "> and lirun = #{lirun}</if>
+            <if test="oldprodid != null  and oldprodid != ''"> and oldprodid = #{oldprodid}</if>
+            <if test="opertype != null "> and opertype = #{opertype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSellplanmainDetailById" parameterType="Integer" resultMap="CmfSellplanmainDetailResult">
+        <include refid="selectCmfSellplanmainDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSellplanmainDetail" parameterType="CmfSellplanmainDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sellplanmain_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">prodid,</if>
+            <if test="prodname != null and prodname != ''">prodname,</if>
+            <if test="prodguige != null and prodguige != ''">prodguige,</if>
+            <if test="prodxinghao != null and prodxinghao != ''">prodxinghao,</if>
+            <if test="proddanwei != null and proddanwei != ''">proddanwei,</if>
+            <if test="price != null">price,</if>
+            <if test="zhekou != null">zhekou,</if>
+            <if test="num != null">num,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="mainrowid != null">mainrowid,</if>
+            <if test="jine != null">jine,</if>
+            <if test="chukunum != null">chukunum,</if>
+            <if test="plandate != null">plandate,</if>
+            <if test="qici != null and qici != ''">qici,</if>
+            <if test="yaoqiu != null and yaoqiu != ''">yaoqiu,</if>
+            <if test="iftixing != null and iftixing != ''">iftixing,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="lirun != null">lirun,</if>
+            <if test="oldprodid != null and oldprodid != ''">oldprodid,</if>
+            <if test="opertype != null">opertype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">#{prodid},</if>
+            <if test="prodname != null and prodname != ''">#{prodname},</if>
+            <if test="prodguige != null and prodguige != ''">#{prodguige},</if>
+            <if test="prodxinghao != null and prodxinghao != ''">#{prodxinghao},</if>
+            <if test="proddanwei != null and proddanwei != ''">#{proddanwei},</if>
+            <if test="price != null">#{price},</if>
+            <if test="zhekou != null">#{zhekou},</if>
+            <if test="num != null">#{num},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="mainrowid != null">#{mainrowid},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="chukunum != null">#{chukunum},</if>
+            <if test="plandate != null">#{plandate},</if>
+            <if test="qici != null and qici != ''">#{qici},</if>
+            <if test="yaoqiu != null and yaoqiu != ''">#{yaoqiu},</if>
+            <if test="iftixing != null and iftixing != ''">#{iftixing},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="lirun != null">#{lirun},</if>
+            <if test="oldprodid != null and oldprodid != ''">#{oldprodid},</if>
+            <if test="opertype != null">#{opertype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSellplanmainDetail" parameterType="CmfSellplanmainDetail">
+        update cmf_sellplanmain_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">prodid = #{prodid},</if>
+            <if test="prodname != null and prodname != ''">prodname = #{prodname},</if>
+            <if test="prodguige != null and prodguige != ''">prodguige = #{prodguige},</if>
+            <if test="prodxinghao != null and prodxinghao != ''">prodxinghao = #{prodxinghao},</if>
+            <if test="proddanwei != null and proddanwei != ''">proddanwei = #{proddanwei},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="zhekou != null">zhekou = #{zhekou},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="mainrowid != null">mainrowid = #{mainrowid},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="chukunum != null">chukunum = #{chukunum},</if>
+            <if test="plandate != null">plandate = #{plandate},</if>
+            <if test="qici != null and qici != ''">qici = #{qici},</if>
+            <if test="yaoqiu != null and yaoqiu != ''">yaoqiu = #{yaoqiu},</if>
+            <if test="iftixing != null and iftixing != ''">iftixing = #{iftixing},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="lirun != null">lirun = #{lirun},</if>
+            <if test="oldprodid != null and oldprodid != ''">oldprodid = #{oldprodid},</if>
+            <if test="opertype != null">opertype = #{opertype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSellplanmainDetailById" parameterType="Integer">
+        delete from cmf_sellplanmain_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSellplanmainDetailByIds" parameterType="String">
+        delete from cmf_sellplanmain_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemtableMapper">
+    
+    <resultMap type="CmfSystemtable" id="CmfSystemtableResult">
+        <result property="id"    column="id"    />
+        <result property="systemtablename"    column="systemtablename"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemtableVo">
+        select id, systemtablename from cmf_systemtable
+    </sql>
+
+    <select id="selectCmfSystemtableList" parameterType="CmfSystemtable" resultMap="CmfSystemtableResult">
+        <include refid="selectCmfSystemtableVo"/>
+        <where>  
+            <if test="systemtablename != null  and systemtablename != ''"> and systemtablename like concat('%', #{systemtablename}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemtableById" parameterType="Integer" resultMap="CmfSystemtableResult">
+        <include refid="selectCmfSystemtableVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemtable" parameterType="CmfSystemtable" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_systemtable
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="systemtablename != null and systemtablename != ''">systemtablename,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="systemtablename != null and systemtablename != ''">#{systemtablename},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemtable" parameterType="CmfSystemtable">
+        update cmf_systemtable
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="systemtablename != null and systemtablename != ''">systemtablename = #{systemtablename},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemtableById" parameterType="Integer">
+        delete from cmf_systemtable where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemtableByIds" parameterType="String">
+        delete from cmf_systemtable where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

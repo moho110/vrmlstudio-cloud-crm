@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.finance.mapper.CmfAccesspreshouMapper">
+    
+    <resultMap type="CmfAccesspreshou" id="CmfAccesspreshouResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="curchuzhi"    column="curchuzhi"    />
+        <result property="accountid"    column="accountid"    />
+        <result property="jine"    column="jine"    />
+        <result property="opertype"    column="opertype"    />
+        <result property="guanlianbillid"    column="guanlianbillid"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="billdeptid"    column="billdeptid"    />
+    </resultMap>
+
+    <sql id="selectCmfAccesspreshouVo">
+        select id, customerid, linkman, curchuzhi, accountid, jine, opertype, guanlianbillid, createman, createtime, beizhu, billdeptid from cmf_accesspreshou
+    </sql>
+
+    <select id="selectCmfAccesspreshouList" parameterType="CmfAccesspreshou" resultMap="CmfAccesspreshouResult">
+        <include refid="selectCmfAccesspreshouVo"/>
+        <where>  
+            <if test="customerid != null  and customerid != ''"> and customerid = #{customerid}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman like concat('%', #{linkman}, '%')</if>
+            <if test="curchuzhi != null "> and curchuzhi = #{curchuzhi}</if>
+            <if test="accountid != null  and accountid != ''"> and accountid = #{accountid}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="opertype != null "> and opertype = #{opertype}</if>
+            <if test="guanlianbillid != null "> and guanlianbillid = #{guanlianbillid}</if>
+            <if test="createman != null  and createman != ''"> and createman like concat('%', #{createman}, '%')</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="billdeptid != null "> and billdeptid = #{billdeptid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfAccesspreshouById" parameterType="Integer" resultMap="CmfAccesspreshouResult">
+        <include refid="selectCmfAccesspreshouVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfAccesspreshou" parameterType="CmfAccesspreshou" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_accesspreshou
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null and customerid != ''">customerid,</if>
+            <if test="linkman != null and linkman != ''">linkman,</if>
+            <if test="curchuzhi != null">curchuzhi,</if>
+            <if test="accountid != null and accountid != ''">accountid,</if>
+            <if test="jine != null">jine,</if>
+            <if test="opertype != null">opertype,</if>
+            <if test="guanlianbillid != null">guanlianbillid,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="billdeptid != null">billdeptid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null and customerid != ''">#{customerid},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="curchuzhi != null">#{curchuzhi},</if>
+            <if test="accountid != null and accountid != ''">#{accountid},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="opertype != null">#{opertype},</if>
+            <if test="guanlianbillid != null">#{guanlianbillid},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="billdeptid != null">#{billdeptid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfAccesspreshou" parameterType="CmfAccesspreshou">
+        update cmf_accesspreshou
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null and customerid != ''">customerid = #{customerid},</if>
+            <if test="linkman != null and linkman != ''">linkman = #{linkman},</if>
+            <if test="curchuzhi != null">curchuzhi = #{curchuzhi},</if>
+            <if test="accountid != null and accountid != ''">accountid = #{accountid},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="opertype != null">opertype = #{opertype},</if>
+            <if test="guanlianbillid != null">guanlianbillid = #{guanlianbillid},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="billdeptid != null">billdeptid = #{billdeptid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfAccesspreshouById" parameterType="Integer">
+        delete from cmf_accesspreshou where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfAccesspreshouByIds" parameterType="String">
+        delete from cmf_accesspreshou where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

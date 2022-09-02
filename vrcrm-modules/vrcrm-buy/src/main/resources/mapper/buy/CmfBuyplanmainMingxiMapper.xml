@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfBuyplanmainMingxiMapper">
+    
+    <resultMap type="CmfBuyplanmainMingxi" id="CmfBuyplanmainMingxiResult">
+        <result property="id"    column="id"    />
+        <result property="oldproductid"    column="oldproductid"    />
+        <result property="prodid"    column="prodid"    />
+        <result property="lastprice"    column="lastprice"    />
+        <result property="prodname"    column="prodname"    />
+        <result property="num"    column="num"    />
+        <result property="price"    column="price"    />
+        <result property="jine"    column="jine"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="mainrowid"    column="mainrowid"    />
+    </resultMap>
+
+    <sql id="selectCmfBuyplanmainMingxiVo">
+        select id, oldproductid, prodid, lastprice, prodname, num, price, jine, beizhu, mainrowid from cmf_buyplanmain_mingxi
+    </sql>
+
+    <select id="selectCmfBuyplanmainMingxiList" parameterType="CmfBuyplanmainMingxi" resultMap="CmfBuyplanmainMingxiResult">
+        <include refid="selectCmfBuyplanmainMingxiVo"/>
+        <where>  
+            <if test="oldproductid != null  and oldproductid != ''"> and oldproductid = #{oldproductid}</if>
+            <if test="prodid != null  and prodid != ''"> and prodid = #{prodid}</if>
+            <if test="lastprice != null "> and lastprice = #{lastprice}</if>
+            <if test="prodname != null  and prodname != ''"> and prodname like concat('%', #{prodname}, '%')</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="mainrowid != null "> and mainrowid = #{mainrowid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfBuyplanmainMingxiById" parameterType="Integer" resultMap="CmfBuyplanmainMingxiResult">
+        <include refid="selectCmfBuyplanmainMingxiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfBuyplanmainMingxi" parameterType="CmfBuyplanmainMingxi" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_buyplanmain_mingxi
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="oldproductid != null and oldproductid != ''">oldproductid,</if>
+            <if test="prodid != null and prodid != ''">prodid,</if>
+            <if test="lastprice != null">lastprice,</if>
+            <if test="prodname != null and prodname != ''">prodname,</if>
+            <if test="num != null">num,</if>
+            <if test="price != null">price,</if>
+            <if test="jine != null">jine,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="mainrowid != null">mainrowid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="oldproductid != null and oldproductid != ''">#{oldproductid},</if>
+            <if test="prodid != null and prodid != ''">#{prodid},</if>
+            <if test="lastprice != null">#{lastprice},</if>
+            <if test="prodname != null and prodname != ''">#{prodname},</if>
+            <if test="num != null">#{num},</if>
+            <if test="price != null">#{price},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="mainrowid != null">#{mainrowid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfBuyplanmainMingxi" parameterType="CmfBuyplanmainMingxi">
+        update cmf_buyplanmain_mingxi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="oldproductid != null and oldproductid != ''">oldproductid = #{oldproductid},</if>
+            <if test="prodid != null and prodid != ''">prodid = #{prodid},</if>
+            <if test="lastprice != null">lastprice = #{lastprice},</if>
+            <if test="prodname != null and prodname != ''">prodname = #{prodname},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="mainrowid != null">mainrowid = #{mainrowid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfBuyplanmainMingxiById" parameterType="Integer">
+        delete from cmf_buyplanmain_mingxi where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfBuyplanmainMingxiByIds" parameterType="String">
+        delete from cmf_buyplanmain_mingxi where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengTiaoxiububanMapper">
+    
+    <resultMap type="CmfEduXingzhengTiaoxiububan" id="CmfEduXingzhengTiaoxiububanResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="department"    column="department"    />
+        <result property="person"    column="person"    />
+        <result property="tiaoxiutime"    column="tiaoxiuTime"    />
+        <result property="tiaoxiustart"    column="tiaoxiuStart"    />
+        <result property="bubantime"    column="bubanTime"    />
+        <result property="bubanstart"    column="bubanStart"    />
+        <result property="tiaoxiuexstatus"    column="tiaoxiuExStatus"    />
+        <result property="tiaoxiuworkflowid"    column="tiaoxiuWorkFlowID"    />
+        <result property="tiaoxiuexman"    column="tiaoxiuExMan"    />
+        <result property="tiaoxiuextime"    column="tiaoxiuExTime"    />
+        <result property="bubanexstatus"    column="bubanExStatus"    />
+        <result property="bubanworkflowid"    column="bubanWorkFlowID"    />
+        <result property="bubanexman"    column="bubanExMan"    />
+        <result property="bubanextime"    column="bubanExTime"    />
+        <result property="personname"    column="personName"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengTiaoxiububanVo">
+        select id, term, department, person, tiaoxiuTime, tiaoxiuStart, bubanTime, bubanStart, tiaoxiuExStatus, tiaoxiuWorkFlowID, tiaoxiuExMan, tiaoxiuExTime, bubanExStatus, bubanWorkFlowID, bubanExMan, bubanExTime, personName from cmf_edu_xingzheng_tiaoxiububan
+    </sql>
+
+    <select id="selectCmfEduXingzhengTiaoxiububanList" parameterType="CmfEduXingzhengTiaoxiububan" resultMap="CmfEduXingzhengTiaoxiububanResult">
+        <include refid="selectCmfEduXingzhengTiaoxiububanVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="person != null  and person != ''"> and person = #{person}</if>
+            <if test="tiaoxiutime != null "> and tiaoxiuTime = #{tiaoxiutime}</if>
+            <if test="tiaoxiustart != null  and tiaoxiustart != ''"> and tiaoxiuStart = #{tiaoxiustart}</if>
+            <if test="bubantime != null "> and bubanTime = #{bubantime}</if>
+            <if test="bubanstart != null  and bubanstart != ''"> and bubanStart = #{bubanstart}</if>
+            <if test="tiaoxiuexstatus != null "> and tiaoxiuExStatus = #{tiaoxiuexstatus}</if>
+            <if test="tiaoxiuworkflowid != null "> and tiaoxiuWorkFlowID = #{tiaoxiuworkflowid}</if>
+            <if test="tiaoxiuexman != null  and tiaoxiuexman != ''"> and tiaoxiuExMan = #{tiaoxiuexman}</if>
+            <if test="tiaoxiuextime != null  and tiaoxiuextime != ''"> and tiaoxiuExTime = #{tiaoxiuextime}</if>
+            <if test="bubanexstatus != null "> and bubanExStatus = #{bubanexstatus}</if>
+            <if test="bubanworkflowid != null "> and bubanWorkFlowID = #{bubanworkflowid}</if>
+            <if test="bubanexman != null  and bubanexman != ''"> and bubanExMan = #{bubanexman}</if>
+            <if test="bubanextime != null  and bubanextime != ''"> and bubanExTime = #{bubanextime}</if>
+            <if test="personname != null  and personname != ''"> and personName like concat('%', #{personname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengTiaoxiububanById" parameterType="Integer" resultMap="CmfEduXingzhengTiaoxiububanResult">
+        <include refid="selectCmfEduXingzhengTiaoxiububanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengTiaoxiububan" parameterType="CmfEduXingzhengTiaoxiububan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_tiaoxiububan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="person != null and person != ''">person,</if>
+            <if test="tiaoxiutime != null">tiaoxiuTime,</if>
+            <if test="tiaoxiustart != null and tiaoxiustart != ''">tiaoxiuStart,</if>
+            <if test="bubantime != null">bubanTime,</if>
+            <if test="bubanstart != null and bubanstart != ''">bubanStart,</if>
+            <if test="tiaoxiuexstatus != null">tiaoxiuExStatus,</if>
+            <if test="tiaoxiuworkflowid != null">tiaoxiuWorkFlowID,</if>
+            <if test="tiaoxiuexman != null and tiaoxiuexman != ''">tiaoxiuExMan,</if>
+            <if test="tiaoxiuextime != null and tiaoxiuextime != ''">tiaoxiuExTime,</if>
+            <if test="bubanexstatus != null">bubanExStatus,</if>
+            <if test="bubanworkflowid != null">bubanWorkFlowID,</if>
+            <if test="bubanexman != null and bubanexman != ''">bubanExMan,</if>
+            <if test="bubanextime != null and bubanextime != ''">bubanExTime,</if>
+            <if test="personname != null and personname != ''">personName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="person != null and person != ''">#{person},</if>
+            <if test="tiaoxiutime != null">#{tiaoxiutime},</if>
+            <if test="tiaoxiustart != null and tiaoxiustart != ''">#{tiaoxiustart},</if>
+            <if test="bubantime != null">#{bubantime},</if>
+            <if test="bubanstart != null and bubanstart != ''">#{bubanstart},</if>
+            <if test="tiaoxiuexstatus != null">#{tiaoxiuexstatus},</if>
+            <if test="tiaoxiuworkflowid != null">#{tiaoxiuworkflowid},</if>
+            <if test="tiaoxiuexman != null and tiaoxiuexman != ''">#{tiaoxiuexman},</if>
+            <if test="tiaoxiuextime != null and tiaoxiuextime != ''">#{tiaoxiuextime},</if>
+            <if test="bubanexstatus != null">#{bubanexstatus},</if>
+            <if test="bubanworkflowid != null">#{bubanworkflowid},</if>
+            <if test="bubanexman != null and bubanexman != ''">#{bubanexman},</if>
+            <if test="bubanextime != null and bubanextime != ''">#{bubanextime},</if>
+            <if test="personname != null and personname != ''">#{personname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengTiaoxiububan" parameterType="CmfEduXingzhengTiaoxiububan">
+        update cmf_edu_xingzheng_tiaoxiububan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="person != null and person != ''">person = #{person},</if>
+            <if test="tiaoxiutime != null">tiaoxiuTime = #{tiaoxiutime},</if>
+            <if test="tiaoxiustart != null and tiaoxiustart != ''">tiaoxiuStart = #{tiaoxiustart},</if>
+            <if test="bubantime != null">bubanTime = #{bubantime},</if>
+            <if test="bubanstart != null and bubanstart != ''">bubanStart = #{bubanstart},</if>
+            <if test="tiaoxiuexstatus != null">tiaoxiuExStatus = #{tiaoxiuexstatus},</if>
+            <if test="tiaoxiuworkflowid != null">tiaoxiuWorkFlowID = #{tiaoxiuworkflowid},</if>
+            <if test="tiaoxiuexman != null and tiaoxiuexman != ''">tiaoxiuExMan = #{tiaoxiuexman},</if>
+            <if test="tiaoxiuextime != null and tiaoxiuextime != ''">tiaoxiuExTime = #{tiaoxiuextime},</if>
+            <if test="bubanexstatus != null">bubanExStatus = #{bubanexstatus},</if>
+            <if test="bubanworkflowid != null">bubanWorkFlowID = #{bubanworkflowid},</if>
+            <if test="bubanexman != null and bubanexman != ''">bubanExMan = #{bubanexman},</if>
+            <if test="bubanextime != null and bubanextime != ''">bubanExTime = #{bubanextime},</if>
+            <if test="personname != null and personname != ''">personName = #{personname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengTiaoxiububanById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_tiaoxiububan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengTiaoxiububanByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_tiaoxiububan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

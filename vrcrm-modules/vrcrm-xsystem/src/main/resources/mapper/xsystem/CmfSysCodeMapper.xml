@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSysCodeMapper">
+    
+    <resultMap type="CmfSysCode" id="CmfSysCodeResult">
+        <result property="id"    column="id"    />
+        <result property="codeNo"    column="CODE_NO"    />
+        <result property="codeName"    column="CODE_NAME"    />
+        <result property="codeOrder"    column="CODE_ORDER"    />
+        <result property="parentNo"    column="PARENT_NO"    />
+        <result property="codeFlag"    column="CODE_FLAG"    />
+    </resultMap>
+
+    <sql id="selectCmfSysCodeVo">
+        select id, CODE_NO, CODE_NAME, CODE_ORDER, PARENT_NO, CODE_FLAG from cmf_sys_code
+    </sql>
+
+    <select id="selectCmfSysCodeList" parameterType="CmfSysCode" resultMap="CmfSysCodeResult">
+        <include refid="selectCmfSysCodeVo"/>
+        <where>  
+            <if test="codeNo != null  and codeNo != ''"> and CODE_NO = #{codeNo}</if>
+            <if test="codeName != null  and codeName != ''"> and CODE_NAME like concat('%', #{codeName}, '%')</if>
+            <if test="codeOrder != null  and codeOrder != ''"> and CODE_ORDER = #{codeOrder}</if>
+            <if test="parentNo != null  and parentNo != ''"> and PARENT_NO = #{parentNo}</if>
+            <if test="codeFlag != null "> and CODE_FLAG = #{codeFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSysCodeById" parameterType="Integer" resultMap="CmfSysCodeResult">
+        <include refid="selectCmfSysCodeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSysCode" parameterType="CmfSysCode" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sys_code
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="codeNo != null and codeNo != ''">CODE_NO,</if>
+            <if test="codeName != null and codeName != ''">CODE_NAME,</if>
+            <if test="codeOrder != null and codeOrder != ''">CODE_ORDER,</if>
+            <if test="parentNo != null and parentNo != ''">PARENT_NO,</if>
+            <if test="codeFlag != null">CODE_FLAG,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="codeNo != null and codeNo != ''">#{codeNo},</if>
+            <if test="codeName != null and codeName != ''">#{codeName},</if>
+            <if test="codeOrder != null and codeOrder != ''">#{codeOrder},</if>
+            <if test="parentNo != null and parentNo != ''">#{parentNo},</if>
+            <if test="codeFlag != null">#{codeFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSysCode" parameterType="CmfSysCode">
+        update cmf_sys_code
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="codeNo != null and codeNo != ''">CODE_NO = #{codeNo},</if>
+            <if test="codeName != null and codeName != ''">CODE_NAME = #{codeName},</if>
+            <if test="codeOrder != null and codeOrder != ''">CODE_ORDER = #{codeOrder},</if>
+            <if test="parentNo != null and parentNo != ''">PARENT_NO = #{parentNo},</if>
+            <if test="codeFlag != null">CODE_FLAG = #{codeFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSysCodeById" parameterType="Integer">
+        delete from cmf_sys_code where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSysCodeByIds" parameterType="String">
+        delete from cmf_sys_code where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

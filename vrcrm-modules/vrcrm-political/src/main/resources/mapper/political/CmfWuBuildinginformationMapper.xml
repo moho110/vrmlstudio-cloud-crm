@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfWuBuildinginformationMapper">
+    
+    <resultMap type="CmfWuBuildinginformation" id="CmfWuBuildinginformationResult">
+        <result property="id"    column="id"    />
+        <result property="buildingno"    column="buildingNo"    />
+        <result property="buildingname"    column="buildingName"    />
+        <result property="buildinglocate"    column="buildingLocate"    />
+        <result property="unit"    column="unit"    />
+        <result property="buildingstruct"    column="buildingStruct"    />
+        <result property="type"    column="type"    />
+        <result property="sum"    column="sum"    />
+        <result property="startdate"    column="startDate"    />
+        <result property="finishdate"    column="finishDate"    />
+        <result property="jiaofudate"    column="jiaofuDate"    />
+        <result property="usein"    column="useIn"    />
+        <result property="area"    column="area"    />
+        <result property="salednum"    column="saledNum"    />
+        <result property="rentnum"    column="rentNum"    />
+        <result property="builder"    column="builder"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="memo"    column="memo"    />
+        <result property="optmanage"    column="optManage"    />
+        <result property="areaname"    column="areaName"    />
+    </resultMap>
+
+    <sql id="selectCmfWuBuildinginformationVo">
+        select id, buildingNo, buildingName, buildingLocate, unit, buildingStruct, type, sum, startDate, finishDate, jiaofuDate, useIn, area, saledNum, rentNum, builder, creator, createTime, memo, optManage, areaName from cmf_wu_buildinginformation
+    </sql>
+
+    <select id="selectCmfWuBuildinginformationList" parameterType="CmfWuBuildinginformation" resultMap="CmfWuBuildinginformationResult">
+        <include refid="selectCmfWuBuildinginformationVo"/>
+        <where>  
+            <if test="buildingno != null  and buildingno != ''"> and buildingNo = #{buildingno}</if>
+            <if test="buildingname != null  and buildingname != ''"> and buildingName like concat('%', #{buildingname}, '%')</if>
+            <if test="buildinglocate != null  and buildinglocate != ''"> and buildingLocate = #{buildinglocate}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="buildingstruct != null  and buildingstruct != ''"> and buildingStruct = #{buildingstruct}</if>
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+            <if test="sum != null  and sum != ''"> and sum = #{sum}</if>
+            <if test="startdate != null  and startdate != ''"> and startDate = #{startdate}</if>
+            <if test="finishdate != null  and finishdate != ''"> and finishDate = #{finishdate}</if>
+            <if test="jiaofudate != null  and jiaofudate != ''"> and jiaofuDate = #{jiaofudate}</if>
+            <if test="usein != null  and usein != ''"> and useIn = #{usein}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="salednum != null  and salednum != ''"> and saledNum = #{salednum}</if>
+            <if test="rentnum != null  and rentnum != ''"> and rentNum = #{rentnum}</if>
+            <if test="builder != null  and builder != ''"> and builder = #{builder}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="optmanage != null  and optmanage != ''"> and optManage = #{optmanage}</if>
+            <if test="areaname != null  and areaname != ''"> and areaName like concat('%', #{areaname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfWuBuildinginformationById" parameterType="Integer" resultMap="CmfWuBuildinginformationResult">
+        <include refid="selectCmfWuBuildinginformationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfWuBuildinginformation" parameterType="CmfWuBuildinginformation" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_wu_buildinginformation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buildingno != null and buildingno != ''">buildingNo,</if>
+            <if test="buildingname != null and buildingname != ''">buildingName,</if>
+            <if test="buildinglocate != null and buildinglocate != ''">buildingLocate,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="buildingstruct != null and buildingstruct != ''">buildingStruct,</if>
+            <if test="type != null and type != ''">type,</if>
+            <if test="sum != null and sum != ''">sum,</if>
+            <if test="startdate != null and startdate != ''">startDate,</if>
+            <if test="finishdate != null and finishdate != ''">finishDate,</if>
+            <if test="jiaofudate != null and jiaofudate != ''">jiaofuDate,</if>
+            <if test="usein != null and usein != ''">useIn,</if>
+            <if test="area != null and area != ''">area,</if>
+            <if test="salednum != null and salednum != ''">saledNum,</if>
+            <if test="rentnum != null and rentnum != ''">rentNum,</if>
+            <if test="builder != null and builder != ''">builder,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="optmanage != null and optmanage != ''">optManage,</if>
+            <if test="areaname != null and areaname != ''">areaName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buildingno != null and buildingno != ''">#{buildingno},</if>
+            <if test="buildingname != null and buildingname != ''">#{buildingname},</if>
+            <if test="buildinglocate != null and buildinglocate != ''">#{buildinglocate},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="buildingstruct != null and buildingstruct != ''">#{buildingstruct},</if>
+            <if test="type != null and type != ''">#{type},</if>
+            <if test="sum != null and sum != ''">#{sum},</if>
+            <if test="startdate != null and startdate != ''">#{startdate},</if>
+            <if test="finishdate != null and finishdate != ''">#{finishdate},</if>
+            <if test="jiaofudate != null and jiaofudate != ''">#{jiaofudate},</if>
+            <if test="usein != null and usein != ''">#{usein},</if>
+            <if test="area != null and area != ''">#{area},</if>
+            <if test="salednum != null and salednum != ''">#{salednum},</if>
+            <if test="rentnum != null and rentnum != ''">#{rentnum},</if>
+            <if test="builder != null and builder != ''">#{builder},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="optmanage != null and optmanage != ''">#{optmanage},</if>
+            <if test="areaname != null and areaname != ''">#{areaname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfWuBuildinginformation" parameterType="CmfWuBuildinginformation">
+        update cmf_wu_buildinginformation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buildingno != null and buildingno != ''">buildingNo = #{buildingno},</if>
+            <if test="buildingname != null and buildingname != ''">buildingName = #{buildingname},</if>
+            <if test="buildinglocate != null and buildinglocate != ''">buildingLocate = #{buildinglocate},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="buildingstruct != null and buildingstruct != ''">buildingStruct = #{buildingstruct},</if>
+            <if test="type != null and type != ''">type = #{type},</if>
+            <if test="sum != null and sum != ''">sum = #{sum},</if>
+            <if test="startdate != null and startdate != ''">startDate = #{startdate},</if>
+            <if test="finishdate != null and finishdate != ''">finishDate = #{finishdate},</if>
+            <if test="jiaofudate != null and jiaofudate != ''">jiaofuDate = #{jiaofudate},</if>
+            <if test="usein != null and usein != ''">useIn = #{usein},</if>
+            <if test="area != null and area != ''">area = #{area},</if>
+            <if test="salednum != null and salednum != ''">saledNum = #{salednum},</if>
+            <if test="rentnum != null and rentnum != ''">rentNum = #{rentnum},</if>
+            <if test="builder != null and builder != ''">builder = #{builder},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="optmanage != null and optmanage != ''">optManage = #{optmanage},</if>
+            <if test="areaname != null and areaname != ''">areaName = #{areaname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfWuBuildinginformationById" parameterType="Integer">
+        delete from cmf_wu_buildinginformation where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfWuBuildinginformationByIds" parameterType="String">
+        delete from cmf_wu_buildinginformation where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

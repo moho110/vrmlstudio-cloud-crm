@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfKaipiaorecordMapper">
+    
+    <resultMap type="CmfKaipiaorecord" id="CmfKaipiaorecordResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="dingdanbillid"    column="dingdanbillid"    />
+        <result property="kaipiaoneirong"    column="kaipiaoneirong"    />
+        <result property="piaojutype"    column="piaojutype"    />
+        <result property="piaojujine"    column="piaojujine"    />
+        <result property="fapiaono"    column="fapiaono"    />
+        <result property="kaipiaodate"    column="kaipiaodate"    />
+        <result property="qici"    column="qici"    />
+        <result property="kaipiaoren"    column="kaipiaoren"    />
+        <result property="ifhuikuan"    column="ifhuikuan"    />
+        <result property="huikuanid"    column="huikuanid"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="createtime"    column="createtime"    />
+    </resultMap>
+
+    <sql id="selectCmfKaipiaorecordVo">
+        select id, customerid, dingdanbillid, kaipiaoneirong, piaojutype, piaojujine, fapiaono, kaipiaodate, qici, kaipiaoren, ifhuikuan, huikuanid, beizhu, createtime from cmf_kaipiaorecord
+    </sql>
+
+    <select id="selectCmfKaipiaorecordList" parameterType="CmfKaipiaorecord" resultMap="CmfKaipiaorecordResult">
+        <include refid="selectCmfKaipiaorecordVo"/>
+        <where>  
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="dingdanbillid != null "> and dingdanbillid = #{dingdanbillid}</if>
+            <if test="kaipiaoneirong != null  and kaipiaoneirong != ''"> and kaipiaoneirong = #{kaipiaoneirong}</if>
+            <if test="piaojutype != null "> and piaojutype = #{piaojutype}</if>
+            <if test="piaojujine != null "> and piaojujine = #{piaojujine}</if>
+            <if test="fapiaono != null  and fapiaono != ''"> and fapiaono = #{fapiaono}</if>
+            <if test="kaipiaodate != null "> and kaipiaodate = #{kaipiaodate}</if>
+            <if test="qici != null  and qici != ''"> and qici = #{qici}</if>
+            <if test="kaipiaoren != null  and kaipiaoren != ''"> and kaipiaoren = #{kaipiaoren}</if>
+            <if test="ifhuikuan != null  and ifhuikuan != ''"> and ifhuikuan = #{ifhuikuan}</if>
+            <if test="huikuanid != null  and huikuanid != ''"> and huikuanid = #{huikuanid}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfKaipiaorecordById" parameterType="Integer" resultMap="CmfKaipiaorecordResult">
+        <include refid="selectCmfKaipiaorecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfKaipiaorecord" parameterType="CmfKaipiaorecord" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_kaipiaorecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">customerid,</if>
+            <if test="dingdanbillid != null">dingdanbillid,</if>
+            <if test="kaipiaoneirong != null and kaipiaoneirong != ''">kaipiaoneirong,</if>
+            <if test="piaojutype != null">piaojutype,</if>
+            <if test="piaojujine != null">piaojujine,</if>
+            <if test="fapiaono != null and fapiaono != ''">fapiaono,</if>
+            <if test="kaipiaodate != null">kaipiaodate,</if>
+            <if test="qici != null and qici != ''">qici,</if>
+            <if test="kaipiaoren != null and kaipiaoren != ''">kaipiaoren,</if>
+            <if test="ifhuikuan != null and ifhuikuan != ''">ifhuikuan,</if>
+            <if test="huikuanid != null and huikuanid != ''">huikuanid,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="createtime != null">createtime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">#{customerid},</if>
+            <if test="dingdanbillid != null">#{dingdanbillid},</if>
+            <if test="kaipiaoneirong != null and kaipiaoneirong != ''">#{kaipiaoneirong},</if>
+            <if test="piaojutype != null">#{piaojutype},</if>
+            <if test="piaojujine != null">#{piaojujine},</if>
+            <if test="fapiaono != null and fapiaono != ''">#{fapiaono},</if>
+            <if test="kaipiaodate != null">#{kaipiaodate},</if>
+            <if test="qici != null and qici != ''">#{qici},</if>
+            <if test="kaipiaoren != null and kaipiaoren != ''">#{kaipiaoren},</if>
+            <if test="ifhuikuan != null and ifhuikuan != ''">#{ifhuikuan},</if>
+            <if test="huikuanid != null and huikuanid != ''">#{huikuanid},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfKaipiaorecord" parameterType="CmfKaipiaorecord">
+        update cmf_kaipiaorecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="dingdanbillid != null">dingdanbillid = #{dingdanbillid},</if>
+            <if test="kaipiaoneirong != null and kaipiaoneirong != ''">kaipiaoneirong = #{kaipiaoneirong},</if>
+            <if test="piaojutype != null">piaojutype = #{piaojutype},</if>
+            <if test="piaojujine != null">piaojujine = #{piaojujine},</if>
+            <if test="fapiaono != null and fapiaono != ''">fapiaono = #{fapiaono},</if>
+            <if test="kaipiaodate != null">kaipiaodate = #{kaipiaodate},</if>
+            <if test="qici != null and qici != ''">qici = #{qici},</if>
+            <if test="kaipiaoren != null and kaipiaoren != ''">kaipiaoren = #{kaipiaoren},</if>
+            <if test="ifhuikuan != null and ifhuikuan != ''">ifhuikuan = #{ifhuikuan},</if>
+            <if test="huikuanid != null and huikuanid != ''">huikuanid = #{huikuanid},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfKaipiaorecordById" parameterType="Integer">
+        delete from cmf_kaipiaorecord where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfKaipiaorecordByIds" parameterType="String">
+        delete from cmf_kaipiaorecord where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

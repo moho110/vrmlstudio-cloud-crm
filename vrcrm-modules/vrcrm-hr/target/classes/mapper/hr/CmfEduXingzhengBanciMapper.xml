@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengBanciMapper">
+    
+    <resultMap type="CmfEduXingzhengBanci" id="CmfEduXingzhengBanciResult">
+        <result property="id"    column="id"    />
+        <result property="classname"    column="className"    />
+        <result property="dutytime"    column="dutyTime"    />
+        <result property="isstarttimeenable"    column="isStartTimeEnable"    />
+        <result property="isendtimeenable"    column="isEndTimeEnable"    />
+        <result property="startcardtime"    column="startCardTime"    />
+        <result property="endcardtime"    column="endCardTime"    />
+        <result property="startdelaycardtime"    column="startDelayCardTime"    />
+        <result property="enddelaycardtime"    column="endDelayCardTime"    />
+        <result property="latertime"    column="laterTime"    />
+        <result property="earlytime"    column="earlyTime"    />
+        <result property="classmanageone"    column="classManageOne"    />
+        <result property="classmanagetwo"    column="classManageTwo"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengBanciVo">
+        select id, className, dutyTime, isStartTimeEnable, isEndTimeEnable, startCardTime, endCardTime, startDelayCardTime, endDelayCardTime, laterTime, earlyTime, classManageOne, classManageTwo, memo, creator, createTime from cmf_edu_xingzheng_banci
+    </sql>
+
+    <select id="selectCmfEduXingzhengBanciList" parameterType="CmfEduXingzhengBanci" resultMap="CmfEduXingzhengBanciResult">
+        <include refid="selectCmfEduXingzhengBanciVo"/>
+        <where>  
+            <if test="classname != null  and classname != ''"> and className like concat('%', #{classname}, '%')</if>
+            <if test="dutytime != null  and dutytime != ''"> and dutyTime = #{dutytime}</if>
+            <if test="isstarttimeenable != null  and isstarttimeenable != ''"> and isStartTimeEnable = #{isstarttimeenable}</if>
+            <if test="isendtimeenable != null "> and isEndTimeEnable = #{isendtimeenable}</if>
+            <if test="startcardtime != null "> and startCardTime = #{startcardtime}</if>
+            <if test="endcardtime != null "> and endCardTime = #{endcardtime}</if>
+            <if test="startdelaycardtime != null "> and startDelayCardTime = #{startdelaycardtime}</if>
+            <if test="enddelaycardtime != null "> and endDelayCardTime = #{enddelaycardtime}</if>
+            <if test="latertime != null "> and laterTime = #{latertime}</if>
+            <if test="earlytime != null "> and earlyTime = #{earlytime}</if>
+            <if test="classmanageone != null  and classmanageone != ''"> and classManageOne = #{classmanageone}</if>
+            <if test="classmanagetwo != null  and classmanagetwo != ''"> and classManageTwo = #{classmanagetwo}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengBanciById" parameterType="Integer" resultMap="CmfEduXingzhengBanciResult">
+        <include refid="selectCmfEduXingzhengBanciVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengBanci" parameterType="CmfEduXingzhengBanci" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_banci
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="classname != null and classname != ''">className,</if>
+            <if test="dutytime != null and dutytime != ''">dutyTime,</if>
+            <if test="isstarttimeenable != null and isstarttimeenable != ''">isStartTimeEnable,</if>
+            <if test="isendtimeenable != null">isEndTimeEnable,</if>
+            <if test="startcardtime != null">startCardTime,</if>
+            <if test="endcardtime != null">endCardTime,</if>
+            <if test="startdelaycardtime != null">startDelayCardTime,</if>
+            <if test="enddelaycardtime != null">endDelayCardTime,</if>
+            <if test="latertime != null">laterTime,</if>
+            <if test="earlytime != null">earlyTime,</if>
+            <if test="classmanageone != null and classmanageone != ''">classManageOne,</if>
+            <if test="classmanagetwo != null and classmanagetwo != ''">classManageTwo,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="classname != null and classname != ''">#{classname},</if>
+            <if test="dutytime != null and dutytime != ''">#{dutytime},</if>
+            <if test="isstarttimeenable != null and isstarttimeenable != ''">#{isstarttimeenable},</if>
+            <if test="isendtimeenable != null">#{isendtimeenable},</if>
+            <if test="startcardtime != null">#{startcardtime},</if>
+            <if test="endcardtime != null">#{endcardtime},</if>
+            <if test="startdelaycardtime != null">#{startdelaycardtime},</if>
+            <if test="enddelaycardtime != null">#{enddelaycardtime},</if>
+            <if test="latertime != null">#{latertime},</if>
+            <if test="earlytime != null">#{earlytime},</if>
+            <if test="classmanageone != null and classmanageone != ''">#{classmanageone},</if>
+            <if test="classmanagetwo != null and classmanagetwo != ''">#{classmanagetwo},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengBanci" parameterType="CmfEduXingzhengBanci">
+        update cmf_edu_xingzheng_banci
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="classname != null and classname != ''">className = #{classname},</if>
+            <if test="dutytime != null and dutytime != ''">dutyTime = #{dutytime},</if>
+            <if test="isstarttimeenable != null and isstarttimeenable != ''">isStartTimeEnable = #{isstarttimeenable},</if>
+            <if test="isendtimeenable != null">isEndTimeEnable = #{isendtimeenable},</if>
+            <if test="startcardtime != null">startCardTime = #{startcardtime},</if>
+            <if test="endcardtime != null">endCardTime = #{endcardtime},</if>
+            <if test="startdelaycardtime != null">startDelayCardTime = #{startdelaycardtime},</if>
+            <if test="enddelaycardtime != null">endDelayCardTime = #{enddelaycardtime},</if>
+            <if test="latertime != null">laterTime = #{latertime},</if>
+            <if test="earlytime != null">earlyTime = #{earlytime},</if>
+            <if test="classmanageone != null and classmanageone != ''">classManageOne = #{classmanageone},</if>
+            <if test="classmanagetwo != null and classmanagetwo != ''">classManageTwo = #{classmanagetwo},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengBanciById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_banci where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengBanciByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_banci where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

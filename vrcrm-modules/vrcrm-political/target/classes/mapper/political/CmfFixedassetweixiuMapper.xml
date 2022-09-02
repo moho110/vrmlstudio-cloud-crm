@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfFixedassetweixiuMapper">
+    
+    <resultMap type="CmfFixedassetweixiu" id="CmfFixedassetweixiuResult">
+        <result property="id"    column="id"    />
+        <result property="setname"    column="setName"    />
+        <result property="setno"    column="setNo"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="repairunit"    column="repairUnit"    />
+        <result property="repairman"    column="repairMan"    />
+        <result property="thingintro"    column="thingIntro"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="creattime"    column="creatTime"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectCmfFixedassetweixiuVo">
+        select id, setName, setNo, inDepartment, repairUnit, repairMan, thingIntro, approvalMan, memo, creator, creatTime, price, quantity, count from cmf_fixedassetweixiu
+    </sql>
+
+    <select id="selectCmfFixedassetweixiuList" parameterType="CmfFixedassetweixiu" resultMap="CmfFixedassetweixiuResult">
+        <include refid="selectCmfFixedassetweixiuVo"/>
+        <where>  
+            <if test="setname != null  and setname != ''"> and setName like concat('%', #{setname}, '%')</if>
+            <if test="setno != null  and setno != ''"> and setNo = #{setno}</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="repairunit != null  and repairunit != ''"> and repairUnit = #{repairunit}</if>
+            <if test="repairman != null  and repairman != ''"> and repairMan = #{repairman}</if>
+            <if test="thingintro != null  and thingintro != ''"> and thingIntro = #{thingintro}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="creattime != null "> and creatTime = #{creattime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFixedassetweixiuById" parameterType="Integer" resultMap="CmfFixedassetweixiuResult">
+        <include refid="selectCmfFixedassetweixiuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFixedassetweixiu" parameterType="CmfFixedassetweixiu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fixedassetweixiu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName,</if>
+            <if test="setno != null and setno != ''">setNo,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="repairunit != null and repairunit != ''">repairUnit,</if>
+            <if test="repairman != null and repairman != ''">repairMan,</if>
+            <if test="thingintro != null and thingintro != ''">thingIntro,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="creattime != null">creatTime,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="count != null">count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">#{setname},</if>
+            <if test="setno != null and setno != ''">#{setno},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="repairunit != null and repairunit != ''">#{repairunit},</if>
+            <if test="repairman != null and repairman != ''">#{repairman},</if>
+            <if test="thingintro != null and thingintro != ''">#{thingintro},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="creattime != null">#{creattime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFixedassetweixiu" parameterType="CmfFixedassetweixiu">
+        update cmf_fixedassetweixiu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName = #{setname},</if>
+            <if test="setno != null and setno != ''">setNo = #{setno},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="repairunit != null and repairunit != ''">repairUnit = #{repairunit},</if>
+            <if test="repairman != null and repairman != ''">repairMan = #{repairman},</if>
+            <if test="thingintro != null and thingintro != ''">thingIntro = #{thingintro},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="creattime != null">creatTime = #{creattime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFixedassetweixiuById" parameterType="Integer">
+        delete from cmf_fixedassetweixiu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFixedassetweixiuByIds" parameterType="String">
+        delete from cmf_fixedassetweixiu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

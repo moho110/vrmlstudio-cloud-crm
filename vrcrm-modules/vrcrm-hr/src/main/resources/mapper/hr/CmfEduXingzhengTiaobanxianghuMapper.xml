@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengTiaobanxianghuMapper">
+    
+    <resultMap type="CmfEduXingzhengTiaobanxianghu" id="CmfEduXingzhengTiaobanxianghuResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="oridepartment"    column="oriDepartment"    />
+        <result property="oriperson"    column="oriPerson"    />
+        <result property="oristarttime"    column="oriStartTime"    />
+        <result property="oristart"    column="oriStart"    />
+        <result property="newdepartment"    column="newDepartment"    />
+        <result property="newcruit"    column="newCruit"    />
+        <result property="newstarttime"    column="newStartTime"    />
+        <result property="newstart"    column="newStart"    />
+        <result property="exstatus"    column="exStatus"    />
+        <result property="workflowid"    column="workFlowID"    />
+        <result property="exman"    column="exMan"    />
+        <result property="extime"    column="exTime"    />
+        <result property="oripersonname"    column="oriPersonName"    />
+        <result property="newpersonname"    column="newPersonName"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengTiaobanxianghuVo">
+        select id, term, oriDepartment, oriPerson, oriStartTime, oriStart, newDepartment, newCruit, newStartTime, newStart, exStatus, workFlowID, exMan, exTime, oriPersonName, newPersonName from cmf_edu_xingzheng_tiaobanxianghu
+    </sql>
+
+    <select id="selectCmfEduXingzhengTiaobanxianghuList" parameterType="CmfEduXingzhengTiaobanxianghu" resultMap="CmfEduXingzhengTiaobanxianghuResult">
+        <include refid="selectCmfEduXingzhengTiaobanxianghuVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="oridepartment != null  and oridepartment != ''"> and oriDepartment = #{oridepartment}</if>
+            <if test="oriperson != null  and oriperson != ''"> and oriPerson = #{oriperson}</if>
+            <if test="oristarttime != null "> and oriStartTime = #{oristarttime}</if>
+            <if test="oristart != null  and oristart != ''"> and oriStart = #{oristart}</if>
+            <if test="newdepartment != null  and newdepartment != ''"> and newDepartment = #{newdepartment}</if>
+            <if test="newcruit != null  and newcruit != ''"> and newCruit = #{newcruit}</if>
+            <if test="newstarttime != null "> and newStartTime = #{newstarttime}</if>
+            <if test="newstart != null  and newstart != ''"> and newStart = #{newstart}</if>
+            <if test="exstatus != null "> and exStatus = #{exstatus}</if>
+            <if test="workflowid != null "> and workFlowID = #{workflowid}</if>
+            <if test="exman != null  and exman != ''"> and exMan = #{exman}</if>
+            <if test="extime != null  and extime != ''"> and exTime = #{extime}</if>
+            <if test="oripersonname != null  and oripersonname != ''"> and oriPersonName like concat('%', #{oripersonname}, '%')</if>
+            <if test="newpersonname != null  and newpersonname != ''"> and newPersonName like concat('%', #{newpersonname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengTiaobanxianghuById" parameterType="Integer" resultMap="CmfEduXingzhengTiaobanxianghuResult">
+        <include refid="selectCmfEduXingzhengTiaobanxianghuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengTiaobanxianghu" parameterType="CmfEduXingzhengTiaobanxianghu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_tiaobanxianghu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="oridepartment != null and oridepartment != ''">oriDepartment,</if>
+            <if test="oriperson != null and oriperson != ''">oriPerson,</if>
+            <if test="oristarttime != null">oriStartTime,</if>
+            <if test="oristart != null and oristart != ''">oriStart,</if>
+            <if test="newdepartment != null and newdepartment != ''">newDepartment,</if>
+            <if test="newcruit != null and newcruit != ''">newCruit,</if>
+            <if test="newstarttime != null">newStartTime,</if>
+            <if test="newstart != null and newstart != ''">newStart,</if>
+            <if test="exstatus != null">exStatus,</if>
+            <if test="workflowid != null">workFlowID,</if>
+            <if test="exman != null and exman != ''">exMan,</if>
+            <if test="extime != null and extime != ''">exTime,</if>
+            <if test="oripersonname != null and oripersonname != ''">oriPersonName,</if>
+            <if test="newpersonname != null and newpersonname != ''">newPersonName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="oridepartment != null and oridepartment != ''">#{oridepartment},</if>
+            <if test="oriperson != null and oriperson != ''">#{oriperson},</if>
+            <if test="oristarttime != null">#{oristarttime},</if>
+            <if test="oristart != null and oristart != ''">#{oristart},</if>
+            <if test="newdepartment != null and newdepartment != ''">#{newdepartment},</if>
+            <if test="newcruit != null and newcruit != ''">#{newcruit},</if>
+            <if test="newstarttime != null">#{newstarttime},</if>
+            <if test="newstart != null and newstart != ''">#{newstart},</if>
+            <if test="exstatus != null">#{exstatus},</if>
+            <if test="workflowid != null">#{workflowid},</if>
+            <if test="exman != null and exman != ''">#{exman},</if>
+            <if test="extime != null and extime != ''">#{extime},</if>
+            <if test="oripersonname != null and oripersonname != ''">#{oripersonname},</if>
+            <if test="newpersonname != null and newpersonname != ''">#{newpersonname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengTiaobanxianghu" parameterType="CmfEduXingzhengTiaobanxianghu">
+        update cmf_edu_xingzheng_tiaobanxianghu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="oridepartment != null and oridepartment != ''">oriDepartment = #{oridepartment},</if>
+            <if test="oriperson != null and oriperson != ''">oriPerson = #{oriperson},</if>
+            <if test="oristarttime != null">oriStartTime = #{oristarttime},</if>
+            <if test="oristart != null and oristart != ''">oriStart = #{oristart},</if>
+            <if test="newdepartment != null and newdepartment != ''">newDepartment = #{newdepartment},</if>
+            <if test="newcruit != null and newcruit != ''">newCruit = #{newcruit},</if>
+            <if test="newstarttime != null">newStartTime = #{newstarttime},</if>
+            <if test="newstart != null and newstart != ''">newStart = #{newstart},</if>
+            <if test="exstatus != null">exStatus = #{exstatus},</if>
+            <if test="workflowid != null">workFlowID = #{workflowid},</if>
+            <if test="exman != null and exman != ''">exMan = #{exman},</if>
+            <if test="extime != null and extime != ''">exTime = #{extime},</if>
+            <if test="oripersonname != null and oripersonname != ''">oriPersonName = #{oripersonname},</if>
+            <if test="newpersonname != null and newpersonname != ''">newPersonName = #{newpersonname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengTiaobanxianghuById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_tiaobanxianghu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengTiaobanxianghuByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_tiaobanxianghu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

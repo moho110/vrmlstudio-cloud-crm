@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.finance.mapper.CmfAccesstypeMapper">
+    
+    <resultMap type="CmfAccesstype" id="CmfAccesstypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="parent"    column="parent"    />
+        <result property="inout"    column="inout"    />
+    </resultMap>
+
+    <sql id="selectCmfAccesstypeVo">
+        select id, name, parent, inout from cmf_accesstype
+    </sql>
+
+    <select id="selectCmfAccesstypeList" parameterType="CmfAccesstype" resultMap="CmfAccesstypeResult">
+        <include refid="selectCmfAccesstypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="parent != null "> and parent = #{parent}</if>
+            <if test="inout != null "> and inout = #{inout}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfAccesstypeById" parameterType="Integer" resultMap="CmfAccesstypeResult">
+        <include refid="selectCmfAccesstypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfAccesstype" parameterType="CmfAccesstype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_accesstype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="parent != null">parent,</if>
+            <if test="inout != null">inout,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="parent != null">#{parent},</if>
+            <if test="inout != null">#{inout},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfAccesstype" parameterType="CmfAccesstype">
+        update cmf_accesstype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="parent != null">parent = #{parent},</if>
+            <if test="inout != null">inout = #{inout},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfAccesstypeById" parameterType="Integer">
+        delete from cmf_accesstype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfAccesstypeByIds" parameterType="String">
+        delete from cmf_accesstype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

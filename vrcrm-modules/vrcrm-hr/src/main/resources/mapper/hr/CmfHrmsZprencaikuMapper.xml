@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsZprencaikuMapper">
+    
+    <resultMap type="CmfHrmsZprencaiku" id="CmfHrmsZprencaikuResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+        <result property="sex"    column="sex"    />
+        <result property="contact"    column="contact"    />
+        <result property="idno"    column="IDNo"    />
+        <result property="national"    column="national"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="political"    column="political"    />
+        <result property="jiguan"    column="jiguan"    />
+        <result property="hukouinpos"    column="hukouInPos"    />
+        <result property="studyexp"    column="studyExp"    />
+        <result property="staffname"    column="staffName"    />
+        <result property="college"    column="college"    />
+        <result property="professional"    column="professional"    />
+        <result property="secpro"    column="secPro"    />
+        <result property="email"    column="email"    />
+        <result property="familytelephone"    column="familyTelephone"    />
+        <result property="familyaddr"    column="familyAddr"    />
+        <result property="postalcode"    column="postalCode"    />
+        <result property="edution"    column="edution"    />
+        <result property="workexp"    column="workExp"    />
+        <result property="selfeval"    column="selfEval"    />
+        <result property="englishabillity"    column="englishAbillity"    />
+        <result property="traingexp"    column="traingExp"    />
+        <result property="photo"    column="photo"    />
+        <result property="attach"    column="attach"    />
+        <result property="projectexp"    column="projectExp"    />
+        <result property="resumeletter"    column="resumeLetter"    />
+        <result property="proobject"    column="proObject"    />
+        <result property="luyongstatus"    column="luyongStatus"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsZprencaikuVo">
+        select id, Name, sex, contact, IDNo, national, birthday, political, jiguan, hukouInPos, studyExp, staffName, college, professional, secPro, email, familyTelephone, familyAddr, postalCode, edution, workExp, selfEval, englishAbillity, traingExp, photo, attach, projectExp, resumeLetter, proObject, luyongStatus, creator, createTime from cmf_hrms_zprencaiku
+    </sql>
+
+    <select id="selectCmfHrmsZprencaikuList" parameterType="CmfHrmsZprencaiku" resultMap="CmfHrmsZprencaikuResult">
+        <include refid="selectCmfHrmsZprencaikuVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="contact != null  and contact != ''"> and contact = #{contact}</if>
+            <if test="idno != null  and idno != ''"> and IDNo = #{idno}</if>
+            <if test="national != null  and national != ''"> and national = #{national}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="political != null  and political != ''"> and political = #{political}</if>
+            <if test="jiguan != null  and jiguan != ''"> and jiguan = #{jiguan}</if>
+            <if test="hukouinpos != null  and hukouinpos != ''"> and hukouInPos = #{hukouinpos}</if>
+            <if test="studyexp != null  and studyexp != ''"> and studyExp = #{studyexp}</if>
+            <if test="staffname != null  and staffname != ''"> and staffName like concat('%', #{staffname}, '%')</if>
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="professional != null  and professional != ''"> and professional = #{professional}</if>
+            <if test="secpro != null  and secpro != ''"> and secPro = #{secpro}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="familytelephone != null  and familytelephone != ''"> and familyTelephone = #{familytelephone}</if>
+            <if test="familyaddr != null  and familyaddr != ''"> and familyAddr = #{familyaddr}</if>
+            <if test="postalcode != null "> and postalCode = #{postalcode}</if>
+            <if test="edution != null  and edution != ''"> and edution = #{edution}</if>
+            <if test="workexp != null  and workexp != ''"> and workExp = #{workexp}</if>
+            <if test="selfeval != null  and selfeval != ''"> and selfEval = #{selfeval}</if>
+            <if test="englishabillity != null  and englishabillity != ''"> and englishAbillity = #{englishabillity}</if>
+            <if test="traingexp != null  and traingexp != ''"> and traingExp = #{traingexp}</if>
+            <if test="photo != null  and photo != ''"> and photo = #{photo}</if>
+            <if test="attach != null  and attach != ''"> and attach = #{attach}</if>
+            <if test="projectexp != null  and projectexp != ''"> and projectExp = #{projectexp}</if>
+            <if test="resumeletter != null  and resumeletter != ''"> and resumeLetter = #{resumeletter}</if>
+            <if test="proobject != null  and proobject != ''"> and proObject = #{proobject}</if>
+            <if test="luyongstatus != null  and luyongstatus != ''"> and luyongStatus = #{luyongstatus}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsZprencaikuById" parameterType="Integer" resultMap="CmfHrmsZprencaikuResult">
+        <include refid="selectCmfHrmsZprencaikuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsZprencaiku" parameterType="CmfHrmsZprencaiku" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_zprencaiku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="contact != null and contact != ''">contact,</if>
+            <if test="idno != null and idno != ''">IDNo,</if>
+            <if test="national != null and national != ''">national,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="political != null and political != ''">political,</if>
+            <if test="jiguan != null and jiguan != ''">jiguan,</if>
+            <if test="hukouinpos != null and hukouinpos != ''">hukouInPos,</if>
+            <if test="studyexp != null and studyexp != ''">studyExp,</if>
+            <if test="staffname != null and staffname != ''">staffName,</if>
+            <if test="college != null and college != ''">college,</if>
+            <if test="professional != null and professional != ''">professional,</if>
+            <if test="secpro != null and secpro != ''">secPro,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="familytelephone != null and familytelephone != ''">familyTelephone,</if>
+            <if test="familyaddr != null and familyaddr != ''">familyAddr,</if>
+            <if test="postalcode != null">postalCode,</if>
+            <if test="edution != null and edution != ''">edution,</if>
+            <if test="workexp != null and workexp != ''">workExp,</if>
+            <if test="selfeval != null and selfeval != ''">selfEval,</if>
+            <if test="englishabillity != null and englishabillity != ''">englishAbillity,</if>
+            <if test="traingexp != null and traingexp != ''">traingExp,</if>
+            <if test="photo != null and photo != ''">photo,</if>
+            <if test="attach != null and attach != ''">attach,</if>
+            <if test="projectexp != null and projectexp != ''">projectExp,</if>
+            <if test="resumeletter != null and resumeletter != ''">resumeLetter,</if>
+            <if test="proobject != null and proobject != ''">proObject,</if>
+            <if test="luyongstatus != null and luyongstatus != ''">luyongStatus,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="contact != null and contact != ''">#{contact},</if>
+            <if test="idno != null and idno != ''">#{idno},</if>
+            <if test="national != null and national != ''">#{national},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="political != null and political != ''">#{political},</if>
+            <if test="jiguan != null and jiguan != ''">#{jiguan},</if>
+            <if test="hukouinpos != null and hukouinpos != ''">#{hukouinpos},</if>
+            <if test="studyexp != null and studyexp != ''">#{studyexp},</if>
+            <if test="staffname != null and staffname != ''">#{staffname},</if>
+            <if test="college != null and college != ''">#{college},</if>
+            <if test="professional != null and professional != ''">#{professional},</if>
+            <if test="secpro != null and secpro != ''">#{secpro},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="familytelephone != null and familytelephone != ''">#{familytelephone},</if>
+            <if test="familyaddr != null and familyaddr != ''">#{familyaddr},</if>
+            <if test="postalcode != null">#{postalcode},</if>
+            <if test="edution != null and edution != ''">#{edution},</if>
+            <if test="workexp != null and workexp != ''">#{workexp},</if>
+            <if test="selfeval != null and selfeval != ''">#{selfeval},</if>
+            <if test="englishabillity != null and englishabillity != ''">#{englishabillity},</if>
+            <if test="traingexp != null and traingexp != ''">#{traingexp},</if>
+            <if test="photo != null and photo != ''">#{photo},</if>
+            <if test="attach != null and attach != ''">#{attach},</if>
+            <if test="projectexp != null and projectexp != ''">#{projectexp},</if>
+            <if test="resumeletter != null and resumeletter != ''">#{resumeletter},</if>
+            <if test="proobject != null and proobject != ''">#{proobject},</if>
+            <if test="luyongstatus != null and luyongstatus != ''">#{luyongstatus},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsZprencaiku" parameterType="CmfHrmsZprencaiku">
+        update cmf_hrms_zprencaiku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="contact != null and contact != ''">contact = #{contact},</if>
+            <if test="idno != null and idno != ''">IDNo = #{idno},</if>
+            <if test="national != null and national != ''">national = #{national},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="political != null and political != ''">political = #{political},</if>
+            <if test="jiguan != null and jiguan != ''">jiguan = #{jiguan},</if>
+            <if test="hukouinpos != null and hukouinpos != ''">hukouInPos = #{hukouinpos},</if>
+            <if test="studyexp != null and studyexp != ''">studyExp = #{studyexp},</if>
+            <if test="staffname != null and staffname != ''">staffName = #{staffname},</if>
+            <if test="college != null and college != ''">college = #{college},</if>
+            <if test="professional != null and professional != ''">professional = #{professional},</if>
+            <if test="secpro != null and secpro != ''">secPro = #{secpro},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="familytelephone != null and familytelephone != ''">familyTelephone = #{familytelephone},</if>
+            <if test="familyaddr != null and familyaddr != ''">familyAddr = #{familyaddr},</if>
+            <if test="postalcode != null">postalCode = #{postalcode},</if>
+            <if test="edution != null and edution != ''">edution = #{edution},</if>
+            <if test="workexp != null and workexp != ''">workExp = #{workexp},</if>
+            <if test="selfeval != null and selfeval != ''">selfEval = #{selfeval},</if>
+            <if test="englishabillity != null and englishabillity != ''">englishAbillity = #{englishabillity},</if>
+            <if test="traingexp != null and traingexp != ''">traingExp = #{traingexp},</if>
+            <if test="photo != null and photo != ''">photo = #{photo},</if>
+            <if test="attach != null and attach != ''">attach = #{attach},</if>
+            <if test="projectexp != null and projectexp != ''">projectExp = #{projectexp},</if>
+            <if test="resumeletter != null and resumeletter != ''">resumeLetter = #{resumeletter},</if>
+            <if test="proobject != null and proobject != ''">proObject = #{proobject},</if>
+            <if test="luyongstatus != null and luyongstatus != ''">luyongStatus = #{luyongstatus},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsZprencaikuById" parameterType="Integer">
+        delete from cmf_hrms_zprencaiku where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsZprencaikuByIds" parameterType="String">
+        delete from cmf_hrms_zprencaiku where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

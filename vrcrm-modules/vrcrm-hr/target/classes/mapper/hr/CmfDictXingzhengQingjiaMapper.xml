@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfDictXingzhengQingjiaMapper">
+    
+    <resultMap type="CmfDictXingzhengQingjia" id="CmfDictXingzhengQingjiaResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfDictXingzhengQingjiaVo">
+        select id, Name from cmf_dict_xingzheng_qingjia
+    </sql>
+
+    <select id="selectCmfDictXingzhengQingjiaList" parameterType="CmfDictXingzhengQingjia" resultMap="CmfDictXingzhengQingjiaResult">
+        <include refid="selectCmfDictXingzhengQingjiaVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDictXingzhengQingjiaById" parameterType="Integer" resultMap="CmfDictXingzhengQingjiaResult">
+        <include refid="selectCmfDictXingzhengQingjiaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDictXingzhengQingjia" parameterType="CmfDictXingzhengQingjia" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dict_xingzheng_qingjia
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDictXingzhengQingjia" parameterType="CmfDictXingzhengQingjia">
+        update cmf_dict_xingzheng_qingjia
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDictXingzhengQingjiaById" parameterType="Integer">
+        delete from cmf_dict_xingzheng_qingjia where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDictXingzhengQingjiaByIds" parameterType="String">
+        delete from cmf_dict_xingzheng_qingjia where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

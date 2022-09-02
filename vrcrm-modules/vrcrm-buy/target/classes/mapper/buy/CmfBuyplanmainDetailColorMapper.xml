@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfBuyplanmainDetailColorMapper">
+    
+    <resultMap type="CmfBuyplanmainDetailColor" id="CmfBuyplanmainDetailColorResult">
+        <result property="id"    column="id"    />
+        <result property="num"    column="num"    />
+    </resultMap>
+
+    <sql id="selectCmfBuyplanmainDetailColorVo">
+        select id, num from cmf_buyplanmain_detail_color
+    </sql>
+
+    <select id="selectCmfBuyplanmainDetailColorList" parameterType="CmfBuyplanmainDetailColor" resultMap="CmfBuyplanmainDetailColorResult">
+        <include refid="selectCmfBuyplanmainDetailColorVo"/>
+        <where>  
+            <if test="num != null "> and num = #{num}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfBuyplanmainDetailColorById" parameterType="Integer" resultMap="CmfBuyplanmainDetailColorResult">
+        <include refid="selectCmfBuyplanmainDetailColorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfBuyplanmainDetailColor" parameterType="CmfBuyplanmainDetailColor" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_buyplanmain_detail_color
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="num != null">num,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="num != null">#{num},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfBuyplanmainDetailColor" parameterType="CmfBuyplanmainDetailColor">
+        update cmf_buyplanmain_detail_color
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="num != null">num = #{num},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfBuyplanmainDetailColorById" parameterType="Integer">
+        delete from cmf_buyplanmain_detail_color where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfBuyplanmainDetailColorByIds" parameterType="String">
+        delete from cmf_buyplanmain_detail_color where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfCrmMytableNoteMapper">
+    
+    <resultMap type="CmfCrmMytableNote" id="CmfCrmMytableNoteResult">
+        <result property="id"    column="id"    />
+        <result property="notecontent"    column="noteContent"    />
+        <result property="createid"    column="createId"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmMytableNoteVo">
+        select id, noteContent, createId, createTime from cmf_crm_mytable_note
+    </sql>
+
+    <select id="selectCmfCrmMytableNoteList" parameterType="CmfCrmMytableNote" resultMap="CmfCrmMytableNoteResult">
+        <include refid="selectCmfCrmMytableNoteVo"/>
+        <where>  
+            <if test="notecontent != null  and notecontent != ''"> and noteContent = #{notecontent}</if>
+            <if test="createid != null  and createid != ''"> and createId = #{createid}</if>
+            <if test="createtime != null  and createtime != ''"> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmMytableNoteById" parameterType="Integer" resultMap="CmfCrmMytableNoteResult">
+        <include refid="selectCmfCrmMytableNoteVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmMytableNote" parameterType="CmfCrmMytableNote" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_mytable_note
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="notecontent != null and notecontent != ''">noteContent,</if>
+            <if test="createid != null and createid != ''">createId,</if>
+            <if test="createtime != null and createtime != ''">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="notecontent != null and notecontent != ''">#{notecontent},</if>
+            <if test="createid != null and createid != ''">#{createid},</if>
+            <if test="createtime != null and createtime != ''">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmMytableNote" parameterType="CmfCrmMytableNote">
+        update cmf_crm_mytable_note
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="notecontent != null and notecontent != ''">noteContent = #{notecontent},</if>
+            <if test="createid != null and createid != ''">createId = #{createid},</if>
+            <if test="createtime != null and createtime != ''">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmMytableNoteById" parameterType="Integer">
+        delete from cmf_crm_mytable_note where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmMytableNoteByIds" parameterType="String">
+        delete from cmf_crm_mytable_note where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfProductcolorMapper">
+    
+    <resultMap type="CmfProductcolor" id="CmfProductcolorResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="colorvalue"    column="colorvalue"    />
+    </resultMap>
+
+    <sql id="selectCmfProductcolorVo">
+        select id, name, colorvalue from cmf_productcolor
+    </sql>
+
+    <select id="selectCmfProductcolorList" parameterType="CmfProductcolor" resultMap="CmfProductcolorResult">
+        <include refid="selectCmfProductcolorVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="colorvalue != null  and colorvalue != ''"> and colorvalue = #{colorvalue}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfProductcolorById" parameterType="Integer" resultMap="CmfProductcolorResult">
+        <include refid="selectCmfProductcolorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfProductcolor" parameterType="CmfProductcolor" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_productcolor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="colorvalue != null and colorvalue != ''">colorvalue,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="colorvalue != null and colorvalue != ''">#{colorvalue},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfProductcolor" parameterType="CmfProductcolor">
+        update cmf_productcolor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="colorvalue != null and colorvalue != ''">colorvalue = #{colorvalue},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfProductcolorById" parameterType="Integer">
+        delete from cmf_productcolor where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfProductcolorByIds" parameterType="String">
+        delete from cmf_productcolor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

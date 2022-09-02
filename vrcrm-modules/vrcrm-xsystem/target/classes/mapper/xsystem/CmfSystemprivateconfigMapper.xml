@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemprivateconfigMapper">
+    
+    <resultMap type="CmfSystemprivateconfig" id="CmfSystemprivateconfigResult">
+        <result property="id"    column="id"    />
+        <result property="category"    column="category"    />
+        <result property="table"    column="table"    />
+        <result property="object"    column="object"    />
+        <result property="views"    column="views"    />
+        <result property="column"    column="column"    />
+        <result property="other"    column="other"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemprivateconfigVo">
+        select id, category, table, object, views, column, other, creator, createTime from cmf_systemprivateconfig
+    </sql>
+
+    <select id="selectCmfSystemprivateconfigList" parameterType="CmfSystemprivateconfig" resultMap="CmfSystemprivateconfigResult">
+        <include refid="selectCmfSystemprivateconfigVo"/>
+        <where>  
+            <if test="category != null  and category != ''"> and category = #{category}</if>
+            <if test="table != null  and table != ''"> and table = #{table}</if>
+            <if test="object != null  and object != ''"> and object = #{object}</if>
+            <if test="views != null  and views != ''"> and views = #{views}</if>
+            <if test="column != null "> and column = #{column}</if>
+            <if test="other != null  and other != ''"> and other = #{other}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemprivateconfigById" parameterType="Integer" resultMap="CmfSystemprivateconfigResult">
+        <include refid="selectCmfSystemprivateconfigVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemprivateconfig" parameterType="CmfSystemprivateconfig" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_systemprivateconfig
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">category,</if>
+            <if test="table != null and table != ''">table,</if>
+            <if test="object != null and object != ''">object,</if>
+            <if test="views != null and views != ''">views,</if>
+            <if test="column != null">column,</if>
+            <if test="other != null and other != ''">other,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="table != null and table != ''">#{table},</if>
+            <if test="object != null and object != ''">#{object},</if>
+            <if test="views != null and views != ''">#{views},</if>
+            <if test="column != null">#{column},</if>
+            <if test="other != null and other != ''">#{other},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemprivateconfig" parameterType="CmfSystemprivateconfig">
+        update cmf_systemprivateconfig
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="category != null and category != ''">category = #{category},</if>
+            <if test="table != null and table != ''">table = #{table},</if>
+            <if test="object != null and object != ''">object = #{object},</if>
+            <if test="views != null and views != ''">views = #{views},</if>
+            <if test="column != null">column = #{column},</if>
+            <if test="other != null and other != ''">other = #{other},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemprivateconfigById" parameterType="Integer">
+        delete from cmf_systemprivateconfig where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemprivateconfigByIds" parameterType="String">
+        delete from cmf_systemprivateconfig where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

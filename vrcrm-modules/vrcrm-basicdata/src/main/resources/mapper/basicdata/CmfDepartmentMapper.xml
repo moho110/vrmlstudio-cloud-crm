@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfDepartmentMapper">
+    
+    <resultMap type="CmfDepartment" id="CmfDepartmentResult">
+        <result property="id"    column="id"    />
+        <result property="deptName"    column="DEPT_NAME"    />
+        <result property="telNo"    column="TEL_NO"    />
+        <result property="faxNo"    column="FAX_NO"    />
+        <result property="deptNo"    column="DEPT_NO"    />
+        <result property="deptParent"    column="DEPT_PARENT"    />
+        <result property="manager"    column="MANAGER"    />
+        <result property="leader1"    column="LEADER1"    />
+        <result property="leader2"    column="LEADER2"    />
+        <result property="deptFunc"    column="DEPT_FUNC"    />
+        <result property="orderno"    column="orderno"    />
+    </resultMap>
+
+    <sql id="selectCmfDepartmentVo">
+        select id, DEPT_NAME, TEL_NO, FAX_NO, DEPT_NO, DEPT_PARENT, MANAGER, LEADER1, LEADER2, DEPT_FUNC, orderno from cmf_department
+    </sql>
+
+    <select id="selectCmfDepartmentList" parameterType="CmfDepartment" resultMap="CmfDepartmentResult">
+        <include refid="selectCmfDepartmentVo"/>
+        <where>  
+            <if test="deptName != null  and deptName != ''"> and DEPT_NAME like concat('%', #{deptName}, '%')</if>
+            <if test="telNo != null  and telNo != ''"> and TEL_NO = #{telNo}</if>
+            <if test="faxNo != null  and faxNo != ''"> and FAX_NO = #{faxNo}</if>
+            <if test="deptNo != null "> and DEPT_NO = #{deptNo}</if>
+            <if test="deptParent != null "> and DEPT_PARENT = #{deptParent}</if>
+            <if test="manager != null  and manager != ''"> and MANAGER = #{manager}</if>
+            <if test="leader1 != null  and leader1 != ''"> and LEADER1 = #{leader1}</if>
+            <if test="leader2 != null  and leader2 != ''"> and LEADER2 = #{leader2}</if>
+            <if test="deptFunc != null  and deptFunc != ''"> and DEPT_FUNC = #{deptFunc}</if>
+            <if test="orderno != null "> and orderno = #{orderno}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDepartmentById" parameterType="Integer" resultMap="CmfDepartmentResult">
+        <include refid="selectCmfDepartmentVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDepartment" parameterType="CmfDepartment" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_department
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="deptName != null and deptName != ''">DEPT_NAME,</if>
+            <if test="telNo != null and telNo != ''">TEL_NO,</if>
+            <if test="faxNo != null and faxNo != ''">FAX_NO,</if>
+            <if test="deptNo != null">DEPT_NO,</if>
+            <if test="deptParent != null">DEPT_PARENT,</if>
+            <if test="manager != null and manager != ''">MANAGER,</if>
+            <if test="leader1 != null and leader1 != ''">LEADER1,</if>
+            <if test="leader2 != null and leader2 != ''">LEADER2,</if>
+            <if test="deptFunc != null and deptFunc != ''">DEPT_FUNC,</if>
+            <if test="orderno != null">orderno,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="deptName != null and deptName != ''">#{deptName},</if>
+            <if test="telNo != null and telNo != ''">#{telNo},</if>
+            <if test="faxNo != null and faxNo != ''">#{faxNo},</if>
+            <if test="deptNo != null">#{deptNo},</if>
+            <if test="deptParent != null">#{deptParent},</if>
+            <if test="manager != null and manager != ''">#{manager},</if>
+            <if test="leader1 != null and leader1 != ''">#{leader1},</if>
+            <if test="leader2 != null and leader2 != ''">#{leader2},</if>
+            <if test="deptFunc != null and deptFunc != ''">#{deptFunc},</if>
+            <if test="orderno != null">#{orderno},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDepartment" parameterType="CmfDepartment">
+        update cmf_department
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="deptName != null and deptName != ''">DEPT_NAME = #{deptName},</if>
+            <if test="telNo != null and telNo != ''">TEL_NO = #{telNo},</if>
+            <if test="faxNo != null and faxNo != ''">FAX_NO = #{faxNo},</if>
+            <if test="deptNo != null">DEPT_NO = #{deptNo},</if>
+            <if test="deptParent != null">DEPT_PARENT = #{deptParent},</if>
+            <if test="manager != null and manager != ''">MANAGER = #{manager},</if>
+            <if test="leader1 != null and leader1 != ''">LEADER1 = #{leader1},</if>
+            <if test="leader2 != null and leader2 != ''">LEADER2 = #{leader2},</if>
+            <if test="deptFunc != null and deptFunc != ''">DEPT_FUNC = #{deptFunc},</if>
+            <if test="orderno != null">orderno = #{orderno},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDepartmentById" parameterType="Integer">
+        delete from cmf_department where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDepartmentByIds" parameterType="String">
+        delete from cmf_department where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

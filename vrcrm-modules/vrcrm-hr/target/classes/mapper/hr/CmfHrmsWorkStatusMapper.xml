@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsWorkStatusMapper">
+    
+    <resultMap type="CmfHrmsWorkStatus" id="CmfHrmsWorkStatusResult">
+        <result property="id"    column="id"    />
+        <result property="status"    column="status"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsWorkStatusVo">
+        select id, status from cmf_hrms_work_status
+    </sql>
+
+    <select id="selectCmfHrmsWorkStatusList" parameterType="CmfHrmsWorkStatus" resultMap="CmfHrmsWorkStatusResult">
+        <include refid="selectCmfHrmsWorkStatusVo"/>
+        <where>  
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsWorkStatusById" parameterType="Integer" resultMap="CmfHrmsWorkStatusResult">
+        <include refid="selectCmfHrmsWorkStatusVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsWorkStatus" parameterType="CmfHrmsWorkStatus" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_work_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="status != null and status != ''">status,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="status != null and status != ''">#{status},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsWorkStatus" parameterType="CmfHrmsWorkStatus">
+        update cmf_hrms_work_status
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="status != null and status != ''">status = #{status},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsWorkStatusById" parameterType="Integer">
+        delete from cmf_hrms_work_status where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsWorkStatusByIds" parameterType="String">
+        delete from cmf_hrms_work_status where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfExchangeMapper">
+    
+    <resultMap type="CmfExchange" id="CmfExchangeResult">
+        <result property="id"    column="id"    />
+        <result property="customid"    column="customid"    />
+        <result property="prodid"    column="prodid"    />
+        <result property="xinghao"    column="xinghao"    />
+        <result property="guige"    column="guige"    />
+        <result property="integral"    column="integral"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="createman"    column="createman"    />
+        <result property="prodname"    column="prodname"    />
+        <result property="exchangenum"    column="exchangenum"    />
+        <result property="stockid"    column="stockid"    />
+        <result property="beizhu"    column="beizhu"    />
+    </resultMap>
+
+    <sql id="selectCmfExchangeVo">
+        select id, customid, prodid, xinghao, guige, integral, createtime, createman, prodname, exchangenum, stockid, beizhu from cmf_exchange
+    </sql>
+
+    <select id="selectCmfExchangeList" parameterType="CmfExchange" resultMap="CmfExchangeResult">
+        <include refid="selectCmfExchangeVo"/>
+        <where>  
+            <if test="customid != null "> and customid = #{customid}</if>
+            <if test="prodid != null  and prodid != ''"> and prodid = #{prodid}</if>
+            <if test="xinghao != null  and xinghao != ''"> and xinghao = #{xinghao}</if>
+            <if test="guige != null  and guige != ''"> and guige = #{guige}</if>
+            <if test="integral != null "> and integral = #{integral}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="prodname != null  and prodname != ''"> and prodname like concat('%', #{prodname}, '%')</if>
+            <if test="exchangenum != null "> and exchangenum = #{exchangenum}</if>
+            <if test="stockid != null  and stockid != ''"> and stockid = #{stockid}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfExchangeById" parameterType="Integer" resultMap="CmfExchangeResult">
+        <include refid="selectCmfExchangeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfExchange" parameterType="CmfExchange" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_exchange
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customid != null">customid,</if>
+            <if test="prodid != null and prodid != ''">prodid,</if>
+            <if test="xinghao != null and xinghao != ''">xinghao,</if>
+            <if test="guige != null and guige != ''">guige,</if>
+            <if test="integral != null">integral,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="prodname != null and prodname != ''">prodname,</if>
+            <if test="exchangenum != null">exchangenum,</if>
+            <if test="stockid != null and stockid != ''">stockid,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customid != null">#{customid},</if>
+            <if test="prodid != null and prodid != ''">#{prodid},</if>
+            <if test="xinghao != null and xinghao != ''">#{xinghao},</if>
+            <if test="guige != null and guige != ''">#{guige},</if>
+            <if test="integral != null">#{integral},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="prodname != null and prodname != ''">#{prodname},</if>
+            <if test="exchangenum != null">#{exchangenum},</if>
+            <if test="stockid != null and stockid != ''">#{stockid},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfExchange" parameterType="CmfExchange">
+        update cmf_exchange
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customid != null">customid = #{customid},</if>
+            <if test="prodid != null and prodid != ''">prodid = #{prodid},</if>
+            <if test="xinghao != null and xinghao != ''">xinghao = #{xinghao},</if>
+            <if test="guige != null and guige != ''">guige = #{guige},</if>
+            <if test="integral != null">integral = #{integral},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="prodname != null and prodname != ''">prodname = #{prodname},</if>
+            <if test="exchangenum != null">exchangenum = #{exchangenum},</if>
+            <if test="stockid != null and stockid != ''">stockid = #{stockid},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfExchangeById" parameterType="Integer">
+        delete from cmf_exchange where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfExchangeByIds" parameterType="String">
+        delete from cmf_exchange where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

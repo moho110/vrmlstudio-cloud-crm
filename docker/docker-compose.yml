@@ -1,0 +1,140 @@
+version : '3.8'
+services:
+  vrcrm-nacos:
+    container_name: vrcrm-nacos
+    image: nacos/nacos-server
+    build:
+      context: ./nacos
+    environment:
+      - MODE=standalone
+    volumes:
+      - ./nacos/logs/:/home/nacos/logs
+      - ./nacos/conf/application.properties:/home/nacos/conf/application.properties
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+      - "9849:9849"
+    depends_on:
+      - vrcrm-mysql
+  vrcrm-mysql:
+    container_name: vrcrm-mysql
+    image: mysql:5.7
+    build:
+      context: ./mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/logs:/logs
+      - ./mysql/data:/var/lib/mysql
+    command: [
+          'mysqld',
+          '--innodb-buffer-pool-size=80M',
+          '--character-set-server=utf8mb4',
+          '--collation-server=utf8mb4_unicode_ci',
+          '--default-time-zone=+8:00',
+          '--lower-case-table-names=1'
+        ]
+    environment:
+      MYSQL_DATABASE: 'ry-cloud'
+      MYSQL_ROOT_PASSWORD: password
+  vrcrm-redis:
+    container_name: vrcrm-redis
+    image: redis
+    build:
+      context: ./redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf/redis.conf:/home/vrcrm/redis/redis.conf
+      - ./redis/data:/data
+    command: redis-server /home/vrcrm/redis/redis.conf
+  vrcrm-nginx:
+    container_name: vrcrm-nginx
+    image: nginx
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/html/dist:/home/vrcrm/projects/vrcrm-ui
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - vrcrm-gateway
+    links:
+      - vrcrm-gateway
+  vrcrm-gateway:
+    container_name: vrcrm-gateway
+    build:
+      context: ./vrcrm/gateway
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - vrcrm-redis
+    links:
+      - vrcrm-redis
+  vrcrm-auth:
+    container_name: vrcrm-auth
+    build:
+      context: ./vrcrm/auth
+      dockerfile: dockerfile
+    ports:
+      - "9200:9200"
+    depends_on:
+      - vrcrm-redis
+    links:
+      - vrcrm-redis
+  vrcrm-modules-system:
+    container_name: vrcrm-modules-system
+    build:
+      context: ./vrcrm/modules/system
+      dockerfile: dockerfile
+    ports:
+      - "9201:9201"
+    depends_on:
+      - vrcrm-redis
+      - vrcrm-mysql
+    links:
+      - vrcrm-redis
+      - vrcrm-mysql
+  vrcrm-modules-gen:
+    container_name: vrcrm-modules-gen
+    build:
+      context: ./vrcrm/modules/gen
+      dockerfile: dockerfile
+    ports:
+      - "9202:9202"
+    depends_on:
+      - vrcrm-mysql
+    links:
+      - vrcrm-mysql
+  vrcrm-modules-job:
+    container_name: vrcrm-modules-job
+    build:
+      context: ./vrcrm/modules/job
+      dockerfile: dockerfile
+    ports:
+      - "9203:9203"
+    depends_on:
+      - vrcrm-mysql
+    links:
+      - vrcrm-mysql
+  vrcrm-modules-file:
+    container_name: vrcrm-modules-file
+    build:
+      context: ./vrcrm/modules/file
+      dockerfile: dockerfile
+    ports:
+      - "9300:9300"
+    volumes:
+    - ./vrcrm/uploadPath:/home/vrcrm/uploadPath
+  vrcrm-visual-monitor:
+    container_name: vrcrm-visual-monitor
+    build:
+      context: ./vrcrm/visual/monitor
+      dockerfile: dockerfile
+    ports:
+      - "9100:9100"

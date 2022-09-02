@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfCrmChanceMapper">
+    
+    <resultMap type="CmfCrmChance" id="CmfCrmChanceResult">
+        <result property="id"    column="id"    />
+        <result property="chancetheme"    column="chanceTheme"    />
+        <result property="clientname"    column="clientName"    />
+        <result property="linkman"    column="linkMan"    />
+        <result property="findtime"    column="findTime"    />
+        <result property="clientneed"    column="clientNeed"    />
+        <result property="presigntime"    column="preSignTime"    />
+        <result property="precount"    column="preCount"    />
+        <result property="enable"    column="enable"    />
+        <result property="recentstatus"    column="recentStatus"    />
+        <result property="status"    column="status"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="bak"    column="bak"    />
+        <result property="lastcontacttime"    column="lastContactTime"    />
+        <result property="attach"    column="attach"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmChanceVo">
+        select id, chanceTheme, clientName, linkMan, findTime, clientNeed, preSignTime, preCount, enable, recentStatus, status, creator, createTime, bak, lastContactTime, attach from cmf_crm_chance
+    </sql>
+
+    <select id="selectCmfCrmChanceList" parameterType="CmfCrmChance" resultMap="CmfCrmChanceResult">
+        <include refid="selectCmfCrmChanceVo"/>
+        <where>  
+            <if test="chancetheme != null  and chancetheme != ''"> and chanceTheme = #{chancetheme}</if>
+            <if test="clientname != null  and clientname != ''"> and clientName like concat('%', #{clientname}, '%')</if>
+            <if test="linkman != null  and linkman != ''"> and linkMan = #{linkman}</if>
+            <if test="findtime != null "> and findTime = #{findtime}</if>
+            <if test="clientneed != null  and clientneed != ''"> and clientNeed = #{clientneed}</if>
+            <if test="presigntime != null "> and preSignTime = #{presigntime}</if>
+            <if test="precount != null "> and preCount = #{precount}</if>
+            <if test="enable != null  and enable != ''"> and enable = #{enable}</if>
+            <if test="recentstatus != null  and recentstatus != ''"> and recentStatus = #{recentstatus}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="bak != null  and bak != ''"> and bak = #{bak}</if>
+            <if test="lastcontacttime != null "> and lastContactTime = #{lastcontacttime}</if>
+            <if test="attach != null  and attach != ''"> and attach = #{attach}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmChanceById" parameterType="Integer" resultMap="CmfCrmChanceResult">
+        <include refid="selectCmfCrmChanceVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmChance" parameterType="CmfCrmChance" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_chance
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="chancetheme != null and chancetheme != ''">chanceTheme,</if>
+            <if test="clientname != null and clientname != ''">clientName,</if>
+            <if test="linkman != null and linkman != ''">linkMan,</if>
+            <if test="findtime != null">findTime,</if>
+            <if test="clientneed != null and clientneed != ''">clientNeed,</if>
+            <if test="presigntime != null">preSignTime,</if>
+            <if test="precount != null">preCount,</if>
+            <if test="enable != null and enable != ''">enable,</if>
+            <if test="recentstatus != null and recentstatus != ''">recentStatus,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="bak != null and bak != ''">bak,</if>
+            <if test="lastcontacttime != null">lastContactTime,</if>
+            <if test="attach != null and attach != ''">attach,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="chancetheme != null and chancetheme != ''">#{chancetheme},</if>
+            <if test="clientname != null and clientname != ''">#{clientname},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="findtime != null">#{findtime},</if>
+            <if test="clientneed != null and clientneed != ''">#{clientneed},</if>
+            <if test="presigntime != null">#{presigntime},</if>
+            <if test="precount != null">#{precount},</if>
+            <if test="enable != null and enable != ''">#{enable},</if>
+            <if test="recentstatus != null and recentstatus != ''">#{recentstatus},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="bak != null and bak != ''">#{bak},</if>
+            <if test="lastcontacttime != null">#{lastcontacttime},</if>
+            <if test="attach != null and attach != ''">#{attach},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmChance" parameterType="CmfCrmChance">
+        update cmf_crm_chance
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="chancetheme != null and chancetheme != ''">chanceTheme = #{chancetheme},</if>
+            <if test="clientname != null and clientname != ''">clientName = #{clientname},</if>
+            <if test="linkman != null and linkman != ''">linkMan = #{linkman},</if>
+            <if test="findtime != null">findTime = #{findtime},</if>
+            <if test="clientneed != null and clientneed != ''">clientNeed = #{clientneed},</if>
+            <if test="presigntime != null">preSignTime = #{presigntime},</if>
+            <if test="precount != null">preCount = #{precount},</if>
+            <if test="enable != null and enable != ''">enable = #{enable},</if>
+            <if test="recentstatus != null and recentstatus != ''">recentStatus = #{recentstatus},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="bak != null and bak != ''">bak = #{bak},</if>
+            <if test="lastcontacttime != null">lastContactTime = #{lastcontacttime},</if>
+            <if test="attach != null and attach != ''">attach = #{attach},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmChanceById" parameterType="Integer">
+        delete from cmf_crm_chance where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmChanceByIds" parameterType="String">
+        delete from cmf_crm_chance where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

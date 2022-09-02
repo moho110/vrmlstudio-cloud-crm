@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfEduBuildingMapper">
+    
+    <resultMap type="CmfEduBuilding" id="CmfEduBuildingResult">
+        <result property="id"    column="id"    />
+        <result property="buildingno"    column="buildingNo"    />
+        <result property="buildingname"    column="buildingName"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfEduBuildingVo">
+        select id, buildingNo, buildingName, memo from cmf_edu_building
+    </sql>
+
+    <select id="selectCmfEduBuildingList" parameterType="CmfEduBuilding" resultMap="CmfEduBuildingResult">
+        <include refid="selectCmfEduBuildingVo"/>
+        <where>  
+            <if test="buildingno != null  and buildingno != ''"> and buildingNo = #{buildingno}</if>
+            <if test="buildingname != null  and buildingname != ''"> and buildingName like concat('%', #{buildingname}, '%')</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduBuildingById" parameterType="Integer" resultMap="CmfEduBuildingResult">
+        <include refid="selectCmfEduBuildingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduBuilding" parameterType="CmfEduBuilding" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_building
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="buildingno != null and buildingno != ''">buildingNo,</if>
+            <if test="buildingname != null and buildingname != ''">buildingName,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="buildingno != null and buildingno != ''">#{buildingno},</if>
+            <if test="buildingname != null and buildingname != ''">#{buildingname},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduBuilding" parameterType="CmfEduBuilding">
+        update cmf_edu_building
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="buildingno != null and buildingno != ''">buildingNo = #{buildingno},</if>
+            <if test="buildingname != null and buildingname != ''">buildingName = #{buildingname},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduBuildingById" parameterType="Integer">
+        delete from cmf_edu_building where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduBuildingByIds" parameterType="String">
+        delete from cmf_edu_building where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

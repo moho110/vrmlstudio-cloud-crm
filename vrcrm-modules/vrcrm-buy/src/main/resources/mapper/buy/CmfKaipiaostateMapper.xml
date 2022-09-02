@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfKaipiaostateMapper">
+    
+    <resultMap type="CmfKaipiaostate" id="CmfKaipiaostateResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectCmfKaipiaostateVo">
+        select id, name from cmf_kaipiaostate
+    </sql>
+
+    <select id="selectCmfKaipiaostateList" parameterType="CmfKaipiaostate" resultMap="CmfKaipiaostateResult">
+        <include refid="selectCmfKaipiaostateVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfKaipiaostateById" parameterType="Integer" resultMap="CmfKaipiaostateResult">
+        <include refid="selectCmfKaipiaostateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfKaipiaostate" parameterType="CmfKaipiaostate" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_kaipiaostate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfKaipiaostate" parameterType="CmfKaipiaostate">
+        update cmf_kaipiaostate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfKaipiaostateById" parameterType="Integer">
+        delete from cmf_kaipiaostate where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfKaipiaostateByIds" parameterType="String">
+        delete from cmf_kaipiaostate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

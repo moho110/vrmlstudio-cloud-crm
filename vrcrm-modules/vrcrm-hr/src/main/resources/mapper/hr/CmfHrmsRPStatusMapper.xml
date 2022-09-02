@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsRPStatusMapper">
+    
+    <resultMap type="CmfHrmsRPStatus" id="CmfHrmsRPStatusResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsRPStatusVo">
+        select id, Name from cmf_hrms_r_p_status
+    </sql>
+
+    <select id="selectCmfHrmsRPStatusList" parameterType="CmfHrmsRPStatus" resultMap="CmfHrmsRPStatusResult">
+        <include refid="selectCmfHrmsRPStatusVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsRPStatusById" parameterType="Integer" resultMap="CmfHrmsRPStatusResult">
+        <include refid="selectCmfHrmsRPStatusVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsRPStatus" parameterType="CmfHrmsRPStatus" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_r_p_status
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsRPStatus" parameterType="CmfHrmsRPStatus">
+        update cmf_hrms_r_p_status
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsRPStatusById" parameterType="Integer">
+        delete from cmf_hrms_r_p_status where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsRPStatusByIds" parameterType="String">
+        delete from cmf_hrms_r_p_status where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerFanganMapper">
+    
+    <resultMap type="CmfCustomerFangan" id="CmfCustomerFanganResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="chanceid"    column="chanceid"    />
+        <result property="content"    column="content"    />
+        <result property="fankui"    column="fankui"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="fujian"    column="fujian"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerFanganVo">
+        select id, zhuti, customerid, chanceid, content, fankui, createman, createtime, fujian from cmf_customer_fangan
+    </sql>
+
+    <select id="selectCmfCustomerFanganList" parameterType="CmfCustomerFangan" resultMap="CmfCustomerFanganResult">
+        <include refid="selectCmfCustomerFanganVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="chanceid != null  and chanceid != ''"> and chanceid = #{chanceid}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="fankui != null  and fankui != ''"> and fankui = #{fankui}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerFanganById" parameterType="Integer" resultMap="CmfCustomerFanganResult">
+        <include refid="selectCmfCustomerFanganVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerFangan" parameterType="CmfCustomerFangan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customer_fangan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="customerid != null">customerid,</if>
+            <if test="chanceid != null and chanceid != ''">chanceid,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="fankui != null and fankui != ''">fankui,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="fujian != null and fujian != ''">fujian,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="customerid != null">#{customerid},</if>
+            <if test="chanceid != null and chanceid != ''">#{chanceid},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="fankui != null and fankui != ''">#{fankui},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="fujian != null and fujian != ''">#{fujian},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerFangan" parameterType="CmfCustomerFangan">
+        update cmf_customer_fangan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="chanceid != null and chanceid != ''">chanceid = #{chanceid},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="fankui != null and fankui != ''">fankui = #{fankui},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="fujian != null and fujian != ''">fujian = #{fujian},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerFanganById" parameterType="Integer">
+        delete from cmf_customer_fangan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerFanganByIds" parameterType="String">
+        delete from cmf_customer_fangan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

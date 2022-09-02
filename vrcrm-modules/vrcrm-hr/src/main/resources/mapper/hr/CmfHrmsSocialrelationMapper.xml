@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsSocialrelationMapper">
+    
+    <resultMap type="CmfHrmsSocialrelation" id="CmfHrmsSocialrelationResult">
+        <result property="id"    column="id"    />
+        <result property="relation"    column="relation"    />
+        <result property="name"    column="name"    />
+        <result property="political"    column="political"    />
+        <result property="company"    column="company"    />
+        <result property="staff"    column="staff"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="workid"    column="workId"    />
+        <result property="named"    column="named"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="workaddress"    column="workAddress"    />
+        <result property="telephone"    column="telephone"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsSocialrelationVo">
+        select id, relation, name, political, company, staff, creator, createTime, workId, named, inDepartment, workAddress, telephone from cmf_hrms_socialrelation
+    </sql>
+
+    <select id="selectCmfHrmsSocialrelationList" parameterType="CmfHrmsSocialrelation" resultMap="CmfHrmsSocialrelationResult">
+        <include refid="selectCmfHrmsSocialrelationVo"/>
+        <where>  
+            <if test="relation != null  and relation != ''"> and relation = #{relation}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="political != null  and political != ''"> and political = #{political}</if>
+            <if test="company != null  and company != ''"> and company = #{company}</if>
+            <if test="staff != null  and staff != ''"> and staff = #{staff}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="named != null  and named != ''"> and named = #{named}</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="workaddress != null  and workaddress != ''"> and workAddress = #{workaddress}</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsSocialrelationById" parameterType="Integer" resultMap="CmfHrmsSocialrelationResult">
+        <include refid="selectCmfHrmsSocialrelationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsSocialrelation" parameterType="CmfHrmsSocialrelation" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_socialrelation
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="relation != null and relation != ''">relation,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="political != null and political != ''">political,</if>
+            <if test="company != null and company != ''">company,</if>
+            <if test="staff != null and staff != ''">staff,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="named != null and named != ''">named,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="workaddress != null and workaddress != ''">workAddress,</if>
+            <if test="telephone != null and telephone != ''">telephone,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="relation != null and relation != ''">#{relation},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="political != null and political != ''">#{political},</if>
+            <if test="company != null and company != ''">#{company},</if>
+            <if test="staff != null and staff != ''">#{staff},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="named != null and named != ''">#{named},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="workaddress != null and workaddress != ''">#{workaddress},</if>
+            <if test="telephone != null and telephone != ''">#{telephone},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsSocialrelation" parameterType="CmfHrmsSocialrelation">
+        update cmf_hrms_socialrelation
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="relation != null and relation != ''">relation = #{relation},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="political != null and political != ''">political = #{political},</if>
+            <if test="company != null and company != ''">company = #{company},</if>
+            <if test="staff != null and staff != ''">staff = #{staff},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="named != null and named != ''">named = #{named},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="workaddress != null and workaddress != ''">workAddress = #{workaddress},</if>
+            <if test="telephone != null and telephone != ''">telephone = #{telephone},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsSocialrelationById" parameterType="Integer">
+        delete from cmf_hrms_socialrelation where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsSocialrelationByIds" parameterType="String">
+        delete from cmf_hrms_socialrelation where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

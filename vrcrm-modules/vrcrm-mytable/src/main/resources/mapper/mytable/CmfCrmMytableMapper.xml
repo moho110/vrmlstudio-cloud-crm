@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfCrmMytableMapper">
+    
+    <resultMap type="CmfCrmMytable" id="CmfCrmMytableResult">
+        <result property="id"    column="id"    />
+        <result property="moduleid"    column="moduleId"    />
+        <result property="modulename"    column="moduleName"    />
+        <result property="moduleposition"    column="modulePosition"    />
+        <result property="moduleattr"    column="moduleAttr"    />
+        <result property="displaylinenumber"    column="displayLineNumber"    />
+        <result property="scrolldisplay"    column="scrollDisplay"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmMytableVo">
+        select id, moduleId, moduleName, modulePosition, moduleAttr, displayLineNumber, scrollDisplay, creator, createTime, memo from cmf_crm_mytable
+    </sql>
+
+    <select id="selectCmfCrmMytableList" parameterType="CmfCrmMytable" resultMap="CmfCrmMytableResult">
+        <include refid="selectCmfCrmMytableVo"/>
+        <where>  
+            <if test="moduleid != null  and moduleid != ''"> and moduleId = #{moduleid}</if>
+            <if test="modulename != null  and modulename != ''"> and moduleName like concat('%', #{modulename}, '%')</if>
+            <if test="moduleposition != null  and moduleposition != ''"> and modulePosition = #{moduleposition}</if>
+            <if test="moduleattr != null  and moduleattr != ''"> and moduleAttr = #{moduleattr}</if>
+            <if test="displaylinenumber != null  and displaylinenumber != ''"> and displayLineNumber = #{displaylinenumber}</if>
+            <if test="scrolldisplay != null  and scrolldisplay != ''"> and scrollDisplay = #{scrolldisplay}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null  and createtime != ''"> and createTime = #{createtime}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmMytableById" parameterType="Long" resultMap="CmfCrmMytableResult">
+        <include refid="selectCmfCrmMytableVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmMytable" parameterType="CmfCrmMytable" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_mytable
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="moduleid != null and moduleid != ''">moduleId,</if>
+            <if test="modulename != null and modulename != ''">moduleName,</if>
+            <if test="moduleposition != null and moduleposition != ''">modulePosition,</if>
+            <if test="moduleattr != null and moduleattr != ''">moduleAttr,</if>
+            <if test="displaylinenumber != null and displaylinenumber != ''">displayLineNumber,</if>
+            <if test="scrolldisplay != null and scrolldisplay != ''">scrollDisplay,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null and createtime != ''">createTime,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="moduleid != null and moduleid != ''">#{moduleid},</if>
+            <if test="modulename != null and modulename != ''">#{modulename},</if>
+            <if test="moduleposition != null and moduleposition != ''">#{moduleposition},</if>
+            <if test="moduleattr != null and moduleattr != ''">#{moduleattr},</if>
+            <if test="displaylinenumber != null and displaylinenumber != ''">#{displaylinenumber},</if>
+            <if test="scrolldisplay != null and scrolldisplay != ''">#{scrolldisplay},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null and createtime != ''">#{createtime},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmMytable" parameterType="CmfCrmMytable">
+        update cmf_crm_mytable
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="moduleid != null and moduleid != ''">moduleId = #{moduleid},</if>
+            <if test="modulename != null and modulename != ''">moduleName = #{modulename},</if>
+            <if test="moduleposition != null and moduleposition != ''">modulePosition = #{moduleposition},</if>
+            <if test="moduleattr != null and moduleattr != ''">moduleAttr = #{moduleattr},</if>
+            <if test="displaylinenumber != null and displaylinenumber != ''">displayLineNumber = #{displaylinenumber},</if>
+            <if test="scrolldisplay != null and scrolldisplay != ''">scrollDisplay = #{scrolldisplay},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null and createtime != ''">createTime = #{createtime},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmMytableById" parameterType="Long">
+        delete from cmf_crm_mytable where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmMytableByIds" parameterType="String">
+        delete from cmf_crm_mytable where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

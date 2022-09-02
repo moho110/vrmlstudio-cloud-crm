@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfFahuotypeMapper">
+    
+    <resultMap type="CmfFahuotype" id="CmfFahuotypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="kuaididan"    column="kuaididan"    />
+        <result property="design"    column="design"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="tel"    column="tel"    />
+        <result property="shunxu"    column="shunxu"    />
+    </resultMap>
+
+    <sql id="selectCmfFahuotypeVo">
+        select id, name, kuaididan, design, linkman, tel, shunxu from cmf_fahuotype
+    </sql>
+
+    <select id="selectCmfFahuotypeList" parameterType="CmfFahuotype" resultMap="CmfFahuotypeResult">
+        <include refid="selectCmfFahuotypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="kuaididan != null  and kuaididan != ''"> and kuaididan = #{kuaididan}</if>
+            <if test="design != null  and design != ''"> and design = #{design}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+            <if test="tel != null  and tel != ''"> and tel = #{tel}</if>
+            <if test="shunxu != null "> and shunxu = #{shunxu}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFahuotypeById" parameterType="Integer" resultMap="CmfFahuotypeResult">
+        <include refid="selectCmfFahuotypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFahuotype" parameterType="CmfFahuotype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fahuotype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="kuaididan != null and kuaididan != ''">kuaididan,</if>
+            <if test="design != null and design != ''">design,</if>
+            <if test="linkman != null and linkman != ''">linkman,</if>
+            <if test="tel != null and tel != ''">tel,</if>
+            <if test="shunxu != null">shunxu,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="kuaididan != null and kuaididan != ''">#{kuaididan},</if>
+            <if test="design != null and design != ''">#{design},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="tel != null and tel != ''">#{tel},</if>
+            <if test="shunxu != null">#{shunxu},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFahuotype" parameterType="CmfFahuotype">
+        update cmf_fahuotype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="kuaididan != null and kuaididan != ''">kuaididan = #{kuaididan},</if>
+            <if test="design != null and design != ''">design = #{design},</if>
+            <if test="linkman != null and linkman != ''">linkman = #{linkman},</if>
+            <if test="tel != null and tel != ''">tel = #{tel},</if>
+            <if test="shunxu != null">shunxu = #{shunxu},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFahuotypeById" parameterType="Integer">
+        delete from cmf_fahuotype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFahuotypeByIds" parameterType="String">
+        delete from cmf_fahuotype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

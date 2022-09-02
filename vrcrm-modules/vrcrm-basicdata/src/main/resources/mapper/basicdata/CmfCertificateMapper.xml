@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfCertificateMapper">
+    
+    <resultMap type="CmfCertificate" id="CmfCertificateResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="certificatetype"    column="certificatetype"    />
+        <result property="certificateno"    column="certificateno"    />
+        <result property="certificateinfo"    column="certificateinfo"    />
+        <result property="fromdate"    column="fromdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="explianstr"    column="explianstr"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="fileaddress"    column="fileaddress"    />
+    </resultMap>
+
+    <sql id="selectCmfCertificateVo">
+        select id, user_id, supplyid, certificatetype, certificateno, certificateinfo, fromdate, enddate, explianstr, user_flag, fileaddress from cmf_certificate
+    </sql>
+
+    <select id="selectCmfCertificateList" parameterType="CmfCertificate" resultMap="CmfCertificateResult">
+        <include refid="selectCmfCertificateVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="supplyid != null  and supplyid != ''"> and supplyid = #{supplyid}</if>
+            <if test="certificatetype != null  and certificatetype != ''"> and certificatetype = #{certificatetype}</if>
+            <if test="certificateno != null  and certificateno != ''"> and certificateno = #{certificateno}</if>
+            <if test="certificateinfo != null  and certificateinfo != ''"> and certificateinfo = #{certificateinfo}</if>
+            <if test="fromdate != null  and fromdate != ''"> and fromdate = #{fromdate}</if>
+            <if test="enddate != null  and enddate != ''"> and enddate = #{enddate}</if>
+            <if test="explianstr != null  and explianstr != ''"> and explianstr = #{explianstr}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="fileaddress != null  and fileaddress != ''"> and fileaddress = #{fileaddress}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCertificateById" parameterType="Integer" resultMap="CmfCertificateResult">
+        <include refid="selectCmfCertificateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCertificate" parameterType="CmfCertificate" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_certificate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="supplyid != null and supplyid != ''">supplyid,</if>
+            <if test="certificatetype != null and certificatetype != ''">certificatetype,</if>
+            <if test="certificateno != null and certificateno != ''">certificateno,</if>
+            <if test="certificateinfo != null and certificateinfo != ''">certificateinfo,</if>
+            <if test="fromdate != null and fromdate != ''">fromdate,</if>
+            <if test="enddate != null and enddate != ''">enddate,</if>
+            <if test="explianstr != null and explianstr != ''">explianstr,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="supplyid != null and supplyid != ''">#{supplyid},</if>
+            <if test="certificatetype != null and certificatetype != ''">#{certificatetype},</if>
+            <if test="certificateno != null and certificateno != ''">#{certificateno},</if>
+            <if test="certificateinfo != null and certificateinfo != ''">#{certificateinfo},</if>
+            <if test="fromdate != null and fromdate != ''">#{fromdate},</if>
+            <if test="enddate != null and enddate != ''">#{enddate},</if>
+            <if test="explianstr != null and explianstr != ''">#{explianstr},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="fileaddress != null and fileaddress != ''">#{fileaddress},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCertificate" parameterType="CmfCertificate">
+        update cmf_certificate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="supplyid != null and supplyid != ''">supplyid = #{supplyid},</if>
+            <if test="certificatetype != null and certificatetype != ''">certificatetype = #{certificatetype},</if>
+            <if test="certificateno != null and certificateno != ''">certificateno = #{certificateno},</if>
+            <if test="certificateinfo != null and certificateinfo != ''">certificateinfo = #{certificateinfo},</if>
+            <if test="fromdate != null and fromdate != ''">fromdate = #{fromdate},</if>
+            <if test="enddate != null and enddate != ''">enddate = #{enddate},</if>
+            <if test="explianstr != null and explianstr != ''">explianstr = #{explianstr},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress = #{fileaddress},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCertificateById" parameterType="Integer">
+        delete from cmf_certificate where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCertificateByIds" parameterType="String">
+        delete from cmf_certificate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

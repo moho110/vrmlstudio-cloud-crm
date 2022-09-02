@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsWorkerHetongMapper">
+    
+    <resultMap type="CmfHrmsWorkerHetong" id="CmfHrmsWorkerHetongResult">
+        <result property="id"    column="id"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="signtime"    column="signTime"    />
+        <result property="endtime"    column="endTime"    />
+        <result property="workedyear"    column="workedYear"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsWorkerHetongVo">
+        select id, workId, name, inDepartment, signTime, endTime, workedYear, creator, createTime from cmf_hrms_worker_hetong
+    </sql>
+
+    <select id="selectCmfHrmsWorkerHetongList" parameterType="CmfHrmsWorkerHetong" resultMap="CmfHrmsWorkerHetongResult">
+        <include refid="selectCmfHrmsWorkerHetongVo"/>
+        <where>  
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="signtime != null "> and signTime = #{signtime}</if>
+            <if test="endtime != null "> and endTime = #{endtime}</if>
+            <if test="workedyear != null "> and workedYear = #{workedyear}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null  and createtime != ''"> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsWorkerHetongById" parameterType="Integer" resultMap="CmfHrmsWorkerHetongResult">
+        <include refid="selectCmfHrmsWorkerHetongVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsWorkerHetong" parameterType="CmfHrmsWorkerHetong" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_worker_hetong
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="signtime != null">signTime,</if>
+            <if test="endtime != null">endTime,</if>
+            <if test="workedyear != null">workedYear,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null and createtime != ''">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="signtime != null">#{signtime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="workedyear != null">#{workedyear},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null and createtime != ''">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsWorkerHetong" parameterType="CmfHrmsWorkerHetong">
+        update cmf_hrms_worker_hetong
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="signtime != null">signTime = #{signtime},</if>
+            <if test="endtime != null">endTime = #{endtime},</if>
+            <if test="workedyear != null">workedYear = #{workedyear},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null and createtime != ''">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsWorkerHetongById" parameterType="Integer">
+        delete from cmf_hrms_worker_hetong where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsWorkerHetongByIds" parameterType="String">
+        delete from cmf_hrms_worker_hetong where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

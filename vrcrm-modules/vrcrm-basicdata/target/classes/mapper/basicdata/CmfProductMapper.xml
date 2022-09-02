@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfProductMapper">
+    
+    <resultMap type="CmfProduct" id="CmfProductResult">
+        <result property="id"    column="id"    />
+        <result property="productname"    column="productname"    />
+        <result property="measureid"    column="measureid"    />
+        <result property="mode"    column="mode"    />
+        <result property="standard"    column="standard"    />
+        <result property="producttype"    column="producttype"    />
+        <result property="storemin"    column="storemin"    />
+        <result property="storemax"    column="storemax"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="sellprice"    column="sellprice"    />
+        <result property="productcn"    column="productcn"    />
+        <result property="sellprice2"    column="sellprice2"    />
+        <result property="sellprice3"    column="sellprice3"    />
+        <result property="fileaddress"    column="fileaddress"    />
+        <result property="oldproductid"    column="oldproductid"    />
+        <result property="ifkucun"    column="ifkucun"    />
+        <result property="relatefiles"    column="relatefiles"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="hascolor"    column="hascolor"    />
+        <result property="sellprice4"    column="sellprice4"    />
+    </resultMap>
+
+    <sql id="selectCmfProductVo">
+        select id, productname, measureid, mode, standard, producttype, storemin, storemax, user_flag, sellprice, productcn, sellprice2, sellprice3, fileaddress, oldproductid, ifkucun, relatefiles, supplyid, hascolor, sellprice4 from cmf_product
+    </sql>
+
+    <select id="selectCmfProductList" parameterType="CmfProduct" resultMap="CmfProductResult">
+        <include refid="selectCmfProductVo"/>
+        <where>  
+            <if test="productname != null  and productname != ''"> and productname like concat('%', #{productname}, '%')</if>
+            <if test="measureid != null  and measureid != ''"> and measureid = #{measureid}</if>
+            <if test="mode != null  and mode != ''"> and mode = #{mode}</if>
+            <if test="standard != null  and standard != ''"> and standard = #{standard}</if>
+            <if test="producttype != null "> and producttype = #{producttype}</if>
+            <if test="storemin != null "> and storemin = #{storemin}</if>
+            <if test="storemax != null "> and storemax = #{storemax}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="sellprice != null "> and sellprice = #{sellprice}</if>
+            <if test="productcn != null  and productcn != ''"> and productcn = #{productcn}</if>
+            <if test="sellprice2 != null "> and sellprice2 = #{sellprice2}</if>
+            <if test="sellprice3 != null "> and sellprice3 = #{sellprice3}</if>
+            <if test="fileaddress != null  and fileaddress != ''"> and fileaddress = #{fileaddress}</if>
+            <if test="oldproductid != null  and oldproductid != ''"> and oldproductid = #{oldproductid}</if>
+            <if test="ifkucun != null  and ifkucun != ''"> and ifkucun = #{ifkucun}</if>
+            <if test="relatefiles != null  and relatefiles != ''"> and relatefiles = #{relatefiles}</if>
+            <if test="supplyid != null  and supplyid != ''"> and supplyid = #{supplyid}</if>
+            <if test="hascolor != null  and hascolor != ''"> and hascolor = #{hascolor}</if>
+            <if test="sellprice4 != null "> and sellprice4 = #{sellprice4}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfProductById" parameterType="Integer" resultMap="CmfProductResult">
+        <include refid="selectCmfProductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfProduct" parameterType="CmfProduct" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_product
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productname != null and productname != ''">productname,</if>
+            <if test="measureid != null and measureid != ''">measureid,</if>
+            <if test="mode != null and mode != ''">mode,</if>
+            <if test="standard != null and standard != ''">standard,</if>
+            <if test="producttype != null">producttype,</if>
+            <if test="storemin != null">storemin,</if>
+            <if test="storemax != null">storemax,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="sellprice != null">sellprice,</if>
+            <if test="productcn != null and productcn != ''">productcn,</if>
+            <if test="sellprice2 != null">sellprice2,</if>
+            <if test="sellprice3 != null">sellprice3,</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress,</if>
+            <if test="oldproductid != null and oldproductid != ''">oldproductid,</if>
+            <if test="ifkucun != null and ifkucun != ''">ifkucun,</if>
+            <if test="relatefiles != null and relatefiles != ''">relatefiles,</if>
+            <if test="supplyid != null and supplyid != ''">supplyid,</if>
+            <if test="hascolor != null and hascolor != ''">hascolor,</if>
+            <if test="sellprice4 != null">sellprice4,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productname != null and productname != ''">#{productname},</if>
+            <if test="measureid != null and measureid != ''">#{measureid},</if>
+            <if test="mode != null and mode != ''">#{mode},</if>
+            <if test="standard != null and standard != ''">#{standard},</if>
+            <if test="producttype != null">#{producttype},</if>
+            <if test="storemin != null">#{storemin},</if>
+            <if test="storemax != null">#{storemax},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="sellprice != null">#{sellprice},</if>
+            <if test="productcn != null and productcn != ''">#{productcn},</if>
+            <if test="sellprice2 != null">#{sellprice2},</if>
+            <if test="sellprice3 != null">#{sellprice3},</if>
+            <if test="fileaddress != null and fileaddress != ''">#{fileaddress},</if>
+            <if test="oldproductid != null and oldproductid != ''">#{oldproductid},</if>
+            <if test="ifkucun != null and ifkucun != ''">#{ifkucun},</if>
+            <if test="relatefiles != null and relatefiles != ''">#{relatefiles},</if>
+            <if test="supplyid != null and supplyid != ''">#{supplyid},</if>
+            <if test="hascolor != null and hascolor != ''">#{hascolor},</if>
+            <if test="sellprice4 != null">#{sellprice4},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfProduct" parameterType="CmfProduct">
+        update cmf_product
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productname != null and productname != ''">productname = #{productname},</if>
+            <if test="measureid != null and measureid != ''">measureid = #{measureid},</if>
+            <if test="mode != null and mode != ''">mode = #{mode},</if>
+            <if test="standard != null and standard != ''">standard = #{standard},</if>
+            <if test="producttype != null">producttype = #{producttype},</if>
+            <if test="storemin != null">storemin = #{storemin},</if>
+            <if test="storemax != null">storemax = #{storemax},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="sellprice != null">sellprice = #{sellprice},</if>
+            <if test="productcn != null and productcn != ''">productcn = #{productcn},</if>
+            <if test="sellprice2 != null">sellprice2 = #{sellprice2},</if>
+            <if test="sellprice3 != null">sellprice3 = #{sellprice3},</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress = #{fileaddress},</if>
+            <if test="oldproductid != null and oldproductid != ''">oldproductid = #{oldproductid},</if>
+            <if test="ifkucun != null and ifkucun != ''">ifkucun = #{ifkucun},</if>
+            <if test="relatefiles != null and relatefiles != ''">relatefiles = #{relatefiles},</if>
+            <if test="supplyid != null and supplyid != ''">supplyid = #{supplyid},</if>
+            <if test="hascolor != null and hascolor != ''">hascolor = #{hascolor},</if>
+            <if test="sellprice4 != null">sellprice4 = #{sellprice4},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfProductById" parameterType="Integer">
+        delete from cmf_product where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfProductByIds" parameterType="String">
+        delete from cmf_product where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

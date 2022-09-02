@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengKaoqinbudengMapper">
+    
+    <resultMap type="CmfEduXingzhengKaoqinbudeng" id="CmfEduXingzhengKaoqinbudengResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="department"    column="department"    />
+        <result property="person"    column="person"    />
+        <result property="time"    column="time"    />
+        <result property="day"    column="day"    />
+        <result property="class"    column="class"    />
+        <result property="budengproject"    column="budengProject"    />
+        <result property="budengstatus"    column="budengStatus"    />
+        <result property="workflowid"    column="workFlowID"    />
+        <result property="exman"    column="exMan"    />
+        <result property="extime"    column="exTime"    />
+        <result property="personname"    column="personName"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengKaoqinbudengVo">
+        select id, term, department, person, time, day, class, budengProject, budengStatus, workFlowID, exMan, exTime, personName from cmf_edu_xingzheng_kaoqinbudeng
+    </sql>
+
+    <select id="selectCmfEduXingzhengKaoqinbudengList" parameterType="CmfEduXingzhengKaoqinbudeng" resultMap="CmfEduXingzhengKaoqinbudengResult">
+        <include refid="selectCmfEduXingzhengKaoqinbudengVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="person != null  and person != ''"> and person = #{person}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="day != null  and day != ''"> and day = #{day}</if>
+            <if test="class != null "> and class = #{class}</if>
+            <if test="budengproject != null  and budengproject != ''"> and budengProject = #{budengproject}</if>
+            <if test="budengstatus != null  and budengstatus != ''"> and budengStatus = #{budengstatus}</if>
+            <if test="workflowid != null  and workflowid != ''"> and workFlowID = #{workflowid}</if>
+            <if test="exman != null  and exman != ''"> and exMan = #{exman}</if>
+            <if test="extime != null  and extime != ''"> and exTime = #{extime}</if>
+            <if test="personname != null  and personname != ''"> and personName like concat('%', #{personname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengKaoqinbudengById" parameterType="Integer" resultMap="CmfEduXingzhengKaoqinbudengResult">
+        <include refid="selectCmfEduXingzhengKaoqinbudengVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengKaoqinbudeng" parameterType="CmfEduXingzhengKaoqinbudeng" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_kaoqinbudeng
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="person != null and person != ''">person,</if>
+            <if test="time != null">time,</if>
+            <if test="day != null and day != ''">day,</if>
+            <if test="class != null">class,</if>
+            <if test="budengproject != null and budengproject != ''">budengProject,</if>
+            <if test="budengstatus != null and budengstatus != ''">budengStatus,</if>
+            <if test="workflowid != null and workflowid != ''">workFlowID,</if>
+            <if test="exman != null and exman != ''">exMan,</if>
+            <if test="extime != null and extime != ''">exTime,</if>
+            <if test="personname != null and personname != ''">personName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="person != null and person != ''">#{person},</if>
+            <if test="time != null">#{time},</if>
+            <if test="day != null and day != ''">#{day},</if>
+            <if test="class != null">#{class},</if>
+            <if test="budengproject != null and budengproject != ''">#{budengproject},</if>
+            <if test="budengstatus != null and budengstatus != ''">#{budengstatus},</if>
+            <if test="workflowid != null and workflowid != ''">#{workflowid},</if>
+            <if test="exman != null and exman != ''">#{exman},</if>
+            <if test="extime != null and extime != ''">#{extime},</if>
+            <if test="personname != null and personname != ''">#{personname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengKaoqinbudeng" parameterType="CmfEduXingzhengKaoqinbudeng">
+        update cmf_edu_xingzheng_kaoqinbudeng
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="person != null and person != ''">person = #{person},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="day != null and day != ''">day = #{day},</if>
+            <if test="class != null">class = #{class},</if>
+            <if test="budengproject != null and budengproject != ''">budengProject = #{budengproject},</if>
+            <if test="budengstatus != null and budengstatus != ''">budengStatus = #{budengstatus},</if>
+            <if test="workflowid != null and workflowid != ''">workFlowID = #{workflowid},</if>
+            <if test="exman != null and exman != ''">exMan = #{exman},</if>
+            <if test="extime != null and extime != ''">exTime = #{extime},</if>
+            <if test="personname != null and personname != ''">personName = #{personname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengKaoqinbudengById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_kaoqinbudeng where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengKaoqinbudengByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_kaoqinbudeng where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

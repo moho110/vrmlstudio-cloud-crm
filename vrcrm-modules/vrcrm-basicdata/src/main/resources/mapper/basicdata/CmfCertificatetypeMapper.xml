@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfCertificatetypeMapper">
+    
+    <resultMap type="CmfCertificatetype" id="CmfCertificatetypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfCertificatetypeVo">
+        select id, name, user_id, code, user_flag from cmf_certificatetype
+    </sql>
+
+    <select id="selectCmfCertificatetypeList" parameterType="CmfCertificatetype" resultMap="CmfCertificatetypeResult">
+        <include refid="selectCmfCertificatetypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCertificatetypeById" parameterType="Integer" resultMap="CmfCertificatetypeResult">
+        <include refid="selectCmfCertificatetypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCertificatetype" parameterType="CmfCertificatetype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_certificatetype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCertificatetype" parameterType="CmfCertificatetype">
+        update cmf_certificatetype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCertificatetypeById" parameterType="Integer">
+        delete from cmf_certificatetype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCertificatetypeByIds" parameterType="String">
+        delete from cmf_certificatetype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

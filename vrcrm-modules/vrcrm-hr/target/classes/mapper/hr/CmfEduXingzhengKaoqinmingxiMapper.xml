@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.system.mapper.CmfEduXingzhengKaoqinmingxiMapper">
+    
+    <resultMap type="CmfEduXingzhengKaoqinmingxi" id="CmfEduXingzhengKaoqinmingxiResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="department"    column="department"    />
+        <result property="person"    column="person"    />
+        <result property="date"    column="date"    />
+        <result property="week"    column="week"    />
+        <result property="day"    column="day"    />
+        <result property="class"    column="class"    />
+        <result property="startrealitycard"    column="startRealityCard"    />
+        <result property="startkaoqinstatus"    column="startKaoqinStatus"    />
+        <result property="endrealitycard"    column="endRealityCard"    />
+        <result property="endkaoqinstatus"    column="endKaoqinStatus"    />
+        <result property="startcardbgn"    column="startCardBGN"    />
+        <result property="startcardend"    column="startCardEND"    />
+        <result property="endcartbgn"    column="endCartBGN"    />
+        <result property="endcardend"    column="endCardEND"    />
+        <result property="startdelaytime"    column="startDelayTime"    />
+        <result property="delayminutesnum"    column="delayMinutesNum"    />
+        <result property="delayquittime"    column="delayQuitTime"    />
+        <result property="earlyquitminutesnum"    column="earlyQuitMinutesNum"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="personname"    column="personName"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengKaoqinmingxiVo">
+        select id, term, department, person, date, week, day, class, startRealityCard, startKaoqinStatus, endRealityCard, endKaoqinStatus, startCardBGN, startCardEND, endCartBGN, endCardEND, startDelayTime, delayMinutesNum, delayQuitTime, earlyQuitMinutesNum, createTime, personName from cmf_edu_xingzheng_kaoqinmingxi
+    </sql>
+
+    <select id="selectCmfEduXingzhengKaoqinmingxiList" parameterType="CmfEduXingzhengKaoqinmingxi" resultMap="CmfEduXingzhengKaoqinmingxiResult">
+        <include refid="selectCmfEduXingzhengKaoqinmingxiVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="person != null  and person != ''"> and person = #{person}</if>
+            <if test="date != null "> and date = #{date}</if>
+            <if test="week != null "> and week = #{week}</if>
+            <if test="day != null  and day != ''"> and day = #{day}</if>
+            <if test="class != null  and class != ''"> and class = #{class}</if>
+            <if test="startrealitycard != null  and startrealitycard != ''"> and startRealityCard = #{startrealitycard}</if>
+            <if test="startkaoqinstatus != null  and startkaoqinstatus != ''"> and startKaoqinStatus = #{startkaoqinstatus}</if>
+            <if test="endrealitycard != null  and endrealitycard != ''"> and endRealityCard = #{endrealitycard}</if>
+            <if test="endkaoqinstatus != null  and endkaoqinstatus != ''"> and endKaoqinStatus = #{endkaoqinstatus}</if>
+            <if test="startcardbgn != null  and startcardbgn != ''"> and startCardBGN = #{startcardbgn}</if>
+            <if test="startcardend != null  and startcardend != ''"> and startCardEND = #{startcardend}</if>
+            <if test="endcartbgn != null  and endcartbgn != ''"> and endCartBGN = #{endcartbgn}</if>
+            <if test="endcardend != null  and endcardend != ''"> and endCardEND = #{endcardend}</if>
+            <if test="startdelaytime != null  and startdelaytime != ''"> and startDelayTime = #{startdelaytime}</if>
+            <if test="delayminutesnum != null  and delayminutesnum != ''"> and delayMinutesNum = #{delayminutesnum}</if>
+            <if test="delayquittime != null  and delayquittime != ''"> and delayQuitTime = #{delayquittime}</if>
+            <if test="earlyquitminutesnum != null  and earlyquitminutesnum != ''"> and earlyQuitMinutesNum = #{earlyquitminutesnum}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="personname != null  and personname != ''"> and personName like concat('%', #{personname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengKaoqinmingxiById" parameterType="Integer" resultMap="CmfEduXingzhengKaoqinmingxiResult">
+        <include refid="selectCmfEduXingzhengKaoqinmingxiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengKaoqinmingxi" parameterType="CmfEduXingzhengKaoqinmingxi" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_kaoqinmingxi
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="person != null and person != ''">person,</if>
+            <if test="date != null">date,</if>
+            <if test="week != null">week,</if>
+            <if test="day != null and day != ''">day,</if>
+            <if test="class != null and class != ''">class,</if>
+            <if test="startrealitycard != null and startrealitycard != ''">startRealityCard,</if>
+            <if test="startkaoqinstatus != null and startkaoqinstatus != ''">startKaoqinStatus,</if>
+            <if test="endrealitycard != null and endrealitycard != ''">endRealityCard,</if>
+            <if test="endkaoqinstatus != null and endkaoqinstatus != ''">endKaoqinStatus,</if>
+            <if test="startcardbgn != null and startcardbgn != ''">startCardBGN,</if>
+            <if test="startcardend != null and startcardend != ''">startCardEND,</if>
+            <if test="endcartbgn != null and endcartbgn != ''">endCartBGN,</if>
+            <if test="endcardend != null and endcardend != ''">endCardEND,</if>
+            <if test="startdelaytime != null and startdelaytime != ''">startDelayTime,</if>
+            <if test="delayminutesnum != null and delayminutesnum != ''">delayMinutesNum,</if>
+            <if test="delayquittime != null and delayquittime != ''">delayQuitTime,</if>
+            <if test="earlyquitminutesnum != null and earlyquitminutesnum != ''">earlyQuitMinutesNum,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="personname != null and personname != ''">personName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="person != null and person != ''">#{person},</if>
+            <if test="date != null">#{date},</if>
+            <if test="week != null">#{week},</if>
+            <if test="day != null and day != ''">#{day},</if>
+            <if test="class != null and class != ''">#{class},</if>
+            <if test="startrealitycard != null and startrealitycard != ''">#{startrealitycard},</if>
+            <if test="startkaoqinstatus != null and startkaoqinstatus != ''">#{startkaoqinstatus},</if>
+            <if test="endrealitycard != null and endrealitycard != ''">#{endrealitycard},</if>
+            <if test="endkaoqinstatus != null and endkaoqinstatus != ''">#{endkaoqinstatus},</if>
+            <if test="startcardbgn != null and startcardbgn != ''">#{startcardbgn},</if>
+            <if test="startcardend != null and startcardend != ''">#{startcardend},</if>
+            <if test="endcartbgn != null and endcartbgn != ''">#{endcartbgn},</if>
+            <if test="endcardend != null and endcardend != ''">#{endcardend},</if>
+            <if test="startdelaytime != null and startdelaytime != ''">#{startdelaytime},</if>
+            <if test="delayminutesnum != null and delayminutesnum != ''">#{delayminutesnum},</if>
+            <if test="delayquittime != null and delayquittime != ''">#{delayquittime},</if>
+            <if test="earlyquitminutesnum != null and earlyquitminutesnum != ''">#{earlyquitminutesnum},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="personname != null and personname != ''">#{personname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengKaoqinmingxi" parameterType="CmfEduXingzhengKaoqinmingxi">
+        update cmf_edu_xingzheng_kaoqinmingxi
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="person != null and person != ''">person = #{person},</if>
+            <if test="date != null">date = #{date},</if>
+            <if test="week != null">week = #{week},</if>
+            <if test="day != null and day != ''">day = #{day},</if>
+            <if test="class != null and class != ''">class = #{class},</if>
+            <if test="startrealitycard != null and startrealitycard != ''">startRealityCard = #{startrealitycard},</if>
+            <if test="startkaoqinstatus != null and startkaoqinstatus != ''">startKaoqinStatus = #{startkaoqinstatus},</if>
+            <if test="endrealitycard != null and endrealitycard != ''">endRealityCard = #{endrealitycard},</if>
+            <if test="endkaoqinstatus != null and endkaoqinstatus != ''">endKaoqinStatus = #{endkaoqinstatus},</if>
+            <if test="startcardbgn != null and startcardbgn != ''">startCardBGN = #{startcardbgn},</if>
+            <if test="startcardend != null and startcardend != ''">startCardEND = #{startcardend},</if>
+            <if test="endcartbgn != null and endcartbgn != ''">endCartBGN = #{endcartbgn},</if>
+            <if test="endcardend != null and endcardend != ''">endCardEND = #{endcardend},</if>
+            <if test="startdelaytime != null and startdelaytime != ''">startDelayTime = #{startdelaytime},</if>
+            <if test="delayminutesnum != null and delayminutesnum != ''">delayMinutesNum = #{delayminutesnum},</if>
+            <if test="delayquittime != null and delayquittime != ''">delayQuitTime = #{delayquittime},</if>
+            <if test="earlyquitminutesnum != null and earlyquitminutesnum != ''">earlyQuitMinutesNum = #{earlyquitminutesnum},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="personname != null and personname != ''">personName = #{personname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengKaoqinmingxiById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_kaoqinmingxi where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengKaoqinmingxiByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_kaoqinmingxi where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

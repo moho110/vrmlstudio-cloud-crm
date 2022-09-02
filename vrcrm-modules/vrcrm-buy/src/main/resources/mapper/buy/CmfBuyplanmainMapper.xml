@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfBuyplanmainMapper">
+    
+    <resultMap type="CmfBuyplanmain" id="CmfBuyplanmainResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="caigoudate"    column="caigoudate"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="daohuodate"    column="daohuodate"    />
+        <result property="danhao"    column="danhao"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="guanliandingdan"    column="guanliandingdan"    />
+        <result property="guanliankehu"    column="guanliankehu"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="beiyong1"    column="beiyong1"    />
+        <result property="beiyong2"    column="beiyong2"    />
+        <result property="beiyong3"    column="beiyong3"    />
+        <result property="paymoney"    column="paymoney"    />
+        <result property="state"    column="state"    />
+        <result property="rukumoney"    column="rukumoney"    />
+        <result property="shoupiaomoney"    column="shoupiaomoney"    />
+        <result property="ifpay"    column="ifpay"    />
+        <result property="shoupiaostate"    column="shoupiaostate"    />
+        <result property="oddment"    column="oddment"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="accountid"    column="accountid"    />
+    </resultMap>
+
+    <sql id="selectCmfBuyplanmainVo">
+        select id, zhuti, supplyid, linkman, caigoudate, storeid, daohuodate, danhao, createman, createtime, totalmoney, guanliandingdan, guanliankehu, beizhu, beiyong1, beiyong2, beiyong3, paymoney, state, rukumoney, shoupiaomoney, ifpay, shoupiaostate, oddment, user_flag, accountid from cmf_buyplanmain
+    </sql>
+
+    <select id="selectCmfBuyplanmainList" parameterType="CmfBuyplanmain" resultMap="CmfBuyplanmainResult">
+        <include refid="selectCmfBuyplanmainVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="supplyid != null  and supplyid != ''"> and supplyid = #{supplyid}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+            <if test="caigoudate != null "> and caigoudate = #{caigoudate}</if>
+            <if test="storeid != null "> and storeid = #{storeid}</if>
+            <if test="daohuodate != null "> and daohuodate = #{daohuodate}</if>
+            <if test="danhao != null  and danhao != ''"> and danhao = #{danhao}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="guanliandingdan != null  and guanliandingdan != ''"> and guanliandingdan = #{guanliandingdan}</if>
+            <if test="guanliankehu != null  and guanliankehu != ''"> and guanliankehu = #{guanliankehu}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="beiyong1 != null  and beiyong1 != ''"> and beiyong1 = #{beiyong1}</if>
+            <if test="beiyong2 != null  and beiyong2 != ''"> and beiyong2 = #{beiyong2}</if>
+            <if test="beiyong3 != null  and beiyong3 != ''"> and beiyong3 = #{beiyong3}</if>
+            <if test="paymoney != null "> and paymoney = #{paymoney}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="rukumoney != null "> and rukumoney = #{rukumoney}</if>
+            <if test="shoupiaomoney != null "> and shoupiaomoney = #{shoupiaomoney}</if>
+            <if test="ifpay != null "> and ifpay = #{ifpay}</if>
+            <if test="shoupiaostate != null "> and shoupiaostate = #{shoupiaostate}</if>
+            <if test="oddment != null "> and oddment = #{oddment}</if>
+            <if test="userFlag != null "> and user_flag = #{userFlag}</if>
+            <if test="accountid != null "> and accountid = #{accountid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfBuyplanmainById" parameterType="Integer" resultMap="CmfBuyplanmainResult">
+        <include refid="selectCmfBuyplanmainVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfBuyplanmain" parameterType="CmfBuyplanmain" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_buyplanmain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="supplyid != null and supplyid != ''">supplyid,</if>
+            <if test="linkman != null and linkman != ''">linkman,</if>
+            <if test="caigoudate != null">caigoudate,</if>
+            <if test="storeid != null">storeid,</if>
+            <if test="daohuodate != null">daohuodate,</if>
+            <if test="danhao != null and danhao != ''">danhao,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="guanliandingdan != null and guanliandingdan != ''">guanliandingdan,</if>
+            <if test="guanliankehu != null and guanliankehu != ''">guanliankehu,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="beiyong1 != null and beiyong1 != ''">beiyong1,</if>
+            <if test="beiyong2 != null and beiyong2 != ''">beiyong2,</if>
+            <if test="beiyong3 != null and beiyong3 != ''">beiyong3,</if>
+            <if test="paymoney != null">paymoney,</if>
+            <if test="state != null">state,</if>
+            <if test="rukumoney != null">rukumoney,</if>
+            <if test="shoupiaomoney != null">shoupiaomoney,</if>
+            <if test="ifpay != null">ifpay,</if>
+            <if test="shoupiaostate != null">shoupiaostate,</if>
+            <if test="oddment != null">oddment,</if>
+            <if test="userFlag != null">user_flag,</if>
+            <if test="accountid != null">accountid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="supplyid != null and supplyid != ''">#{supplyid},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="caigoudate != null">#{caigoudate},</if>
+            <if test="storeid != null">#{storeid},</if>
+            <if test="daohuodate != null">#{daohuodate},</if>
+            <if test="danhao != null and danhao != ''">#{danhao},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="guanliandingdan != null and guanliandingdan != ''">#{guanliandingdan},</if>
+            <if test="guanliankehu != null and guanliankehu != ''">#{guanliankehu},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="beiyong1 != null and beiyong1 != ''">#{beiyong1},</if>
+            <if test="beiyong2 != null and beiyong2 != ''">#{beiyong2},</if>
+            <if test="beiyong3 != null and beiyong3 != ''">#{beiyong3},</if>
+            <if test="paymoney != null">#{paymoney},</if>
+            <if test="state != null">#{state},</if>
+            <if test="rukumoney != null">#{rukumoney},</if>
+            <if test="shoupiaomoney != null">#{shoupiaomoney},</if>
+            <if test="ifpay != null">#{ifpay},</if>
+            <if test="shoupiaostate != null">#{shoupiaostate},</if>
+            <if test="oddment != null">#{oddment},</if>
+            <if test="userFlag != null">#{userFlag},</if>
+            <if test="accountid != null">#{accountid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfBuyplanmain" parameterType="CmfBuyplanmain">
+        update cmf_buyplanmain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="supplyid != null and supplyid != ''">supplyid = #{supplyid},</if>
+            <if test="linkman != null and linkman != ''">linkman = #{linkman},</if>
+            <if test="caigoudate != null">caigoudate = #{caigoudate},</if>
+            <if test="storeid != null">storeid = #{storeid},</if>
+            <if test="daohuodate != null">daohuodate = #{daohuodate},</if>
+            <if test="danhao != null and danhao != ''">danhao = #{danhao},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="guanliandingdan != null and guanliandingdan != ''">guanliandingdan = #{guanliandingdan},</if>
+            <if test="guanliankehu != null and guanliankehu != ''">guanliankehu = #{guanliankehu},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="beiyong1 != null and beiyong1 != ''">beiyong1 = #{beiyong1},</if>
+            <if test="beiyong2 != null and beiyong2 != ''">beiyong2 = #{beiyong2},</if>
+            <if test="beiyong3 != null and beiyong3 != ''">beiyong3 = #{beiyong3},</if>
+            <if test="paymoney != null">paymoney = #{paymoney},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="rukumoney != null">rukumoney = #{rukumoney},</if>
+            <if test="shoupiaomoney != null">shoupiaomoney = #{shoupiaomoney},</if>
+            <if test="ifpay != null">ifpay = #{ifpay},</if>
+            <if test="shoupiaostate != null">shoupiaostate = #{shoupiaostate},</if>
+            <if test="oddment != null">oddment = #{oddment},</if>
+            <if test="userFlag != null">user_flag = #{userFlag},</if>
+            <if test="accountid != null">accountid = #{accountid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfBuyplanmainById" parameterType="Integer">
+        delete from cmf_buyplanmain where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfBuyplanmainByIds" parameterType="String">
+        delete from cmf_buyplanmain where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

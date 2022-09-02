@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStorecheckMapper">
+    
+    <resultMap type="CmfStorecheck" id="CmfStorecheckResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="state"    column="state"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfStorecheckVo">
+        select id, zhuti, storeid, totalmoney, state, createman, createtime, memo from cmf_storecheck
+    </sql>
+
+    <select id="selectCmfStorecheckList" parameterType="CmfStorecheck" resultMap="CmfStorecheckResult">
+        <include refid="selectCmfStorecheckVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="storeid != null "> and storeid = #{storeid}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStorecheckById" parameterType="Integer" resultMap="CmfStorecheckResult">
+        <include refid="selectCmfStorecheckVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStorecheck" parameterType="CmfStorecheck" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_storecheck
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="storeid != null">storeid,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="state != null and state != ''">state,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="storeid != null">#{storeid},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStorecheck" parameterType="CmfStorecheck">
+        update cmf_storecheck
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="storeid != null">storeid = #{storeid},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="state != null and state != ''">state = #{state},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStorecheckById" parameterType="Integer">
+        delete from cmf_storecheck where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStorecheckByIds" parameterType="String">
+        delete from cmf_storecheck where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

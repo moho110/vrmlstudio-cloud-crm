@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfWorkplanmainMapper">
+    
+    <resultMap type="CmfWorkplanmain" id="CmfWorkplanmainResult">
+        <result property="id"    column="id"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="createman"    column="createman"    />
+        <result property="state"    column="state"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="content"    column="content"    />
+        <result property="kind"    column="kind"    />
+        <result property="begintime"    column="begintime"    />
+        <result property="endtime"    column="endtime"    />
+        <result property="zhixingren"    column="zhixingren"    />
+        <result property="finishtime"    column="finishtime"    />
+        <result property="shenheren"    column="shenheren"    />
+        <result property="shenchastate"    column="shenchastate"    />
+        <result property="shenhetime"    column="shenhetime"    />
+        <result property="shenhepishi"    column="shenhepishi"    />
+        <result property="fujian"    column="fujian"    />
+        <result property="ifsms"    column="ifsms"    />
+        <result property="ifemail"    column="ifemail"    />
+        <result property="guanlianshiwu"    column="guanlianshiwu"    />
+        <result property="guanlianurl"    column="guanlianurl"    />
+        <result property="guanlianid"    column="guanlianid"    />
+        <result property="lastzhixingtime"    column="lastzhixingtime"    />
+    </resultMap>
+
+    <sql id="selectCmfWorkplanmainVo">
+        select id, createtime, createman, state, zhuti, content, kind, begintime, endtime, zhixingren, finishtime, shenheren, shenchastate, shenhetime, shenhepishi, fujian, ifsms, ifemail, guanlianshiwu, guanlianurl, guanlianid, lastzhixingtime from cmf_workplanmain
+    </sql>
+
+    <select id="selectCmfWorkplanmainList" parameterType="CmfWorkplanmain" resultMap="CmfWorkplanmainResult">
+        <include refid="selectCmfWorkplanmainVo"/>
+        <where>  
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="kind != null  and kind != ''"> and kind = #{kind}</if>
+            <if test="begintime != null "> and begintime = #{begintime}</if>
+            <if test="endtime != null "> and endtime = #{endtime}</if>
+            <if test="zhixingren != null  and zhixingren != ''"> and zhixingren = #{zhixingren}</if>
+            <if test="finishtime != null "> and finishtime = #{finishtime}</if>
+            <if test="shenheren != null  and shenheren != ''"> and shenheren = #{shenheren}</if>
+            <if test="shenchastate != null "> and shenchastate = #{shenchastate}</if>
+            <if test="shenhetime != null "> and shenhetime = #{shenhetime}</if>
+            <if test="shenhepishi != null  and shenhepishi != ''"> and shenhepishi = #{shenhepishi}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+            <if test="ifsms != null "> and ifsms = #{ifsms}</if>
+            <if test="ifemail != null "> and ifemail = #{ifemail}</if>
+            <if test="guanlianshiwu != null  and guanlianshiwu != ''"> and guanlianshiwu = #{guanlianshiwu}</if>
+            <if test="guanlianurl != null  and guanlianurl != ''"> and guanlianurl = #{guanlianurl}</if>
+            <if test="guanlianid != null "> and guanlianid = #{guanlianid}</if>
+            <if test="lastzhixingtime != null "> and lastzhixingtime = #{lastzhixingtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfWorkplanmainById" parameterType="Integer" resultMap="CmfWorkplanmainResult">
+        <include refid="selectCmfWorkplanmainVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfWorkplanmain" parameterType="CmfWorkplanmain" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_workplanmain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="createtime != null">createtime,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="state != null">state,</if>
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="kind != null and kind != ''">kind,</if>
+            <if test="begintime != null">begintime,</if>
+            <if test="endtime != null">endtime,</if>
+            <if test="zhixingren != null and zhixingren != ''">zhixingren,</if>
+            <if test="finishtime != null">finishtime,</if>
+            <if test="shenheren != null and shenheren != ''">shenheren,</if>
+            <if test="shenchastate != null">shenchastate,</if>
+            <if test="shenhetime != null">shenhetime,</if>
+            <if test="shenhepishi != null and shenhepishi != ''">shenhepishi,</if>
+            <if test="fujian != null and fujian != ''">fujian,</if>
+            <if test="ifsms != null">ifsms,</if>
+            <if test="ifemail != null">ifemail,</if>
+            <if test="guanlianshiwu != null and guanlianshiwu != ''">guanlianshiwu,</if>
+            <if test="guanlianurl != null and guanlianurl != ''">guanlianurl,</if>
+            <if test="guanlianid != null">guanlianid,</if>
+            <if test="lastzhixingtime != null">lastzhixingtime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="createtime != null">#{createtime},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="state != null">#{state},</if>
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="kind != null and kind != ''">#{kind},</if>
+            <if test="begintime != null">#{begintime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="zhixingren != null and zhixingren != ''">#{zhixingren},</if>
+            <if test="finishtime != null">#{finishtime},</if>
+            <if test="shenheren != null and shenheren != ''">#{shenheren},</if>
+            <if test="shenchastate != null">#{shenchastate},</if>
+            <if test="shenhetime != null">#{shenhetime},</if>
+            <if test="shenhepishi != null and shenhepishi != ''">#{shenhepishi},</if>
+            <if test="fujian != null and fujian != ''">#{fujian},</if>
+            <if test="ifsms != null">#{ifsms},</if>
+            <if test="ifemail != null">#{ifemail},</if>
+            <if test="guanlianshiwu != null and guanlianshiwu != ''">#{guanlianshiwu},</if>
+            <if test="guanlianurl != null and guanlianurl != ''">#{guanlianurl},</if>
+            <if test="guanlianid != null">#{guanlianid},</if>
+            <if test="lastzhixingtime != null">#{lastzhixingtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfWorkplanmain" parameterType="CmfWorkplanmain">
+        update cmf_workplanmain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="kind != null and kind != ''">kind = #{kind},</if>
+            <if test="begintime != null">begintime = #{begintime},</if>
+            <if test="endtime != null">endtime = #{endtime},</if>
+            <if test="zhixingren != null and zhixingren != ''">zhixingren = #{zhixingren},</if>
+            <if test="finishtime != null">finishtime = #{finishtime},</if>
+            <if test="shenheren != null and shenheren != ''">shenheren = #{shenheren},</if>
+            <if test="shenchastate != null">shenchastate = #{shenchastate},</if>
+            <if test="shenhetime != null">shenhetime = #{shenhetime},</if>
+            <if test="shenhepishi != null and shenhepishi != ''">shenhepishi = #{shenhepishi},</if>
+            <if test="fujian != null and fujian != ''">fujian = #{fujian},</if>
+            <if test="ifsms != null">ifsms = #{ifsms},</if>
+            <if test="ifemail != null">ifemail = #{ifemail},</if>
+            <if test="guanlianshiwu != null and guanlianshiwu != ''">guanlianshiwu = #{guanlianshiwu},</if>
+            <if test="guanlianurl != null and guanlianurl != ''">guanlianurl = #{guanlianurl},</if>
+            <if test="guanlianid != null">guanlianid = #{guanlianid},</if>
+            <if test="lastzhixingtime != null">lastzhixingtime = #{lastzhixingtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfWorkplanmainById" parameterType="Integer">
+        delete from cmf_workplanmain where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfWorkplanmainByIds" parameterType="String">
+        delete from cmf_workplanmain where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

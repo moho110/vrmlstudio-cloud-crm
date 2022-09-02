@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfDictWeekdayMapper">
+    
+    <resultMap type="CmfDictWeekday" id="CmfDictWeekdayResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+    </resultMap>
+
+    <sql id="selectCmfDictWeekdayVo">
+        select id, Name from cmf_dict_weekday
+    </sql>
+
+    <select id="selectCmfDictWeekdayList" parameterType="CmfDictWeekday" resultMap="CmfDictWeekdayResult">
+        <include refid="selectCmfDictWeekdayVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDictWeekdayById" parameterType="Integer" resultMap="CmfDictWeekdayResult">
+        <include refid="selectCmfDictWeekdayVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDictWeekday" parameterType="CmfDictWeekday" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dict_weekday
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDictWeekday" parameterType="CmfDictWeekday">
+        update cmf_dict_weekday
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDictWeekdayById" parameterType="Integer">
+        delete from cmf_dict_weekday where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDictWeekdayByIds" parameterType="String">
+        delete from cmf_dict_weekday where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

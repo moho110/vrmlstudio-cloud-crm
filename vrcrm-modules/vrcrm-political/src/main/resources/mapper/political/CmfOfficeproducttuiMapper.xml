@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeproducttuiMapper">
+    
+    <resultMap type="CmfOfficeproducttui" id="CmfOfficeproducttuiResult">
+        <result property="id"    column="id"    />
+        <result property="officename"    column="officeName"    />
+        <result property="officeno"    column="officeNo"    />
+        <result property="quitwarehouse"    column="quitWarehouse"    />
+        <result property="quitwarequantity"    column="quitWareQuantity"    />
+        <result property="quitobjects"    column="quitObjects"    />
+        <result property="staffman"    column="staffMan"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="creattime"    column="creatTime"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeproducttuiVo">
+        select id, officeName, officeNo, quitWarehouse, quitWareQuantity, quitObjects, staffMan, approvalMan, memo, creator, creatTime, price, quantity, count from cmf_officeproducttui
+    </sql>
+
+    <select id="selectCmfOfficeproducttuiList" parameterType="CmfOfficeproducttui" resultMap="CmfOfficeproducttuiResult">
+        <include refid="selectCmfOfficeproducttuiVo"/>
+        <where>  
+            <if test="officename != null  and officename != ''"> and officeName like concat('%', #{officename}, '%')</if>
+            <if test="officeno != null  and officeno != ''"> and officeNo = #{officeno}</if>
+            <if test="quitwarehouse != null  and quitwarehouse != ''"> and quitWarehouse = #{quitwarehouse}</if>
+            <if test="quitwarequantity != null "> and quitWareQuantity = #{quitwarequantity}</if>
+            <if test="quitobjects != null  and quitobjects != ''"> and quitObjects = #{quitobjects}</if>
+            <if test="staffman != null  and staffman != ''"> and staffMan = #{staffman}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="creattime != null "> and creatTime = #{creattime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeproducttuiById" parameterType="Integer" resultMap="CmfOfficeproducttuiResult">
+        <include refid="selectCmfOfficeproducttuiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeproducttui" parameterType="CmfOfficeproducttui" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_officeproducttui
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName,</if>
+            <if test="officeno != null and officeno != ''">officeNo,</if>
+            <if test="quitwarehouse != null and quitwarehouse != ''">quitWarehouse,</if>
+            <if test="quitwarequantity != null">quitWareQuantity,</if>
+            <if test="quitobjects != null and quitobjects != ''">quitObjects,</if>
+            <if test="staffman != null and staffman != ''">staffMan,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="creattime != null">creatTime,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="count != null">count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">#{officename},</if>
+            <if test="officeno != null and officeno != ''">#{officeno},</if>
+            <if test="quitwarehouse != null and quitwarehouse != ''">#{quitwarehouse},</if>
+            <if test="quitwarequantity != null">#{quitwarequantity},</if>
+            <if test="quitobjects != null and quitobjects != ''">#{quitobjects},</if>
+            <if test="staffman != null and staffman != ''">#{staffman},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="creattime != null">#{creattime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeproducttui" parameterType="CmfOfficeproducttui">
+        update cmf_officeproducttui
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName = #{officename},</if>
+            <if test="officeno != null and officeno != ''">officeNo = #{officeno},</if>
+            <if test="quitwarehouse != null and quitwarehouse != ''">quitWarehouse = #{quitwarehouse},</if>
+            <if test="quitwarequantity != null">quitWareQuantity = #{quitwarequantity},</if>
+            <if test="quitobjects != null and quitobjects != ''">quitObjects = #{quitobjects},</if>
+            <if test="staffman != null and staffman != ''">staffMan = #{staffman},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="creattime != null">creatTime = #{creattime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeproducttuiById" parameterType="Integer">
+        delete from cmf_officeproducttui where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeproducttuiByIds" parameterType="String">
+        delete from cmf_officeproducttui where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

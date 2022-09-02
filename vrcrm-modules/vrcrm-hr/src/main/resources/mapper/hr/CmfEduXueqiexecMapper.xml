@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXueqiexecMapper">
+    
+    <resultMap type="CmfEduXueqiexec" id="CmfEduXueqiexecResult">
+        <result property="id"    column="id"    />
+        <result property="termname"    column="termName"    />
+        <result property="recentterm"    column="recentTerm"    />
+        <result property="ismorninghaveclass"    column="isMorningHaveClass"    />
+        <result property="iseveninghaveclass"    column="isEveningHaveClass"    />
+        <result property="studyyear"    column="studyYear"    />
+        <result property="issatclass"    column="isSatClass"    />
+        <result property="issunclass"    column="isSunClass"    />
+        <result property="starttime"    column="startTime"    />
+        <result property="endtime"    column="endTime"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXueqiexecVo">
+        select id, termName, recentTerm, isMorningHaveClass, isEveningHaveClass, studyYear, isSatClass, isSunClass, startTime, endTime, memo from cmf_edu_xueqiexec
+    </sql>
+
+    <select id="selectCmfEduXueqiexecList" parameterType="CmfEduXueqiexec" resultMap="CmfEduXueqiexecResult">
+        <include refid="selectCmfEduXueqiexecVo"/>
+        <where>  
+            <if test="termname != null  and termname != ''"> and termName like concat('%', #{termname}, '%')</if>
+            <if test="recentterm != null "> and recentTerm = #{recentterm}</if>
+            <if test="ismorninghaveclass != null "> and isMorningHaveClass = #{ismorninghaveclass}</if>
+            <if test="iseveninghaveclass != null "> and isEveningHaveClass = #{iseveninghaveclass}</if>
+            <if test="studyyear != null  and studyyear != ''"> and studyYear = #{studyyear}</if>
+            <if test="issatclass != null "> and isSatClass = #{issatclass}</if>
+            <if test="issunclass != null "> and isSunClass = #{issunclass}</if>
+            <if test="starttime != null "> and startTime = #{starttime}</if>
+            <if test="endtime != null "> and endTime = #{endtime}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXueqiexecById" parameterType="Integer" resultMap="CmfEduXueqiexecResult">
+        <include refid="selectCmfEduXueqiexecVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXueqiexec" parameterType="CmfEduXueqiexec" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xueqiexec
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="termname != null and termname != ''">termName,</if>
+            <if test="recentterm != null">recentTerm,</if>
+            <if test="ismorninghaveclass != null">isMorningHaveClass,</if>
+            <if test="iseveninghaveclass != null">isEveningHaveClass,</if>
+            <if test="studyyear != null and studyyear != ''">studyYear,</if>
+            <if test="issatclass != null">isSatClass,</if>
+            <if test="issunclass != null">isSunClass,</if>
+            <if test="starttime != null">startTime,</if>
+            <if test="endtime != null">endTime,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="termname != null and termname != ''">#{termname},</if>
+            <if test="recentterm != null">#{recentterm},</if>
+            <if test="ismorninghaveclass != null">#{ismorninghaveclass},</if>
+            <if test="iseveninghaveclass != null">#{iseveninghaveclass},</if>
+            <if test="studyyear != null and studyyear != ''">#{studyyear},</if>
+            <if test="issatclass != null">#{issatclass},</if>
+            <if test="issunclass != null">#{issunclass},</if>
+            <if test="starttime != null">#{starttime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXueqiexec" parameterType="CmfEduXueqiexec">
+        update cmf_edu_xueqiexec
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="termname != null and termname != ''">termName = #{termname},</if>
+            <if test="recentterm != null">recentTerm = #{recentterm},</if>
+            <if test="ismorninghaveclass != null">isMorningHaveClass = #{ismorninghaveclass},</if>
+            <if test="iseveninghaveclass != null">isEveningHaveClass = #{iseveninghaveclass},</if>
+            <if test="studyyear != null and studyyear != ''">studyYear = #{studyyear},</if>
+            <if test="issatclass != null">isSatClass = #{issatclass},</if>
+            <if test="issunclass != null">isSunClass = #{issunclass},</if>
+            <if test="starttime != null">startTime = #{starttime},</if>
+            <if test="endtime != null">endTime = #{endtime},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXueqiexecById" parameterType="Integer">
+        delete from cmf_edu_xueqiexec where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXueqiexecByIds" parameterType="String">
+        delete from cmf_edu_xueqiexec where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

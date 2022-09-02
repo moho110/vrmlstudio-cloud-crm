@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.vrcrm</groupId>
+        <artifactId>vrcrm</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <modules>
+        <module>vrcrm-modules-system</module>
+        <module>vrcrm-modules-gen</module>
+        <module>vrcrm-modules-job</module>
+        <module>vrcrm-modules-file</module>
+        <module>vrcrm-tenant</module>
+        <module>vrcrm-basicdata</module>
+        <module>vrcrm-buy</module>
+        <module>vrcrm-customer</module>
+        <module>vrcrm-finance</module>
+        <module>vrcrm-hr</module>
+        <module>vrcrm-mytable</module>
+        <module>vrcrm-political</module>
+        <module>vrcrm-sales</module>
+        <module>vrcrm-store</module>
+        <module>vrcrm-supply</module>
+        <module>vrcrm-xsystem</module>
+        <module>vrcrm-modules-api</module>
+    </modules>
+
+    <artifactId>vrcrm-modules</artifactId>
+    <packaging>pom</packaging>
+
+    <description>
+        vrcrm-modules业务模块
+    </description>
+
+</project>

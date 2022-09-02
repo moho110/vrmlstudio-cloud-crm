@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStoreaccesstypeMapper">
+    
+    <resultMap type="CmfStoreaccesstype" id="CmfStoreaccesstypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="inout"    column="inout"    />
+        <result property="linkaction"    column="linkaction"    />
+    </resultMap>
+
+    <sql id="selectCmfStoreaccesstypeVo">
+        select id, name, inout, linkaction from cmf_storeaccesstype
+    </sql>
+
+    <select id="selectCmfStoreaccesstypeList" parameterType="CmfStoreaccesstype" resultMap="CmfStoreaccesstypeResult">
+        <include refid="selectCmfStoreaccesstypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="inout != null "> and inout = #{inout}</if>
+            <if test="linkaction != null  and linkaction != ''"> and linkaction = #{linkaction}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStoreaccesstypeById" parameterType="Integer" resultMap="CmfStoreaccesstypeResult">
+        <include refid="selectCmfStoreaccesstypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStoreaccesstype" parameterType="CmfStoreaccesstype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_storeaccesstype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="inout != null">inout,</if>
+            <if test="linkaction != null and linkaction != ''">linkaction,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="inout != null">#{inout},</if>
+            <if test="linkaction != null and linkaction != ''">#{linkaction},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStoreaccesstype" parameterType="CmfStoreaccesstype">
+        update cmf_storeaccesstype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="inout != null">inout = #{inout},</if>
+            <if test="linkaction != null and linkaction != ''">linkaction = #{linkaction},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStoreaccesstypeById" parameterType="Integer">
+        delete from cmf_storeaccesstype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStoreaccesstypeByIds" parameterType="String">
+        delete from cmf_storeaccesstype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

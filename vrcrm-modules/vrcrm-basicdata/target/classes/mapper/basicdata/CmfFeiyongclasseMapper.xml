@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfFeiyongclasseMapper">
+    
+    <resultMap type="CmfFeiyongclasse" id="CmfFeiyongclasseResult">
+        <result property="id"    column="id"    />
+        <result property="classname"    column="classname"    />
+        <result property="kind"    column="kind"    />
+    </resultMap>
+
+    <sql id="selectCmfFeiyongclasseVo">
+        select id, classname, kind from cmf_feiyongclasse
+    </sql>
+
+    <select id="selectCmfFeiyongclasseList" parameterType="CmfFeiyongclasse" resultMap="CmfFeiyongclasseResult">
+        <include refid="selectCmfFeiyongclasseVo"/>
+        <where>  
+            <if test="classname != null  and classname != ''"> and classname like concat('%', #{classname}, '%')</if>
+            <if test="kind != null "> and kind = #{kind}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFeiyongclasseById" parameterType="Integer" resultMap="CmfFeiyongclasseResult">
+        <include refid="selectCmfFeiyongclasseVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFeiyongclasse" parameterType="CmfFeiyongclasse" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_feiyongclasse
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="classname != null and classname != ''">classname,</if>
+            <if test="kind != null">kind,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="classname != null and classname != ''">#{classname},</if>
+            <if test="kind != null">#{kind},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFeiyongclasse" parameterType="CmfFeiyongclasse">
+        update cmf_feiyongclasse
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="classname != null and classname != ''">classname = #{classname},</if>
+            <if test="kind != null">kind = #{kind},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFeiyongclasseById" parameterType="Integer">
+        delete from cmf_feiyongclasse where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFeiyongclasseByIds" parameterType="String">
+        delete from cmf_feiyongclasse where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

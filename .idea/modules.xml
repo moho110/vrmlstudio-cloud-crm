@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/vrcrm.iml" filepath="$PROJECT_DIR$/vrcrm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-api/vrcrm-api.iml" filepath="$PROJECT_DIR$/vrcrm-api/vrcrm-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-api/vrcrm-api-system/vrcrm-api-system.iml" filepath="$PROJECT_DIR$/vrcrm-api/vrcrm-api-system/vrcrm-api-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-auth/vrcrm-auth.iml" filepath="$PROJECT_DIR$/vrcrm-auth/vrcrm-auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-basicdata/vrcrm-basicdata.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-basicdata/vrcrm-basicdata.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-buy/vrcrm-buy.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-buy/vrcrm-buy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-core/vrcrm-common-core.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-core/vrcrm-common-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-datascope/vrcrm-common-datascope.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-datascope/vrcrm-common-datascope.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-datasource/vrcrm-common-datasource.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-datasource/vrcrm-common-datasource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-log/vrcrm-common-log.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-log/vrcrm-common-log.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-redis/vrcrm-common-redis.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-redis/vrcrm-common-redis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-security/vrcrm-common-security.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-security/vrcrm-common-security.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-swagger/vrcrm-common-swagger.iml" filepath="$PROJECT_DIR$/vrcrm-common/vrcrm-common-swagger/vrcrm-common-swagger.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-customer/vrcrm-customer.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-customer/vrcrm-customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-finance/vrcrm-finance.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-finance/vrcrm-finance.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-gateway/vrcrm-gateway.iml" filepath="$PROJECT_DIR$/vrcrm-gateway/vrcrm-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-hr/vrcrm-hr.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-hr/vrcrm-hr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-modules.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-api/vrcrm-modules-api.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-api/vrcrm-modules-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-file/vrcrm-modules-file.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-file/vrcrm-modules-file.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-gen/vrcrm-modules-gen.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-gen/vrcrm-modules-gen.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-job/vrcrm-modules-job.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-job/vrcrm-modules-job.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-system/vrcrm-modules-system.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-system/vrcrm-modules-system.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-mytable/vrcrm-mytable.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-mytable/vrcrm-mytable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-political/vrcrm-political.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-political/vrcrm-political.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-sales/vrcrm-sales.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-sales/vrcrm-sales.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-store/vrcrm-store.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-store/vrcrm-store.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-supply/vrcrm-supply.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-supply/vrcrm-supply.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-tenant/vrcrm-tenant.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-tenant/vrcrm-tenant.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-visual/vrcrm-visual.iml" filepath="$PROJECT_DIR$/vrcrm-visual/vrcrm-visual.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-visual/vrcrm-monitor/vrcrm-visual-monitor.iml" filepath="$PROJECT_DIR$/vrcrm-visual/vrcrm-monitor/vrcrm-visual-monitor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-xsystem/vrcrm-xsystem.iml" filepath="$PROJECT_DIR$/vrcrm-modules/vrcrm-xsystem/vrcrm-xsystem.iml" />
+    </modules>
+  </component>
+</project>

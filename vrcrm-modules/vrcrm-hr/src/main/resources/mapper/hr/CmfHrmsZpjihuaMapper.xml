@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsZpjihuaMapper">
+    
+    <resultMap type="CmfHrmsZpjihua" id="CmfHrmsZpjihuaResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+        <result property="sex"    column="sex"    />
+        <result property="need"    column="need"    />
+        <result property="personnumber"    column="personNumber"    />
+        <result property="starttime"    column="startTime"    />
+        <result property="endtime"    column="endTime"    />
+        <result property="applyman"    column="applyMan"    />
+        <result property="applytime"    column="applyTime"    />
+        <result property="exman"    column="exMan"    />
+        <result property="extime"    column="exTime"    />
+        <result property="exstatus"    column="exStatus"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsZpjihuaVo">
+        select id, Name, sex, need, personNumber, startTime, endTime, applyMan, applyTime, exMan, exTime, exStatus from cmf_hrms_zpjihua
+    </sql>
+
+    <select id="selectCmfHrmsZpjihuaList" parameterType="CmfHrmsZpjihua" resultMap="CmfHrmsZpjihuaResult">
+        <include refid="selectCmfHrmsZpjihuaVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="need != null  and need != ''"> and need = #{need}</if>
+            <if test="personnumber != null "> and personNumber = #{personnumber}</if>
+            <if test="starttime != null "> and startTime = #{starttime}</if>
+            <if test="endtime != null "> and endTime = #{endtime}</if>
+            <if test="applyman != null  and applyman != ''"> and applyMan = #{applyman}</if>
+            <if test="applytime != null "> and applyTime = #{applytime}</if>
+            <if test="exman != null  and exman != ''"> and exMan = #{exman}</if>
+            <if test="extime != null  and extime != ''"> and exTime = #{extime}</if>
+            <if test="exstatus != null  and exstatus != ''"> and exStatus = #{exstatus}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsZpjihuaById" parameterType="Integer" resultMap="CmfHrmsZpjihuaResult">
+        <include refid="selectCmfHrmsZpjihuaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsZpjihua" parameterType="CmfHrmsZpjihua" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_zpjihua
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="need != null and need != ''">need,</if>
+            <if test="personnumber != null">personNumber,</if>
+            <if test="starttime != null">startTime,</if>
+            <if test="endtime != null">endTime,</if>
+            <if test="applyman != null and applyman != ''">applyMan,</if>
+            <if test="applytime != null">applyTime,</if>
+            <if test="exman != null and exman != ''">exMan,</if>
+            <if test="extime != null and extime != ''">exTime,</if>
+            <if test="exstatus != null and exstatus != ''">exStatus,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="need != null and need != ''">#{need},</if>
+            <if test="personnumber != null">#{personnumber},</if>
+            <if test="starttime != null">#{starttime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="applyman != null and applyman != ''">#{applyman},</if>
+            <if test="applytime != null">#{applytime},</if>
+            <if test="exman != null and exman != ''">#{exman},</if>
+            <if test="extime != null and extime != ''">#{extime},</if>
+            <if test="exstatus != null and exstatus != ''">#{exstatus},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsZpjihua" parameterType="CmfHrmsZpjihua">
+        update cmf_hrms_zpjihua
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="need != null and need != ''">need = #{need},</if>
+            <if test="personnumber != null">personNumber = #{personnumber},</if>
+            <if test="starttime != null">startTime = #{starttime},</if>
+            <if test="endtime != null">endTime = #{endtime},</if>
+            <if test="applyman != null and applyman != ''">applyMan = #{applyman},</if>
+            <if test="applytime != null">applyTime = #{applytime},</if>
+            <if test="exman != null and exman != ''">exMan = #{exman},</if>
+            <if test="extime != null and extime != ''">exTime = #{extime},</if>
+            <if test="exstatus != null and exstatus != ''">exStatus = #{exstatus},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsZpjihuaById" parameterType="Integer">
+        delete from cmf_hrms_zpjihua where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsZpjihuaByIds" parameterType="String">
+        delete from cmf_hrms_zpjihua where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

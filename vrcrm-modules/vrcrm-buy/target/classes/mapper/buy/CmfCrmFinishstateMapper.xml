@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfCrmFinishstateMapper">
+    
+    <resultMap type="CmfCrmFinishstate" id="CmfCrmFinishstateResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmFinishstateVo">
+        select id, name from cmf_crm_finishstate
+    </sql>
+
+    <select id="selectCmfCrmFinishstateList" parameterType="CmfCrmFinishstate" resultMap="CmfCrmFinishstateResult">
+        <include refid="selectCmfCrmFinishstateVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmFinishstateById" parameterType="Integer" resultMap="CmfCrmFinishstateResult">
+        <include refid="selectCmfCrmFinishstateVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmFinishstate" parameterType="CmfCrmFinishstate" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_finishstate
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmFinishstate" parameterType="CmfCrmFinishstate">
+        update cmf_crm_finishstate
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmFinishstateById" parameterType="Integer">
+        delete from cmf_crm_finishstate where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmFinishstateByIds" parameterType="String">
+        delete from cmf_crm_finishstate where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

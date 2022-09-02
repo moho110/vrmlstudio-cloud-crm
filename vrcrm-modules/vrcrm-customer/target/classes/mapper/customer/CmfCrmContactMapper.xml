@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCrmContactMapper">
+    
+    <resultMap type="CmfCrmContact" id="CmfCrmContactResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="linkmanid"    column="linkmanid"    />
+        <result property="userId"    column="user_id"    />
+        <result property="createman"    column="createman"    />
+        <result property="contact"    column="contact"    />
+        <result property="chance"    column="chance"    />
+        <result property="stage"    column="stage"    />
+        <result property="describes"    column="describes"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="contacttime"    column="contacttime"    />
+        <result property="nextcontacttime"    column="nextcontacttime"    />
+        <result property="nextissue"    column="nextissue"    />
+        <result property="alreadycontact"    column="alreadycontact"    />
+        <result property="public"    column="public"    />
+        <result property="priority"    column="priority"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmContactVo">
+        select id, customerid, linkmanid, user_id, createman, contact, chance, stage, describes, createtime, contacttime, nextcontacttime, nextissue, alreadycontact, public, priority from cmf_crm_contact
+    </sql>
+
+    <select id="selectCmfCrmContactList" parameterType="CmfCrmContact" resultMap="CmfCrmContactResult">
+        <include refid="selectCmfCrmContactVo"/>
+        <where>  
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="linkmanid != null  and linkmanid != ''"> and linkmanid = #{linkmanid}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="contact != null  and contact != ''"> and contact = #{contact}</if>
+            <if test="chance != null  and chance != ''"> and chance = #{chance}</if>
+            <if test="stage != null  and stage != ''"> and stage = #{stage}</if>
+            <if test="describes != null  and describes != ''"> and describes = #{describes}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="contacttime != null "> and contacttime = #{contacttime}</if>
+            <if test="nextcontacttime != null "> and nextcontacttime = #{nextcontacttime}</if>
+            <if test="nextissue != null  and nextissue != ''"> and nextissue = #{nextissue}</if>
+            <if test="alreadycontact != null  and alreadycontact != ''"> and alreadycontact = #{alreadycontact}</if>
+            <if test="public != null  and public != ''"> and public = #{public}</if>
+            <if test="priority != null  and priority != ''"> and priority = #{priority}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmContactById" parameterType="Integer" resultMap="CmfCrmContactResult">
+        <include refid="selectCmfCrmContactVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmContact" parameterType="CmfCrmContact" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_contact
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">customerid,</if>
+            <if test="linkmanid != null and linkmanid != ''">linkmanid,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="contact != null and contact != ''">contact,</if>
+            <if test="chance != null and chance != ''">chance,</if>
+            <if test="stage != null and stage != ''">stage,</if>
+            <if test="describes != null and describes != ''">describes,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="contacttime != null">contacttime,</if>
+            <if test="nextcontacttime != null">nextcontacttime,</if>
+            <if test="nextissue != null and nextissue != ''">nextissue,</if>
+            <if test="alreadycontact != null and alreadycontact != ''">alreadycontact,</if>
+            <if test="public != null and public != ''">public,</if>
+            <if test="priority != null and priority != ''">priority,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">#{customerid},</if>
+            <if test="linkmanid != null and linkmanid != ''">#{linkmanid},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="contact != null and contact != ''">#{contact},</if>
+            <if test="chance != null and chance != ''">#{chance},</if>
+            <if test="stage != null and stage != ''">#{stage},</if>
+            <if test="describes != null and describes != ''">#{describes},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="contacttime != null">#{contacttime},</if>
+            <if test="nextcontacttime != null">#{nextcontacttime},</if>
+            <if test="nextissue != null and nextissue != ''">#{nextissue},</if>
+            <if test="alreadycontact != null and alreadycontact != ''">#{alreadycontact},</if>
+            <if test="public != null and public != ''">#{public},</if>
+            <if test="priority != null and priority != ''">#{priority},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmContact" parameterType="CmfCrmContact">
+        update cmf_crm_contact
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="linkmanid != null and linkmanid != ''">linkmanid = #{linkmanid},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="contact != null and contact != ''">contact = #{contact},</if>
+            <if test="chance != null and chance != ''">chance = #{chance},</if>
+            <if test="stage != null and stage != ''">stage = #{stage},</if>
+            <if test="describes != null and describes != ''">describes = #{describes},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="contacttime != null">contacttime = #{contacttime},</if>
+            <if test="nextcontacttime != null">nextcontacttime = #{nextcontacttime},</if>
+            <if test="nextissue != null and nextissue != ''">nextissue = #{nextissue},</if>
+            <if test="alreadycontact != null and alreadycontact != ''">alreadycontact = #{alreadycontact},</if>
+            <if test="public != null and public != ''">public = #{public},</if>
+            <if test="priority != null and priority != ''">priority = #{priority},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmContactById" parameterType="Integer">
+        delete from cmf_crm_contact where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmContactByIds" parameterType="String">
+        delete from cmf_crm_contact where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

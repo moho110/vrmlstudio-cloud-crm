@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCompeteproductMapper">
+    
+    <resultMap type="CmfCompeteproduct" id="CmfCompeteproductResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="productid"    column="productid"    />
+        <result property="infofrom"    column="infofrom"    />
+        <result property="comproduct"    column="comproduct"    />
+        <result property="compname"    column="compname"    />
+        <result property="compexcel"    column="compexcel"    />
+        <result property="compdefect"    column="compdefect"    />
+        <result property="compprice"    column="compprice"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="fileaddress"    column="fileaddress"    />
+        <result property="createtime"    column="createtime"    />
+    </resultMap>
+
+    <sql id="selectCmfCompeteproductVo">
+        select id, user_id, customerid, productid, infofrom, comproduct, compname, compexcel, compdefect, compprice, user_flag, fileaddress, createtime from cmf_competeproduct
+    </sql>
+
+    <select id="selectCmfCompeteproductList" parameterType="CmfCompeteproduct" resultMap="CmfCompeteproductResult">
+        <include refid="selectCmfCompeteproductVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="customerid != null  and customerid != ''"> and customerid = #{customerid}</if>
+            <if test="productid != null  and productid != ''"> and productid = #{productid}</if>
+            <if test="infofrom != null  and infofrom != ''"> and infofrom = #{infofrom}</if>
+            <if test="comproduct != null  and comproduct != ''"> and comproduct = #{comproduct}</if>
+            <if test="compname != null  and compname != ''"> and compname like concat('%', #{compname}, '%')</if>
+            <if test="compexcel != null  and compexcel != ''"> and compexcel = #{compexcel}</if>
+            <if test="compdefect != null  and compdefect != ''"> and compdefect = #{compdefect}</if>
+            <if test="compprice != null  and compprice != ''"> and compprice = #{compprice}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="fileaddress != null  and fileaddress != ''"> and fileaddress = #{fileaddress}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCompeteproductById" parameterType="Integer" resultMap="CmfCompeteproductResult">
+        <include refid="selectCmfCompeteproductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCompeteproduct" parameterType="CmfCompeteproduct" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_competeproduct
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="customerid != null and customerid != ''">customerid,</if>
+            <if test="productid != null and productid != ''">productid,</if>
+            <if test="infofrom != null and infofrom != ''">infofrom,</if>
+            <if test="comproduct != null and comproduct != ''">comproduct,</if>
+            <if test="compname != null and compname != ''">compname,</if>
+            <if test="compexcel != null and compexcel != ''">compexcel,</if>
+            <if test="compdefect != null and compdefect != ''">compdefect,</if>
+            <if test="compprice != null and compprice != ''">compprice,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress,</if>
+            <if test="createtime != null">createtime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="customerid != null and customerid != ''">#{customerid},</if>
+            <if test="productid != null and productid != ''">#{productid},</if>
+            <if test="infofrom != null and infofrom != ''">#{infofrom},</if>
+            <if test="comproduct != null and comproduct != ''">#{comproduct},</if>
+            <if test="compname != null and compname != ''">#{compname},</if>
+            <if test="compexcel != null and compexcel != ''">#{compexcel},</if>
+            <if test="compdefect != null and compdefect != ''">#{compdefect},</if>
+            <if test="compprice != null and compprice != ''">#{compprice},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="fileaddress != null and fileaddress != ''">#{fileaddress},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCompeteproduct" parameterType="CmfCompeteproduct">
+        update cmf_competeproduct
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="customerid != null and customerid != ''">customerid = #{customerid},</if>
+            <if test="productid != null and productid != ''">productid = #{productid},</if>
+            <if test="infofrom != null and infofrom != ''">infofrom = #{infofrom},</if>
+            <if test="comproduct != null and comproduct != ''">comproduct = #{comproduct},</if>
+            <if test="compname != null and compname != ''">compname = #{compname},</if>
+            <if test="compexcel != null and compexcel != ''">compexcel = #{compexcel},</if>
+            <if test="compdefect != null and compdefect != ''">compdefect = #{compdefect},</if>
+            <if test="compprice != null and compprice != ''">compprice = #{compprice},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress = #{fileaddress},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCompeteproductById" parameterType="Integer">
+        delete from cmf_competeproduct where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCompeteproductByIds" parameterType="String">
+        delete from cmf_competeproduct where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

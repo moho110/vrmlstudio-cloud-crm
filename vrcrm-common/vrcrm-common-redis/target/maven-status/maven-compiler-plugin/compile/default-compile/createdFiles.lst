@@ -1,0 +1,3 @@
+com\vrcrm\common\redis\configure\RedisConfig.class
+com\vrcrm\common\redis\configure\FastJson2JsonRedisSerializer.class
+com\vrcrm\common\redis\service\RedisService.class

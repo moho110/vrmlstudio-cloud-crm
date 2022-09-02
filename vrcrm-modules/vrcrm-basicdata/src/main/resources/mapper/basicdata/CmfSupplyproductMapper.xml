@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfSupplyproductMapper">
+    
+    <resultMap type="CmfSupplyproduct" id="CmfSupplyproductResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="user_id"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="productid"    column="productid"    />
+        <result property="productprice"    column="productprice"    />
+        <result property="pricedate"    column="pricedate"    />
+        <result property="explianstr"    column="explianstr"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="cycle"    column="cycle"    />
+        <result property="fujian"    column="fujian"    />
+    </resultMap>
+
+    <sql id="selectCmfSupplyproductVo">
+        select id, user_id, supplyid, productid, productprice, pricedate, explianstr, user_flag, cycle, fujian from cmf_supplyproduct
+    </sql>
+
+    <select id="selectCmfSupplyproductList" parameterType="CmfSupplyproduct" resultMap="CmfSupplyproductResult">
+        <include refid="selectCmfSupplyproductVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="supplyid != null  and supplyid != ''"> and supplyid = #{supplyid}</if>
+            <if test="productid != null  and productid != ''"> and productid = #{productid}</if>
+            <if test="productprice != null "> and productprice = #{productprice}</if>
+            <if test="pricedate != null  and pricedate != ''"> and pricedate = #{pricedate}</if>
+            <if test="explianstr != null  and explianstr != ''"> and explianstr = #{explianstr}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="cycle != null "> and cycle = #{cycle}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSupplyproductById" parameterType="Integer" resultMap="CmfSupplyproductResult">
+        <include refid="selectCmfSupplyproductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSupplyproduct" parameterType="CmfSupplyproduct" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_supplyproduct
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="supplyid != null and supplyid != ''">supplyid,</if>
+            <if test="productid != null and productid != ''">productid,</if>
+            <if test="productprice != null">productprice,</if>
+            <if test="pricedate != null and pricedate != ''">pricedate,</if>
+            <if test="explianstr != null and explianstr != ''">explianstr,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="cycle != null">cycle,</if>
+            <if test="fujian != null and fujian != ''">fujian,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="supplyid != null and supplyid != ''">#{supplyid},</if>
+            <if test="productid != null and productid != ''">#{productid},</if>
+            <if test="productprice != null">#{productprice},</if>
+            <if test="pricedate != null and pricedate != ''">#{pricedate},</if>
+            <if test="explianstr != null and explianstr != ''">#{explianstr},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="cycle != null">#{cycle},</if>
+            <if test="fujian != null and fujian != ''">#{fujian},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSupplyproduct" parameterType="CmfSupplyproduct">
+        update cmf_supplyproduct
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="supplyid != null and supplyid != ''">supplyid = #{supplyid},</if>
+            <if test="productid != null and productid != ''">productid = #{productid},</if>
+            <if test="productprice != null">productprice = #{productprice},</if>
+            <if test="pricedate != null and pricedate != ''">pricedate = #{pricedate},</if>
+            <if test="explianstr != null and explianstr != ''">explianstr = #{explianstr},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="cycle != null">cycle = #{cycle},</if>
+            <if test="fujian != null and fujian != ''">fujian = #{fujian},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSupplyproductById" parameterType="Integer">
+        delete from cmf_supplyproduct where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSupplyproductByIds" parameterType="String">
+        delete from cmf_supplyproduct where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCrmShenhezhuangtaiMapper">
+    
+    <resultMap type="CmfCrmShenhezhuangtai" id="CmfCrmShenhezhuangtaiResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmShenhezhuangtaiVo">
+        select id, name from cmf_crm_shenhezhuangtai
+    </sql>
+
+    <select id="selectCmfCrmShenhezhuangtaiList" parameterType="CmfCrmShenhezhuangtai" resultMap="CmfCrmShenhezhuangtaiResult">
+        <include refid="selectCmfCrmShenhezhuangtaiVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmShenhezhuangtaiById" parameterType="Integer" resultMap="CmfCrmShenhezhuangtaiResult">
+        <include refid="selectCmfCrmShenhezhuangtaiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmShenhezhuangtai" parameterType="CmfCrmShenhezhuangtai" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_shenhezhuangtai
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmShenhezhuangtai" parameterType="CmfCrmShenhezhuangtai">
+        update cmf_crm_shenhezhuangtai
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmShenhezhuangtaiById" parameterType="Integer">
+        delete from cmf_crm_shenhezhuangtai where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmShenhezhuangtaiByIds" parameterType="String">
+        delete from cmf_crm_shenhezhuangtai where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemhelpMapper">
+    
+    <resultMap type="CmfSystemhelp" id="CmfSystemhelpResult">
+        <result property="id"    column="id"    />
+        <result property="systemhelpname"    column="systemhelpname"    />
+        <result property="text"    column="text"    />
+        <result property="integer"    column="integer"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemhelpVo">
+        select id, systemhelpname, text, integer from cmf_systemhelp
+    </sql>
+
+    <select id="selectCmfSystemhelpList" parameterType="CmfSystemhelp" resultMap="CmfSystemhelpResult">
+        <include refid="selectCmfSystemhelpVo"/>
+        <where>  
+            <if test="systemhelpname != null  and systemhelpname != ''"> and systemhelpname like concat('%', #{systemhelpname}, '%')</if>
+            <if test="text != null  and text != ''"> and text = #{text}</if>
+            <if test="integer != null  and integer != ''"> and integer = #{integer}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemhelpById" parameterType="Integer" resultMap="CmfSystemhelpResult">
+        <include refid="selectCmfSystemhelpVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemhelp" parameterType="CmfSystemhelp" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_systemhelp
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="systemhelpname != null and systemhelpname != ''">systemhelpname,</if>
+            <if test="text != null and text != ''">text,</if>
+            <if test="integer != null and integer != ''">integer,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="systemhelpname != null and systemhelpname != ''">#{systemhelpname},</if>
+            <if test="text != null and text != ''">#{text},</if>
+            <if test="integer != null and integer != ''">#{integer},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemhelp" parameterType="CmfSystemhelp">
+        update cmf_systemhelp
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="systemhelpname != null and systemhelpname != ''">systemhelpname = #{systemhelpname},</if>
+            <if test="text != null and text != ''">text = #{text},</if>
+            <if test="integer != null and integer != ''">integer = #{integer},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemhelpById" parameterType="Integer">
+        delete from cmf_systemhelp where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemhelpByIds" parameterType="String">
+        delete from cmf_systemhelp where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

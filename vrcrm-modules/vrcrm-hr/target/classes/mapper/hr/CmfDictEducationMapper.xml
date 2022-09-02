@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfDictEducationMapper">
+    
+    <resultMap type="CmfDictEducation" id="CmfDictEducationResult">
+        <result property="id"    column="id"    />
+        <result property="dictEducationname"    column="Dict_EducationName"    />
+        <result property="dictEducationcode"    column="Dict_EducationCode"    />
+    </resultMap>
+
+    <sql id="selectCmfDictEducationVo">
+        select id, Dict_EducationName, Dict_EducationCode from cmf_dict_education
+    </sql>
+
+    <select id="selectCmfDictEducationList" parameterType="CmfDictEducation" resultMap="CmfDictEducationResult">
+        <include refid="selectCmfDictEducationVo"/>
+        <where>  
+            <if test="dictEducationname != null  and dictEducationname != ''"> and Dict_EducationName like concat('%', #{dictEducationname}, '%')</if>
+            <if test="dictEducationcode != null  and dictEducationcode != ''"> and Dict_EducationCode = #{dictEducationcode}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfDictEducationById" parameterType="Integer" resultMap="CmfDictEducationResult">
+        <include refid="selectCmfDictEducationVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfDictEducation" parameterType="CmfDictEducation" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_dict_education
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictEducationname != null and dictEducationname != ''">Dict_EducationName,</if>
+            <if test="dictEducationcode != null and dictEducationcode != ''">Dict_EducationCode,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dictEducationname != null and dictEducationname != ''">#{dictEducationname},</if>
+            <if test="dictEducationcode != null and dictEducationcode != ''">#{dictEducationcode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfDictEducation" parameterType="CmfDictEducation">
+        update cmf_dict_education
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dictEducationname != null and dictEducationname != ''">Dict_EducationName = #{dictEducationname},</if>
+            <if test="dictEducationcode != null and dictEducationcode != ''">Dict_EducationCode = #{dictEducationcode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfDictEducationById" parameterType="Integer">
+        delete from cmf_dict_education where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfDictEducationByIds" parameterType="String">
+        delete from cmf_dict_education where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

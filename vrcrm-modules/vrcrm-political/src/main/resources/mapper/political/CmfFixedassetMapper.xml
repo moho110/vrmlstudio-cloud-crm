@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfFixedassetMapper">
+    
+    <resultMap type="CmfFixedasset" id="CmfFixedassetResult">
+        <result property="id"    column="id"    />
+        <result property="setname"    column="setName"    />
+        <result property="setno"    column="setNo"    />
+        <result property="setpichi"    column="setPichi"    />
+        <result property="settype"    column="setType"    />
+        <result property="purchaseid"    column="purchaseID"    />
+        <result property="supply"    column="supply"    />
+        <result property="department"    column="department"    />
+        <result property="person"    column="person"    />
+        <result property="size"    column="size"    />
+        <result property="status"    column="status"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="price"    column="price"    />
+        <result property="count"    column="count"    />
+        <result property="unit"    column="unit"    />
+        <result property="place"    column="place"    />
+        <result property="purchasedate"    column="purchaseDate"    />
+        <result property="billnum"    column="billNum"    />
+        <result property="idnumber"    column="IDNumber"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="usedepartment"    column="useDepartment"    />
+        <result property="usedirect"    column="useDirect"    />
+        <result property="testdepartment"    column="testDepartment"    />
+        <result property="dutyman"    column="dutyMan"    />
+        <result property="qiyongdate"    column="qiyongDate"    />
+    </resultMap>
+
+    <sql id="selectCmfFixedassetVo">
+        select id, setName, setNo, setPichi, setType, purchaseID, supply, department, person, size, status, quantity, price, count, unit, place, purchaseDate, billNum, IDNumber, memo, creator, createTime, useDepartment, useDirect, testDepartment, dutyMan, qiyongDate from cmf_fixedasset
+    </sql>
+
+    <select id="selectCmfFixedassetList" parameterType="CmfFixedasset" resultMap="CmfFixedassetResult">
+        <include refid="selectCmfFixedassetVo"/>
+        <where>  
+            <if test="setname != null  and setname != ''"> and setName like concat('%', #{setname}, '%')</if>
+            <if test="setno != null  and setno != ''"> and setNo = #{setno}</if>
+            <if test="setpichi != null  and setpichi != ''"> and setPichi = #{setpichi}</if>
+            <if test="settype != null  and settype != ''"> and setType = #{settype}</if>
+            <if test="purchaseid != null  and purchaseid != ''"> and purchaseID = #{purchaseid}</if>
+            <if test="supply != null  and supply != ''"> and supply = #{supply}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="person != null  and person != ''"> and person = #{person}</if>
+            <if test="size != null  and size != ''"> and size = #{size}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="price != null  and price != ''"> and price = #{price}</if>
+            <if test="count != null  and count != ''"> and count = #{count}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="place != null  and place != ''"> and place = #{place}</if>
+            <if test="purchasedate != null  and purchasedate != ''"> and purchaseDate = #{purchasedate}</if>
+            <if test="billnum != null  and billnum != ''"> and billNum = #{billnum}</if>
+            <if test="idnumber != null  and idnumber != ''"> and IDNumber = #{idnumber}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="usedepartment != null  and usedepartment != ''"> and useDepartment = #{usedepartment}</if>
+            <if test="usedirect != null  and usedirect != ''"> and useDirect = #{usedirect}</if>
+            <if test="testdepartment != null  and testdepartment != ''"> and testDepartment = #{testdepartment}</if>
+            <if test="dutyman != null  and dutyman != ''"> and dutyMan = #{dutyman}</if>
+            <if test="qiyongdate != null  and qiyongdate != ''"> and qiyongDate = #{qiyongdate}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFixedassetById" parameterType="Integer" resultMap="CmfFixedassetResult">
+        <include refid="selectCmfFixedassetVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFixedasset" parameterType="CmfFixedasset" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fixedasset
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName,</if>
+            <if test="setno != null and setno != ''">setNo,</if>
+            <if test="setpichi != null and setpichi != ''">setPichi,</if>
+            <if test="settype != null and settype != ''">setType,</if>
+            <if test="purchaseid != null and purchaseid != ''">purchaseID,</if>
+            <if test="supply != null and supply != ''">supply,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="person != null and person != ''">person,</if>
+            <if test="size != null and size != ''">size,</if>
+            <if test="status != null and status != ''">status,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="price != null and price != ''">price,</if>
+            <if test="count != null and count != ''">count,</if>
+            <if test="unit != null and unit != ''">unit,</if>
+            <if test="place != null and place != ''">place,</if>
+            <if test="purchasedate != null and purchasedate != ''">purchaseDate,</if>
+            <if test="billnum != null and billnum != ''">billNum,</if>
+            <if test="idnumber != null and idnumber != ''">IDNumber,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="usedepartment != null and usedepartment != ''">useDepartment,</if>
+            <if test="usedirect != null and usedirect != ''">useDirect,</if>
+            <if test="testdepartment != null and testdepartment != ''">testDepartment,</if>
+            <if test="dutyman != null and dutyman != ''">dutyMan,</if>
+            <if test="qiyongdate != null and qiyongdate != ''">qiyongDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">#{setname},</if>
+            <if test="setno != null and setno != ''">#{setno},</if>
+            <if test="setpichi != null and setpichi != ''">#{setpichi},</if>
+            <if test="settype != null and settype != ''">#{settype},</if>
+            <if test="purchaseid != null and purchaseid != ''">#{purchaseid},</if>
+            <if test="supply != null and supply != ''">#{supply},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="person != null and person != ''">#{person},</if>
+            <if test="size != null and size != ''">#{size},</if>
+            <if test="status != null and status != ''">#{status},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="price != null and price != ''">#{price},</if>
+            <if test="count != null and count != ''">#{count},</if>
+            <if test="unit != null and unit != ''">#{unit},</if>
+            <if test="place != null and place != ''">#{place},</if>
+            <if test="purchasedate != null and purchasedate != ''">#{purchasedate},</if>
+            <if test="billnum != null and billnum != ''">#{billnum},</if>
+            <if test="idnumber != null and idnumber != ''">#{idnumber},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="usedepartment != null and usedepartment != ''">#{usedepartment},</if>
+            <if test="usedirect != null and usedirect != ''">#{usedirect},</if>
+            <if test="testdepartment != null and testdepartment != ''">#{testdepartment},</if>
+            <if test="dutyman != null and dutyman != ''">#{dutyman},</if>
+            <if test="qiyongdate != null and qiyongdate != ''">#{qiyongdate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFixedasset" parameterType="CmfFixedasset">
+        update cmf_fixedasset
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName = #{setname},</if>
+            <if test="setno != null and setno != ''">setNo = #{setno},</if>
+            <if test="setpichi != null and setpichi != ''">setPichi = #{setpichi},</if>
+            <if test="settype != null and settype != ''">setType = #{settype},</if>
+            <if test="purchaseid != null and purchaseid != ''">purchaseID = #{purchaseid},</if>
+            <if test="supply != null and supply != ''">supply = #{supply},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="person != null and person != ''">person = #{person},</if>
+            <if test="size != null and size != ''">size = #{size},</if>
+            <if test="status != null and status != ''">status = #{status},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="price != null and price != ''">price = #{price},</if>
+            <if test="count != null and count != ''">count = #{count},</if>
+            <if test="unit != null and unit != ''">unit = #{unit},</if>
+            <if test="place != null and place != ''">place = #{place},</if>
+            <if test="purchasedate != null and purchasedate != ''">purchaseDate = #{purchasedate},</if>
+            <if test="billnum != null and billnum != ''">billNum = #{billnum},</if>
+            <if test="idnumber != null and idnumber != ''">IDNumber = #{idnumber},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="usedepartment != null and usedepartment != ''">useDepartment = #{usedepartment},</if>
+            <if test="usedirect != null and usedirect != ''">useDirect = #{usedirect},</if>
+            <if test="testdepartment != null and testdepartment != ''">testDepartment = #{testdepartment},</if>
+            <if test="dutyman != null and dutyman != ''">dutyMan = #{dutyman},</if>
+            <if test="qiyongdate != null and qiyongdate != ''">qiyongDate = #{qiyongdate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFixedassetById" parameterType="Integer">
+        delete from cmf_fixedasset where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFixedassetByIds" parameterType="String">
+        delete from cmf_fixedasset where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

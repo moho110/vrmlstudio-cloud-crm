@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduZhongcengcepingMapper">
+    
+    <resultMap type="CmfEduZhongcengceping" id="CmfEduZhongcengcepingResult">
+        <result property="id"    column="id"    />
+        <result property="testname"    column="testName"    />
+        <result property="starttime"    column="startTime"    />
+        <result property="endtime"    column="endTime"    />
+        <result property="isuse"    column="isUse"    />
+        <result property="testmanby"    column="testManby"    />
+        <result property="jointestman"    column="joinTestMan"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfEduZhongcengcepingVo">
+        select id, testName, startTime, endTime, isUse, testManby, joinTestMan, creator, createTime from cmf_edu_zhongcengceping
+    </sql>
+
+    <select id="selectCmfEduZhongcengcepingList" parameterType="CmfEduZhongcengceping" resultMap="CmfEduZhongcengcepingResult">
+        <include refid="selectCmfEduZhongcengcepingVo"/>
+        <where>  
+            <if test="testname != null  and testname != ''"> and testName like concat('%', #{testname}, '%')</if>
+            <if test="starttime != null  and starttime != ''"> and startTime = #{starttime}</if>
+            <if test="endtime != null  and endtime != ''"> and endTime = #{endtime}</if>
+            <if test="isuse != null "> and isUse = #{isuse}</if>
+            <if test="testmanby != null  and testmanby != ''"> and testManby = #{testmanby}</if>
+            <if test="jointestman != null  and jointestman != ''"> and joinTestMan = #{jointestman}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduZhongcengcepingById" parameterType="Integer" resultMap="CmfEduZhongcengcepingResult">
+        <include refid="selectCmfEduZhongcengcepingVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduZhongcengceping" parameterType="CmfEduZhongcengceping" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_zhongcengceping
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="testname != null and testname != ''">testName,</if>
+            <if test="starttime != null and starttime != ''">startTime,</if>
+            <if test="endtime != null and endtime != ''">endTime,</if>
+            <if test="isuse != null">isUse,</if>
+            <if test="testmanby != null and testmanby != ''">testManby,</if>
+            <if test="jointestman != null and jointestman != ''">joinTestMan,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="testname != null and testname != ''">#{testname},</if>
+            <if test="starttime != null and starttime != ''">#{starttime},</if>
+            <if test="endtime != null and endtime != ''">#{endtime},</if>
+            <if test="isuse != null">#{isuse},</if>
+            <if test="testmanby != null and testmanby != ''">#{testmanby},</if>
+            <if test="jointestman != null and jointestman != ''">#{jointestman},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduZhongcengceping" parameterType="CmfEduZhongcengceping">
+        update cmf_edu_zhongcengceping
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="testname != null and testname != ''">testName = #{testname},</if>
+            <if test="starttime != null and starttime != ''">startTime = #{starttime},</if>
+            <if test="endtime != null and endtime != ''">endTime = #{endtime},</if>
+            <if test="isuse != null">isUse = #{isuse},</if>
+            <if test="testmanby != null and testmanby != ''">testManby = #{testmanby},</if>
+            <if test="jointestman != null and jointestman != ''">joinTestMan = #{jointestman},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduZhongcengcepingById" parameterType="Integer">
+        delete from cmf_edu_zhongcengceping where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduZhongcengcepingByIds" parameterType="String">
+        delete from cmf_edu_zhongcengceping where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

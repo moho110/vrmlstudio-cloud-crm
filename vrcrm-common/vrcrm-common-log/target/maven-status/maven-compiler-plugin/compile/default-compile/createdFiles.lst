@@ -1,0 +1,6 @@
+com\vrcrm\common\log\enums\OperatorType.class
+com\vrcrm\common\log\enums\BusinessType.class
+com\vrcrm\common\log\enums\BusinessStatus.class
+com\vrcrm\common\log\service\AsyncLogService.class
+com\vrcrm\common\log\annotation\Log.class
+com\vrcrm\common\log\aspect\LogAspect.class

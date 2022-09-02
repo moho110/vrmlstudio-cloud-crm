@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfCmdictCountrycodeMapper">
+    
+    <resultMap type="CmfCmdictCountrycode" id="CmfCmdictCountrycodeResult">
+        <result property="id"    column="id"    />
+        <result property="countryname"    column="countryName"    />
+        <result property="countrycode"    column="countryCode"    />
+        <result property="postcode"    column="postCode"    />
+    </resultMap>
+
+    <sql id="selectCmfCmdictCountrycodeVo">
+        select id, countryName, countryCode, postCode from cmf_cmdict_countrycode
+    </sql>
+
+    <select id="selectCmfCmdictCountrycodeList" parameterType="CmfCmdictCountrycode" resultMap="CmfCmdictCountrycodeResult">
+        <include refid="selectCmfCmdictCountrycodeVo"/>
+        <where>  
+            <if test="countryname != null  and countryname != ''"> and countryName like concat('%', #{countryname}, '%')</if>
+            <if test="countrycode != null  and countrycode != ''"> and countryCode = #{countrycode}</if>
+            <if test="postcode != null  and postcode != ''"> and postCode = #{postcode}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCmdictCountrycodeById" parameterType="Integer" resultMap="CmfCmdictCountrycodeResult">
+        <include refid="selectCmfCmdictCountrycodeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCmdictCountrycode" parameterType="CmfCmdictCountrycode" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_cmdict_countrycode
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="countryname != null and countryname != ''">countryName,</if>
+            <if test="countrycode != null and countrycode != ''">countryCode,</if>
+            <if test="postcode != null and postcode != ''">postCode,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="countryname != null and countryname != ''">#{countryname},</if>
+            <if test="countrycode != null and countrycode != ''">#{countrycode},</if>
+            <if test="postcode != null and postcode != ''">#{postcode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCmdictCountrycode" parameterType="CmfCmdictCountrycode">
+        update cmf_cmdict_countrycode
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="countryname != null and countryname != ''">countryName = #{countryname},</if>
+            <if test="countrycode != null and countrycode != ''">countryCode = #{countrycode},</if>
+            <if test="postcode != null and postcode != ''">postCode = #{postcode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCmdictCountrycodeById" parameterType="Integer">
+        delete from cmf_cmdict_countrycode where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCmdictCountrycodeByIds" parameterType="String">
+        delete from cmf_cmdict_countrycode where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduTeacherkaoqinMapper">
+    
+    <resultMap type="CmfEduTeacherkaoqin" id="CmfEduTeacherkaoqinResult">
+        <result property="id"    column="id"    />
+        <result property="teacherusername"    column="teacherUserName"    />
+        <result property="teachername"    column="teacherName"    />
+        <result property="dutydate"    column="dutyDate"    />
+        <result property="cardtime"    column="cardTime"    />
+        <result property="dutyid"    column="dutyId"    />
+        <result property="dutyposition"    column="dutyPosition"    />
+        <result property="dutyip"    column="dutyIP"    />
+    </resultMap>
+
+    <sql id="selectCmfEduTeacherkaoqinVo">
+        select id, teacherUserName, teacherName, dutyDate, cardTime, dutyId, dutyPosition, dutyIP from cmf_edu_teacherkaoqin
+    </sql>
+
+    <select id="selectCmfEduTeacherkaoqinList" parameterType="CmfEduTeacherkaoqin" resultMap="CmfEduTeacherkaoqinResult">
+        <include refid="selectCmfEduTeacherkaoqinVo"/>
+        <where>  
+            <if test="teacherusername != null  and teacherusername != ''"> and teacherUserName like concat('%', #{teacherusername}, '%')</if>
+            <if test="teachername != null  and teachername != ''"> and teacherName like concat('%', #{teachername}, '%')</if>
+            <if test="dutydate != null "> and dutyDate = #{dutydate}</if>
+            <if test="cardtime != null  and cardtime != ''"> and cardTime = #{cardtime}</if>
+            <if test="dutyid != null  and dutyid != ''"> and dutyId = #{dutyid}</if>
+            <if test="dutyposition != null  and dutyposition != ''"> and dutyPosition = #{dutyposition}</if>
+            <if test="dutyip != null  and dutyip != ''"> and dutyIP = #{dutyip}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduTeacherkaoqinById" parameterType="Integer" resultMap="CmfEduTeacherkaoqinResult">
+        <include refid="selectCmfEduTeacherkaoqinVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduTeacherkaoqin" parameterType="CmfEduTeacherkaoqin" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_teacherkaoqin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="teacherusername != null and teacherusername != ''">teacherUserName,</if>
+            <if test="teachername != null and teachername != ''">teacherName,</if>
+            <if test="dutydate != null">dutyDate,</if>
+            <if test="cardtime != null and cardtime != ''">cardTime,</if>
+            <if test="dutyid != null and dutyid != ''">dutyId,</if>
+            <if test="dutyposition != null and dutyposition != ''">dutyPosition,</if>
+            <if test="dutyip != null and dutyip != ''">dutyIP,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="teacherusername != null and teacherusername != ''">#{teacherusername},</if>
+            <if test="teachername != null and teachername != ''">#{teachername},</if>
+            <if test="dutydate != null">#{dutydate},</if>
+            <if test="cardtime != null and cardtime != ''">#{cardtime},</if>
+            <if test="dutyid != null and dutyid != ''">#{dutyid},</if>
+            <if test="dutyposition != null and dutyposition != ''">#{dutyposition},</if>
+            <if test="dutyip != null and dutyip != ''">#{dutyip},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduTeacherkaoqin" parameterType="CmfEduTeacherkaoqin">
+        update cmf_edu_teacherkaoqin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teacherusername != null and teacherusername != ''">teacherUserName = #{teacherusername},</if>
+            <if test="teachername != null and teachername != ''">teacherName = #{teachername},</if>
+            <if test="dutydate != null">dutyDate = #{dutydate},</if>
+            <if test="cardtime != null and cardtime != ''">cardTime = #{cardtime},</if>
+            <if test="dutyid != null and dutyid != ''">dutyId = #{dutyid},</if>
+            <if test="dutyposition != null and dutyposition != ''">dutyPosition = #{dutyposition},</if>
+            <if test="dutyip != null and dutyip != ''">dutyIP = #{dutyip},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduTeacherkaoqinById" parameterType="Integer">
+        delete from cmf_edu_teacherkaoqin where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduTeacherkaoqinByIds" parameterType="String">
+        delete from cmf_edu_teacherkaoqin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

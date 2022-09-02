@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduZhongcengrenyuanMapper">
+    
+    <resultMap type="CmfEduZhongcengrenyuan" id="CmfEduZhongcengrenyuanResult">
+        <result property="id"    column="id"    />
+        <result property="testname"    column="testName"    />
+        <result property="testmanby"    column="testManBy"    />
+        <result property="uit"    column="uit"    />
+        <result property="staff"    column="staff"    />
+        <result property="pindedesp"    column="pindeDesp"    />
+        <result property="pindeself"    column="pindeSelf"    />
+        <result property="abillitydesp"    column="abillityDesp"    />
+        <result property="abillityself"    column="abillitySelf"    />
+        <result property="studydesp"    column="studyDesp"    />
+        <result property="studyself"    column="studySelf"    />
+        <result property="jixiaodesp"    column="jixiaoDesp"    />
+        <result property="jixiaoself"    column="jixiaoSelf"    />
+        <result property="lianzhengdesp"    column="lianzhengDesp"    />
+        <result property="lianzhengself"    column="lianzhengSelf"    />
+        <result property="attach"    column="attach"    />
+    </resultMap>
+
+    <sql id="selectCmfEduZhongcengrenyuanVo">
+        select id, testName, testManBy, uit, staff, pindeDesp, pindeSelf, abillityDesp, abillitySelf, studyDesp, studySelf, jixiaoDesp, jixiaoSelf, lianzhengDesp, lianzhengSelf, attach from cmf_edu_zhongcengrenyuan
+    </sql>
+
+    <select id="selectCmfEduZhongcengrenyuanList" parameterType="CmfEduZhongcengrenyuan" resultMap="CmfEduZhongcengrenyuanResult">
+        <include refid="selectCmfEduZhongcengrenyuanVo"/>
+        <where>  
+            <if test="testname != null  and testname != ''"> and testName like concat('%', #{testname}, '%')</if>
+            <if test="testmanby != null  and testmanby != ''"> and testManBy = #{testmanby}</if>
+            <if test="uit != null  and uit != ''"> and uit = #{uit}</if>
+            <if test="staff != null  and staff != ''"> and staff = #{staff}</if>
+            <if test="pindedesp != null  and pindedesp != ''"> and pindeDesp = #{pindedesp}</if>
+            <if test="pindeself != null  and pindeself != ''"> and pindeSelf = #{pindeself}</if>
+            <if test="abillitydesp != null  and abillitydesp != ''"> and abillityDesp = #{abillitydesp}</if>
+            <if test="abillityself != null  and abillityself != ''"> and abillitySelf = #{abillityself}</if>
+            <if test="studydesp != null  and studydesp != ''"> and studyDesp = #{studydesp}</if>
+            <if test="studyself != null  and studyself != ''"> and studySelf = #{studyself}</if>
+            <if test="jixiaodesp != null  and jixiaodesp != ''"> and jixiaoDesp = #{jixiaodesp}</if>
+            <if test="jixiaoself != null  and jixiaoself != ''"> and jixiaoSelf = #{jixiaoself}</if>
+            <if test="lianzhengdesp != null  and lianzhengdesp != ''"> and lianzhengDesp = #{lianzhengdesp}</if>
+            <if test="lianzhengself != null  and lianzhengself != ''"> and lianzhengSelf = #{lianzhengself}</if>
+            <if test="attach != null  and attach != ''"> and attach = #{attach}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduZhongcengrenyuanById" parameterType="Integer" resultMap="CmfEduZhongcengrenyuanResult">
+        <include refid="selectCmfEduZhongcengrenyuanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduZhongcengrenyuan" parameterType="CmfEduZhongcengrenyuan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_zhongcengrenyuan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="testname != null and testname != ''">testName,</if>
+            <if test="testmanby != null and testmanby != ''">testManBy,</if>
+            <if test="uit != null and uit != ''">uit,</if>
+            <if test="staff != null and staff != ''">staff,</if>
+            <if test="pindedesp != null and pindedesp != ''">pindeDesp,</if>
+            <if test="pindeself != null and pindeself != ''">pindeSelf,</if>
+            <if test="abillitydesp != null and abillitydesp != ''">abillityDesp,</if>
+            <if test="abillityself != null and abillityself != ''">abillitySelf,</if>
+            <if test="studydesp != null and studydesp != ''">studyDesp,</if>
+            <if test="studyself != null and studyself != ''">studySelf,</if>
+            <if test="jixiaodesp != null and jixiaodesp != ''">jixiaoDesp,</if>
+            <if test="jixiaoself != null and jixiaoself != ''">jixiaoSelf,</if>
+            <if test="lianzhengdesp != null and lianzhengdesp != ''">lianzhengDesp,</if>
+            <if test="lianzhengself != null and lianzhengself != ''">lianzhengSelf,</if>
+            <if test="attach != null and attach != ''">attach,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="testname != null and testname != ''">#{testname},</if>
+            <if test="testmanby != null and testmanby != ''">#{testmanby},</if>
+            <if test="uit != null and uit != ''">#{uit},</if>
+            <if test="staff != null and staff != ''">#{staff},</if>
+            <if test="pindedesp != null and pindedesp != ''">#{pindedesp},</if>
+            <if test="pindeself != null and pindeself != ''">#{pindeself},</if>
+            <if test="abillitydesp != null and abillitydesp != ''">#{abillitydesp},</if>
+            <if test="abillityself != null and abillityself != ''">#{abillityself},</if>
+            <if test="studydesp != null and studydesp != ''">#{studydesp},</if>
+            <if test="studyself != null and studyself != ''">#{studyself},</if>
+            <if test="jixiaodesp != null and jixiaodesp != ''">#{jixiaodesp},</if>
+            <if test="jixiaoself != null and jixiaoself != ''">#{jixiaoself},</if>
+            <if test="lianzhengdesp != null and lianzhengdesp != ''">#{lianzhengdesp},</if>
+            <if test="lianzhengself != null and lianzhengself != ''">#{lianzhengself},</if>
+            <if test="attach != null and attach != ''">#{attach},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduZhongcengrenyuan" parameterType="CmfEduZhongcengrenyuan">
+        update cmf_edu_zhongcengrenyuan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="testname != null and testname != ''">testName = #{testname},</if>
+            <if test="testmanby != null and testmanby != ''">testManBy = #{testmanby},</if>
+            <if test="uit != null and uit != ''">uit = #{uit},</if>
+            <if test="staff != null and staff != ''">staff = #{staff},</if>
+            <if test="pindedesp != null and pindedesp != ''">pindeDesp = #{pindedesp},</if>
+            <if test="pindeself != null and pindeself != ''">pindeSelf = #{pindeself},</if>
+            <if test="abillitydesp != null and abillitydesp != ''">abillityDesp = #{abillitydesp},</if>
+            <if test="abillityself != null and abillityself != ''">abillitySelf = #{abillityself},</if>
+            <if test="studydesp != null and studydesp != ''">studyDesp = #{studydesp},</if>
+            <if test="studyself != null and studyself != ''">studySelf = #{studyself},</if>
+            <if test="jixiaodesp != null and jixiaodesp != ''">jixiaoDesp = #{jixiaodesp},</if>
+            <if test="jixiaoself != null and jixiaoself != ''">jixiaoSelf = #{jixiaoself},</if>
+            <if test="lianzhengdesp != null and lianzhengdesp != ''">lianzhengDesp = #{lianzhengdesp},</if>
+            <if test="lianzhengself != null and lianzhengself != ''">lianzhengSelf = #{lianzhengself},</if>
+            <if test="attach != null and attach != ''">attach = #{attach},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduZhongcengrenyuanById" parameterType="Integer">
+        delete from cmf_edu_zhongcengrenyuan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduZhongcengrenyuanByIds" parameterType="String">
+        delete from cmf_edu_zhongcengrenyuan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

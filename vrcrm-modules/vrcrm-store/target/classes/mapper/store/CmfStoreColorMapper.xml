@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStoreColorMapper">
+    
+    <resultMap type="CmfStoreColor" id="CmfStoreColorResult">
+        <result property="id"    column="id"    />
+        <result property="color"    column="color"    />
+        <result property="num"    column="num"    />
+    </resultMap>
+
+    <sql id="selectCmfStoreColorVo">
+        select id, color, num from cmf_store_color
+    </sql>
+
+    <select id="selectCmfStoreColorList" parameterType="CmfStoreColor" resultMap="CmfStoreColorResult">
+        <include refid="selectCmfStoreColorVo"/>
+        <where>  
+            <if test="color != null "> and color = #{color}</if>
+            <if test="num != null "> and num = #{num}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStoreColorById" parameterType="Integer" resultMap="CmfStoreColorResult">
+        <include refid="selectCmfStoreColorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStoreColor" parameterType="CmfStoreColor" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_store_color
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="color != null">color,</if>
+            <if test="num != null">num,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="color != null">#{color},</if>
+            <if test="num != null">#{num},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStoreColor" parameterType="CmfStoreColor">
+        update cmf_store_color
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="color != null">color = #{color},</if>
+            <if test="num != null">num = #{num},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStoreColorById" parameterType="Integer">
+        delete from cmf_store_color where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStoreColorByIds" parameterType="String">
+        delete from cmf_store_color where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

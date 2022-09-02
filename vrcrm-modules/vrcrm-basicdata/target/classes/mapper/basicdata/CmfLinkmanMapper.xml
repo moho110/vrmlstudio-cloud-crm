@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfLinkmanMapper">
+    
+    <resultMap type="CmfLinkman" id="CmfLinkmanResult">
+        <result property="id"    column="id"    />
+        <result property="linkmanname"    column="linkmanname"    />
+        <result property="linkmanpy"    column="linkmanpy"    />
+        <result property="gender"    column="gender"    />
+        <result property="phone"    column="phone"    />
+        <result property="fax"    column="fax"    />
+        <result property="email"    column="email"    />
+        <result property="postcode"    column="postcode"    />
+        <result property="mark"    column="mark"    />
+        <result property="business"    column="business"    />
+        <result property="businessexpian"    column="businessexpian"    />
+        <result property="address"    column="address"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="supplycn"    column="supplycn"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="birthday"    column="birthday"    />
+    </resultMap>
+
+    <sql id="selectCmfLinkmanVo">
+        select id, linkmanname, linkmanpy, gender, phone, fax, email, postcode, mark, business, businessexpian, address, user_flag, user_id, supplycn, customerid, mobile, birthday from cmf_linkman
+    </sql>
+
+    <select id="selectCmfLinkmanList" parameterType="CmfLinkman" resultMap="CmfLinkmanResult">
+        <include refid="selectCmfLinkmanVo"/>
+        <where>  
+            <if test="linkmanname != null  and linkmanname != ''"> and linkmanname like concat('%', #{linkmanname}, '%')</if>
+            <if test="linkmanpy != null  and linkmanpy != ''"> and linkmanpy = #{linkmanpy}</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="fax != null  and fax != ''"> and fax = #{fax}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="postcode != null  and postcode != ''"> and postcode = #{postcode}</if>
+            <if test="mark != null  and mark != ''"> and mark = #{mark}</if>
+            <if test="business != null  and business != ''"> and business = #{business}</if>
+            <if test="businessexpian != null  and businessexpian != ''"> and businessexpian = #{businessexpian}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="supplycn != null  and supplycn != ''"> and supplycn = #{supplycn}</if>
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="birthday != null  and birthday != ''"> and birthday = #{birthday}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfLinkmanById" parameterType="Integer" resultMap="CmfLinkmanResult">
+        <include refid="selectCmfLinkmanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfLinkman" parameterType="CmfLinkman" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_linkman
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="linkmanname != null and linkmanname != ''">linkmanname,</if>
+            <if test="linkmanpy != null and linkmanpy != ''">linkmanpy,</if>
+            <if test="gender != null and gender != ''">gender,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="fax != null and fax != ''">fax,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="postcode != null and postcode != ''">postcode,</if>
+            <if test="mark != null and mark != ''">mark,</if>
+            <if test="business != null and business != ''">business,</if>
+            <if test="businessexpian != null and businessexpian != ''">businessexpian,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="supplycn != null and supplycn != ''">supplycn,</if>
+            <if test="customerid != null">customerid,</if>
+            <if test="mobile != null and mobile != ''">mobile,</if>
+            <if test="birthday != null and birthday != ''">birthday,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="linkmanname != null and linkmanname != ''">#{linkmanname},</if>
+            <if test="linkmanpy != null and linkmanpy != ''">#{linkmanpy},</if>
+            <if test="gender != null and gender != ''">#{gender},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="fax != null and fax != ''">#{fax},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="postcode != null and postcode != ''">#{postcode},</if>
+            <if test="mark != null and mark != ''">#{mark},</if>
+            <if test="business != null and business != ''">#{business},</if>
+            <if test="businessexpian != null and businessexpian != ''">#{businessexpian},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="supplycn != null and supplycn != ''">#{supplycn},</if>
+            <if test="customerid != null">#{customerid},</if>
+            <if test="mobile != null and mobile != ''">#{mobile},</if>
+            <if test="birthday != null and birthday != ''">#{birthday},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfLinkman" parameterType="CmfLinkman">
+        update cmf_linkman
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="linkmanname != null and linkmanname != ''">linkmanname = #{linkmanname},</if>
+            <if test="linkmanpy != null and linkmanpy != ''">linkmanpy = #{linkmanpy},</if>
+            <if test="gender != null and gender != ''">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="fax != null and fax != ''">fax = #{fax},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="postcode != null and postcode != ''">postcode = #{postcode},</if>
+            <if test="mark != null and mark != ''">mark = #{mark},</if>
+            <if test="business != null and business != ''">business = #{business},</if>
+            <if test="businessexpian != null and businessexpian != ''">businessexpian = #{businessexpian},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="supplycn != null and supplycn != ''">supplycn = #{supplycn},</if>
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+            <if test="birthday != null and birthday != ''">birthday = #{birthday},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfLinkmanById" parameterType="Integer">
+        delete from cmf_linkman where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfLinkmanByIds" parameterType="String">
+        delete from cmf_linkman where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

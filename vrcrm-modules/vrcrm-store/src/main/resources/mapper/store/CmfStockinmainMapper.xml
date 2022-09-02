@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStockinmainMapper">
+    
+    <resultMap type="CmfStockinmain" id="CmfStockinmainResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="indate"    column="indate"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="caigoubillid"    column="caigoubillid"    />
+        <result property="tuihuobillid"    column="tuihuobillid"    />
+        <result property="memo"    column="memo"    />
+        <result property="state"    column="state"    />
+        <result property="beiyong1"    column="beiyong1"    />
+        <result property="beiyong2"    column="beiyong2"    />
+        <result property="beiyong3"    column="beiyong3"    />
+        <result property="totalnum"    column="totalnum"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="instoreshenhe"    column="instoreshenhe"    />
+        <result property="intype"    column="intype"    />
+    </resultMap>
+
+    <sql id="selectCmfStockinmainVo">
+        select id, zhuti, storeid, indate, createman, createtime, caigoubillid, tuihuobillid, memo, state, beiyong1, beiyong2, beiyong3, totalnum, totalmoney, instoreshenhe, intype from cmf_stockinmain
+    </sql>
+
+    <select id="selectCmfStockinmainList" parameterType="CmfStockinmain" resultMap="CmfStockinmainResult">
+        <include refid="selectCmfStockinmainVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="storeid != null "> and storeid = #{storeid}</if>
+            <if test="indate != null "> and indate = #{indate}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="caigoubillid != null "> and caigoubillid = #{caigoubillid}</if>
+            <if test="tuihuobillid != null "> and tuihuobillid = #{tuihuobillid}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="beiyong1 != null  and beiyong1 != ''"> and beiyong1 = #{beiyong1}</if>
+            <if test="beiyong2 != null  and beiyong2 != ''"> and beiyong2 = #{beiyong2}</if>
+            <if test="beiyong3 != null  and beiyong3 != ''"> and beiyong3 = #{beiyong3}</if>
+            <if test="totalnum != null "> and totalnum = #{totalnum}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="instoreshenhe != null  and instoreshenhe != ''"> and instoreshenhe = #{instoreshenhe}</if>
+            <if test="intype != null  and intype != ''"> and intype = #{intype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStockinmainById" parameterType="Integer" resultMap="CmfStockinmainResult">
+        <include refid="selectCmfStockinmainVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStockinmain" parameterType="CmfStockinmain" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_stockinmain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="storeid != null">storeid,</if>
+            <if test="indate != null">indate,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="caigoubillid != null">caigoubillid,</if>
+            <if test="tuihuobillid != null">tuihuobillid,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="state != null and state != ''">state,</if>
+            <if test="beiyong1 != null and beiyong1 != ''">beiyong1,</if>
+            <if test="beiyong2 != null and beiyong2 != ''">beiyong2,</if>
+            <if test="beiyong3 != null and beiyong3 != ''">beiyong3,</if>
+            <if test="totalnum != null">totalnum,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="instoreshenhe != null and instoreshenhe != ''">instoreshenhe,</if>
+            <if test="intype != null and intype != ''">intype,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="storeid != null">#{storeid},</if>
+            <if test="indate != null">#{indate},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="caigoubillid != null">#{caigoubillid},</if>
+            <if test="tuihuobillid != null">#{tuihuobillid},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="beiyong1 != null and beiyong1 != ''">#{beiyong1},</if>
+            <if test="beiyong2 != null and beiyong2 != ''">#{beiyong2},</if>
+            <if test="beiyong3 != null and beiyong3 != ''">#{beiyong3},</if>
+            <if test="totalnum != null">#{totalnum},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="instoreshenhe != null and instoreshenhe != ''">#{instoreshenhe},</if>
+            <if test="intype != null and intype != ''">#{intype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStockinmain" parameterType="CmfStockinmain">
+        update cmf_stockinmain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="storeid != null">storeid = #{storeid},</if>
+            <if test="indate != null">indate = #{indate},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="caigoubillid != null">caigoubillid = #{caigoubillid},</if>
+            <if test="tuihuobillid != null">tuihuobillid = #{tuihuobillid},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="state != null and state != ''">state = #{state},</if>
+            <if test="beiyong1 != null and beiyong1 != ''">beiyong1 = #{beiyong1},</if>
+            <if test="beiyong2 != null and beiyong2 != ''">beiyong2 = #{beiyong2},</if>
+            <if test="beiyong3 != null and beiyong3 != ''">beiyong3 = #{beiyong3},</if>
+            <if test="totalnum != null">totalnum = #{totalnum},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="instoreshenhe != null and instoreshenhe != ''">instoreshenhe = #{instoreshenhe},</if>
+            <if test="intype != null and intype != ''">intype = #{intype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStockinmainById" parameterType="Integer">
+        delete from cmf_stockinmain where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStockinmainByIds" parameterType="String">
+        delete from cmf_stockinmain where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

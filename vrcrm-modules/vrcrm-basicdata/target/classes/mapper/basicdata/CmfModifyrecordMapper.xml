@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfModifyrecordMapper">
+    
+    <resultMap type="CmfModifyrecord" id="CmfModifyrecordResult">
+        <result property="id"    column="id"    />
+        <result property="tablename"    column="tablename"    />
+        <result property="keyfield"    column="keyfield"    />
+        <result property="keyvalue"    column="keyvalue"    />
+        <result property="createman"    column="createman"    />
+        <result property="modifycontent"    column="modifycontent"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="ip"    column="ip"    />
+    </resultMap>
+
+    <sql id="selectCmfModifyrecordVo">
+        select id, tablename, keyfield, keyvalue, createman, modifycontent, createtime, ip from cmf_modifyrecord
+    </sql>
+
+    <select id="selectCmfModifyrecordList" parameterType="CmfModifyrecord" resultMap="CmfModifyrecordResult">
+        <include refid="selectCmfModifyrecordVo"/>
+        <where>  
+            <if test="tablename != null  and tablename != ''"> and tablename like concat('%', #{tablename}, '%')</if>
+            <if test="keyfield != null  and keyfield != ''"> and keyfield = #{keyfield}</if>
+            <if test="keyvalue != null  and keyvalue != ''"> and keyvalue = #{keyvalue}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="modifycontent != null  and modifycontent != ''"> and modifycontent = #{modifycontent}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="ip != null  and ip != ''"> and ip = #{ip}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfModifyrecordById" parameterType="Integer" resultMap="CmfModifyrecordResult">
+        <include refid="selectCmfModifyrecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfModifyrecord" parameterType="CmfModifyrecord" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_modifyrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="tablename != null and tablename != ''">tablename,</if>
+            <if test="keyfield != null and keyfield != ''">keyfield,</if>
+            <if test="keyvalue != null and keyvalue != ''">keyvalue,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="modifycontent != null and modifycontent != ''">modifycontent,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="ip != null and ip != ''">ip,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="tablename != null and tablename != ''">#{tablename},</if>
+            <if test="keyfield != null and keyfield != ''">#{keyfield},</if>
+            <if test="keyvalue != null and keyvalue != ''">#{keyvalue},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="modifycontent != null and modifycontent != ''">#{modifycontent},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="ip != null and ip != ''">#{ip},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfModifyrecord" parameterType="CmfModifyrecord">
+        update cmf_modifyrecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="tablename != null and tablename != ''">tablename = #{tablename},</if>
+            <if test="keyfield != null and keyfield != ''">keyfield = #{keyfield},</if>
+            <if test="keyvalue != null and keyvalue != ''">keyvalue = #{keyvalue},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="modifycontent != null and modifycontent != ''">modifycontent = #{modifycontent},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="ip != null and ip != ''">ip = #{ip},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfModifyrecordById" parameterType="Integer">
+        delete from cmf_modifyrecord where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfModifyrecordByIds" parameterType="String">
+        delete from cmf_modifyrecord where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

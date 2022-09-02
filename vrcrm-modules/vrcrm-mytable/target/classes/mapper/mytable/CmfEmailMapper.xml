@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfEmailMapper">
+    
+    <resultMap type="CmfEmail" id="CmfEmailResult">
+        <result property="id"    column="id"    />
+        <result property="fromId"    column="FROM_ID"    />
+        <result property="customers"    column="customers"    />
+        <result property="supplys"    column="supplys"    />
+        <result property="others"    column="others"    />
+        <result property="subject"    column="SUBJECT"    />
+        <result property="content"    column="CONTENT"    />
+        <result property="sendTime"    column="SEND_TIME"    />
+        <result property="attachmentId"    column="ATTACHMENT_ID"    />
+        <result property="attachmentName"    column="ATTACHMENT_NAME"    />
+        <result property="sendFlag"    column="SEND_FLAG"    />
+    </resultMap>
+
+    <sql id="selectCmfEmailVo">
+        select id, FROM_ID, customers, supplys, others, SUBJECT, CONTENT, SEND_TIME, ATTACHMENT_ID, ATTACHMENT_NAME, SEND_FLAG from cmf_email
+    </sql>
+
+    <select id="selectCmfEmailList" parameterType="CmfEmail" resultMap="CmfEmailResult">
+        <include refid="selectCmfEmailVo"/>
+        <where>  
+            <if test="fromId != null  and fromId != ''"> and FROM_ID = #{fromId}</if>
+            <if test="customers != null  and customers != ''"> and customers = #{customers}</if>
+            <if test="supplys != null  and supplys != ''"> and supplys = #{supplys}</if>
+            <if test="others != null  and others != ''"> and others = #{others}</if>
+            <if test="subject != null  and subject != ''"> and SUBJECT = #{subject}</if>
+            <if test="content != null  and content != ''"> and CONTENT = #{content}</if>
+            <if test="sendTime != null "> and SEND_TIME = #{sendTime}</if>
+            <if test="attachmentId != null  and attachmentId != ''"> and ATTACHMENT_ID = #{attachmentId}</if>
+            <if test="attachmentName != null  and attachmentName != ''"> and ATTACHMENT_NAME like concat('%', #{attachmentName}, '%')</if>
+            <if test="sendFlag != null "> and SEND_FLAG = #{sendFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEmailById" parameterType="Integer" resultMap="CmfEmailResult">
+        <include refid="selectCmfEmailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEmail" parameterType="CmfEmail" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_email
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fromId != null and fromId != ''">FROM_ID,</if>
+            <if test="customers != null and customers != ''">customers,</if>
+            <if test="supplys != null and supplys != ''">supplys,</if>
+            <if test="others != null and others != ''">others,</if>
+            <if test="subject != null and subject != ''">SUBJECT,</if>
+            <if test="content != null and content != ''">CONTENT,</if>
+            <if test="sendTime != null">SEND_TIME,</if>
+            <if test="attachmentId != null and attachmentId != ''">ATTACHMENT_ID,</if>
+            <if test="attachmentName != null and attachmentName != ''">ATTACHMENT_NAME,</if>
+            <if test="sendFlag != null">SEND_FLAG,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fromId != null and fromId != ''">#{fromId},</if>
+            <if test="customers != null and customers != ''">#{customers},</if>
+            <if test="supplys != null and supplys != ''">#{supplys},</if>
+            <if test="others != null and others != ''">#{others},</if>
+            <if test="subject != null and subject != ''">#{subject},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="sendTime != null">#{sendTime},</if>
+            <if test="attachmentId != null and attachmentId != ''">#{attachmentId},</if>
+            <if test="attachmentName != null and attachmentName != ''">#{attachmentName},</if>
+            <if test="sendFlag != null">#{sendFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEmail" parameterType="CmfEmail">
+        update cmf_email
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fromId != null and fromId != ''">FROM_ID = #{fromId},</if>
+            <if test="customers != null and customers != ''">customers = #{customers},</if>
+            <if test="supplys != null and supplys != ''">supplys = #{supplys},</if>
+            <if test="others != null and others != ''">others = #{others},</if>
+            <if test="subject != null and subject != ''">SUBJECT = #{subject},</if>
+            <if test="content != null and content != ''">CONTENT = #{content},</if>
+            <if test="sendTime != null">SEND_TIME = #{sendTime},</if>
+            <if test="attachmentId != null and attachmentId != ''">ATTACHMENT_ID = #{attachmentId},</if>
+            <if test="attachmentName != null and attachmentName != ''">ATTACHMENT_NAME = #{attachmentName},</if>
+            <if test="sendFlag != null">SEND_FLAG = #{sendFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEmailById" parameterType="Integer">
+        delete from cmf_email where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEmailByIds" parameterType="String">
+        delete from cmf_email where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

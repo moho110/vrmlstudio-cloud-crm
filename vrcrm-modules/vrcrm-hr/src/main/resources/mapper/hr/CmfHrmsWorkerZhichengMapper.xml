@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsWorkerZhichengMapper">
+    
+    <resultMap type="CmfHrmsWorkerZhicheng" id="CmfHrmsWorkerZhichengResult">
+        <result property="id"    column="id"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="staffname"    column="staffName"    />
+        <result property="gettime"    column="getTime"    />
+        <result property="agency"    column="agency"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsWorkerZhichengVo">
+        select id, workId, name, staffName, getTime, agency, inDepartment, creator, createTime from cmf_hrms_worker_zhicheng
+    </sql>
+
+    <select id="selectCmfHrmsWorkerZhichengList" parameterType="CmfHrmsWorkerZhicheng" resultMap="CmfHrmsWorkerZhichengResult">
+        <include refid="selectCmfHrmsWorkerZhichengVo"/>
+        <where>  
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="staffname != null  and staffname != ''"> and staffName like concat('%', #{staffname}, '%')</if>
+            <if test="gettime != null "> and getTime = #{gettime}</if>
+            <if test="agency != null  and agency != ''"> and agency = #{agency}</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsWorkerZhichengById" parameterType="Integer" resultMap="CmfHrmsWorkerZhichengResult">
+        <include refid="selectCmfHrmsWorkerZhichengVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsWorkerZhicheng" parameterType="CmfHrmsWorkerZhicheng" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_worker_zhicheng
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="staffname != null and staffname != ''">staffName,</if>
+            <if test="gettime != null">getTime,</if>
+            <if test="agency != null and agency != ''">agency,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="staffname != null and staffname != ''">#{staffname},</if>
+            <if test="gettime != null">#{gettime},</if>
+            <if test="agency != null and agency != ''">#{agency},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsWorkerZhicheng" parameterType="CmfHrmsWorkerZhicheng">
+        update cmf_hrms_worker_zhicheng
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="staffname != null and staffname != ''">staffName = #{staffname},</if>
+            <if test="gettime != null">getTime = #{gettime},</if>
+            <if test="agency != null and agency != ''">agency = #{agency},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsWorkerZhichengById" parameterType="Integer">
+        delete from cmf_hrms_worker_zhicheng where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsWorkerZhichengByIds" parameterType="String">
+        delete from cmf_hrms_worker_zhicheng where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

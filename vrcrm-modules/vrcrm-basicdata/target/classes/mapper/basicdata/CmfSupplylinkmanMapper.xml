@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfSupplylinkmanMapper">
+    
+    <resultMap type="CmfSupplylinkman" id="CmfSupplylinkmanResult">
+        <result property="id"    column="id"    />
+        <result property="supplyname"    column="supplyname"    />
+        <result property="beiyong"    column="beiyong"    />
+        <result property="gender"    column="gender"    />
+        <result property="phone"    column="phone"    />
+        <result property="fax"    column="fax"    />
+        <result property="email"    column="email"    />
+        <result property="postcode"    column="postcode"    />
+        <result property="mark"    column="mark"    />
+        <result property="business"    column="business"    />
+        <result property="businessexpian"    column="businessexpian"    />
+        <result property="address"    column="address"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="supplycn"    column="supplycn"    />
+        <result property="supplyid"    column="supplyid"    />
+    </resultMap>
+
+    <sql id="selectCmfSupplylinkmanVo">
+        select id, supplyname, beiyong, gender, phone, fax, email, postcode, mark, business, businessexpian, address, user_flag, user_id, supplycn, supplyid from cmf_supplylinkman
+    </sql>
+
+    <select id="selectCmfSupplylinkmanList" parameterType="CmfSupplylinkman" resultMap="CmfSupplylinkmanResult">
+        <include refid="selectCmfSupplylinkmanVo"/>
+        <where>  
+            <if test="supplyname != null  and supplyname != ''"> and supplyname like concat('%', #{supplyname}, '%')</if>
+            <if test="beiyong != null  and beiyong != ''"> and beiyong = #{beiyong}</if>
+            <if test="gender != null  and gender != ''"> and gender = #{gender}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="fax != null  and fax != ''"> and fax = #{fax}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="postcode != null  and postcode != ''"> and postcode = #{postcode}</if>
+            <if test="mark != null  and mark != ''"> and mark = #{mark}</if>
+            <if test="business != null  and business != ''"> and business = #{business}</if>
+            <if test="businessexpian != null  and businessexpian != ''"> and businessexpian = #{businessexpian}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="supplycn != null  and supplycn != ''"> and supplycn = #{supplycn}</if>
+            <if test="supplyid != null "> and supplyid = #{supplyid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSupplylinkmanById" parameterType="Integer" resultMap="CmfSupplylinkmanResult">
+        <include refid="selectCmfSupplylinkmanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSupplylinkman" parameterType="CmfSupplylinkman" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_supplylinkman
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="supplyname != null and supplyname != ''">supplyname,</if>
+            <if test="beiyong != null and beiyong != ''">beiyong,</if>
+            <if test="gender != null and gender != ''">gender,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="fax != null and fax != ''">fax,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="postcode != null and postcode != ''">postcode,</if>
+            <if test="mark != null and mark != ''">mark,</if>
+            <if test="business != null and business != ''">business,</if>
+            <if test="businessexpian != null and businessexpian != ''">businessexpian,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="supplycn != null and supplycn != ''">supplycn,</if>
+            <if test="supplyid != null">supplyid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="supplyname != null and supplyname != ''">#{supplyname},</if>
+            <if test="beiyong != null and beiyong != ''">#{beiyong},</if>
+            <if test="gender != null and gender != ''">#{gender},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="fax != null and fax != ''">#{fax},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="postcode != null and postcode != ''">#{postcode},</if>
+            <if test="mark != null and mark != ''">#{mark},</if>
+            <if test="business != null and business != ''">#{business},</if>
+            <if test="businessexpian != null and businessexpian != ''">#{businessexpian},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="supplycn != null and supplycn != ''">#{supplycn},</if>
+            <if test="supplyid != null">#{supplyid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSupplylinkman" parameterType="CmfSupplylinkman">
+        update cmf_supplylinkman
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="supplyname != null and supplyname != ''">supplyname = #{supplyname},</if>
+            <if test="beiyong != null and beiyong != ''">beiyong = #{beiyong},</if>
+            <if test="gender != null and gender != ''">gender = #{gender},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="fax != null and fax != ''">fax = #{fax},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="postcode != null and postcode != ''">postcode = #{postcode},</if>
+            <if test="mark != null and mark != ''">mark = #{mark},</if>
+            <if test="business != null and business != ''">business = #{business},</if>
+            <if test="businessexpian != null and businessexpian != ''">businessexpian = #{businessexpian},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="supplycn != null and supplycn != ''">supplycn = #{supplycn},</if>
+            <if test="supplyid != null">supplyid = #{supplyid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSupplylinkmanById" parameterType="Integer">
+        delete from cmf_supplylinkman where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSupplylinkmanByIds" parameterType="String">
+        delete from cmf_supplylinkman where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

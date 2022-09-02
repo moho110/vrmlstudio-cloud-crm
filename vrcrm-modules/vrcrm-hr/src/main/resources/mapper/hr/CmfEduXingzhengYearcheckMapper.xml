@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengYearcheckMapper">
+    
+    <resultMap type="CmfEduXingzhengYearcheck" id="CmfEduXingzhengYearcheckResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="username"    column="userName"    />
+        <result property="name"    column="name"    />
+        <result property="classroom"    column="classRoom"    />
+        <result property="kezhang"    column="kezhang"    />
+        <result property="pindetaiduabillityscore"    column="pindetaiduAbillityScore"    />
+        <result property="chuqinscore"    column="chuqinScore"    />
+        <result property="workquantityscore"    column="workquantityScore"    />
+        <result property="workjilvscore"    column="workjilvScore"    />
+        <result property="workspecscore"    column="workSpecScore"    />
+        <result property="workxiaoguoscore"    column="workxiaoguoScore"    />
+        <result property="banzhurenscore"    column="banzhurenScore"    />
+        <result property="tempworkscore"    column="tempWorkScore"    />
+        <result property="thesisscore"    column="thesisScore"    />
+        <result property="teachingscore"    column="teachingScore"    />
+        <result property="sumscore"    column="sumScore"    />
+        <result property="extime"    column="exTime"    />
+        <result property="pindeabillityscore"    column="pindeAbillityScore"    />
+        <result property="chuqinbiaoxianscore"    column="chuqinbiaoxianScore"    />
+        <result property="workexscore"    column="workExScore"    />
+        <result property="workjilvexscore"    column="workJilvExScore"    />
+        <result property="workspecexscore"    column="workSpecExScore"    />
+        <result property="workxiaoguoexscore"    column="workxiaoguoExScore"    />
+        <result property="banzhurenworkexscore"    column="banzhurenWorkExScore"    />
+        <result property="tempworkexscore"    column="tempWorkExScore"    />
+        <result property="thesisexscore"    column="thesisExScore"    />
+        <result property="techingexscore"    column="techingExScore"    />
+        <result property="sumexscore"    column="sumExScore"    />
+        <result property="keshiscoreman"    column="keshiScoreMan"    />
+        <result property="classroomscoretime"    column="classRoomScoreTime"    />
+        <result property="workflow"    column="workflow"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengYearcheckVo">
+        select id, term, userName, name, classRoom, kezhang, pindetaiduAbillityScore, chuqinScore, workquantityScore, workjilvScore, workSpecScore, workxiaoguoScore, banzhurenScore, tempWorkScore, thesisScore, teachingScore, sumScore, exTime, pindeAbillityScore, chuqinbiaoxianScore, workExScore, workJilvExScore, workSpecExScore, workxiaoguoExScore, banzhurenWorkExScore, tempWorkExScore, thesisExScore, techingExScore, sumExScore, keshiScoreMan, classRoomScoreTime, workflow from cmf_edu_xingzheng_yearcheck
+    </sql>
+
+    <select id="selectCmfEduXingzhengYearcheckList" parameterType="CmfEduXingzhengYearcheck" resultMap="CmfEduXingzhengYearcheckResult">
+        <include refid="selectCmfEduXingzhengYearcheckVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="username != null  and username != ''"> and userName like concat('%', #{username}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="classroom != null  and classroom != ''"> and classRoom = #{classroom}</if>
+            <if test="kezhang != null  and kezhang != ''"> and kezhang = #{kezhang}</if>
+            <if test="pindetaiduabillityscore != null "> and pindetaiduAbillityScore = #{pindetaiduabillityscore}</if>
+            <if test="chuqinscore != null "> and chuqinScore = #{chuqinscore}</if>
+            <if test="workquantityscore != null "> and workquantityScore = #{workquantityscore}</if>
+            <if test="workjilvscore != null "> and workjilvScore = #{workjilvscore}</if>
+            <if test="workspecscore != null "> and workSpecScore = #{workspecscore}</if>
+            <if test="workxiaoguoscore != null "> and workxiaoguoScore = #{workxiaoguoscore}</if>
+            <if test="banzhurenscore != null "> and banzhurenScore = #{banzhurenscore}</if>
+            <if test="tempworkscore != null "> and tempWorkScore = #{tempworkscore}</if>
+            <if test="thesisscore != null "> and thesisScore = #{thesisscore}</if>
+            <if test="teachingscore != null "> and teachingScore = #{teachingscore}</if>
+            <if test="sumscore != null "> and sumScore = #{sumscore}</if>
+            <if test="extime != null "> and exTime = #{extime}</if>
+            <if test="pindeabillityscore != null "> and pindeAbillityScore = #{pindeabillityscore}</if>
+            <if test="chuqinbiaoxianscore != null "> and chuqinbiaoxianScore = #{chuqinbiaoxianscore}</if>
+            <if test="workexscore != null "> and workExScore = #{workexscore}</if>
+            <if test="workjilvexscore != null "> and workJilvExScore = #{workjilvexscore}</if>
+            <if test="workspecexscore != null "> and workSpecExScore = #{workspecexscore}</if>
+            <if test="workxiaoguoexscore != null "> and workxiaoguoExScore = #{workxiaoguoexscore}</if>
+            <if test="banzhurenworkexscore != null "> and banzhurenWorkExScore = #{banzhurenworkexscore}</if>
+            <if test="tempworkexscore != null "> and tempWorkExScore = #{tempworkexscore}</if>
+            <if test="thesisexscore != null "> and thesisExScore = #{thesisexscore}</if>
+            <if test="techingexscore != null "> and techingExScore = #{techingexscore}</if>
+            <if test="sumexscore != null "> and sumExScore = #{sumexscore}</if>
+            <if test="keshiscoreman != null  and keshiscoreman != ''"> and keshiScoreMan = #{keshiscoreman}</if>
+            <if test="classroomscoretime != null "> and classRoomScoreTime = #{classroomscoretime}</if>
+            <if test="workflow != null  and workflow != ''"> and workflow = #{workflow}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengYearcheckById" parameterType="Integer" resultMap="CmfEduXingzhengYearcheckResult">
+        <include refid="selectCmfEduXingzhengYearcheckVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengYearcheck" parameterType="CmfEduXingzhengYearcheck" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_yearcheck
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="username != null and username != ''">userName,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="classroom != null and classroom != ''">classRoom,</if>
+            <if test="kezhang != null and kezhang != ''">kezhang,</if>
+            <if test="pindetaiduabillityscore != null">pindetaiduAbillityScore,</if>
+            <if test="chuqinscore != null">chuqinScore,</if>
+            <if test="workquantityscore != null">workquantityScore,</if>
+            <if test="workjilvscore != null">workjilvScore,</if>
+            <if test="workspecscore != null">workSpecScore,</if>
+            <if test="workxiaoguoscore != null">workxiaoguoScore,</if>
+            <if test="banzhurenscore != null">banzhurenScore,</if>
+            <if test="tempworkscore != null">tempWorkScore,</if>
+            <if test="thesisscore != null">thesisScore,</if>
+            <if test="teachingscore != null">teachingScore,</if>
+            <if test="sumscore != null">sumScore,</if>
+            <if test="extime != null">exTime,</if>
+            <if test="pindeabillityscore != null">pindeAbillityScore,</if>
+            <if test="chuqinbiaoxianscore != null">chuqinbiaoxianScore,</if>
+            <if test="workexscore != null">workExScore,</if>
+            <if test="workjilvexscore != null">workJilvExScore,</if>
+            <if test="workspecexscore != null">workSpecExScore,</if>
+            <if test="workxiaoguoexscore != null">workxiaoguoExScore,</if>
+            <if test="banzhurenworkexscore != null">banzhurenWorkExScore,</if>
+            <if test="tempworkexscore != null">tempWorkExScore,</if>
+            <if test="thesisexscore != null">thesisExScore,</if>
+            <if test="techingexscore != null">techingExScore,</if>
+            <if test="sumexscore != null">sumExScore,</if>
+            <if test="keshiscoreman != null and keshiscoreman != ''">keshiScoreMan,</if>
+            <if test="classroomscoretime != null">classRoomScoreTime,</if>
+            <if test="workflow != null and workflow != ''">workflow,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="classroom != null and classroom != ''">#{classroom},</if>
+            <if test="kezhang != null and kezhang != ''">#{kezhang},</if>
+            <if test="pindetaiduabillityscore != null">#{pindetaiduabillityscore},</if>
+            <if test="chuqinscore != null">#{chuqinscore},</if>
+            <if test="workquantityscore != null">#{workquantityscore},</if>
+            <if test="workjilvscore != null">#{workjilvscore},</if>
+            <if test="workspecscore != null">#{workspecscore},</if>
+            <if test="workxiaoguoscore != null">#{workxiaoguoscore},</if>
+            <if test="banzhurenscore != null">#{banzhurenscore},</if>
+            <if test="tempworkscore != null">#{tempworkscore},</if>
+            <if test="thesisscore != null">#{thesisscore},</if>
+            <if test="teachingscore != null">#{teachingscore},</if>
+            <if test="sumscore != null">#{sumscore},</if>
+            <if test="extime != null">#{extime},</if>
+            <if test="pindeabillityscore != null">#{pindeabillityscore},</if>
+            <if test="chuqinbiaoxianscore != null">#{chuqinbiaoxianscore},</if>
+            <if test="workexscore != null">#{workexscore},</if>
+            <if test="workjilvexscore != null">#{workjilvexscore},</if>
+            <if test="workspecexscore != null">#{workspecexscore},</if>
+            <if test="workxiaoguoexscore != null">#{workxiaoguoexscore},</if>
+            <if test="banzhurenworkexscore != null">#{banzhurenworkexscore},</if>
+            <if test="tempworkexscore != null">#{tempworkexscore},</if>
+            <if test="thesisexscore != null">#{thesisexscore},</if>
+            <if test="techingexscore != null">#{techingexscore},</if>
+            <if test="sumexscore != null">#{sumexscore},</if>
+            <if test="keshiscoreman != null and keshiscoreman != ''">#{keshiscoreman},</if>
+            <if test="classroomscoretime != null">#{classroomscoretime},</if>
+            <if test="workflow != null and workflow != ''">#{workflow},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengYearcheck" parameterType="CmfEduXingzhengYearcheck">
+        update cmf_edu_xingzheng_yearcheck
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="username != null and username != ''">userName = #{username},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="classroom != null and classroom != ''">classRoom = #{classroom},</if>
+            <if test="kezhang != null and kezhang != ''">kezhang = #{kezhang},</if>
+            <if test="pindetaiduabillityscore != null">pindetaiduAbillityScore = #{pindetaiduabillityscore},</if>
+            <if test="chuqinscore != null">chuqinScore = #{chuqinscore},</if>
+            <if test="workquantityscore != null">workquantityScore = #{workquantityscore},</if>
+            <if test="workjilvscore != null">workjilvScore = #{workjilvscore},</if>
+            <if test="workspecscore != null">workSpecScore = #{workspecscore},</if>
+            <if test="workxiaoguoscore != null">workxiaoguoScore = #{workxiaoguoscore},</if>
+            <if test="banzhurenscore != null">banzhurenScore = #{banzhurenscore},</if>
+            <if test="tempworkscore != null">tempWorkScore = #{tempworkscore},</if>
+            <if test="thesisscore != null">thesisScore = #{thesisscore},</if>
+            <if test="teachingscore != null">teachingScore = #{teachingscore},</if>
+            <if test="sumscore != null">sumScore = #{sumscore},</if>
+            <if test="extime != null">exTime = #{extime},</if>
+            <if test="pindeabillityscore != null">pindeAbillityScore = #{pindeabillityscore},</if>
+            <if test="chuqinbiaoxianscore != null">chuqinbiaoxianScore = #{chuqinbiaoxianscore},</if>
+            <if test="workexscore != null">workExScore = #{workexscore},</if>
+            <if test="workjilvexscore != null">workJilvExScore = #{workjilvexscore},</if>
+            <if test="workspecexscore != null">workSpecExScore = #{workspecexscore},</if>
+            <if test="workxiaoguoexscore != null">workxiaoguoExScore = #{workxiaoguoexscore},</if>
+            <if test="banzhurenworkexscore != null">banzhurenWorkExScore = #{banzhurenworkexscore},</if>
+            <if test="tempworkexscore != null">tempWorkExScore = #{tempworkexscore},</if>
+            <if test="thesisexscore != null">thesisExScore = #{thesisexscore},</if>
+            <if test="techingexscore != null">techingExScore = #{techingexscore},</if>
+            <if test="sumexscore != null">sumExScore = #{sumexscore},</if>
+            <if test="keshiscoreman != null and keshiscoreman != ''">keshiScoreMan = #{keshiscoreman},</if>
+            <if test="classroomscoretime != null">classRoomScoreTime = #{classroomscoretime},</if>
+            <if test="workflow != null and workflow != ''">workflow = #{workflow},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengYearcheckById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_yearcheck where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengYearcheckByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_yearcheck where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

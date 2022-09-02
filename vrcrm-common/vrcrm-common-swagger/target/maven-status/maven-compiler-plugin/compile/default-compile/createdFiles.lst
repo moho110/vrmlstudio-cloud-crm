@@ -1,0 +1,8 @@
+com\vrcrm\common\swagger\config\SwaggerProperties$AuthorizationScope.class
+com\vrcrm\common\swagger\config\SwaggerProperties$Contact.class
+com\vrcrm\common\swagger\config\SwaggerBeanPostProcessor.class
+com\vrcrm\common\swagger\annotation\EnableCustomSwagger2.class
+com\vrcrm\common\swagger\config\SwaggerProperties.class
+com\vrcrm\common\swagger\config\SwaggerWebConfiguration.class
+com\vrcrm\common\swagger\config\SwaggerProperties$Authorization.class
+com\vrcrm\common\swagger\config\SwaggerAutoConfiguration.class

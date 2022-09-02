@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfFukuanplanMapper">
+    
+    <resultMap type="CmfFukuanplan" id="CmfFukuanplanResult">
+        <result property="id"    column="id"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="caigoubillid"    column="caigoubillid"    />
+        <result property="plandate"    column="plandate"    />
+        <result property="qici"    column="qici"    />
+        <result property="jine"    column="jine"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="ifpay"    column="ifpay"    />
+    </resultMap>
+
+    <sql id="selectCmfFukuanplanVo">
+        select id, supplyid, caigoubillid, plandate, qici, jine, createman, createtime, ifpay from cmf_fukuanplan
+    </sql>
+
+    <select id="selectCmfFukuanplanList" parameterType="CmfFukuanplan" resultMap="CmfFukuanplanResult">
+        <include refid="selectCmfFukuanplanVo"/>
+        <where>  
+            <if test="supplyid != null "> and supplyid = #{supplyid}</if>
+            <if test="caigoubillid != null "> and caigoubillid = #{caigoubillid}</if>
+            <if test="plandate != null "> and plandate = #{plandate}</if>
+            <if test="qici != null "> and qici = #{qici}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="ifpay != null  and ifpay != ''"> and ifpay = #{ifpay}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFukuanplanById" parameterType="Integer" resultMap="CmfFukuanplanResult">
+        <include refid="selectCmfFukuanplanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFukuanplan" parameterType="CmfFukuanplan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fukuanplan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="supplyid != null">supplyid,</if>
+            <if test="caigoubillid != null">caigoubillid,</if>
+            <if test="plandate != null">plandate,</if>
+            <if test="qici != null">qici,</if>
+            <if test="jine != null">jine,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="ifpay != null and ifpay != ''">ifpay,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="supplyid != null">#{supplyid},</if>
+            <if test="caigoubillid != null">#{caigoubillid},</if>
+            <if test="plandate != null">#{plandate},</if>
+            <if test="qici != null">#{qici},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="ifpay != null and ifpay != ''">#{ifpay},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFukuanplan" parameterType="CmfFukuanplan">
+        update cmf_fukuanplan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="supplyid != null">supplyid = #{supplyid},</if>
+            <if test="caigoubillid != null">caigoubillid = #{caigoubillid},</if>
+            <if test="plandate != null">plandate = #{plandate},</if>
+            <if test="qici != null">qici = #{qici},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="ifpay != null and ifpay != ''">ifpay = #{ifpay},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFukuanplanById" parameterType="Integer">
+        delete from cmf_fukuanplan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFukuanplanByIds" parameterType="String">
+        delete from cmf_fukuanplan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

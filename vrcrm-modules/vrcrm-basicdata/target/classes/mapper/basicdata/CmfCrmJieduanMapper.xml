@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfCrmJieduanMapper">
+    
+    <resultMap type="CmfCrmJieduan" id="CmfCrmJieduanResult">
+        <result property="id"    column="id"    />
+        <result property="stage"    column="stage"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmJieduanVo">
+        select id, stage from cmf_crm_jieduan
+    </sql>
+
+    <select id="selectCmfCrmJieduanList" parameterType="CmfCrmJieduan" resultMap="CmfCrmJieduanResult">
+        <include refid="selectCmfCrmJieduanVo"/>
+        <where>  
+            <if test="stage != null  and stage != ''"> and stage = #{stage}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmJieduanById" parameterType="Integer" resultMap="CmfCrmJieduanResult">
+        <include refid="selectCmfCrmJieduanVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmJieduan" parameterType="CmfCrmJieduan" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_jieduan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="stage != null and stage != ''">stage,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="stage != null and stage != ''">#{stage},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmJieduan" parameterType="CmfCrmJieduan">
+        update cmf_crm_jieduan
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stage != null and stage != ''">stage = #{stage},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmJieduanById" parameterType="Integer">
+        delete from cmf_crm_jieduan where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmJieduanByIds" parameterType="String">
+        delete from cmf_crm_jieduan where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

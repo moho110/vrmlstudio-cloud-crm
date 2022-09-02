@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfSellplanmainMapper">
+    
+    <resultMap type="CmfSellplanmain" id="CmfSellplanmainResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="userId"    column="user_id"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="chanceid"    column="chanceid"    />
+        <result property="sellplanno"    column="sellplanno"    />
+        <result property="totalmoney"    column="totalmoney"    />
+        <result property="paytype"    column="paytype"    />
+        <result property="huikuanjine"    column="huikuanjine"    />
+        <result property="fahuojine"    column="fahuojine"    />
+        <result property="kaipiaojine"    column="kaipiaojine"    />
+        <result property="plandate"    column="plandate"    />
+        <result property="zuiwanfahuodate"    column="zuiwanfahuodate"    />
+        <result property="qianyueren"    column="qianyueren"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="fileaddress"    column="fileaddress"    />
+        <result property="fahuostate"    column="fahuostate"    />
+        <result property="gaiyao"    column="gaiyao"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="linkman"    column="linkman"    />
+        <result property="address"    column="address"    />
+        <result property="mobile"    column="mobile"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="billtype"    column="billtype"    />
+        <result property="ifpay"    column="ifpay"    />
+        <result property="beiyong"    column="beiyong"    />
+        <result property="kaipiaostate"    column="kaipiaostate"    />
+        <result property="fapiaoneirong"    column="fapiaoneirong"    />
+        <result property="fapiaotype"    column="fapiaotype"    />
+        <result property="fapiaono"    column="fapiaono"    />
+        <result property="fahuotype"    column="fahuotype"    />
+        <result property="fahuodan"    column="fahuodan"    />
+        <result property="fahuoyunfei"    column="fahuoyunfei"    />
+        <result property="yunfeitype"    column="yunfeitype"    />
+        <result property="oddment"    column="oddment"    />
+        <result property="integral"    column="integral"    />
+    </resultMap>
+
+    <sql id="selectCmfSellplanmainVo">
+        select id, zhuti, user_id, supplyid, chanceid, sellplanno, totalmoney, paytype, huikuanjine, fahuojine, kaipiaojine, plandate, zuiwanfahuodate, qianyueren, user_flag, beizhu, fileaddress, fahuostate, gaiyao, storeid, linkman, address, mobile, createtime, billtype, ifpay, beiyong, kaipiaostate, fapiaoneirong, fapiaotype, fapiaono, fahuotype, fahuodan, fahuoyunfei, yunfeitype, oddment, integral from cmf_sellplanmain
+    </sql>
+
+    <select id="selectCmfSellplanmainList" parameterType="CmfSellplanmain" resultMap="CmfSellplanmainResult">
+        <include refid="selectCmfSellplanmainVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="supplyid != null  and supplyid != ''"> and supplyid = #{supplyid}</if>
+            <if test="chanceid != null  and chanceid != ''"> and chanceid = #{chanceid}</if>
+            <if test="sellplanno != null  and sellplanno != ''"> and sellplanno = #{sellplanno}</if>
+            <if test="totalmoney != null "> and totalmoney = #{totalmoney}</if>
+            <if test="paytype != null "> and paytype = #{paytype}</if>
+            <if test="huikuanjine != null "> and huikuanjine = #{huikuanjine}</if>
+            <if test="fahuojine != null "> and fahuojine = #{fahuojine}</if>
+            <if test="kaipiaojine != null "> and kaipiaojine = #{kaipiaojine}</if>
+            <if test="plandate != null "> and plandate = #{plandate}</if>
+            <if test="zuiwanfahuodate != null "> and zuiwanfahuodate = #{zuiwanfahuodate}</if>
+            <if test="qianyueren != null  and qianyueren != ''"> and qianyueren = #{qianyueren}</if>
+            <if test="userFlag != null "> and user_flag = #{userFlag}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="fileaddress != null  and fileaddress != ''"> and fileaddress = #{fileaddress}</if>
+            <if test="fahuostate != null "> and fahuostate = #{fahuostate}</if>
+            <if test="gaiyao != null  and gaiyao != ''"> and gaiyao = #{gaiyao}</if>
+            <if test="storeid != null  and storeid != ''"> and storeid = #{storeid}</if>
+            <if test="linkman != null  and linkman != ''"> and linkman = #{linkman}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="mobile != null  and mobile != ''"> and mobile = #{mobile}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="billtype != null "> and billtype = #{billtype}</if>
+            <if test="ifpay != null "> and ifpay = #{ifpay}</if>
+            <if test="beiyong != null  and beiyong != ''"> and beiyong = #{beiyong}</if>
+            <if test="kaipiaostate != null "> and kaipiaostate = #{kaipiaostate}</if>
+            <if test="fapiaoneirong != null  and fapiaoneirong != ''"> and fapiaoneirong = #{fapiaoneirong}</if>
+            <if test="fapiaotype != null  and fapiaotype != ''"> and fapiaotype = #{fapiaotype}</if>
+            <if test="fapiaono != null  and fapiaono != ''"> and fapiaono = #{fapiaono}</if>
+            <if test="fahuotype != null "> and fahuotype = #{fahuotype}</if>
+            <if test="fahuodan != null  and fahuodan != ''"> and fahuodan = #{fahuodan}</if>
+            <if test="fahuoyunfei != null "> and fahuoyunfei = #{fahuoyunfei}</if>
+            <if test="yunfeitype != null  and yunfeitype != ''"> and yunfeitype = #{yunfeitype}</if>
+            <if test="oddment != null "> and oddment = #{oddment}</if>
+            <if test="integral != null "> and integral = #{integral}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSellplanmainById" parameterType="Integer" resultMap="CmfSellplanmainResult">
+        <include refid="selectCmfSellplanmainVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSellplanmain" parameterType="CmfSellplanmain" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sellplanmain
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="supplyid != null and supplyid != ''">supplyid,</if>
+            <if test="chanceid != null and chanceid != ''">chanceid,</if>
+            <if test="sellplanno != null and sellplanno != ''">sellplanno,</if>
+            <if test="totalmoney != null">totalmoney,</if>
+            <if test="paytype != null">paytype,</if>
+            <if test="huikuanjine != null">huikuanjine,</if>
+            <if test="fahuojine != null">fahuojine,</if>
+            <if test="kaipiaojine != null">kaipiaojine,</if>
+            <if test="plandate != null">plandate,</if>
+            <if test="zuiwanfahuodate != null">zuiwanfahuodate,</if>
+            <if test="qianyueren != null and qianyueren != ''">qianyueren,</if>
+            <if test="userFlag != null">user_flag,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress,</if>
+            <if test="fahuostate != null">fahuostate,</if>
+            <if test="gaiyao != null and gaiyao != ''">gaiyao,</if>
+            <if test="storeid != null and storeid != ''">storeid,</if>
+            <if test="linkman != null and linkman != ''">linkman,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="mobile != null and mobile != ''">mobile,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="billtype != null">billtype,</if>
+            <if test="ifpay != null">ifpay,</if>
+            <if test="beiyong != null and beiyong != ''">beiyong,</if>
+            <if test="kaipiaostate != null">kaipiaostate,</if>
+            <if test="fapiaoneirong != null and fapiaoneirong != ''">fapiaoneirong,</if>
+            <if test="fapiaotype != null and fapiaotype != ''">fapiaotype,</if>
+            <if test="fapiaono != null and fapiaono != ''">fapiaono,</if>
+            <if test="fahuotype != null">fahuotype,</if>
+            <if test="fahuodan != null and fahuodan != ''">fahuodan,</if>
+            <if test="fahuoyunfei != null">fahuoyunfei,</if>
+            <if test="yunfeitype != null and yunfeitype != ''">yunfeitype,</if>
+            <if test="oddment != null">oddment,</if>
+            <if test="integral != null">integral,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="supplyid != null and supplyid != ''">#{supplyid},</if>
+            <if test="chanceid != null and chanceid != ''">#{chanceid},</if>
+            <if test="sellplanno != null and sellplanno != ''">#{sellplanno},</if>
+            <if test="totalmoney != null">#{totalmoney},</if>
+            <if test="paytype != null">#{paytype},</if>
+            <if test="huikuanjine != null">#{huikuanjine},</if>
+            <if test="fahuojine != null">#{fahuojine},</if>
+            <if test="kaipiaojine != null">#{kaipiaojine},</if>
+            <if test="plandate != null">#{plandate},</if>
+            <if test="zuiwanfahuodate != null">#{zuiwanfahuodate},</if>
+            <if test="qianyueren != null and qianyueren != ''">#{qianyueren},</if>
+            <if test="userFlag != null">#{userFlag},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="fileaddress != null and fileaddress != ''">#{fileaddress},</if>
+            <if test="fahuostate != null">#{fahuostate},</if>
+            <if test="gaiyao != null and gaiyao != ''">#{gaiyao},</if>
+            <if test="storeid != null and storeid != ''">#{storeid},</if>
+            <if test="linkman != null and linkman != ''">#{linkman},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="mobile != null and mobile != ''">#{mobile},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="billtype != null">#{billtype},</if>
+            <if test="ifpay != null">#{ifpay},</if>
+            <if test="beiyong != null and beiyong != ''">#{beiyong},</if>
+            <if test="kaipiaostate != null">#{kaipiaostate},</if>
+            <if test="fapiaoneirong != null and fapiaoneirong != ''">#{fapiaoneirong},</if>
+            <if test="fapiaotype != null and fapiaotype != ''">#{fapiaotype},</if>
+            <if test="fapiaono != null and fapiaono != ''">#{fapiaono},</if>
+            <if test="fahuotype != null">#{fahuotype},</if>
+            <if test="fahuodan != null and fahuodan != ''">#{fahuodan},</if>
+            <if test="fahuoyunfei != null">#{fahuoyunfei},</if>
+            <if test="yunfeitype != null and yunfeitype != ''">#{yunfeitype},</if>
+            <if test="oddment != null">#{oddment},</if>
+            <if test="integral != null">#{integral},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSellplanmain" parameterType="CmfSellplanmain">
+        update cmf_sellplanmain
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="supplyid != null and supplyid != ''">supplyid = #{supplyid},</if>
+            <if test="chanceid != null and chanceid != ''">chanceid = #{chanceid},</if>
+            <if test="sellplanno != null and sellplanno != ''">sellplanno = #{sellplanno},</if>
+            <if test="totalmoney != null">totalmoney = #{totalmoney},</if>
+            <if test="paytype != null">paytype = #{paytype},</if>
+            <if test="huikuanjine != null">huikuanjine = #{huikuanjine},</if>
+            <if test="fahuojine != null">fahuojine = #{fahuojine},</if>
+            <if test="kaipiaojine != null">kaipiaojine = #{kaipiaojine},</if>
+            <if test="plandate != null">plandate = #{plandate},</if>
+            <if test="zuiwanfahuodate != null">zuiwanfahuodate = #{zuiwanfahuodate},</if>
+            <if test="qianyueren != null and qianyueren != ''">qianyueren = #{qianyueren},</if>
+            <if test="userFlag != null">user_flag = #{userFlag},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="fileaddress != null and fileaddress != ''">fileaddress = #{fileaddress},</if>
+            <if test="fahuostate != null">fahuostate = #{fahuostate},</if>
+            <if test="gaiyao != null and gaiyao != ''">gaiyao = #{gaiyao},</if>
+            <if test="storeid != null and storeid != ''">storeid = #{storeid},</if>
+            <if test="linkman != null and linkman != ''">linkman = #{linkman},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="mobile != null and mobile != ''">mobile = #{mobile},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="billtype != null">billtype = #{billtype},</if>
+            <if test="ifpay != null">ifpay = #{ifpay},</if>
+            <if test="beiyong != null and beiyong != ''">beiyong = #{beiyong},</if>
+            <if test="kaipiaostate != null">kaipiaostate = #{kaipiaostate},</if>
+            <if test="fapiaoneirong != null and fapiaoneirong != ''">fapiaoneirong = #{fapiaoneirong},</if>
+            <if test="fapiaotype != null and fapiaotype != ''">fapiaotype = #{fapiaotype},</if>
+            <if test="fapiaono != null and fapiaono != ''">fapiaono = #{fapiaono},</if>
+            <if test="fahuotype != null">fahuotype = #{fahuotype},</if>
+            <if test="fahuodan != null and fahuodan != ''">fahuodan = #{fahuodan},</if>
+            <if test="fahuoyunfei != null">fahuoyunfei = #{fahuoyunfei},</if>
+            <if test="yunfeitype != null and yunfeitype != ''">yunfeitype = #{yunfeitype},</if>
+            <if test="oddment != null">oddment = #{oddment},</if>
+            <if test="integral != null">integral = #{integral},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSellplanmainById" parameterType="Integer">
+        delete from cmf_sellplanmain where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSellplanmainByIds" parameterType="String">
+        delete from cmf_sellplanmain where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

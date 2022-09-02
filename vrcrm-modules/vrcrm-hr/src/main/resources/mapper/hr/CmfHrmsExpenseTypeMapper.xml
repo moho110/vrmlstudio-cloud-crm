@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsExpenseTypeMapper">
+    
+    <resultMap type="CmfHrmsExpenseType" id="CmfHrmsExpenseTypeResult">
+        <result property="id"    column="id"    />
+        <result property="type"    column="type"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsExpenseTypeVo">
+        select id, type from cmf_hrms_expense_type
+    </sql>
+
+    <select id="selectCmfHrmsExpenseTypeList" parameterType="CmfHrmsExpenseType" resultMap="CmfHrmsExpenseTypeResult">
+        <include refid="selectCmfHrmsExpenseTypeVo"/>
+        <where>  
+            <if test="type != null  and type != ''"> and type = #{type}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsExpenseTypeById" parameterType="Integer" resultMap="CmfHrmsExpenseTypeResult">
+        <include refid="selectCmfHrmsExpenseTypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsExpenseType" parameterType="CmfHrmsExpenseType" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_expense_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="type != null and type != ''">#{type},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsExpenseType" parameterType="CmfHrmsExpenseType">
+        update cmf_hrms_expense_type
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="type != null and type != ''">type = #{type},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsExpenseTypeById" parameterType="Integer">
+        delete from cmf_hrms_expense_type where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsExpenseTypeByIds" parameterType="String">
+        delete from cmf_hrms_expense_type where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

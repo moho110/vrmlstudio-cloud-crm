@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStockinmainDetailColorMapper">
+    
+    <resultMap type="CmfStockinmainDetailColor" id="CmfStockinmainDetailColorResult">
+        <result property="id"    column="id"    />
+        <result property="color"    column="color"    />
+        <result property="num"    column="num"    />
+    </resultMap>
+
+    <sql id="selectCmfStockinmainDetailColorVo">
+        select id, color, num from cmf_stockinmain_detail_color
+    </sql>
+
+    <select id="selectCmfStockinmainDetailColorList" parameterType="CmfStockinmainDetailColor" resultMap="CmfStockinmainDetailColorResult">
+        <include refid="selectCmfStockinmainDetailColorVo"/>
+        <where>  
+            <if test="color != null "> and color = #{color}</if>
+            <if test="num != null "> and num = #{num}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStockinmainDetailColorById" parameterType="Integer" resultMap="CmfStockinmainDetailColorResult">
+        <include refid="selectCmfStockinmainDetailColorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStockinmainDetailColor" parameterType="CmfStockinmainDetailColor" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_stockinmain_detail_color
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="color != null">color,</if>
+            <if test="num != null">num,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="color != null">#{color},</if>
+            <if test="num != null">#{num},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStockinmainDetailColor" parameterType="CmfStockinmainDetailColor">
+        update cmf_stockinmain_detail_color
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="color != null">color = #{color},</if>
+            <if test="num != null">num = #{num},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStockinmainDetailColorById" parameterType="Integer">
+        delete from cmf_stockinmain_detail_color where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStockinmainDetailColorByIds" parameterType="String">
+        delete from cmf_stockinmain_detail_color where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="vrcrm-gateway" />
+        <module name="vrcrm-common-datascope" />
+        <module name="vrcrm-store" />
+        <module name="vrcrm-common-log" />
+        <module name="vrcrm-mytable" />
+        <module name="vrcrm-modules-api" />
+        <module name="vrcrm-sales" />
+        <module name="vrcrm-tenant" />
+        <module name="vrcrm-modules-system" />
+        <module name="vrcrm-common-datasource" />
+        <module name="vrcrm-common-swagger" />
+        <module name="vrcrm-api-system" />
+        <module name="vrcrm-xsystem" />
+        <module name="vrcrm-basicdata" />
+        <module name="vrcrm-common-security" />
+        <module name="vrcrm-visual-monitor" />
+        <module name="vrcrm-buy" />
+        <module name="vrcrm-auth" />
+        <module name="vrcrm-customer" />
+        <module name="vrcrm-common-redis" />
+        <module name="vrcrm-modules-job" />
+        <module name="vrcrm-hr" />
+        <module name="vrcrm-finance" />
+        <module name="vrcrm-supply" />
+        <module name="vrcrm-common-core" />
+        <module name="vrcrm-political" />
+        <module name="vrcrm-modules-file" />
+        <module name="vrcrm-modules-gen" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="vrcrm" target="1.8" />
+      <module name="vrcrm-api" target="1.8" />
+      <module name="vrcrm-api-system" target="1.8" />
+      <module name="vrcrm-auth" target="1.8" />
+      <module name="vrcrm-basicdata" target="1.8" />
+      <module name="vrcrm-buy" target="1.8" />
+      <module name="vrcrm-common" target="1.8" />
+      <module name="vrcrm-common-core" target="1.8" />
+      <module name="vrcrm-common-datascope" target="1.8" />
+      <module name="vrcrm-common-datasource" target="1.8" />
+      <module name="vrcrm-common-log" target="1.8" />
+      <module name="vrcrm-common-redis" target="1.8" />
+      <module name="vrcrm-common-security" target="1.8" />
+      <module name="vrcrm-common-swagger" target="1.8" />
+      <module name="vrcrm-customer" target="1.8" />
+      <module name="vrcrm-finance" target="1.8" />
+      <module name="vrcrm-gateway" target="1.8" />
+      <module name="vrcrm-hr" target="1.8" />
+      <module name="vrcrm-modules" target="1.8" />
+      <module name="vrcrm-modules-api" target="1.8" />
+      <module name="vrcrm-modules-file" target="1.8" />
+      <module name="vrcrm-modules-gen" target="1.8" />
+      <module name="vrcrm-modules-job" target="1.8" />
+      <module name="vrcrm-modules-system" target="1.8" />
+      <module name="vrcrm-mytable" target="1.8" />
+      <module name="vrcrm-political" target="1.8" />
+      <module name="vrcrm-sales" target="1.8" />
+      <module name="vrcrm-store" target="1.8" />
+      <module name="vrcrm-supply" target="1.8" />
+      <module name="vrcrm-tenant" target="1.8" />
+      <module name="vrcrm-visual" target="1.8" />
+      <module name="vrcrm-visual-monitor" target="1.8" />
+      <module name="vrcrm-xsystem" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

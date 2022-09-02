@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfSupplyleverMapper">
+    
+    <resultMap type="CmfSupplylever" id="CmfSupplyleverResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfSupplyleverVo">
+        select id, name, user_id, code, user_flag from cmf_supplylever
+    </sql>
+
+    <select id="selectCmfSupplyleverList" parameterType="CmfSupplylever" resultMap="CmfSupplyleverResult">
+        <include refid="selectCmfSupplyleverVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSupplyleverById" parameterType="Integer" resultMap="CmfSupplyleverResult">
+        <include refid="selectCmfSupplyleverVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSupplylever" parameterType="CmfSupplylever" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_supplylever
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSupplylever" parameterType="CmfSupplylever">
+        update cmf_supplylever
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSupplyleverById" parameterType="Integer">
+        delete from cmf_supplylever where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSupplyleverByIds" parameterType="String">
+        delete from cmf_supplylever where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

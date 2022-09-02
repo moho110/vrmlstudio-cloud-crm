@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCrmShenqingbaobeiMapper">
+    
+    <resultMap type="CmfCrmShenqingbaobei" id="CmfCrmShenqingbaobeiResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="linkmanid"    column="linkmanid"    />
+        <result property="chanceid"    column="chanceid"    />
+        <result property="introduce"    column="introduce"    />
+        <result property="zhichi"    column="zhichi"    />
+        <result property="fujian"    column="fujian"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="state"    column="state"    />
+        <result property="piyu"    column="piyu"    />
+        <result property="shenheman"    column="shenheman"    />
+        <result property="shenhetime"    column="shenhetime"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="tixingren"    column="tixingren"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmShenqingbaobeiVo">
+        select id, customerid, linkmanid, chanceid, introduce, zhichi, fujian, createman, createtime, state, piyu, shenheman, shenhetime, zhuti, tixingren from cmf_crm_shenqingbaobei
+    </sql>
+
+    <select id="selectCmfCrmShenqingbaobeiList" parameterType="CmfCrmShenqingbaobei" resultMap="CmfCrmShenqingbaobeiResult">
+        <include refid="selectCmfCrmShenqingbaobeiVo"/>
+        <where>  
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="linkmanid != null "> and linkmanid = #{linkmanid}</if>
+            <if test="chanceid != null "> and chanceid = #{chanceid}</if>
+            <if test="introduce != null  and introduce != ''"> and introduce = #{introduce}</if>
+            <if test="zhichi != null  and zhichi != ''"> and zhichi = #{zhichi}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="state != null "> and state = #{state}</if>
+            <if test="piyu != null  and piyu != ''"> and piyu = #{piyu}</if>
+            <if test="shenheman != null  and shenheman != ''"> and shenheman = #{shenheman}</if>
+            <if test="shenhetime != null "> and shenhetime = #{shenhetime}</if>
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="tixingren != null  and tixingren != ''"> and tixingren = #{tixingren}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmShenqingbaobeiById" parameterType="Integer" resultMap="CmfCrmShenqingbaobeiResult">
+        <include refid="selectCmfCrmShenqingbaobeiVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmShenqingbaobei" parameterType="CmfCrmShenqingbaobei" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_shenqingbaobei
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">customerid,</if>
+            <if test="linkmanid != null">linkmanid,</if>
+            <if test="chanceid != null">chanceid,</if>
+            <if test="introduce != null and introduce != ''">introduce,</if>
+            <if test="zhichi != null and zhichi != ''">zhichi,</if>
+            <if test="fujian != null and fujian != ''">fujian,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="state != null">state,</if>
+            <if test="piyu != null and piyu != ''">piyu,</if>
+            <if test="shenheman != null and shenheman != ''">shenheman,</if>
+            <if test="shenhetime != null">shenhetime,</if>
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="tixingren != null and tixingren != ''">tixingren,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null">#{customerid},</if>
+            <if test="linkmanid != null">#{linkmanid},</if>
+            <if test="chanceid != null">#{chanceid},</if>
+            <if test="introduce != null and introduce != ''">#{introduce},</if>
+            <if test="zhichi != null and zhichi != ''">#{zhichi},</if>
+            <if test="fujian != null and fujian != ''">#{fujian},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="state != null">#{state},</if>
+            <if test="piyu != null and piyu != ''">#{piyu},</if>
+            <if test="shenheman != null and shenheman != ''">#{shenheman},</if>
+            <if test="shenhetime != null">#{shenhetime},</if>
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="tixingren != null and tixingren != ''">#{tixingren},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmShenqingbaobei" parameterType="CmfCrmShenqingbaobei">
+        update cmf_crm_shenqingbaobei
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="linkmanid != null">linkmanid = #{linkmanid},</if>
+            <if test="chanceid != null">chanceid = #{chanceid},</if>
+            <if test="introduce != null and introduce != ''">introduce = #{introduce},</if>
+            <if test="zhichi != null and zhichi != ''">zhichi = #{zhichi},</if>
+            <if test="fujian != null and fujian != ''">fujian = #{fujian},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="piyu != null and piyu != ''">piyu = #{piyu},</if>
+            <if test="shenheman != null and shenheman != ''">shenheman = #{shenheman},</if>
+            <if test="shenhetime != null">shenhetime = #{shenhetime},</if>
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="tixingren != null and tixingren != ''">tixingren = #{tixingren},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmShenqingbaobeiById" parameterType="Integer">
+        delete from cmf_crm_shenqingbaobei where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmShenqingbaobeiByIds" parameterType="String">
+        delete from cmf_crm_shenqingbaobei where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

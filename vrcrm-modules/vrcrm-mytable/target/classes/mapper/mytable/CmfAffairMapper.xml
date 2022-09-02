@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfAffairMapper">
+    
+    <resultMap type="CmfAffair" id="CmfAffairResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="USER_ID"    />
+        <result property="beginTime"    column="BEGIN_TIME"    />
+        <result property="endTime"    column="END_TIME"    />
+        <result property="type"    column="TYPE"    />
+        <result property="remindDate"    column="REMIND_DATE"    />
+        <result property="remindTime"    column="REMIND_TIME"    />
+        <result property="content"    column="CONTENT"    />
+        <result property="lastRemind"    column="LAST_REMIND"    />
+        <result property="sms2Remind"    column="SMS2_REMIND"    />
+        <result property="lastSms2Remind"    column="LAST_SMS2_REMIND"    />
+        <result property="managerId"    column="MANAGER_ID"    />
+    </resultMap>
+
+    <sql id="selectCmfAffairVo">
+        select id, USER_ID, BEGIN_TIME, END_TIME, TYPE, REMIND_DATE, REMIND_TIME, CONTENT, LAST_REMIND, SMS2_REMIND, LAST_SMS2_REMIND, MANAGER_ID from cmf_affair
+    </sql>
+
+    <select id="selectCmfAffairList" parameterType="CmfAffair" resultMap="CmfAffairResult">
+        <include refid="selectCmfAffairVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and USER_ID = #{userId}</if>
+            <if test="beginTime != null "> and BEGIN_TIME = #{beginTime}</if>
+            <if test="endTime != null "> and END_TIME = #{endTime}</if>
+            <if test="type != null "> and TYPE = #{type}</if>
+            <if test="remindDate != null "> and REMIND_DATE = #{remindDate}</if>
+            <if test="remindTime != null "> and REMIND_TIME = #{remindTime}</if>
+            <if test="content != null  and content != ''"> and CONTENT = #{content}</if>
+            <if test="lastRemind != null "> and LAST_REMIND = #{lastRemind}</if>
+            <if test="sms2Remind != null  and sms2Remind != ''"> and SMS2_REMIND = #{sms2Remind}</if>
+            <if test="lastSms2Remind != null "> and LAST_SMS2_REMIND = #{lastSms2Remind}</if>
+            <if test="managerId != null  and managerId != ''"> and MANAGER_ID = #{managerId}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfAffairById" parameterType="Integer" resultMap="CmfAffairResult">
+        <include refid="selectCmfAffairVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfAffair" parameterType="CmfAffair" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_affair
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">USER_ID,</if>
+            <if test="beginTime != null">BEGIN_TIME,</if>
+            <if test="endTime != null">END_TIME,</if>
+            <if test="type != null">TYPE,</if>
+            <if test="remindDate != null">REMIND_DATE,</if>
+            <if test="remindTime != null">REMIND_TIME,</if>
+            <if test="content != null and content != ''">CONTENT,</if>
+            <if test="lastRemind != null">LAST_REMIND,</if>
+            <if test="sms2Remind != null and sms2Remind != ''">SMS2_REMIND,</if>
+            <if test="lastSms2Remind != null">LAST_SMS2_REMIND,</if>
+            <if test="managerId != null and managerId != ''">MANAGER_ID,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="beginTime != null">#{beginTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="type != null">#{type},</if>
+            <if test="remindDate != null">#{remindDate},</if>
+            <if test="remindTime != null">#{remindTime},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="lastRemind != null">#{lastRemind},</if>
+            <if test="sms2Remind != null and sms2Remind != ''">#{sms2Remind},</if>
+            <if test="lastSms2Remind != null">#{lastSms2Remind},</if>
+            <if test="managerId != null and managerId != ''">#{managerId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfAffair" parameterType="CmfAffair">
+        update cmf_affair
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">USER_ID = #{userId},</if>
+            <if test="beginTime != null">BEGIN_TIME = #{beginTime},</if>
+            <if test="endTime != null">END_TIME = #{endTime},</if>
+            <if test="type != null">TYPE = #{type},</if>
+            <if test="remindDate != null">REMIND_DATE = #{remindDate},</if>
+            <if test="remindTime != null">REMIND_TIME = #{remindTime},</if>
+            <if test="content != null and content != ''">CONTENT = #{content},</if>
+            <if test="lastRemind != null">LAST_REMIND = #{lastRemind},</if>
+            <if test="sms2Remind != null and sms2Remind != ''">SMS2_REMIND = #{sms2Remind},</if>
+            <if test="lastSms2Remind != null">LAST_SMS2_REMIND = #{lastSms2Remind},</if>
+            <if test="managerId != null and managerId != ''">MANAGER_ID = #{managerId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfAffairById" parameterType="Integer">
+        delete from cmf_affair where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfAffairByIds" parameterType="String">
+        delete from cmf_affair where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

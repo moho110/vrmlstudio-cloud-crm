@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengWorkCheckRegisterMapper">
+    
+    <resultMap type="CmfEduXingzhengWorkCheckRegister" id="CmfEduXingzhengWorkCheckRegisterResult">
+        <result property="id"    column="id"    />
+        <result property="schoolname"    column="schoolName"    />
+        <result property="studyyear"    column="studyYear"    />
+        <result property="name"    column="name"    />
+        <result property="username"    column="userName"    />
+        <result property="classroom"    column="classRoom"    />
+        <result property="staff"    column="staff"    />
+        <result property="filldate"    column="fillDate"    />
+        <result property="dutyandyearobj"    column="dutyAndYearObj"    />
+        <result property="personsummary"    column="personSummary"    />
+        <result property="personsysign"    column="personSySign"    />
+        <result property="personsysigndate"    column="personSySignDate"    />
+        <result property="recentyearpunishthings"    column="recentYearPunishThings"    />
+        <result property="classroomideal"    column="classRoomIdeal"    />
+        <result property="rankandlevel"    column="rankandLevel"    />
+        <result property="classroomsign"    column="classRoomSign"    />
+        <result property="classroomdate"    column="classRoomDate"    />
+        <result property="schoolopinion"    column="schoolOpinion"    />
+        <result property="exleadergroupsign"    column="ExLeaderGroupSign"    />
+        <result property="exleadergroupsigndate"    column="ExLeaderGroupSignDate"    />
+        <result property="personopinion"    column="personOpinion"    />
+        <result property="personsign"    column="personSign"    />
+        <result property="personopiniondate"    column="personOpinionDate"    />
+        <result property="workflow"    column="workFlow"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengWorkCheckRegisterVo">
+        select id, schoolName, studyYear, name, userName, classRoom, staff, fillDate, dutyAndYearObj, personSummary, personSySign, personSySignDate, recentYearPunishThings, classRoomIdeal, rankandLevel, classRoomSign, classRoomDate, schoolOpinion, ExLeaderGroupSign, ExLeaderGroupSignDate, personOpinion, personSign, personOpinionDate, workFlow from cmf_edu_xingzheng_work_check_register
+    </sql>
+
+    <select id="selectCmfEduXingzhengWorkCheckRegisterList" parameterType="CmfEduXingzhengWorkCheckRegister" resultMap="CmfEduXingzhengWorkCheckRegisterResult">
+        <include refid="selectCmfEduXingzhengWorkCheckRegisterVo"/>
+        <where>  
+            <if test="schoolname != null  and schoolname != ''"> and schoolName like concat('%', #{schoolname}, '%')</if>
+            <if test="studyyear != null  and studyyear != ''"> and studyYear = #{studyyear}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="username != null  and username != ''"> and userName like concat('%', #{username}, '%')</if>
+            <if test="classroom != null  and classroom != ''"> and classRoom = #{classroom}</if>
+            <if test="staff != null  and staff != ''"> and staff = #{staff}</if>
+            <if test="filldate != null "> and fillDate = #{filldate}</if>
+            <if test="dutyandyearobj != null  and dutyandyearobj != ''"> and dutyAndYearObj = #{dutyandyearobj}</if>
+            <if test="personsummary != null  and personsummary != ''"> and personSummary = #{personsummary}</if>
+            <if test="personsysign != null  and personsysign != ''"> and personSySign = #{personsysign}</if>
+            <if test="personsysigndate != null "> and personSySignDate = #{personsysigndate}</if>
+            <if test="recentyearpunishthings != null  and recentyearpunishthings != ''"> and recentYearPunishThings = #{recentyearpunishthings}</if>
+            <if test="classroomideal != null  and classroomideal != ''"> and classRoomIdeal = #{classroomideal}</if>
+            <if test="rankandlevel != null  and rankandlevel != ''"> and rankandLevel = #{rankandlevel}</if>
+            <if test="classroomsign != null  and classroomsign != ''"> and classRoomSign = #{classroomsign}</if>
+            <if test="classroomdate != null "> and classRoomDate = #{classroomdate}</if>
+            <if test="schoolopinion != null  and schoolopinion != ''"> and schoolOpinion = #{schoolopinion}</if>
+            <if test="exleadergroupsign != null  and exleadergroupsign != ''"> and ExLeaderGroupSign = #{exleadergroupsign}</if>
+            <if test="exleadergroupsigndate != null "> and ExLeaderGroupSignDate = #{exleadergroupsigndate}</if>
+            <if test="personopinion != null  and personopinion != ''"> and personOpinion = #{personopinion}</if>
+            <if test="personsign != null  and personsign != ''"> and personSign = #{personsign}</if>
+            <if test="personopiniondate != null "> and personOpinionDate = #{personopiniondate}</if>
+            <if test="workflow != null  and workflow != ''"> and workFlow = #{workflow}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengWorkCheckRegisterById" parameterType="Integer" resultMap="CmfEduXingzhengWorkCheckRegisterResult">
+        <include refid="selectCmfEduXingzhengWorkCheckRegisterVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengWorkCheckRegister" parameterType="CmfEduXingzhengWorkCheckRegister" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_work_check_register
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="schoolname != null and schoolname != ''">schoolName,</if>
+            <if test="studyyear != null and studyyear != ''">studyYear,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="username != null and username != ''">userName,</if>
+            <if test="classroom != null and classroom != ''">classRoom,</if>
+            <if test="staff != null and staff != ''">staff,</if>
+            <if test="filldate != null">fillDate,</if>
+            <if test="dutyandyearobj != null and dutyandyearobj != ''">dutyAndYearObj,</if>
+            <if test="personsummary != null and personsummary != ''">personSummary,</if>
+            <if test="personsysign != null and personsysign != ''">personSySign,</if>
+            <if test="personsysigndate != null">personSySignDate,</if>
+            <if test="recentyearpunishthings != null and recentyearpunishthings != ''">recentYearPunishThings,</if>
+            <if test="classroomideal != null and classroomideal != ''">classRoomIdeal,</if>
+            <if test="rankandlevel != null and rankandlevel != ''">rankandLevel,</if>
+            <if test="classroomsign != null and classroomsign != ''">classRoomSign,</if>
+            <if test="classroomdate != null">classRoomDate,</if>
+            <if test="schoolopinion != null and schoolopinion != ''">schoolOpinion,</if>
+            <if test="exleadergroupsign != null and exleadergroupsign != ''">ExLeaderGroupSign,</if>
+            <if test="exleadergroupsigndate != null">ExLeaderGroupSignDate,</if>
+            <if test="personopinion != null and personopinion != ''">personOpinion,</if>
+            <if test="personsign != null and personsign != ''">personSign,</if>
+            <if test="personopiniondate != null">personOpinionDate,</if>
+            <if test="workflow != null and workflow != ''">workFlow,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="schoolname != null and schoolname != ''">#{schoolname},</if>
+            <if test="studyyear != null and studyyear != ''">#{studyyear},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="username != null and username != ''">#{username},</if>
+            <if test="classroom != null and classroom != ''">#{classroom},</if>
+            <if test="staff != null and staff != ''">#{staff},</if>
+            <if test="filldate != null">#{filldate},</if>
+            <if test="dutyandyearobj != null and dutyandyearobj != ''">#{dutyandyearobj},</if>
+            <if test="personsummary != null and personsummary != ''">#{personsummary},</if>
+            <if test="personsysign != null and personsysign != ''">#{personsysign},</if>
+            <if test="personsysigndate != null">#{personsysigndate},</if>
+            <if test="recentyearpunishthings != null and recentyearpunishthings != ''">#{recentyearpunishthings},</if>
+            <if test="classroomideal != null and classroomideal != ''">#{classroomideal},</if>
+            <if test="rankandlevel != null and rankandlevel != ''">#{rankandlevel},</if>
+            <if test="classroomsign != null and classroomsign != ''">#{classroomsign},</if>
+            <if test="classroomdate != null">#{classroomdate},</if>
+            <if test="schoolopinion != null and schoolopinion != ''">#{schoolopinion},</if>
+            <if test="exleadergroupsign != null and exleadergroupsign != ''">#{exleadergroupsign},</if>
+            <if test="exleadergroupsigndate != null">#{exleadergroupsigndate},</if>
+            <if test="personopinion != null and personopinion != ''">#{personopinion},</if>
+            <if test="personsign != null and personsign != ''">#{personsign},</if>
+            <if test="personopiniondate != null">#{personopiniondate},</if>
+            <if test="workflow != null and workflow != ''">#{workflow},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengWorkCheckRegister" parameterType="CmfEduXingzhengWorkCheckRegister">
+        update cmf_edu_xingzheng_work_check_register
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="schoolname != null and schoolname != ''">schoolName = #{schoolname},</if>
+            <if test="studyyear != null and studyyear != ''">studyYear = #{studyyear},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="username != null and username != ''">userName = #{username},</if>
+            <if test="classroom != null and classroom != ''">classRoom = #{classroom},</if>
+            <if test="staff != null and staff != ''">staff = #{staff},</if>
+            <if test="filldate != null">fillDate = #{filldate},</if>
+            <if test="dutyandyearobj != null and dutyandyearobj != ''">dutyAndYearObj = #{dutyandyearobj},</if>
+            <if test="personsummary != null and personsummary != ''">personSummary = #{personsummary},</if>
+            <if test="personsysign != null and personsysign != ''">personSySign = #{personsysign},</if>
+            <if test="personsysigndate != null">personSySignDate = #{personsysigndate},</if>
+            <if test="recentyearpunishthings != null and recentyearpunishthings != ''">recentYearPunishThings = #{recentyearpunishthings},</if>
+            <if test="classroomideal != null and classroomideal != ''">classRoomIdeal = #{classroomideal},</if>
+            <if test="rankandlevel != null and rankandlevel != ''">rankandLevel = #{rankandlevel},</if>
+            <if test="classroomsign != null and classroomsign != ''">classRoomSign = #{classroomsign},</if>
+            <if test="classroomdate != null">classRoomDate = #{classroomdate},</if>
+            <if test="schoolopinion != null and schoolopinion != ''">schoolOpinion = #{schoolopinion},</if>
+            <if test="exleadergroupsign != null and exleadergroupsign != ''">ExLeaderGroupSign = #{exleadergroupsign},</if>
+            <if test="exleadergroupsigndate != null">ExLeaderGroupSignDate = #{exleadergroupsigndate},</if>
+            <if test="personopinion != null and personopinion != ''">personOpinion = #{personopinion},</if>
+            <if test="personsign != null and personsign != ''">personSign = #{personsign},</if>
+            <if test="personopiniondate != null">personOpinionDate = #{personopiniondate},</if>
+            <if test="workflow != null and workflow != ''">workFlow = #{workflow},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengWorkCheckRegisterById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_work_check_register where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengWorkCheckRegisterByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_work_check_register where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

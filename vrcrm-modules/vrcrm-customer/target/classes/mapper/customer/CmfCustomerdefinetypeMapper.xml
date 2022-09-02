@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerdefinetypeMapper">
+    
+    <resultMap type="CmfCustomerdefinetype" id="CmfCustomerdefinetypeResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerdefinetypeVo">
+        select id, name from cmf_customerdefinetype
+    </sql>
+
+    <select id="selectCmfCustomerdefinetypeList" parameterType="CmfCustomerdefinetype" resultMap="CmfCustomerdefinetypeResult">
+        <include refid="selectCmfCustomerdefinetypeVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerdefinetypeById" parameterType="Integer" resultMap="CmfCustomerdefinetypeResult">
+        <include refid="selectCmfCustomerdefinetypeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerdefinetype" parameterType="CmfCustomerdefinetype" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customerdefinetype
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerdefinetype" parameterType="CmfCustomerdefinetype">
+        update cmf_customerdefinetype
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerdefinetypeById" parameterType="Integer">
+        delete from cmf_customerdefinetype where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerdefinetypeByIds" parameterType="String">
+        delete from cmf_customerdefinetype where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

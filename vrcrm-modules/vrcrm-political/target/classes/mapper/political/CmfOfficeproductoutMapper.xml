@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeproductoutMapper">
+    
+    <resultMap type="CmfOfficeproductout" id="CmfOfficeproductoutResult">
+        <result property="id"    column="id"    />
+        <result property="officename"    column="officeName"    />
+        <result property="officeno"    column="officeNo"    />
+        <result property="outwarehouse"    column="outWarehouse"    />
+        <result property="outquantity"    column="outQuantity"    />
+        <result property="applyman"    column="applyMan"    />
+        <result property="outstatus"    column="outStatus"    />
+        <result property="isexamine"    column="isExamine"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="count"    column="count"    />
+        <result property="returnlimited"    column="returnLimited"    />
+        <result property="isreturn"    column="isReturn"    />
+        <result property="returnreiceiver"    column="returnReiceiver"    />
+        <result property="realreturndate"    column="realReturnDate"    />
+        <result property="examinetime"    column="examineTime"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeproductoutVo">
+        select id, officeName, officeNo, outWarehouse, outQuantity, applyMan, outStatus, isExamine, approvalMan, memo, creator, createTime, price, quantity, count, returnLimited, isReturn, returnReiceiver, realReturnDate, examineTime from cmf_officeproductout
+    </sql>
+
+    <select id="selectCmfOfficeproductoutList" parameterType="CmfOfficeproductout" resultMap="CmfOfficeproductoutResult">
+        <include refid="selectCmfOfficeproductoutVo"/>
+        <where>  
+            <if test="officename != null  and officename != ''"> and officeName like concat('%', #{officename}, '%')</if>
+            <if test="officeno != null  and officeno != ''"> and officeNo = #{officeno}</if>
+            <if test="outwarehouse != null  and outwarehouse != ''"> and outWarehouse = #{outwarehouse}</if>
+            <if test="outquantity != null "> and outQuantity = #{outquantity}</if>
+            <if test="applyman != null  and applyman != ''"> and applyMan = #{applyman}</if>
+            <if test="outstatus != null  and outstatus != ''"> and outStatus = #{outstatus}</if>
+            <if test="isexamine != null  and isexamine != ''"> and isExamine = #{isexamine}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="count != null "> and count = #{count}</if>
+            <if test="returnlimited != null  and returnlimited != ''"> and returnLimited = #{returnlimited}</if>
+            <if test="isreturn != null "> and isReturn = #{isreturn}</if>
+            <if test="returnreiceiver != null  and returnreiceiver != ''"> and returnReiceiver = #{returnreiceiver}</if>
+            <if test="realreturndate != null "> and realReturnDate = #{realreturndate}</if>
+            <if test="examinetime != null "> and examineTime = #{examinetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeproductoutById" parameterType="Integer" resultMap="CmfOfficeproductoutResult">
+        <include refid="selectCmfOfficeproductoutVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeproductout" parameterType="CmfOfficeproductout" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_officeproductout
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName,</if>
+            <if test="officeno != null and officeno != ''">officeNo,</if>
+            <if test="outwarehouse != null and outwarehouse != ''">outWarehouse,</if>
+            <if test="outquantity != null">outQuantity,</if>
+            <if test="applyman != null and applyman != ''">applyMan,</if>
+            <if test="outstatus != null and outstatus != ''">outStatus,</if>
+            <if test="isexamine != null and isexamine != ''">isExamine,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="count != null">count,</if>
+            <if test="returnlimited != null and returnlimited != ''">returnLimited,</if>
+            <if test="isreturn != null">isReturn,</if>
+            <if test="returnreiceiver != null and returnreiceiver != ''">returnReiceiver,</if>
+            <if test="realreturndate != null">realReturnDate,</if>
+            <if test="examinetime != null">examineTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">#{officename},</if>
+            <if test="officeno != null and officeno != ''">#{officeno},</if>
+            <if test="outwarehouse != null and outwarehouse != ''">#{outwarehouse},</if>
+            <if test="outquantity != null">#{outquantity},</if>
+            <if test="applyman != null and applyman != ''">#{applyman},</if>
+            <if test="outstatus != null and outstatus != ''">#{outstatus},</if>
+            <if test="isexamine != null and isexamine != ''">#{isexamine},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="count != null">#{count},</if>
+            <if test="returnlimited != null and returnlimited != ''">#{returnlimited},</if>
+            <if test="isreturn != null">#{isreturn},</if>
+            <if test="returnreiceiver != null and returnreiceiver != ''">#{returnreiceiver},</if>
+            <if test="realreturndate != null">#{realreturndate},</if>
+            <if test="examinetime != null">#{examinetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeproductout" parameterType="CmfOfficeproductout">
+        update cmf_officeproductout
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName = #{officename},</if>
+            <if test="officeno != null and officeno != ''">officeNo = #{officeno},</if>
+            <if test="outwarehouse != null and outwarehouse != ''">outWarehouse = #{outwarehouse},</if>
+            <if test="outquantity != null">outQuantity = #{outquantity},</if>
+            <if test="applyman != null and applyman != ''">applyMan = #{applyman},</if>
+            <if test="outstatus != null and outstatus != ''">outStatus = #{outstatus},</if>
+            <if test="isexamine != null and isexamine != ''">isExamine = #{isexamine},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="returnlimited != null and returnlimited != ''">returnLimited = #{returnlimited},</if>
+            <if test="isreturn != null">isReturn = #{isreturn},</if>
+            <if test="returnreiceiver != null and returnreiceiver != ''">returnReiceiver = #{returnreiceiver},</if>
+            <if test="realreturndate != null">realReturnDate = #{realreturndate},</if>
+            <if test="examinetime != null">examineTime = #{examinetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeproductoutById" parameterType="Integer">
+        delete from cmf_officeproductout where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeproductoutByIds" parameterType="String">
+        delete from cmf_officeproductout where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

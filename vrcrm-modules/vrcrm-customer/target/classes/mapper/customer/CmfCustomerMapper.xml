@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerMapper">
+    
+    <resultMap type="CmfCustomer" id="CmfCustomerResult">
+        <result property="id"    column="id"    />
+        <result property="supplyid"    column="supplyid"    />
+        <result property="supplyname"    column="supplyname"    />
+        <result property="supplyshortname"    column="supplyshortname"    />
+        <result property="enterstype"    column="enterstype"    />
+        <result property="calling"    column="calling"    />
+        <result property="state"    column="state"    />
+        <result property="membercard"    column="membercard"    />
+        <result property="chargesection"    column="chargesection"    />
+        <result property="postalcode"    column="postalcode"    />
+        <result property="phone"    column="phone"    />
+        <result property="fax"    column="fax"    />
+        <result property="contactaddress"    column="contactaddress"    />
+        <result property="email"    column="email"    />
+        <result property="netword"    column="netword"    />
+        <result property="bank"    column="bank"    />
+        <result property="accountnumber"    column="accountnumber"    />
+        <result property="startdate"    column="startdate"    />
+        <result property="enddate"    column="enddate"    />
+        <result property="style"    column="style"    />
+        <result property="userFlag"    column="user_flag"    />
+        <result property="userId"    column="user_id"    />
+        <result property="supplycn"    column="supplycn"    />
+        <result property="sysuser"    column="sysuser"    />
+        <result property="explainstr"    column="explainStr"    />
+        <result property="briefstr"    column="briefStr"    />
+        <result property="prodprice"    column="prodprice"    />
+        <result property="amtagio"    column="amtagio"    />
+        <result property="remark"    column="remark"    />
+        <result property="recommand"    column="recommand"    />
+        <result property="getaccount"    column="getaccount"    />
+        <result property="yuchuzhi"    column="yuchuzhi"    />
+        <result property="factgetmoney"    column="factgetmoney"    />
+        <result property="nogetmoney"    column="nogetmoney"    />
+        <result property="origin"    column="origin"    />
+        <result property="salemode"    column="salemode"    />
+        <result property="property"    column="property"    />
+        <result property="datascope"    column="datascope"    />
+        <result property="createdate"    column="createdate"    />
+        <result property="integral"    column="integral"    />
+        <result property="lasttracetime"    column="lasttracetime"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerVo">
+        select id, supplyid, supplyname, supplyshortname, enterstype, calling, state, membercard, chargesection, postalcode, phone, fax, contactaddress, email, netword, bank, accountnumber, startdate, enddate, style, user_flag, user_id, supplycn, sysuser, explainStr, briefStr, prodprice, amtagio, remark, recommand, getaccount, yuchuzhi, factgetmoney, nogetmoney, origin, salemode, property, datascope, createdate, integral, lasttracetime from cmf_customer
+    </sql>
+
+    <select id="selectCmfCustomerList" parameterType="CmfCustomer" resultMap="CmfCustomerResult">
+        <include refid="selectCmfCustomerVo"/>
+        <where>  
+            <if test="supplyid != null  and supplyid != ''"> and supplyid = #{supplyid}</if>
+            <if test="supplyname != null  and supplyname != ''"> and supplyname like concat('%', #{supplyname}, '%')</if>
+            <if test="supplyshortname != null  and supplyshortname != ''"> and supplyshortname like concat('%', #{supplyshortname}, '%')</if>
+            <if test="enterstype != null  and enterstype != ''"> and enterstype = #{enterstype}</if>
+            <if test="calling != null  and calling != ''"> and calling = #{calling}</if>
+            <if test="state != null  and state != ''"> and state = #{state}</if>
+            <if test="membercard != null  and membercard != ''"> and membercard = #{membercard}</if>
+            <if test="chargesection != null  and chargesection != ''"> and chargesection = #{chargesection}</if>
+            <if test="postalcode != null  and postalcode != ''"> and postalcode = #{postalcode}</if>
+            <if test="phone != null  and phone != ''"> and phone = #{phone}</if>
+            <if test="fax != null  and fax != ''"> and fax = #{fax}</if>
+            <if test="contactaddress != null  and contactaddress != ''"> and contactaddress = #{contactaddress}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="netword != null  and netword != ''"> and netword = #{netword}</if>
+            <if test="bank != null  and bank != ''"> and bank = #{bank}</if>
+            <if test="accountnumber != null  and accountnumber != ''"> and accountnumber = #{accountnumber}</if>
+            <if test="startdate != null  and startdate != ''"> and startdate = #{startdate}</if>
+            <if test="enddate != null  and enddate != ''"> and enddate = #{enddate}</if>
+            <if test="style != null  and style != ''"> and style = #{style}</if>
+            <if test="userFlag != null  and userFlag != ''"> and user_flag = #{userFlag}</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="supplycn != null  and supplycn != ''"> and supplycn = #{supplycn}</if>
+            <if test="sysuser != null  and sysuser != ''"> and sysuser = #{sysuser}</if>
+            <if test="explainstr != null  and explainstr != ''"> and explainStr = #{explainstr}</if>
+            <if test="briefstr != null  and briefstr != ''"> and briefStr = #{briefstr}</if>
+            <if test="prodprice != null  and prodprice != ''"> and prodprice = #{prodprice}</if>
+            <if test="amtagio != null  and amtagio != ''"> and amtagio = #{amtagio}</if>
+            <if test="recommand != null  and recommand != ''"> and recommand = #{recommand}</if>
+            <if test="getaccount != null  and getaccount != ''"> and getaccount = #{getaccount}</if>
+            <if test="yuchuzhi != null "> and yuchuzhi = #{yuchuzhi}</if>
+            <if test="factgetmoney != null "> and factgetmoney = #{factgetmoney}</if>
+            <if test="nogetmoney != null "> and nogetmoney = #{nogetmoney}</if>
+            <if test="origin != null  and origin != ''"> and origin = #{origin}</if>
+            <if test="salemode != null  and salemode != ''"> and salemode = #{salemode}</if>
+            <if test="property != null  and property != ''"> and property = #{property}</if>
+            <if test="datascope != null  and datascope != ''"> and datascope = #{datascope}</if>
+            <if test="createdate != null "> and createdate = #{createdate}</if>
+            <if test="integral != null "> and integral = #{integral}</if>
+            <if test="lasttracetime != null "> and lasttracetime = #{lasttracetime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerById" parameterType="Integer" resultMap="CmfCustomerResult">
+        <include refid="selectCmfCustomerVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomer" parameterType="CmfCustomer" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="supplyid != null and supplyid != ''">supplyid,</if>
+            <if test="supplyname != null and supplyname != ''">supplyname,</if>
+            <if test="supplyshortname != null and supplyshortname != ''">supplyshortname,</if>
+            <if test="enterstype != null and enterstype != ''">enterstype,</if>
+            <if test="calling != null and calling != ''">calling,</if>
+            <if test="state != null and state != ''">state,</if>
+            <if test="membercard != null and membercard != ''">membercard,</if>
+            <if test="chargesection != null and chargesection != ''">chargesection,</if>
+            <if test="postalcode != null and postalcode != ''">postalcode,</if>
+            <if test="phone != null and phone != ''">phone,</if>
+            <if test="fax != null and fax != ''">fax,</if>
+            <if test="contactaddress != null and contactaddress != ''">contactaddress,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="netword != null and netword != ''">netword,</if>
+            <if test="bank != null and bank != ''">bank,</if>
+            <if test="accountnumber != null and accountnumber != ''">accountnumber,</if>
+            <if test="startdate != null and startdate != ''">startdate,</if>
+            <if test="enddate != null and enddate != ''">enddate,</if>
+            <if test="style != null and style != ''">style,</if>
+            <if test="userFlag != null and userFlag != ''">user_flag,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="supplycn != null and supplycn != ''">supplycn,</if>
+            <if test="sysuser != null and sysuser != ''">sysuser,</if>
+            <if test="explainstr != null and explainstr != ''">explainStr,</if>
+            <if test="briefstr != null and briefstr != ''">briefStr,</if>
+            <if test="prodprice != null and prodprice != ''">prodprice,</if>
+            <if test="amtagio != null and amtagio != ''">amtagio,</if>
+            <if test="remark != null and remark != ''">remark,</if>
+            <if test="recommand != null and recommand != ''">recommand,</if>
+            <if test="getaccount != null and getaccount != ''">getaccount,</if>
+            <if test="yuchuzhi != null">yuchuzhi,</if>
+            <if test="factgetmoney != null">factgetmoney,</if>
+            <if test="nogetmoney != null">nogetmoney,</if>
+            <if test="origin != null and origin != ''">origin,</if>
+            <if test="salemode != null and salemode != ''">salemode,</if>
+            <if test="property != null and property != ''">property,</if>
+            <if test="datascope != null and datascope != ''">datascope,</if>
+            <if test="createdate != null">createdate,</if>
+            <if test="integral != null">integral,</if>
+            <if test="lasttracetime != null">lasttracetime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="supplyid != null and supplyid != ''">#{supplyid},</if>
+            <if test="supplyname != null and supplyname != ''">#{supplyname},</if>
+            <if test="supplyshortname != null and supplyshortname != ''">#{supplyshortname},</if>
+            <if test="enterstype != null and enterstype != ''">#{enterstype},</if>
+            <if test="calling != null and calling != ''">#{calling},</if>
+            <if test="state != null and state != ''">#{state},</if>
+            <if test="membercard != null and membercard != ''">#{membercard},</if>
+            <if test="chargesection != null and chargesection != ''">#{chargesection},</if>
+            <if test="postalcode != null and postalcode != ''">#{postalcode},</if>
+            <if test="phone != null and phone != ''">#{phone},</if>
+            <if test="fax != null and fax != ''">#{fax},</if>
+            <if test="contactaddress != null and contactaddress != ''">#{contactaddress},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="netword != null and netword != ''">#{netword},</if>
+            <if test="bank != null and bank != ''">#{bank},</if>
+            <if test="accountnumber != null and accountnumber != ''">#{accountnumber},</if>
+            <if test="startdate != null and startdate != ''">#{startdate},</if>
+            <if test="enddate != null and enddate != ''">#{enddate},</if>
+            <if test="style != null and style != ''">#{style},</if>
+            <if test="userFlag != null and userFlag != ''">#{userFlag},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="supplycn != null and supplycn != ''">#{supplycn},</if>
+            <if test="sysuser != null and sysuser != ''">#{sysuser},</if>
+            <if test="explainstr != null and explainstr != ''">#{explainstr},</if>
+            <if test="briefstr != null and briefstr != ''">#{briefstr},</if>
+            <if test="prodprice != null and prodprice != ''">#{prodprice},</if>
+            <if test="amtagio != null and amtagio != ''">#{amtagio},</if>
+            <if test="remark != null and remark != ''">#{remark},</if>
+            <if test="recommand != null and recommand != ''">#{recommand},</if>
+            <if test="getaccount != null and getaccount != ''">#{getaccount},</if>
+            <if test="yuchuzhi != null">#{yuchuzhi},</if>
+            <if test="factgetmoney != null">#{factgetmoney},</if>
+            <if test="nogetmoney != null">#{nogetmoney},</if>
+            <if test="origin != null and origin != ''">#{origin},</if>
+            <if test="salemode != null and salemode != ''">#{salemode},</if>
+            <if test="property != null and property != ''">#{property},</if>
+            <if test="datascope != null and datascope != ''">#{datascope},</if>
+            <if test="createdate != null">#{createdate},</if>
+            <if test="integral != null">#{integral},</if>
+            <if test="lasttracetime != null">#{lasttracetime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomer" parameterType="CmfCustomer">
+        update cmf_customer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="supplyid != null and supplyid != ''">supplyid = #{supplyid},</if>
+            <if test="supplyname != null and supplyname != ''">supplyname = #{supplyname},</if>
+            <if test="supplyshortname != null and supplyshortname != ''">supplyshortname = #{supplyshortname},</if>
+            <if test="enterstype != null and enterstype != ''">enterstype = #{enterstype},</if>
+            <if test="calling != null and calling != ''">calling = #{calling},</if>
+            <if test="state != null and state != ''">state = #{state},</if>
+            <if test="membercard != null and membercard != ''">membercard = #{membercard},</if>
+            <if test="chargesection != null and chargesection != ''">chargesection = #{chargesection},</if>
+            <if test="postalcode != null and postalcode != ''">postalcode = #{postalcode},</if>
+            <if test="phone != null and phone != ''">phone = #{phone},</if>
+            <if test="fax != null and fax != ''">fax = #{fax},</if>
+            <if test="contactaddress != null and contactaddress != ''">contactaddress = #{contactaddress},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="netword != null and netword != ''">netword = #{netword},</if>
+            <if test="bank != null and bank != ''">bank = #{bank},</if>
+            <if test="accountnumber != null and accountnumber != ''">accountnumber = #{accountnumber},</if>
+            <if test="startdate != null and startdate != ''">startdate = #{startdate},</if>
+            <if test="enddate != null and enddate != ''">enddate = #{enddate},</if>
+            <if test="style != null and style != ''">style = #{style},</if>
+            <if test="userFlag != null and userFlag != ''">user_flag = #{userFlag},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="supplycn != null and supplycn != ''">supplycn = #{supplycn},</if>
+            <if test="sysuser != null and sysuser != ''">sysuser = #{sysuser},</if>
+            <if test="explainstr != null and explainstr != ''">explainStr = #{explainstr},</if>
+            <if test="briefstr != null and briefstr != ''">briefStr = #{briefstr},</if>
+            <if test="prodprice != null and prodprice != ''">prodprice = #{prodprice},</if>
+            <if test="amtagio != null and amtagio != ''">amtagio = #{amtagio},</if>
+            <if test="remark != null and remark != ''">remark = #{remark},</if>
+            <if test="recommand != null and recommand != ''">recommand = #{recommand},</if>
+            <if test="getaccount != null and getaccount != ''">getaccount = #{getaccount},</if>
+            <if test="yuchuzhi != null">yuchuzhi = #{yuchuzhi},</if>
+            <if test="factgetmoney != null">factgetmoney = #{factgetmoney},</if>
+            <if test="nogetmoney != null">nogetmoney = #{nogetmoney},</if>
+            <if test="origin != null and origin != ''">origin = #{origin},</if>
+            <if test="salemode != null and salemode != ''">salemode = #{salemode},</if>
+            <if test="property != null and property != ''">property = #{property},</if>
+            <if test="datascope != null and datascope != ''">datascope = #{datascope},</if>
+            <if test="createdate != null">createdate = #{createdate},</if>
+            <if test="integral != null">integral = #{integral},</if>
+            <if test="lasttracetime != null">lasttracetime = #{lasttracetime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerById" parameterType="Integer">
+        delete from cmf_customer where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerByIds" parameterType="String">
+        delete from cmf_customer where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

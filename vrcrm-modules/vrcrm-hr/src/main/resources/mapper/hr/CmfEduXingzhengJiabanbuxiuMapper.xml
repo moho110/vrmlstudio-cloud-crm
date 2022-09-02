@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengJiabanbuxiuMapper">
+    
+    <resultMap type="CmfEduXingzhengJiabanbuxiu" id="CmfEduXingzhengJiabanbuxiuResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="department"    column="department"    />
+        <result property="person"    column="person"    />
+        <result property="delayworktime"    column="delayWorkTime"    />
+        <result property="delayworknum"    column="delayWorkNum"    />
+        <result property="buxiutime"    column="buxiuTime"    />
+        <result property="buxiuclass"    column="buxiuClass"    />
+        <result property="delayworkstatus"    column="delayWorkStatus"    />
+        <result property="delayworkid"    column="delayWorkID"    />
+        <result property="delayworkman"    column="delayWorkMan"    />
+        <result property="delayworkextime"    column="delayWorkExTime"    />
+        <result property="buxiustatus"    column="buxiuStatus"    />
+        <result property="buxiuflowid"    column="buxiuFlowId"    />
+        <result property="buxiuexman"    column="buxiuExMan"    />
+        <result property="buxiuextime"    column="buxiuExTime"    />
+        <result property="personname"    column="personName"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengJiabanbuxiuVo">
+        select id, term, department, person, delayWorkTime, delayWorkNum, buxiuTime, buxiuClass, delayWorkStatus, delayWorkID, delayWorkMan, delayWorkExTime, buxiuStatus, buxiuFlowId, buxiuExMan, buxiuExTime, personName from cmf_edu_xingzheng_jiabanbuxiu
+    </sql>
+
+    <select id="selectCmfEduXingzhengJiabanbuxiuList" parameterType="CmfEduXingzhengJiabanbuxiu" resultMap="CmfEduXingzhengJiabanbuxiuResult">
+        <include refid="selectCmfEduXingzhengJiabanbuxiuVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="person != null  and person != ''"> and person = #{person}</if>
+            <if test="delayworktime != null "> and delayWorkTime = #{delayworktime}</if>
+            <if test="delayworknum != null  and delayworknum != ''"> and delayWorkNum = #{delayworknum}</if>
+            <if test="buxiutime != null "> and buxiuTime = #{buxiutime}</if>
+            <if test="buxiuclass != null  and buxiuclass != ''"> and buxiuClass = #{buxiuclass}</if>
+            <if test="delayworkstatus != null "> and delayWorkStatus = #{delayworkstatus}</if>
+            <if test="delayworkid != null "> and delayWorkID = #{delayworkid}</if>
+            <if test="delayworkman != null  and delayworkman != ''"> and delayWorkMan = #{delayworkman}</if>
+            <if test="delayworkextime != null  and delayworkextime != ''"> and delayWorkExTime = #{delayworkextime}</if>
+            <if test="buxiustatus != null "> and buxiuStatus = #{buxiustatus}</if>
+            <if test="buxiuflowid != null "> and buxiuFlowId = #{buxiuflowid}</if>
+            <if test="buxiuexman != null  and buxiuexman != ''"> and buxiuExMan = #{buxiuexman}</if>
+            <if test="buxiuextime != null  and buxiuextime != ''"> and buxiuExTime = #{buxiuextime}</if>
+            <if test="personname != null  and personname != ''"> and personName like concat('%', #{personname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengJiabanbuxiuById" parameterType="Integer" resultMap="CmfEduXingzhengJiabanbuxiuResult">
+        <include refid="selectCmfEduXingzhengJiabanbuxiuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengJiabanbuxiu" parameterType="CmfEduXingzhengJiabanbuxiu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_jiabanbuxiu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="person != null and person != ''">person,</if>
+            <if test="delayworktime != null">delayWorkTime,</if>
+            <if test="delayworknum != null and delayworknum != ''">delayWorkNum,</if>
+            <if test="buxiutime != null">buxiuTime,</if>
+            <if test="buxiuclass != null and buxiuclass != ''">buxiuClass,</if>
+            <if test="delayworkstatus != null">delayWorkStatus,</if>
+            <if test="delayworkid != null">delayWorkID,</if>
+            <if test="delayworkman != null and delayworkman != ''">delayWorkMan,</if>
+            <if test="delayworkextime != null and delayworkextime != ''">delayWorkExTime,</if>
+            <if test="buxiustatus != null">buxiuStatus,</if>
+            <if test="buxiuflowid != null">buxiuFlowId,</if>
+            <if test="buxiuexman != null and buxiuexman != ''">buxiuExMan,</if>
+            <if test="buxiuextime != null and buxiuextime != ''">buxiuExTime,</if>
+            <if test="personname != null and personname != ''">personName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="person != null and person != ''">#{person},</if>
+            <if test="delayworktime != null">#{delayworktime},</if>
+            <if test="delayworknum != null and delayworknum != ''">#{delayworknum},</if>
+            <if test="buxiutime != null">#{buxiutime},</if>
+            <if test="buxiuclass != null and buxiuclass != ''">#{buxiuclass},</if>
+            <if test="delayworkstatus != null">#{delayworkstatus},</if>
+            <if test="delayworkid != null">#{delayworkid},</if>
+            <if test="delayworkman != null and delayworkman != ''">#{delayworkman},</if>
+            <if test="delayworkextime != null and delayworkextime != ''">#{delayworkextime},</if>
+            <if test="buxiustatus != null">#{buxiustatus},</if>
+            <if test="buxiuflowid != null">#{buxiuflowid},</if>
+            <if test="buxiuexman != null and buxiuexman != ''">#{buxiuexman},</if>
+            <if test="buxiuextime != null and buxiuextime != ''">#{buxiuextime},</if>
+            <if test="personname != null and personname != ''">#{personname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengJiabanbuxiu" parameterType="CmfEduXingzhengJiabanbuxiu">
+        update cmf_edu_xingzheng_jiabanbuxiu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="person != null and person != ''">person = #{person},</if>
+            <if test="delayworktime != null">delayWorkTime = #{delayworktime},</if>
+            <if test="delayworknum != null and delayworknum != ''">delayWorkNum = #{delayworknum},</if>
+            <if test="buxiutime != null">buxiuTime = #{buxiutime},</if>
+            <if test="buxiuclass != null and buxiuclass != ''">buxiuClass = #{buxiuclass},</if>
+            <if test="delayworkstatus != null">delayWorkStatus = #{delayworkstatus},</if>
+            <if test="delayworkid != null">delayWorkID = #{delayworkid},</if>
+            <if test="delayworkman != null and delayworkman != ''">delayWorkMan = #{delayworkman},</if>
+            <if test="delayworkextime != null and delayworkextime != ''">delayWorkExTime = #{delayworkextime},</if>
+            <if test="buxiustatus != null">buxiuStatus = #{buxiustatus},</if>
+            <if test="buxiuflowid != null">buxiuFlowId = #{buxiuflowid},</if>
+            <if test="buxiuexman != null and buxiuexman != ''">buxiuExMan = #{buxiuexman},</if>
+            <if test="buxiuextime != null and buxiuextime != ''">buxiuExTime = #{buxiuextime},</if>
+            <if test="personname != null and personname != ''">personName = #{personname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengJiabanbuxiuById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_jiabanbuxiu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengJiabanbuxiuByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_jiabanbuxiu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

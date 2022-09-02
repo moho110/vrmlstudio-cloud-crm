@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsFileMapper">
+    
+    <resultMap type="CmfHrmsFile" id="CmfHrmsFileResult">
+        <result property="id"    column="id"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="sex"    column="sex"    />
+        <result property="marriage"    column="marriage"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="national"    column="national"    />
+        <result property="political"    column="political"    />
+        <result property="idno"    column="IDNo"    />
+        <result property="hukou"    column="hukou"    />
+        <result property="jiguan"    column="jiguan"    />
+        <result property="insuranceno"    column="insuranceNo"    />
+        <result property="address"    column="address"    />
+        <result property="postalcode"    column="postalCode"    />
+        <result property="email"    column="email"    />
+        <result property="telephone"    column="telephone"    />
+        <result property="studyexp"    column="studyExp"    />
+        <result property="professional"    column="professional"    />
+        <result property="college"    column="college"    />
+        <result property="staff"    column="staff"    />
+        <result property="staffname"    column="staffName"    />
+        <result property="politicallevel"    column="politicalLevel"    />
+        <result property="computerlevel"    column="computerLevel"    />
+        <result property="foreign"    column="foreign"    />
+        <result property="foreignlevel"    column="foreignLevel"    />
+        <result property="whenwork"    column="whenWork"    />
+        <result property="worktime"    column="workTime"    />
+        <result property="workstatus"    column="workStatus"    />
+        <result property="special"    column="special"    />
+        <result property="memo"    column="memo"    />
+        <result property="attach"    column="attach"    />
+        <result property="photo"    column="photo"    />
+        <result property="entryunitdate"    column="entryUnitDate"    />
+        <result property="unitworktime"    column="unitWorkTime"    />
+        <result property="quitdate"    column="quitDate"    />
+        <result property="nowcontractdate"    column="nowContractDate"    />
+        <result property="nowcontractenddate"    column="nowContractEndDate"    />
+        <result property="tuixiudate"    column="tuixiuDate"    />
+        <result property="tuixiuage"    column="tuixiuAge"    />
+        <result property="workinformal"    column="workInFormal"    />
+        <result property="firstcontractdate"    column="firstContractDate"    />
+        <result property="techlevel"    column="techLevel"    />
+        <result property="techexdate"    column="techExDate"    />
+        <result property="stafftype"    column="staffType"    />
+        <result property="staffbyname"    column="staffbyName"    />
+        <result property="stafftechscore"    column="staffTechScore"    />
+        <result property="bank"    column="bank"    />
+        <result property="bankno"    column="bankNo"    />
+        <result property="salarylevel"    column="salaryLevel"    />
+        <result property="staffyinlibirthday"    column="staffyinliBirthday"    />
+        <result property="persondesp"    column="personDesp"    />
+        <result property="passport"    column="passport"    />
+        <result property="bloody"    column="bloody"    />
+        <result property="height"    column="height"    />
+        <result property="weight"    column="weight"    />
+        <result property="eyesight"    column="eyesight"    />
+        <result property="health"    column="health"    />
+        <result property="drivers"    column="drivers"    />
+        <result property="workexp"    column="workExp"    />
+        <result property="workexpattach"    column="workExpAttach"    />
+        <result property="socialrelation"    column="socialRelation"    />
+        <result property="socialrelationattach"    column="socialRelationAttach"    />
+        <result property="recoverstaffdate"    column="recoverStaffDate"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsFileVo">
+        select id, workId, name, inDepartment, sex, marriage, birthday, national, political, IDNo, hukou, jiguan, insuranceNo, address, postalCode, email, telephone, studyExp, professional, college, staff, staffName, politicalLevel, computerLevel, foreign, foreignLevel, whenWork, workTime, workStatus, special, memo, attach, photo, entryUnitDate, unitWorkTime, quitDate, nowContractDate, nowContractEndDate, tuixiuDate, tuixiuAge, workInFormal, firstContractDate, techLevel, techExDate, staffType, staffbyName, staffTechScore, bank, bankNo, salaryLevel, staffyinliBirthday, personDesp, passport, bloody, height, weight, eyesight, health, drivers, workExp, workExpAttach, socialRelation, socialRelationAttach, recoverStaffDate from cmf_hrms_file
+    </sql>
+
+    <select id="selectCmfHrmsFileList" parameterType="CmfHrmsFile" resultMap="CmfHrmsFileResult">
+        <include refid="selectCmfHrmsFileVo"/>
+        <where>  
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="marriage != null  and marriage != ''"> and marriage = #{marriage}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="national != null  and national != ''"> and national = #{national}</if>
+            <if test="political != null  and political != ''"> and political = #{political}</if>
+            <if test="idno != null  and idno != ''"> and IDNo = #{idno}</if>
+            <if test="hukou != null  and hukou != ''"> and hukou = #{hukou}</if>
+            <if test="jiguan != null  and jiguan != ''"> and jiguan = #{jiguan}</if>
+            <if test="insuranceno != null  and insuranceno != ''"> and insuranceNo = #{insuranceno}</if>
+            <if test="address != null  and address != ''"> and address = #{address}</if>
+            <if test="postalcode != null  and postalcode != ''"> and postalCode = #{postalcode}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="telephone != null  and telephone != ''"> and telephone = #{telephone}</if>
+            <if test="studyexp != null  and studyexp != ''"> and studyExp = #{studyexp}</if>
+            <if test="professional != null  and professional != ''"> and professional = #{professional}</if>
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="staff != null  and staff != ''"> and staff = #{staff}</if>
+            <if test="staffname != null  and staffname != ''"> and staffName like concat('%', #{staffname}, '%')</if>
+            <if test="politicallevel != null  and politicallevel != ''"> and politicalLevel = #{politicallevel}</if>
+            <if test="computerlevel != null  and computerlevel != ''"> and computerLevel = #{computerlevel}</if>
+            <if test="foreign != null  and foreign != ''"> and foreign = #{foreign}</if>
+            <if test="foreignlevel != null "> and foreignLevel = #{foreignlevel}</if>
+            <if test="whenwork != null "> and whenWork = #{whenwork}</if>
+            <if test="worktime != null "> and workTime = #{worktime}</if>
+            <if test="workstatus != null  and workstatus != ''"> and workStatus = #{workstatus}</if>
+            <if test="special != null  and special != ''"> and special = #{special}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="attach != null  and attach != ''"> and attach = #{attach}</if>
+            <if test="photo != null  and photo != ''"> and photo = #{photo}</if>
+            <if test="entryunitdate != null "> and entryUnitDate = #{entryunitdate}</if>
+            <if test="unitworktime != null "> and unitWorkTime = #{unitworktime}</if>
+            <if test="quitdate != null "> and quitDate = #{quitdate}</if>
+            <if test="nowcontractdate != null "> and nowContractDate = #{nowcontractdate}</if>
+            <if test="nowcontractenddate != null "> and nowContractEndDate = #{nowcontractenddate}</if>
+            <if test="tuixiudate != null "> and tuixiuDate = #{tuixiudate}</if>
+            <if test="tuixiuage != null "> and tuixiuAge = #{tuixiuage}</if>
+            <if test="workinformal != null  and workinformal != ''"> and workInFormal = #{workinformal}</if>
+            <if test="firstcontractdate != null "> and firstContractDate = #{firstcontractdate}</if>
+            <if test="techlevel != null  and techlevel != ''"> and techLevel = #{techlevel}</if>
+            <if test="techexdate != null "> and techExDate = #{techexdate}</if>
+            <if test="stafftype != null  and stafftype != ''"> and staffType = #{stafftype}</if>
+            <if test="staffbyname != null  and staffbyname != ''"> and staffbyName like concat('%', #{staffbyname}, '%')</if>
+            <if test="stafftechscore != null  and stafftechscore != ''"> and staffTechScore = #{stafftechscore}</if>
+            <if test="bank != null  and bank != ''"> and bank = #{bank}</if>
+            <if test="bankno != null  and bankno != ''"> and bankNo = #{bankno}</if>
+            <if test="salarylevel != null  and salarylevel != ''"> and salaryLevel = #{salarylevel}</if>
+            <if test="staffyinlibirthday != null "> and staffyinliBirthday = #{staffyinlibirthday}</if>
+            <if test="persondesp != null  and persondesp != ''"> and personDesp = #{persondesp}</if>
+            <if test="passport != null  and passport != ''"> and passport = #{passport}</if>
+            <if test="bloody != null  and bloody != ''"> and bloody = #{bloody}</if>
+            <if test="height != null  and height != ''"> and height = #{height}</if>
+            <if test="weight != null  and weight != ''"> and weight = #{weight}</if>
+            <if test="eyesight != null  and eyesight != ''"> and eyesight = #{eyesight}</if>
+            <if test="health != null  and health != ''"> and health = #{health}</if>
+            <if test="drivers != null  and drivers != ''"> and drivers = #{drivers}</if>
+            <if test="workexp != null  and workexp != ''"> and workExp = #{workexp}</if>
+            <if test="workexpattach != null  and workexpattach != ''"> and workExpAttach = #{workexpattach}</if>
+            <if test="socialrelation != null  and socialrelation != ''"> and socialRelation = #{socialrelation}</if>
+            <if test="socialrelationattach != null  and socialrelationattach != ''"> and socialRelationAttach = #{socialrelationattach}</if>
+            <if test="recoverstaffdate != null "> and recoverStaffDate = #{recoverstaffdate}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsFileById" parameterType="Integer" resultMap="CmfHrmsFileResult">
+        <include refid="selectCmfHrmsFileVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsFile" parameterType="CmfHrmsFile" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_file
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="marriage != null and marriage != ''">marriage,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="national != null and national != ''">national,</if>
+            <if test="political != null and political != ''">political,</if>
+            <if test="idno != null and idno != ''">IDNo,</if>
+            <if test="hukou != null and hukou != ''">hukou,</if>
+            <if test="jiguan != null and jiguan != ''">jiguan,</if>
+            <if test="insuranceno != null and insuranceno != ''">insuranceNo,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="postalcode != null and postalcode != ''">postalCode,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="telephone != null and telephone != ''">telephone,</if>
+            <if test="studyexp != null and studyexp != ''">studyExp,</if>
+            <if test="professional != null and professional != ''">professional,</if>
+            <if test="college != null and college != ''">college,</if>
+            <if test="staff != null and staff != ''">staff,</if>
+            <if test="staffname != null and staffname != ''">staffName,</if>
+            <if test="politicallevel != null and politicallevel != ''">politicalLevel,</if>
+            <if test="computerlevel != null and computerlevel != ''">computerLevel,</if>
+            <if test="foreign != null and foreign != ''">foreign,</if>
+            <if test="foreignlevel != null">foreignLevel,</if>
+            <if test="whenwork != null">whenWork,</if>
+            <if test="worktime != null">workTime,</if>
+            <if test="workstatus != null and workstatus != ''">workStatus,</if>
+            <if test="special != null and special != ''">special,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="attach != null and attach != ''">attach,</if>
+            <if test="photo != null and photo != ''">photo,</if>
+            <if test="entryunitdate != null">entryUnitDate,</if>
+            <if test="unitworktime != null">unitWorkTime,</if>
+            <if test="quitdate != null">quitDate,</if>
+            <if test="nowcontractdate != null">nowContractDate,</if>
+            <if test="nowcontractenddate != null">nowContractEndDate,</if>
+            <if test="tuixiudate != null">tuixiuDate,</if>
+            <if test="tuixiuage != null">tuixiuAge,</if>
+            <if test="workinformal != null and workinformal != ''">workInFormal,</if>
+            <if test="firstcontractdate != null">firstContractDate,</if>
+            <if test="techlevel != null and techlevel != ''">techLevel,</if>
+            <if test="techexdate != null">techExDate,</if>
+            <if test="stafftype != null and stafftype != ''">staffType,</if>
+            <if test="staffbyname != null and staffbyname != ''">staffbyName,</if>
+            <if test="stafftechscore != null and stafftechscore != ''">staffTechScore,</if>
+            <if test="bank != null and bank != ''">bank,</if>
+            <if test="bankno != null and bankno != ''">bankNo,</if>
+            <if test="salarylevel != null and salarylevel != ''">salaryLevel,</if>
+            <if test="staffyinlibirthday != null">staffyinliBirthday,</if>
+            <if test="persondesp != null and persondesp != ''">personDesp,</if>
+            <if test="passport != null and passport != ''">passport,</if>
+            <if test="bloody != null and bloody != ''">bloody,</if>
+            <if test="height != null and height != ''">height,</if>
+            <if test="weight != null and weight != ''">weight,</if>
+            <if test="eyesight != null and eyesight != ''">eyesight,</if>
+            <if test="health != null and health != ''">health,</if>
+            <if test="drivers != null and drivers != ''">drivers,</if>
+            <if test="workexp != null and workexp != ''">workExp,</if>
+            <if test="workexpattach != null and workexpattach != ''">workExpAttach,</if>
+            <if test="socialrelation != null and socialrelation != ''">socialRelation,</if>
+            <if test="socialrelationattach != null and socialrelationattach != ''">socialRelationAttach,</if>
+            <if test="recoverstaffdate != null">recoverStaffDate,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="marriage != null and marriage != ''">#{marriage},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="national != null and national != ''">#{national},</if>
+            <if test="political != null and political != ''">#{political},</if>
+            <if test="idno != null and idno != ''">#{idno},</if>
+            <if test="hukou != null and hukou != ''">#{hukou},</if>
+            <if test="jiguan != null and jiguan != ''">#{jiguan},</if>
+            <if test="insuranceno != null and insuranceno != ''">#{insuranceno},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="postalcode != null and postalcode != ''">#{postalcode},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="telephone != null and telephone != ''">#{telephone},</if>
+            <if test="studyexp != null and studyexp != ''">#{studyexp},</if>
+            <if test="professional != null and professional != ''">#{professional},</if>
+            <if test="college != null and college != ''">#{college},</if>
+            <if test="staff != null and staff != ''">#{staff},</if>
+            <if test="staffname != null and staffname != ''">#{staffname},</if>
+            <if test="politicallevel != null and politicallevel != ''">#{politicallevel},</if>
+            <if test="computerlevel != null and computerlevel != ''">#{computerlevel},</if>
+            <if test="foreign != null and foreign != ''">#{foreign},</if>
+            <if test="foreignlevel != null">#{foreignlevel},</if>
+            <if test="whenwork != null">#{whenwork},</if>
+            <if test="worktime != null">#{worktime},</if>
+            <if test="workstatus != null and workstatus != ''">#{workstatus},</if>
+            <if test="special != null and special != ''">#{special},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="attach != null and attach != ''">#{attach},</if>
+            <if test="photo != null and photo != ''">#{photo},</if>
+            <if test="entryunitdate != null">#{entryunitdate},</if>
+            <if test="unitworktime != null">#{unitworktime},</if>
+            <if test="quitdate != null">#{quitdate},</if>
+            <if test="nowcontractdate != null">#{nowcontractdate},</if>
+            <if test="nowcontractenddate != null">#{nowcontractenddate},</if>
+            <if test="tuixiudate != null">#{tuixiudate},</if>
+            <if test="tuixiuage != null">#{tuixiuage},</if>
+            <if test="workinformal != null and workinformal != ''">#{workinformal},</if>
+            <if test="firstcontractdate != null">#{firstcontractdate},</if>
+            <if test="techlevel != null and techlevel != ''">#{techlevel},</if>
+            <if test="techexdate != null">#{techexdate},</if>
+            <if test="stafftype != null and stafftype != ''">#{stafftype},</if>
+            <if test="staffbyname != null and staffbyname != ''">#{staffbyname},</if>
+            <if test="stafftechscore != null and stafftechscore != ''">#{stafftechscore},</if>
+            <if test="bank != null and bank != ''">#{bank},</if>
+            <if test="bankno != null and bankno != ''">#{bankno},</if>
+            <if test="salarylevel != null and salarylevel != ''">#{salarylevel},</if>
+            <if test="staffyinlibirthday != null">#{staffyinlibirthday},</if>
+            <if test="persondesp != null and persondesp != ''">#{persondesp},</if>
+            <if test="passport != null and passport != ''">#{passport},</if>
+            <if test="bloody != null and bloody != ''">#{bloody},</if>
+            <if test="height != null and height != ''">#{height},</if>
+            <if test="weight != null and weight != ''">#{weight},</if>
+            <if test="eyesight != null and eyesight != ''">#{eyesight},</if>
+            <if test="health != null and health != ''">#{health},</if>
+            <if test="drivers != null and drivers != ''">#{drivers},</if>
+            <if test="workexp != null and workexp != ''">#{workexp},</if>
+            <if test="workexpattach != null and workexpattach != ''">#{workexpattach},</if>
+            <if test="socialrelation != null and socialrelation != ''">#{socialrelation},</if>
+            <if test="socialrelationattach != null and socialrelationattach != ''">#{socialrelationattach},</if>
+            <if test="recoverstaffdate != null">#{recoverstaffdate},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsFile" parameterType="CmfHrmsFile">
+        update cmf_hrms_file
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="marriage != null and marriage != ''">marriage = #{marriage},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="national != null and national != ''">national = #{national},</if>
+            <if test="political != null and political != ''">political = #{political},</if>
+            <if test="idno != null and idno != ''">IDNo = #{idno},</if>
+            <if test="hukou != null and hukou != ''">hukou = #{hukou},</if>
+            <if test="jiguan != null and jiguan != ''">jiguan = #{jiguan},</if>
+            <if test="insuranceno != null and insuranceno != ''">insuranceNo = #{insuranceno},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="postalcode != null and postalcode != ''">postalCode = #{postalcode},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="telephone != null and telephone != ''">telephone = #{telephone},</if>
+            <if test="studyexp != null and studyexp != ''">studyExp = #{studyexp},</if>
+            <if test="professional != null and professional != ''">professional = #{professional},</if>
+            <if test="college != null and college != ''">college = #{college},</if>
+            <if test="staff != null and staff != ''">staff = #{staff},</if>
+            <if test="staffname != null and staffname != ''">staffName = #{staffname},</if>
+            <if test="politicallevel != null and politicallevel != ''">politicalLevel = #{politicallevel},</if>
+            <if test="computerlevel != null and computerlevel != ''">computerLevel = #{computerlevel},</if>
+            <if test="foreign != null and foreign != ''">foreign = #{foreign},</if>
+            <if test="foreignlevel != null">foreignLevel = #{foreignlevel},</if>
+            <if test="whenwork != null">whenWork = #{whenwork},</if>
+            <if test="worktime != null">workTime = #{worktime},</if>
+            <if test="workstatus != null and workstatus != ''">workStatus = #{workstatus},</if>
+            <if test="special != null and special != ''">special = #{special},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="attach != null and attach != ''">attach = #{attach},</if>
+            <if test="photo != null and photo != ''">photo = #{photo},</if>
+            <if test="entryunitdate != null">entryUnitDate = #{entryunitdate},</if>
+            <if test="unitworktime != null">unitWorkTime = #{unitworktime},</if>
+            <if test="quitdate != null">quitDate = #{quitdate},</if>
+            <if test="nowcontractdate != null">nowContractDate = #{nowcontractdate},</if>
+            <if test="nowcontractenddate != null">nowContractEndDate = #{nowcontractenddate},</if>
+            <if test="tuixiudate != null">tuixiuDate = #{tuixiudate},</if>
+            <if test="tuixiuage != null">tuixiuAge = #{tuixiuage},</if>
+            <if test="workinformal != null and workinformal != ''">workInFormal = #{workinformal},</if>
+            <if test="firstcontractdate != null">firstContractDate = #{firstcontractdate},</if>
+            <if test="techlevel != null and techlevel != ''">techLevel = #{techlevel},</if>
+            <if test="techexdate != null">techExDate = #{techexdate},</if>
+            <if test="stafftype != null and stafftype != ''">staffType = #{stafftype},</if>
+            <if test="staffbyname != null and staffbyname != ''">staffbyName = #{staffbyname},</if>
+            <if test="stafftechscore != null and stafftechscore != ''">staffTechScore = #{stafftechscore},</if>
+            <if test="bank != null and bank != ''">bank = #{bank},</if>
+            <if test="bankno != null and bankno != ''">bankNo = #{bankno},</if>
+            <if test="salarylevel != null and salarylevel != ''">salaryLevel = #{salarylevel},</if>
+            <if test="staffyinlibirthday != null">staffyinliBirthday = #{staffyinlibirthday},</if>
+            <if test="persondesp != null and persondesp != ''">personDesp = #{persondesp},</if>
+            <if test="passport != null and passport != ''">passport = #{passport},</if>
+            <if test="bloody != null and bloody != ''">bloody = #{bloody},</if>
+            <if test="height != null and height != ''">height = #{height},</if>
+            <if test="weight != null and weight != ''">weight = #{weight},</if>
+            <if test="eyesight != null and eyesight != ''">eyesight = #{eyesight},</if>
+            <if test="health != null and health != ''">health = #{health},</if>
+            <if test="drivers != null and drivers != ''">drivers = #{drivers},</if>
+            <if test="workexp != null and workexp != ''">workExp = #{workexp},</if>
+            <if test="workexpattach != null and workexpattach != ''">workExpAttach = #{workexpattach},</if>
+            <if test="socialrelation != null and socialrelation != ''">socialRelation = #{socialrelation},</if>
+            <if test="socialrelationattach != null and socialrelationattach != ''">socialRelationAttach = #{socialrelationattach},</if>
+            <if test="recoverstaffdate != null">recoverStaffDate = #{recoverstaffdate},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsFileById" parameterType="Integer">
+        delete from cmf_hrms_file where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsFileByIds" parameterType="String">
+        delete from cmf_hrms_file where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

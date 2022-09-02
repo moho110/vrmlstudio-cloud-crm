@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfUnitMapper">
+    
+    <resultMap type="CmfUnit" id="CmfUnitResult">
+        <result property="id"    column="id"    />
+        <result property="unitName"    column="UNIT_NAME"    />
+        <result property="telNo"    column="TEL_NO"    />
+        <result property="faxNo"    column="FAX_NO"    />
+        <result property="postNo"    column="POST_NO"    />
+        <result property="address"    column="ADDRESS"    />
+        <result property="url"    column="URL"    />
+        <result property="email"    column="EMAIL"    />
+        <result property="bankName"    column="BANK_NAME"    />
+        <result property="bankNo"    column="BANK_NO"    />
+        <result property="numzero"    column="numzero"    />
+        <result property="buybillid"    column="buybillid"    />
+        <result property="sellbillid"    column="sellbillid"    />
+        <result property="stockinbillid"    column="stockinbillid"    />
+        <result property="stockoutbillid"    column="stockoutbillid"    />
+        <result property="storecheckbillid"    column="storecheckbillid"    />
+        <result property="stockchangebillid"    column="stockchangebillid"    />
+        <result property="zuzhuangbillid"    column="zuzhuangbillid"    />
+        <result property="feiyongbillid"    column="feiyongbillid"    />
+        <result property="prepaybillid"    column="prepaybillid"    />
+        <result property="preshoubillid"    column="preshoubillid"    />
+        <result property="dingjiagongshi"    column="dingjiagongshi"    />
+    </resultMap>
+
+    <sql id="selectCmfUnitVo">
+        select id, UNIT_NAME, TEL_NO, FAX_NO, POST_NO, ADDRESS, URL, EMAIL, BANK_NAME, BANK_NO, numzero, buybillid, sellbillid, stockinbillid, stockoutbillid, storecheckbillid, stockchangebillid, zuzhuangbillid, feiyongbillid, prepaybillid, preshoubillid, dingjiagongshi from cmf_unit
+    </sql>
+
+    <select id="selectCmfUnitList" parameterType="CmfUnit" resultMap="CmfUnitResult">
+        <include refid="selectCmfUnitVo"/>
+        <where>  
+            <if test="unitName != null  and unitName != ''"> and UNIT_NAME like concat('%', #{unitName}, '%')</if>
+            <if test="telNo != null  and telNo != ''"> and TEL_NO = #{telNo}</if>
+            <if test="faxNo != null  and faxNo != ''"> and FAX_NO = #{faxNo}</if>
+            <if test="postNo != null  and postNo != ''"> and POST_NO = #{postNo}</if>
+            <if test="address != null  and address != ''"> and ADDRESS = #{address}</if>
+            <if test="url != null  and url != ''"> and URL = #{url}</if>
+            <if test="email != null  and email != ''"> and EMAIL = #{email}</if>
+            <if test="bankName != null  and bankName != ''"> and BANK_NAME like concat('%', #{bankName}, '%')</if>
+            <if test="bankNo != null  and bankNo != ''"> and BANK_NO = #{bankNo}</if>
+            <if test="numzero != null "> and numzero = #{numzero}</if>
+            <if test="buybillid != null "> and buybillid = #{buybillid}</if>
+            <if test="sellbillid != null "> and sellbillid = #{sellbillid}</if>
+            <if test="stockinbillid != null "> and stockinbillid = #{stockinbillid}</if>
+            <if test="stockoutbillid != null "> and stockoutbillid = #{stockoutbillid}</if>
+            <if test="storecheckbillid != null "> and storecheckbillid = #{storecheckbillid}</if>
+            <if test="stockchangebillid != null "> and stockchangebillid = #{stockchangebillid}</if>
+            <if test="zuzhuangbillid != null "> and zuzhuangbillid = #{zuzhuangbillid}</if>
+            <if test="feiyongbillid != null "> and feiyongbillid = #{feiyongbillid}</if>
+            <if test="prepaybillid != null "> and prepaybillid = #{prepaybillid}</if>
+            <if test="preshoubillid != null "> and preshoubillid = #{preshoubillid}</if>
+            <if test="dingjiagongshi != null "> and dingjiagongshi = #{dingjiagongshi}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfUnitById" parameterType="Integer" resultMap="CmfUnitResult">
+        <include refid="selectCmfUnitVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfUnit" parameterType="CmfUnit" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_unit
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="unitName != null and unitName != ''">UNIT_NAME,</if>
+            <if test="telNo != null and telNo != ''">TEL_NO,</if>
+            <if test="faxNo != null and faxNo != ''">FAX_NO,</if>
+            <if test="postNo != null and postNo != ''">POST_NO,</if>
+            <if test="address != null and address != ''">ADDRESS,</if>
+            <if test="url != null and url != ''">URL,</if>
+            <if test="email != null and email != ''">EMAIL,</if>
+            <if test="bankName != null and bankName != ''">BANK_NAME,</if>
+            <if test="bankNo != null and bankNo != ''">BANK_NO,</if>
+            <if test="numzero != null">numzero,</if>
+            <if test="buybillid != null">buybillid,</if>
+            <if test="sellbillid != null">sellbillid,</if>
+            <if test="stockinbillid != null">stockinbillid,</if>
+            <if test="stockoutbillid != null">stockoutbillid,</if>
+            <if test="storecheckbillid != null">storecheckbillid,</if>
+            <if test="stockchangebillid != null">stockchangebillid,</if>
+            <if test="zuzhuangbillid != null">zuzhuangbillid,</if>
+            <if test="feiyongbillid != null">feiyongbillid,</if>
+            <if test="prepaybillid != null">prepaybillid,</if>
+            <if test="preshoubillid != null">preshoubillid,</if>
+            <if test="dingjiagongshi != null">dingjiagongshi,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="unitName != null and unitName != ''">#{unitName},</if>
+            <if test="telNo != null and telNo != ''">#{telNo},</if>
+            <if test="faxNo != null and faxNo != ''">#{faxNo},</if>
+            <if test="postNo != null and postNo != ''">#{postNo},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="url != null and url != ''">#{url},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="bankName != null and bankName != ''">#{bankName},</if>
+            <if test="bankNo != null and bankNo != ''">#{bankNo},</if>
+            <if test="numzero != null">#{numzero},</if>
+            <if test="buybillid != null">#{buybillid},</if>
+            <if test="sellbillid != null">#{sellbillid},</if>
+            <if test="stockinbillid != null">#{stockinbillid},</if>
+            <if test="stockoutbillid != null">#{stockoutbillid},</if>
+            <if test="storecheckbillid != null">#{storecheckbillid},</if>
+            <if test="stockchangebillid != null">#{stockchangebillid},</if>
+            <if test="zuzhuangbillid != null">#{zuzhuangbillid},</if>
+            <if test="feiyongbillid != null">#{feiyongbillid},</if>
+            <if test="prepaybillid != null">#{prepaybillid},</if>
+            <if test="preshoubillid != null">#{preshoubillid},</if>
+            <if test="dingjiagongshi != null">#{dingjiagongshi},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfUnit" parameterType="CmfUnit">
+        update cmf_unit
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="unitName != null and unitName != ''">UNIT_NAME = #{unitName},</if>
+            <if test="telNo != null and telNo != ''">TEL_NO = #{telNo},</if>
+            <if test="faxNo != null and faxNo != ''">FAX_NO = #{faxNo},</if>
+            <if test="postNo != null and postNo != ''">POST_NO = #{postNo},</if>
+            <if test="address != null and address != ''">ADDRESS = #{address},</if>
+            <if test="url != null and url != ''">URL = #{url},</if>
+            <if test="email != null and email != ''">EMAIL = #{email},</if>
+            <if test="bankName != null and bankName != ''">BANK_NAME = #{bankName},</if>
+            <if test="bankNo != null and bankNo != ''">BANK_NO = #{bankNo},</if>
+            <if test="numzero != null">numzero = #{numzero},</if>
+            <if test="buybillid != null">buybillid = #{buybillid},</if>
+            <if test="sellbillid != null">sellbillid = #{sellbillid},</if>
+            <if test="stockinbillid != null">stockinbillid = #{stockinbillid},</if>
+            <if test="stockoutbillid != null">stockoutbillid = #{stockoutbillid},</if>
+            <if test="storecheckbillid != null">storecheckbillid = #{storecheckbillid},</if>
+            <if test="stockchangebillid != null">stockchangebillid = #{stockchangebillid},</if>
+            <if test="zuzhuangbillid != null">zuzhuangbillid = #{zuzhuangbillid},</if>
+            <if test="feiyongbillid != null">feiyongbillid = #{feiyongbillid},</if>
+            <if test="prepaybillid != null">prepaybillid = #{prepaybillid},</if>
+            <if test="preshoubillid != null">preshoubillid = #{preshoubillid},</if>
+            <if test="dingjiagongshi != null">dingjiagongshi = #{dingjiagongshi},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfUnitById" parameterType="Integer">
+        delete from cmf_unit where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfUnitByIds" parameterType="String">
+        delete from cmf_unit where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

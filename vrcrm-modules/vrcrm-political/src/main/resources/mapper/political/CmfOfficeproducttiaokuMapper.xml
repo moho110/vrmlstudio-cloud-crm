@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeproducttiaokuMapper">
+    
+    <resultMap type="CmfOfficeproducttiaoku" id="CmfOfficeproducttiaokuResult">
+        <result property="id"    column="id"    />
+        <result property="officename"    column="officeName"    />
+        <result property="officeno"    column="officeNo"    />
+        <result property="transferoutwarehouse"    column="transferOutWarehouse"    />
+        <result property="transferinwarehouse"    column="transferInWarehouse"    />
+        <result property="transferquantity"    column="transferQuantity"    />
+        <result property="staffman"    column="staffMan"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="creattime"    column="creatTime"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="count"    column="count"    />
+        <result property="isexamine"    column="isExamine"    />
+        <result property="extime"    column="exTime"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeproducttiaokuVo">
+        select id, officeName, officeNo, transferOutWarehouse, transferInWarehouse, transferQuantity, staffMan, approvalMan, memo, creator, creatTime, price, quantity, count, isExamine, exTime from cmf_officeproducttiaoku
+    </sql>
+
+    <select id="selectCmfOfficeproducttiaokuList" parameterType="CmfOfficeproducttiaoku" resultMap="CmfOfficeproducttiaokuResult">
+        <include refid="selectCmfOfficeproducttiaokuVo"/>
+        <where>  
+            <if test="officename != null  and officename != ''"> and officeName like concat('%', #{officename}, '%')</if>
+            <if test="officeno != null  and officeno != ''"> and officeNo = #{officeno}</if>
+            <if test="transferoutwarehouse != null  and transferoutwarehouse != ''"> and transferOutWarehouse = #{transferoutwarehouse}</if>
+            <if test="transferinwarehouse != null  and transferinwarehouse != ''"> and transferInWarehouse = #{transferinwarehouse}</if>
+            <if test="transferquantity != null "> and transferQuantity = #{transferquantity}</if>
+            <if test="staffman != null  and staffman != ''"> and staffMan = #{staffman}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="creattime != null "> and creatTime = #{creattime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="count != null "> and count = #{count}</if>
+            <if test="isexamine != null "> and isExamine = #{isexamine}</if>
+            <if test="extime != null "> and exTime = #{extime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeproducttiaokuById" parameterType="Integer" resultMap="CmfOfficeproducttiaokuResult">
+        <include refid="selectCmfOfficeproducttiaokuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeproducttiaoku" parameterType="CmfOfficeproducttiaoku" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_officeproducttiaoku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName,</if>
+            <if test="officeno != null and officeno != ''">officeNo,</if>
+            <if test="transferoutwarehouse != null and transferoutwarehouse != ''">transferOutWarehouse,</if>
+            <if test="transferinwarehouse != null and transferinwarehouse != ''">transferInWarehouse,</if>
+            <if test="transferquantity != null">transferQuantity,</if>
+            <if test="staffman != null and staffman != ''">staffMan,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="creattime != null">creatTime,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="count != null">count,</if>
+            <if test="isexamine != null">isExamine,</if>
+            <if test="extime != null">exTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="officename != null and officename != ''">#{officename},</if>
+            <if test="officeno != null and officeno != ''">#{officeno},</if>
+            <if test="transferoutwarehouse != null and transferoutwarehouse != ''">#{transferoutwarehouse},</if>
+            <if test="transferinwarehouse != null and transferinwarehouse != ''">#{transferinwarehouse},</if>
+            <if test="transferquantity != null">#{transferquantity},</if>
+            <if test="staffman != null and staffman != ''">#{staffman},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="creattime != null">#{creattime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="count != null">#{count},</if>
+            <if test="isexamine != null">#{isexamine},</if>
+            <if test="extime != null">#{extime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeproducttiaoku" parameterType="CmfOfficeproducttiaoku">
+        update cmf_officeproducttiaoku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="officename != null and officename != ''">officeName = #{officename},</if>
+            <if test="officeno != null and officeno != ''">officeNo = #{officeno},</if>
+            <if test="transferoutwarehouse != null and transferoutwarehouse != ''">transferOutWarehouse = #{transferoutwarehouse},</if>
+            <if test="transferinwarehouse != null and transferinwarehouse != ''">transferInWarehouse = #{transferinwarehouse},</if>
+            <if test="transferquantity != null">transferQuantity = #{transferquantity},</if>
+            <if test="staffman != null and staffman != ''">staffMan = #{staffman},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="creattime != null">creatTime = #{creattime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="isexamine != null">isExamine = #{isexamine},</if>
+            <if test="extime != null">exTime = #{extime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeproducttiaokuById" parameterType="Integer">
+        delete from cmf_officeproducttiaoku where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeproducttiaokuByIds" parameterType="String">
+        delete from cmf_officeproducttiaoku where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

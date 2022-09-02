@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemLogallMapper">
+    
+    <resultMap type="CmfSystemLogall" id="CmfSystemLogallResult">
+        <result property="id"    column="id"    />
+        <result property="currenttime"    column="currentTime"    />
+        <result property="executetime"    column="executeTime"    />
+        <result property="sql"    column="SQL"    />
+        <result property="slowLaunchThreads"    column="Slow_launch_threads"    />
+        <result property="threadsCached"    column="Threads_cached"    />
+        <result property="threadsConnected"    column="Threads_connected"    />
+        <result property="threadsCreated"    column="Threads_created"    />
+        <result property="threadsRunning"    column="Threads_running"    />
+        <result property="qcacheFreeBlocks"    column="Qcache_free_blocks"    />
+        <result property="qcacheFreeMemory"    column="Qcache_free_memory"    />
+        <result property="qcacheHits"    column="Qcache_hits"    />
+        <result property="qcacheInserts"    column="Qcache_inserts"    />
+        <result property="qcacheLowmemPrunes"    column="Qcache_lowmem_prunes"    />
+        <result property="qcacheNotCached"    column="Qcache_not_cached"    />
+        <result property="qcacheQueriesInCache"    column="Qcache_queries_in_cache"    />
+        <result property="qcacheTotalBlocks"    column="Qcache_total_blocks"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemLogallVo">
+        select id, currentTime, executeTime, SQL, Slow_launch_threads, Threads_cached, Threads_connected, Threads_created, Threads_running, Qcache_free_blocks, Qcache_free_memory, Qcache_hits, Qcache_inserts, Qcache_lowmem_prunes, Qcache_not_cached, Qcache_queries_in_cache, Qcache_total_blocks from cmf_system_logall
+    </sql>
+
+    <select id="selectCmfSystemLogallList" parameterType="CmfSystemLogall" resultMap="CmfSystemLogallResult">
+        <include refid="selectCmfSystemLogallVo"/>
+        <where>  
+            <if test="currenttime != null "> and currentTime = #{currenttime}</if>
+            <if test="executetime != null "> and executeTime = #{executetime}</if>
+            <if test="sql != null  and sql != ''"> and SQL = #{sql}</if>
+            <if test="slowLaunchThreads != null "> and Slow_launch_threads = #{slowLaunchThreads}</if>
+            <if test="threadsCached != null "> and Threads_cached = #{threadsCached}</if>
+            <if test="threadsConnected != null "> and Threads_connected = #{threadsConnected}</if>
+            <if test="threadsCreated != null "> and Threads_created = #{threadsCreated}</if>
+            <if test="threadsRunning != null "> and Threads_running = #{threadsRunning}</if>
+            <if test="qcacheFreeBlocks != null "> and Qcache_free_blocks = #{qcacheFreeBlocks}</if>
+            <if test="qcacheFreeMemory != null "> and Qcache_free_memory = #{qcacheFreeMemory}</if>
+            <if test="qcacheHits != null "> and Qcache_hits = #{qcacheHits}</if>
+            <if test="qcacheInserts != null "> and Qcache_inserts = #{qcacheInserts}</if>
+            <if test="qcacheLowmemPrunes != null "> and Qcache_lowmem_prunes = #{qcacheLowmemPrunes}</if>
+            <if test="qcacheNotCached != null "> and Qcache_not_cached = #{qcacheNotCached}</if>
+            <if test="qcacheQueriesInCache != null "> and Qcache_queries_in_cache = #{qcacheQueriesInCache}</if>
+            <if test="qcacheTotalBlocks != null "> and Qcache_total_blocks = #{qcacheTotalBlocks}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemLogallById" parameterType="Integer" resultMap="CmfSystemLogallResult">
+        <include refid="selectCmfSystemLogallVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemLogall" parameterType="CmfSystemLogall" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_system_logall
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="currenttime != null">currentTime,</if>
+            <if test="executetime != null">executeTime,</if>
+            <if test="sql != null and sql != ''">SQL,</if>
+            <if test="slowLaunchThreads != null">Slow_launch_threads,</if>
+            <if test="threadsCached != null">Threads_cached,</if>
+            <if test="threadsConnected != null">Threads_connected,</if>
+            <if test="threadsCreated != null">Threads_created,</if>
+            <if test="threadsRunning != null">Threads_running,</if>
+            <if test="qcacheFreeBlocks != null">Qcache_free_blocks,</if>
+            <if test="qcacheFreeMemory != null">Qcache_free_memory,</if>
+            <if test="qcacheHits != null">Qcache_hits,</if>
+            <if test="qcacheInserts != null">Qcache_inserts,</if>
+            <if test="qcacheLowmemPrunes != null">Qcache_lowmem_prunes,</if>
+            <if test="qcacheNotCached != null">Qcache_not_cached,</if>
+            <if test="qcacheQueriesInCache != null">Qcache_queries_in_cache,</if>
+            <if test="qcacheTotalBlocks != null">Qcache_total_blocks,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="currenttime != null">#{currenttime},</if>
+            <if test="executetime != null">#{executetime},</if>
+            <if test="sql != null and sql != ''">#{sql},</if>
+            <if test="slowLaunchThreads != null">#{slowLaunchThreads},</if>
+            <if test="threadsCached != null">#{threadsCached},</if>
+            <if test="threadsConnected != null">#{threadsConnected},</if>
+            <if test="threadsCreated != null">#{threadsCreated},</if>
+            <if test="threadsRunning != null">#{threadsRunning},</if>
+            <if test="qcacheFreeBlocks != null">#{qcacheFreeBlocks},</if>
+            <if test="qcacheFreeMemory != null">#{qcacheFreeMemory},</if>
+            <if test="qcacheHits != null">#{qcacheHits},</if>
+            <if test="qcacheInserts != null">#{qcacheInserts},</if>
+            <if test="qcacheLowmemPrunes != null">#{qcacheLowmemPrunes},</if>
+            <if test="qcacheNotCached != null">#{qcacheNotCached},</if>
+            <if test="qcacheQueriesInCache != null">#{qcacheQueriesInCache},</if>
+            <if test="qcacheTotalBlocks != null">#{qcacheTotalBlocks},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemLogall" parameterType="CmfSystemLogall">
+        update cmf_system_logall
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="currenttime != null">currentTime = #{currenttime},</if>
+            <if test="executetime != null">executeTime = #{executetime},</if>
+            <if test="sql != null and sql != ''">SQL = #{sql},</if>
+            <if test="slowLaunchThreads != null">Slow_launch_threads = #{slowLaunchThreads},</if>
+            <if test="threadsCached != null">Threads_cached = #{threadsCached},</if>
+            <if test="threadsConnected != null">Threads_connected = #{threadsConnected},</if>
+            <if test="threadsCreated != null">Threads_created = #{threadsCreated},</if>
+            <if test="threadsRunning != null">Threads_running = #{threadsRunning},</if>
+            <if test="qcacheFreeBlocks != null">Qcache_free_blocks = #{qcacheFreeBlocks},</if>
+            <if test="qcacheFreeMemory != null">Qcache_free_memory = #{qcacheFreeMemory},</if>
+            <if test="qcacheHits != null">Qcache_hits = #{qcacheHits},</if>
+            <if test="qcacheInserts != null">Qcache_inserts = #{qcacheInserts},</if>
+            <if test="qcacheLowmemPrunes != null">Qcache_lowmem_prunes = #{qcacheLowmemPrunes},</if>
+            <if test="qcacheNotCached != null">Qcache_not_cached = #{qcacheNotCached},</if>
+            <if test="qcacheQueriesInCache != null">Qcache_queries_in_cache = #{qcacheQueriesInCache},</if>
+            <if test="qcacheTotalBlocks != null">Qcache_total_blocks = #{qcacheTotalBlocks},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemLogallById" parameterType="Integer">
+        delete from cmf_system_logall where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemLogallByIds" parameterType="String">
+        delete from cmf_system_logall where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

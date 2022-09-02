@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfFixedassetgroupMapper">
+    
+    <resultMap type="CmfFixedassetgroup" id="CmfFixedassetgroupResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+        <result property="sort"    column="sort"    />
+        <result property="prelevetype"    column="preLeveType"    />
+    </resultMap>
+
+    <sql id="selectCmfFixedassetgroupVo">
+        select id, Name, sort, preLeveType from cmf_fixedassetgroup
+    </sql>
+
+    <select id="selectCmfFixedassetgroupList" parameterType="CmfFixedassetgroup" resultMap="CmfFixedassetgroupResult">
+        <include refid="selectCmfFixedassetgroupVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+            <if test="sort != null "> and sort = #{sort}</if>
+            <if test="prelevetype != null  and prelevetype != ''"> and preLeveType = #{prelevetype}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFixedassetgroupById" parameterType="Integer" resultMap="CmfFixedassetgroupResult">
+        <include refid="selectCmfFixedassetgroupVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFixedassetgroup" parameterType="CmfFixedassetgroup" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fixedassetgroup
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+            <if test="sort != null">sort,</if>
+            <if test="prelevetype != null and prelevetype != ''">preLeveType,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sort != null">#{sort},</if>
+            <if test="prelevetype != null and prelevetype != ''">#{prelevetype},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFixedassetgroup" parameterType="CmfFixedassetgroup">
+        update cmf_fixedassetgroup
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+            <if test="sort != null">sort = #{sort},</if>
+            <if test="prelevetype != null and prelevetype != ''">preLeveType = #{prelevetype},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFixedassetgroupById" parameterType="Integer">
+        delete from cmf_fixedassetgroup where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFixedassetgroupByIds" parameterType="String">
+        delete from cmf_fixedassetgroup where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

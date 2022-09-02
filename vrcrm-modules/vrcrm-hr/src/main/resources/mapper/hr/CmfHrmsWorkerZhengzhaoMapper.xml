@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsWorkerZhengzhaoMapper">
+    
+    <resultMap type="CmfHrmsWorkerZhengzhao" id="CmfHrmsWorkerZhengzhaoResult">
+        <result property="id"    column="id"    />
+        <result property="workid"    column="workId"    />
+        <result property="name"    column="name"    />
+        <result property="indepartment"    column="inDepartment"    />
+        <result property="photo"    column="photo"    />
+        <result property="certificationtype"    column="certificationType"    />
+        <result property="certificationname"    column="certificationName"    />
+        <result property="certificationscan"    column="certificationScan"    />
+        <result property="prizetime"    column="prizeTime"    />
+        <result property="agency"    column="agency"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsWorkerZhengzhaoVo">
+        select id, workId, name, inDepartment, photo, certificationType, certificationName, certificationScan, prizeTime, agency, creator, createTime from cmf_hrms_worker_zhengzhao
+    </sql>
+
+    <select id="selectCmfHrmsWorkerZhengzhaoList" parameterType="CmfHrmsWorkerZhengzhao" resultMap="CmfHrmsWorkerZhengzhaoResult">
+        <include refid="selectCmfHrmsWorkerZhengzhaoVo"/>
+        <where>  
+            <if test="workid != null  and workid != ''"> and workId = #{workid}</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="indepartment != null  and indepartment != ''"> and inDepartment = #{indepartment}</if>
+            <if test="photo != null  and photo != ''"> and photo = #{photo}</if>
+            <if test="certificationtype != null  and certificationtype != ''"> and certificationType = #{certificationtype}</if>
+            <if test="certificationname != null  and certificationname != ''"> and certificationName like concat('%', #{certificationname}, '%')</if>
+            <if test="certificationscan != null  and certificationscan != ''"> and certificationScan = #{certificationscan}</if>
+            <if test="prizetime != null "> and prizeTime = #{prizetime}</if>
+            <if test="agency != null  and agency != ''"> and agency = #{agency}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsWorkerZhengzhaoById" parameterType="Integer" resultMap="CmfHrmsWorkerZhengzhaoResult">
+        <include refid="selectCmfHrmsWorkerZhengzhaoVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsWorkerZhengzhao" parameterType="CmfHrmsWorkerZhengzhao" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_worker_zhengzhao
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment,</if>
+            <if test="photo != null and photo != ''">photo,</if>
+            <if test="certificationtype != null and certificationtype != ''">certificationType,</if>
+            <if test="certificationname != null and certificationname != ''">certificationName,</if>
+            <if test="certificationscan != null and certificationscan != ''">certificationScan,</if>
+            <if test="prizetime != null">prizeTime,</if>
+            <if test="agency != null and agency != ''">agency,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workid != null and workid != ''">#{workid},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="indepartment != null and indepartment != ''">#{indepartment},</if>
+            <if test="photo != null and photo != ''">#{photo},</if>
+            <if test="certificationtype != null and certificationtype != ''">#{certificationtype},</if>
+            <if test="certificationname != null and certificationname != ''">#{certificationname},</if>
+            <if test="certificationscan != null and certificationscan != ''">#{certificationscan},</if>
+            <if test="prizetime != null">#{prizetime},</if>
+            <if test="agency != null and agency != ''">#{agency},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsWorkerZhengzhao" parameterType="CmfHrmsWorkerZhengzhao">
+        update cmf_hrms_worker_zhengzhao
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workid != null and workid != ''">workId = #{workid},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="indepartment != null and indepartment != ''">inDepartment = #{indepartment},</if>
+            <if test="photo != null and photo != ''">photo = #{photo},</if>
+            <if test="certificationtype != null and certificationtype != ''">certificationType = #{certificationtype},</if>
+            <if test="certificationname != null and certificationname != ''">certificationName = #{certificationname},</if>
+            <if test="certificationscan != null and certificationscan != ''">certificationScan = #{certificationscan},</if>
+            <if test="prizetime != null">prizeTime = #{prizetime},</if>
+            <if test="agency != null and agency != ''">agency = #{agency},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsWorkerZhengzhaoById" parameterType="Integer">
+        delete from cmf_hrms_worker_zhengzhao where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsWorkerZhengzhaoByIds" parameterType="String">
+        delete from cmf_hrms_worker_zhengzhao where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

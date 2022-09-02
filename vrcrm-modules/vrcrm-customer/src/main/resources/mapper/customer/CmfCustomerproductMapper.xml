@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerproductMapper">
+    
+    <resultMap type="CmfCustomerproduct" id="CmfCustomerproductResult">
+        <result property="id"    column="id"    />
+        <result property="theme"    column="theme"    />
+        <result property="priceman"    column="priceMan"    />
+        <result property="clients"    column="clients"    />
+        <result property="reiceiver"    column="reiceiver"    />
+        <result property="pricetime"    column="priceTime"    />
+        <result property="count"    column="count"    />
+        <result property="salechance"    column="saleChance"    />
+        <result property="jiaofuintro"    column="jiaofuIntro"    />
+        <result property="topayintro"    column="toPayIntro"    />
+        <result property="packageexpintro"    column="packageExpIntro"    />
+        <result property="memo"    column="memo"    />
+        <result property="attach"    column="attach"    />
+        <result property="isexamine"    column="isExamine"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="examineman"    column="examineMan"    />
+        <result property="examinetime"    column="examineTime"    />
+        <result property="unitid"    column="unitid"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerproductVo">
+        select id, theme, priceMan, clients, reiceiver, priceTime, count, saleChance, jiaofuIntro, toPayIntro, packageExpIntro, memo, attach, isExamine, creator, createTime, examineMan, examineTime, unitid from cmf_customerproduct
+    </sql>
+
+    <select id="selectCmfCustomerproductList" parameterType="CmfCustomerproduct" resultMap="CmfCustomerproductResult">
+        <include refid="selectCmfCustomerproductVo"/>
+        <where>  
+            <if test="theme != null  and theme != ''"> and theme = #{theme}</if>
+            <if test="priceman != null  and priceman != ''"> and priceMan = #{priceman}</if>
+            <if test="clients != null  and clients != ''"> and clients = #{clients}</if>
+            <if test="reiceiver != null  and reiceiver != ''"> and reiceiver = #{reiceiver}</if>
+            <if test="pricetime != null  and pricetime != ''"> and priceTime = #{pricetime}</if>
+            <if test="count != null "> and count = #{count}</if>
+            <if test="salechance != null  and salechance != ''"> and saleChance = #{salechance}</if>
+            <if test="jiaofuintro != null  and jiaofuintro != ''"> and jiaofuIntro = #{jiaofuintro}</if>
+            <if test="topayintro != null  and topayintro != ''"> and toPayIntro = #{topayintro}</if>
+            <if test="packageexpintro != null  and packageexpintro != ''"> and packageExpIntro = #{packageexpintro}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="attach != null  and attach != ''"> and attach = #{attach}</if>
+            <if test="isexamine != null "> and isExamine = #{isexamine}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="examineman != null  and examineman != ''"> and examineMan = #{examineman}</if>
+            <if test="examinetime != null "> and examineTime = #{examinetime}</if>
+            <if test="unitid != null "> and unitid = #{unitid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerproductById" parameterType="Integer" resultMap="CmfCustomerproductResult">
+        <include refid="selectCmfCustomerproductVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerproduct" parameterType="CmfCustomerproduct" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customerproduct
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="theme != null and theme != ''">theme,</if>
+            <if test="priceman != null and priceman != ''">priceMan,</if>
+            <if test="clients != null and clients != ''">clients,</if>
+            <if test="reiceiver != null and reiceiver != ''">reiceiver,</if>
+            <if test="pricetime != null and pricetime != ''">priceTime,</if>
+            <if test="count != null">count,</if>
+            <if test="salechance != null and salechance != ''">saleChance,</if>
+            <if test="jiaofuintro != null and jiaofuintro != ''">jiaofuIntro,</if>
+            <if test="topayintro != null and topayintro != ''">toPayIntro,</if>
+            <if test="packageexpintro != null and packageexpintro != ''">packageExpIntro,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="attach != null and attach != ''">attach,</if>
+            <if test="isexamine != null">isExamine,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="examineman != null and examineman != ''">examineMan,</if>
+            <if test="examinetime != null">examineTime,</if>
+            <if test="unitid != null">unitid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="theme != null and theme != ''">#{theme},</if>
+            <if test="priceman != null and priceman != ''">#{priceman},</if>
+            <if test="clients != null and clients != ''">#{clients},</if>
+            <if test="reiceiver != null and reiceiver != ''">#{reiceiver},</if>
+            <if test="pricetime != null and pricetime != ''">#{pricetime},</if>
+            <if test="count != null">#{count},</if>
+            <if test="salechance != null and salechance != ''">#{salechance},</if>
+            <if test="jiaofuintro != null and jiaofuintro != ''">#{jiaofuintro},</if>
+            <if test="topayintro != null and topayintro != ''">#{topayintro},</if>
+            <if test="packageexpintro != null and packageexpintro != ''">#{packageexpintro},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="attach != null and attach != ''">#{attach},</if>
+            <if test="isexamine != null">#{isexamine},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="examineman != null and examineman != ''">#{examineman},</if>
+            <if test="examinetime != null">#{examinetime},</if>
+            <if test="unitid != null">#{unitid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerproduct" parameterType="CmfCustomerproduct">
+        update cmf_customerproduct
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="theme != null and theme != ''">theme = #{theme},</if>
+            <if test="priceman != null and priceman != ''">priceMan = #{priceman},</if>
+            <if test="clients != null and clients != ''">clients = #{clients},</if>
+            <if test="reiceiver != null and reiceiver != ''">reiceiver = #{reiceiver},</if>
+            <if test="pricetime != null and pricetime != ''">priceTime = #{pricetime},</if>
+            <if test="count != null">count = #{count},</if>
+            <if test="salechance != null and salechance != ''">saleChance = #{salechance},</if>
+            <if test="jiaofuintro != null and jiaofuintro != ''">jiaofuIntro = #{jiaofuintro},</if>
+            <if test="topayintro != null and topayintro != ''">toPayIntro = #{topayintro},</if>
+            <if test="packageexpintro != null and packageexpintro != ''">packageExpIntro = #{packageexpintro},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="attach != null and attach != ''">attach = #{attach},</if>
+            <if test="isexamine != null">isExamine = #{isexamine},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="examineman != null and examineman != ''">examineMan = #{examineman},</if>
+            <if test="examinetime != null">examineTime = #{examinetime},</if>
+            <if test="unitid != null">unitid = #{unitid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerproductById" parameterType="Integer">
+        delete from cmf_customerproduct where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerproductByIds" parameterType="String">
+        delete from cmf_customerproduct where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

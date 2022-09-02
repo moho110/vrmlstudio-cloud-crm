@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfCalendarMapper">
+    
+    <resultMap type="CmfCalendar" id="CmfCalendarResult">
+        <result property="id"    column="id"    />
+        <result property="userId"    column="USER_ID"    />
+        <result property="calTime"    column="CAL_TIME"    />
+        <result property="endTime"    column="END_TIME"    />
+        <result property="calType"    column="CAL_TYPE"    />
+        <result property="calLevel"    column="CAL_LEVEL"    />
+        <result property="content"    column="CONTENT"    />
+        <result property="managerId"    column="MANAGER_ID"    />
+        <result property="overStatus"    column="OVER_STATUS"    />
+        <result property="ifsms"    column="ifsms"    />
+        <result property="tixingtime"    column="tixingtime"    />
+        <result property="url"    column="url"    />
+        <result property="guanlianid"    column="guanlianid"    />
+    </resultMap>
+
+    <sql id="selectCmfCalendarVo">
+        select id, USER_ID, CAL_TIME, END_TIME, CAL_TYPE, CAL_LEVEL, CONTENT, MANAGER_ID, OVER_STATUS, ifsms, tixingtime, url, guanlianid from cmf_calendar
+    </sql>
+
+    <select id="selectCmfCalendarList" parameterType="CmfCalendar" resultMap="CmfCalendarResult">
+        <include refid="selectCmfCalendarVo"/>
+        <where>  
+            <if test="userId != null  and userId != ''"> and USER_ID = #{userId}</if>
+            <if test="calTime != null "> and CAL_TIME = #{calTime}</if>
+            <if test="endTime != null "> and END_TIME = #{endTime}</if>
+            <if test="calType != null  and calType != ''"> and CAL_TYPE = #{calType}</if>
+            <if test="calLevel != null "> and CAL_LEVEL = #{calLevel}</if>
+            <if test="content != null  and content != ''"> and CONTENT = #{content}</if>
+            <if test="managerId != null  and managerId != ''"> and MANAGER_ID = #{managerId}</if>
+            <if test="overStatus != null  and overStatus != ''"> and OVER_STATUS = #{overStatus}</if>
+            <if test="ifsms != null "> and ifsms = #{ifsms}</if>
+            <if test="tixingtime != null "> and tixingtime = #{tixingtime}</if>
+            <if test="url != null  and url != ''"> and url = #{url}</if>
+            <if test="guanlianid != null "> and guanlianid = #{guanlianid}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCalendarById" parameterType="Long" resultMap="CmfCalendarResult">
+        <include refid="selectCmfCalendarVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCalendar" parameterType="CmfCalendar" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_calendar
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">USER_ID,</if>
+            <if test="calTime != null">CAL_TIME,</if>
+            <if test="endTime != null">END_TIME,</if>
+            <if test="calType != null and calType != ''">CAL_TYPE,</if>
+            <if test="calLevel != null">CAL_LEVEL,</if>
+            <if test="content != null and content != ''">CONTENT,</if>
+            <if test="managerId != null and managerId != ''">MANAGER_ID,</if>
+            <if test="overStatus != null and overStatus != ''">OVER_STATUS,</if>
+            <if test="ifsms != null">ifsms,</if>
+            <if test="tixingtime != null">tixingtime,</if>
+            <if test="url != null">url,</if>
+            <if test="guanlianid != null">guanlianid,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="calTime != null">#{calTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="calType != null and calType != ''">#{calType},</if>
+            <if test="calLevel != null">#{calLevel},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="managerId != null and managerId != ''">#{managerId},</if>
+            <if test="overStatus != null and overStatus != ''">#{overStatus},</if>
+            <if test="ifsms != null">#{ifsms},</if>
+            <if test="tixingtime != null">#{tixingtime},</if>
+            <if test="url != null">#{url},</if>
+            <if test="guanlianid != null">#{guanlianid},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCalendar" parameterType="CmfCalendar">
+        update cmf_calendar
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null and userId != ''">USER_ID = #{userId},</if>
+            <if test="calTime != null">CAL_TIME = #{calTime},</if>
+            <if test="endTime != null">END_TIME = #{endTime},</if>
+            <if test="calType != null and calType != ''">CAL_TYPE = #{calType},</if>
+            <if test="calLevel != null">CAL_LEVEL = #{calLevel},</if>
+            <if test="content != null and content != ''">CONTENT = #{content},</if>
+            <if test="managerId != null and managerId != ''">MANAGER_ID = #{managerId},</if>
+            <if test="overStatus != null and overStatus != ''">OVER_STATUS = #{overStatus},</if>
+            <if test="ifsms != null">ifsms = #{ifsms},</if>
+            <if test="tixingtime != null">tixingtime = #{tixingtime},</if>
+            <if test="url != null">url = #{url},</if>
+            <if test="guanlianid != null">guanlianid = #{guanlianid},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCalendarById" parameterType="Long">
+        delete from cmf_calendar where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCalendarByIds" parameterType="String">
+        delete from cmf_calendar where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

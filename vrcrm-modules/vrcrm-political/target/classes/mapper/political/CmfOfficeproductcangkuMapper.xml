@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfOfficeproductcangkuMapper">
+    
+    <resultMap type="CmfOfficeproductcangku" id="CmfOfficeproductcangkuResult">
+        <result property="id"    column="id"    />
+        <result property="warehousename"    column="warehouseName"    />
+        <result property="warehouseman"    column="warehouseMan"    />
+        <result property="telphone"    column="telphone"    />
+        <result property="warehouseaddress"    column="warehouseAddress"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfOfficeproductcangkuVo">
+        select id, warehouseName, warehouseMan, telphone, warehouseAddress, memo from cmf_officeproductcangku
+    </sql>
+
+    <select id="selectCmfOfficeproductcangkuList" parameterType="CmfOfficeproductcangku" resultMap="CmfOfficeproductcangkuResult">
+        <include refid="selectCmfOfficeproductcangkuVo"/>
+        <where>  
+            <if test="warehousename != null  and warehousename != ''"> and warehouseName like concat('%', #{warehousename}, '%')</if>
+            <if test="warehouseman != null  and warehouseman != ''"> and warehouseMan = #{warehouseman}</if>
+            <if test="telphone != null  and telphone != ''"> and telphone = #{telphone}</if>
+            <if test="warehouseaddress != null  and warehouseaddress != ''"> and warehouseAddress = #{warehouseaddress}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfOfficeproductcangkuById" parameterType="Integer" resultMap="CmfOfficeproductcangkuResult">
+        <include refid="selectCmfOfficeproductcangkuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfOfficeproductcangku" parameterType="CmfOfficeproductcangku" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_officeproductcangku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="warehousename != null and warehousename != ''">warehouseName,</if>
+            <if test="warehouseman != null and warehouseman != ''">warehouseMan,</if>
+            <if test="telphone != null and telphone != ''">telphone,</if>
+            <if test="warehouseaddress != null and warehouseaddress != ''">warehouseAddress,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="warehousename != null and warehousename != ''">#{warehousename},</if>
+            <if test="warehouseman != null and warehouseman != ''">#{warehouseman},</if>
+            <if test="telphone != null and telphone != ''">#{telphone},</if>
+            <if test="warehouseaddress != null and warehouseaddress != ''">#{warehouseaddress},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfOfficeproductcangku" parameterType="CmfOfficeproductcangku">
+        update cmf_officeproductcangku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="warehousename != null and warehousename != ''">warehouseName = #{warehousename},</if>
+            <if test="warehouseman != null and warehouseman != ''">warehouseMan = #{warehouseman},</if>
+            <if test="telphone != null and telphone != ''">telphone = #{telphone},</if>
+            <if test="warehouseaddress != null and warehouseaddress != ''">warehouseAddress = #{warehouseaddress},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfOfficeproductcangkuById" parameterType="Integer">
+        delete from cmf_officeproductcangku where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfOfficeproductcangkuByIds" parameterType="String">
+        delete from cmf_officeproductcangku where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

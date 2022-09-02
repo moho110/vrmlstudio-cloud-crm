@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfFeiyongrecordMapper">
+    
+    <resultMap type="CmfFeiyongrecord" id="CmfFeiyongrecordResult">
+        <result property="id"    column="id"    />
+        <result property="typeid"    column="typeid"    />
+        <result property="jine"    column="jine"    />
+        <result property="kind"    column="kind"    />
+        <result property="accountid"    column="accountid"    />
+        <result property="chanshengdate"    column="chanshengdate"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="beizhu"    column="beizhu"    />
+    </resultMap>
+
+    <sql id="selectCmfFeiyongrecordVo">
+        select id, typeid, jine, kind, accountid, chanshengdate, createman, createtime, beizhu from cmf_feiyongrecord
+    </sql>
+
+    <select id="selectCmfFeiyongrecordList" parameterType="CmfFeiyongrecord" resultMap="CmfFeiyongrecordResult">
+        <include refid="selectCmfFeiyongrecordVo"/>
+        <where>  
+            <if test="typeid != null "> and typeid = #{typeid}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+            <if test="kind != null "> and kind = #{kind}</if>
+            <if test="accountid != null "> and accountid = #{accountid}</if>
+            <if test="chanshengdate != null "> and chanshengdate = #{chanshengdate}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFeiyongrecordById" parameterType="Integer" resultMap="CmfFeiyongrecordResult">
+        <include refid="selectCmfFeiyongrecordVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFeiyongrecord" parameterType="CmfFeiyongrecord" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_feiyongrecord
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">typeid,</if>
+            <if test="jine != null">jine,</if>
+            <if test="kind != null">kind,</if>
+            <if test="accountid != null">accountid,</if>
+            <if test="chanshengdate != null">chanshengdate,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="typeid != null">#{typeid},</if>
+            <if test="jine != null">#{jine},</if>
+            <if test="kind != null">#{kind},</if>
+            <if test="accountid != null">#{accountid},</if>
+            <if test="chanshengdate != null">#{chanshengdate},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFeiyongrecord" parameterType="CmfFeiyongrecord">
+        update cmf_feiyongrecord
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="typeid != null">typeid = #{typeid},</if>
+            <if test="jine != null">jine = #{jine},</if>
+            <if test="kind != null">kind = #{kind},</if>
+            <if test="accountid != null">accountid = #{accountid},</if>
+            <if test="chanshengdate != null">chanshengdate = #{chanshengdate},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFeiyongrecordById" parameterType="Integer">
+        delete from cmf_feiyongrecord where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFeiyongrecordByIds" parameterType="String">
+        delete from cmf_feiyongrecord where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

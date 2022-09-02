@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.xsystem.mapper.CmfSystemprivateincMapper">
+    
+    <resultMap type="CmfSystemprivateinc" id="CmfSystemprivateincResult">
+        <result property="id"    column="id"    />
+        <result property="file"    column="FILE"    />
+        <result property="module"    column="MODULE"    />
+        <result property="deptId"    column="DEPT_ID"    />
+        <result property="deptName"    column="DEPT_NAME"    />
+        <result property="roleId"    column="ROLE_ID"    />
+        <result property="roleName"    column="ROLE_NAME"    />
+        <result property="userId"    column="USER_ID"    />
+        <result property="userName"    column="USER_NAME"    />
+    </resultMap>
+
+    <sql id="selectCmfSystemprivateincVo">
+        select id, FILE, MODULE, DEPT_ID, DEPT_NAME, ROLE_ID, ROLE_NAME, USER_ID, USER_NAME from cmf_systemprivateinc
+    </sql>
+
+    <select id="selectCmfSystemprivateincList" parameterType="CmfSystemprivateinc" resultMap="CmfSystemprivateincResult">
+        <include refid="selectCmfSystemprivateincVo"/>
+        <where>  
+            <if test="file != null  and file != ''"> and FILE = #{file}</if>
+            <if test="module != null  and module != ''"> and MODULE = #{module}</if>
+            <if test="deptId != null  and deptId != ''"> and DEPT_ID = #{deptId}</if>
+            <if test="deptName != null  and deptName != ''"> and DEPT_NAME like concat('%', #{deptName}, '%')</if>
+            <if test="roleId != null  and roleId != ''"> and ROLE_ID = #{roleId}</if>
+            <if test="roleName != null  and roleName != ''"> and ROLE_NAME like concat('%', #{roleName}, '%')</if>
+            <if test="userId != null  and userId != ''"> and USER_ID = #{userId}</if>
+            <if test="userName != null  and userName != ''"> and USER_NAME like concat('%', #{userName}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSystemprivateincById" parameterType="Integer" resultMap="CmfSystemprivateincResult">
+        <include refid="selectCmfSystemprivateincVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSystemprivateinc" parameterType="CmfSystemprivateinc" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_systemprivateinc
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="file != null and file != ''">FILE,</if>
+            <if test="module != null and module != ''">MODULE,</if>
+            <if test="deptId != null and deptId != ''">DEPT_ID,</if>
+            <if test="deptName != null and deptName != ''">DEPT_NAME,</if>
+            <if test="roleId != null and roleId != ''">ROLE_ID,</if>
+            <if test="roleName != null and roleName != ''">ROLE_NAME,</if>
+            <if test="userId != null and userId != ''">USER_ID,</if>
+            <if test="userName != null and userName != ''">USER_NAME,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="file != null and file != ''">#{file},</if>
+            <if test="module != null and module != ''">#{module},</if>
+            <if test="deptId != null and deptId != ''">#{deptId},</if>
+            <if test="deptName != null and deptName != ''">#{deptName},</if>
+            <if test="roleId != null and roleId != ''">#{roleId},</if>
+            <if test="roleName != null and roleName != ''">#{roleName},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="userName != null and userName != ''">#{userName},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSystemprivateinc" parameterType="CmfSystemprivateinc">
+        update cmf_systemprivateinc
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="file != null and file != ''">FILE = #{file},</if>
+            <if test="module != null and module != ''">MODULE = #{module},</if>
+            <if test="deptId != null and deptId != ''">DEPT_ID = #{deptId},</if>
+            <if test="deptName != null and deptName != ''">DEPT_NAME = #{deptName},</if>
+            <if test="roleId != null and roleId != ''">ROLE_ID = #{roleId},</if>
+            <if test="roleName != null and roleName != ''">ROLE_NAME = #{roleName},</if>
+            <if test="userId != null and userId != ''">USER_ID = #{userId},</if>
+            <if test="userName != null and userName != ''">USER_NAME = #{userName},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSystemprivateincById" parameterType="Integer">
+        delete from cmf_systemprivateinc where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSystemprivateincByIds" parameterType="String">
+        delete from cmf_systemprivateinc where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/vrcrm-api/vrcrm-api-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-api/vrcrm-api-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-auth/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-auth/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-core/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-core/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-datascope/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-datascope/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-datasource/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-datasource/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-log/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-log/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-redis/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-redis/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-security/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-swagger/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-common/vrcrm-common-swagger/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-basicdata/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-basicdata/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-buy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-buy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-customer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-customer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-finance/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-finance/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-hr/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-hr/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-api/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-api/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-file/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-file/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-gen/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-gen/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-job/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-job/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-system/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-modules-system/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-mytable/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-mytable/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-political/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-political/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-sales/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-sales/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-store/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-store/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-supply/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-supply/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-tenant/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-tenant/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-xsystem/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-modules/vrcrm-xsystem/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-visual/vrcrm-monitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vrcrm-visual/vrcrm-monitor/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

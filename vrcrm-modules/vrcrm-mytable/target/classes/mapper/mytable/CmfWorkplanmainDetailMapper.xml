@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfWorkplanmainDetailMapper">
+    
+    <resultMap type="CmfWorkplanmainDetail" id="CmfWorkplanmainDetailResult">
+        <result property="id"    column="id"    />
+        <result property="mainrowid"    column="mainrowid"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="begintime"    column="begintime"    />
+        <result property="endtime"    column="endtime"    />
+        <result property="content"    column="content"    />
+        <result property="result"    column="result"    />
+        <result property="nexttime"    column="nexttime"    />
+        <result property="nextcontent"    column="nextcontent"    />
+        <result property="fujian"    column="fujian"    />
+    </resultMap>
+
+    <sql id="selectCmfWorkplanmainDetailVo">
+        select id, mainrowid, createman, createtime, begintime, endtime, content, result, nexttime, nextcontent, fujian from cmf_workplanmain_detail
+    </sql>
+
+    <select id="selectCmfWorkplanmainDetailList" parameterType="CmfWorkplanmainDetail" resultMap="CmfWorkplanmainDetailResult">
+        <include refid="selectCmfWorkplanmainDetailVo"/>
+        <where>  
+            <if test="mainrowid != null "> and mainrowid = #{mainrowid}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="begintime != null "> and begintime = #{begintime}</if>
+            <if test="endtime != null "> and endtime = #{endtime}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="result != null "> and result = #{result}</if>
+            <if test="nexttime != null "> and nexttime = #{nexttime}</if>
+            <if test="nextcontent != null  and nextcontent != ''"> and nextcontent = #{nextcontent}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfWorkplanmainDetailById" parameterType="Integer" resultMap="CmfWorkplanmainDetailResult">
+        <include refid="selectCmfWorkplanmainDetailVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfWorkplanmainDetail" parameterType="CmfWorkplanmainDetail" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_workplanmain_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mainrowid != null">mainrowid,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="begintime != null">begintime,</if>
+            <if test="endtime != null">endtime,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="result != null">result,</if>
+            <if test="nexttime != null">nexttime,</if>
+            <if test="nextcontent != null and nextcontent != ''">nextcontent,</if>
+            <if test="fujian != null and fujian != ''">fujian,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mainrowid != null">#{mainrowid},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="begintime != null">#{begintime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="result != null">#{result},</if>
+            <if test="nexttime != null">#{nexttime},</if>
+            <if test="nextcontent != null and nextcontent != ''">#{nextcontent},</if>
+            <if test="fujian != null and fujian != ''">#{fujian},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfWorkplanmainDetail" parameterType="CmfWorkplanmainDetail">
+        update cmf_workplanmain_detail
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="mainrowid != null">mainrowid = #{mainrowid},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="begintime != null">begintime = #{begintime},</if>
+            <if test="endtime != null">endtime = #{endtime},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="result != null">result = #{result},</if>
+            <if test="nexttime != null">nexttime = #{nexttime},</if>
+            <if test="nextcontent != null and nextcontent != ''">nextcontent = #{nextcontent},</if>
+            <if test="fujian != null and fujian != ''">fujian = #{fujian},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfWorkplanmainDetailById" parameterType="Integer">
+        delete from cmf_workplanmain_detail where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfWorkplanmainDetailByIds" parameterType="String">
+        delete from cmf_workplanmain_detail where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

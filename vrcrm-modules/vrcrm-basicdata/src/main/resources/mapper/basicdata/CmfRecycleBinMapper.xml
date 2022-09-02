@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfRecycleBinMapper">
+    
+    <resultMap type="CmfRecycleBin" id="CmfRecycleBinResult">
+        <result property="id"    column="id"    />
+        <result property="objectId"    column="object_id"    />
+        <result property="createTime"    column="create_time"    />
+        <result property="tableName"    column="table_name"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+    </resultMap>
+
+    <sql id="selectCmfRecycleBinVo">
+        select id, object_id, create_time, table_name, name, user_id from cmf_recycle_bin
+    </sql>
+
+    <select id="selectCmfRecycleBinList" parameterType="CmfRecycleBin" resultMap="CmfRecycleBinResult">
+        <include refid="selectCmfRecycleBinVo"/>
+        <where>  
+            <if test="objectId != null "> and object_id = #{objectId}</if>
+            <if test="tableName != null  and tableName != ''"> and table_name like concat('%', #{tableName}, '%')</if>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfRecycleBinById" parameterType="Integer" resultMap="CmfRecycleBinResult">
+        <include refid="selectCmfRecycleBinVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfRecycleBin" parameterType="CmfRecycleBin" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_recycle_bin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="objectId != null">object_id,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="tableName != null and tableName != ''">table_name,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null">user_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="objectId != null">#{objectId},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="tableName != null and tableName != ''">#{tableName},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null">#{userId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfRecycleBin" parameterType="CmfRecycleBin">
+        update cmf_recycle_bin
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="objectId != null">object_id = #{objectId},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="tableName != null and tableName != ''">table_name = #{tableName},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfRecycleBinById" parameterType="Integer">
+        delete from cmf_recycle_bin where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfRecycleBinByIds" parameterType="String">
+        delete from cmf_recycle_bin where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

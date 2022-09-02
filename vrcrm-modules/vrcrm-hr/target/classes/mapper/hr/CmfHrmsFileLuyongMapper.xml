@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfHrmsFileLuyongMapper">
+    
+    <resultMap type="CmfHrmsFileLuyong" id="CmfHrmsFileLuyongResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="Name"    />
+        <result property="sex"    column="sex"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="national"    column="national"    />
+        <result property="political"    column="political"    />
+        <result property="idno"    column="IDNo"    />
+        <result property="jiguan"    column="jiguan"    />
+        <result property="college"    column="college"    />
+        <result property="studyexp"    column="studyExp"    />
+        <result property="staffname"    column="staffName"    />
+        <result property="professional"    column="professional"    />
+        <result property="email"    column="email"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfHrmsFileLuyongVo">
+        select id, Name, sex, birthday, national, political, IDNo, jiguan, college, studyExp, staffName, professional, email, creator, createTime from cmf_hrms_file_luyong
+    </sql>
+
+    <select id="selectCmfHrmsFileLuyongList" parameterType="CmfHrmsFileLuyong" resultMap="CmfHrmsFileLuyongResult">
+        <include refid="selectCmfHrmsFileLuyongVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and Name like concat('%', #{name}, '%')</if>
+            <if test="sex != null  and sex != ''"> and sex = #{sex}</if>
+            <if test="birthday != null "> and birthday = #{birthday}</if>
+            <if test="national != null  and national != ''"> and national = #{national}</if>
+            <if test="political != null  and political != ''"> and political = #{political}</if>
+            <if test="idno != null  and idno != ''"> and IDNo = #{idno}</if>
+            <if test="jiguan != null  and jiguan != ''"> and jiguan = #{jiguan}</if>
+            <if test="college != null  and college != ''"> and college = #{college}</if>
+            <if test="studyexp != null  and studyexp != ''"> and studyExp = #{studyexp}</if>
+            <if test="staffname != null  and staffname != ''"> and staffName like concat('%', #{staffname}, '%')</if>
+            <if test="professional != null  and professional != ''"> and professional = #{professional}</if>
+            <if test="email != null  and email != ''"> and email = #{email}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfHrmsFileLuyongById" parameterType="Integer" resultMap="CmfHrmsFileLuyongResult">
+        <include refid="selectCmfHrmsFileLuyongVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfHrmsFileLuyong" parameterType="CmfHrmsFileLuyong" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_hrms_file_luyong
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">Name,</if>
+            <if test="sex != null and sex != ''">sex,</if>
+            <if test="birthday != null">birthday,</if>
+            <if test="national != null and national != ''">national,</if>
+            <if test="political != null and political != ''">political,</if>
+            <if test="idno != null and idno != ''">IDNo,</if>
+            <if test="jiguan != null and jiguan != ''">jiguan,</if>
+            <if test="college != null and college != ''">college,</if>
+            <if test="studyexp != null and studyexp != ''">studyExp,</if>
+            <if test="staffname != null and staffname != ''">staffName,</if>
+            <if test="professional != null and professional != ''">professional,</if>
+            <if test="email != null and email != ''">email,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="sex != null and sex != ''">#{sex},</if>
+            <if test="birthday != null">#{birthday},</if>
+            <if test="national != null and national != ''">#{national},</if>
+            <if test="political != null and political != ''">#{political},</if>
+            <if test="idno != null and idno != ''">#{idno},</if>
+            <if test="jiguan != null and jiguan != ''">#{jiguan},</if>
+            <if test="college != null and college != ''">#{college},</if>
+            <if test="studyexp != null and studyexp != ''">#{studyexp},</if>
+            <if test="staffname != null and staffname != ''">#{staffname},</if>
+            <if test="professional != null and professional != ''">#{professional},</if>
+            <if test="email != null and email != ''">#{email},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfHrmsFileLuyong" parameterType="CmfHrmsFileLuyong">
+        update cmf_hrms_file_luyong
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">Name = #{name},</if>
+            <if test="sex != null and sex != ''">sex = #{sex},</if>
+            <if test="birthday != null">birthday = #{birthday},</if>
+            <if test="national != null and national != ''">national = #{national},</if>
+            <if test="political != null and political != ''">political = #{political},</if>
+            <if test="idno != null and idno != ''">IDNo = #{idno},</if>
+            <if test="jiguan != null and jiguan != ''">jiguan = #{jiguan},</if>
+            <if test="college != null and college != ''">college = #{college},</if>
+            <if test="studyexp != null and studyexp != ''">studyExp = #{studyexp},</if>
+            <if test="staffname != null and staffname != ''">staffName = #{staffname},</if>
+            <if test="professional != null and professional != ''">professional = #{professional},</if>
+            <if test="email != null and email != ''">email = #{email},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfHrmsFileLuyongById" parameterType="Integer">
+        delete from cmf_hrms_file_luyong where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfHrmsFileLuyongByIds" parameterType="String">
+        delete from cmf_hrms_file_luyong where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

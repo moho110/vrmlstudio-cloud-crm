@@ -1,0 +1,9 @@
+com\vrcrm\file\config\MinioConfig.class
+com\vrcrm\file\service\LocalSysFileServiceImpl.class
+com\vrcrm\file\service\ISysFileService.class
+com\vrcrm\file\service\MinioSysFileServiceImpl.class
+com\vrcrm\file\controller\SysFileController.class
+com\vrcrm\file\VrCrmFileApplication.class
+com\vrcrm\file\service\FastDfsSysFileServiceImpl.class
+com\vrcrm\file\utils\FileUploadUtils.class
+com\vrcrm\file\config\ResourcesConfig.class

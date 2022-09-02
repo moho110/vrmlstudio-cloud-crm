@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.sales.mapper.CmfSellcontractJiaofuMapper">
+    
+    <resultMap type="CmfSellcontractJiaofu" id="CmfSellcontractJiaofuResult">
+        <result property="id"    column="id"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="hetongid"    column="hetongid"    />
+        <result property="productid"    column="productid"    />
+        <result property="planid"    column="planid"    />
+        <result property="num"    column="num"    />
+        <result property="price"    column="price"    />
+        <result property="jieshouren"    column="jieshouren"    />
+        <result property="jiaofudate"    column="jiaofudate"    />
+        <result property="beizhu"    column="beizhu"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="beiyong1"    column="beiyong1"    />
+        <result property="beiyong2"    column="beiyong2"    />
+        <result property="beiyong3"    column="beiyong3"    />
+        <result property="jine"    column="jine"    />
+    </resultMap>
+
+    <sql id="selectCmfSellcontractJiaofuVo">
+        select id, customerid, hetongid, productid, planid, num, price, jieshouren, jiaofudate, beizhu, createman, createtime, beiyong1, beiyong2, beiyong3, jine from cmf_sellcontract_jiaofu
+    </sql>
+
+    <select id="selectCmfSellcontractJiaofuList" parameterType="CmfSellcontractJiaofu" resultMap="CmfSellcontractJiaofuResult">
+        <include refid="selectCmfSellcontractJiaofuVo"/>
+        <where>  
+            <if test="customerid != null  and customerid != ''"> and customerid = #{customerid}</if>
+            <if test="hetongid != null  and hetongid != ''"> and hetongid = #{hetongid}</if>
+            <if test="productid != null  and productid != ''"> and productid = #{productid}</if>
+            <if test="planid != null "> and planid = #{planid}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="jieshouren != null  and jieshouren != ''"> and jieshouren = #{jieshouren}</if>
+            <if test="jiaofudate != null "> and jiaofudate = #{jiaofudate}</if>
+            <if test="beizhu != null  and beizhu != ''"> and beizhu = #{beizhu}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="beiyong1 != null  and beiyong1 != ''"> and beiyong1 = #{beiyong1}</if>
+            <if test="beiyong2 != null  and beiyong2 != ''"> and beiyong2 = #{beiyong2}</if>
+            <if test="beiyong3 != null  and beiyong3 != ''"> and beiyong3 = #{beiyong3}</if>
+            <if test="jine != null "> and jine = #{jine}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSellcontractJiaofuById" parameterType="Integer" resultMap="CmfSellcontractJiaofuResult">
+        <include refid="selectCmfSellcontractJiaofuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSellcontractJiaofu" parameterType="CmfSellcontractJiaofu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sellcontract_jiaofu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="customerid != null and customerid != ''">customerid,</if>
+            <if test="hetongid != null and hetongid != ''">hetongid,</if>
+            <if test="productid != null and productid != ''">productid,</if>
+            <if test="planid != null">planid,</if>
+            <if test="num != null">num,</if>
+            <if test="price != null">price,</if>
+            <if test="jieshouren != null and jieshouren != ''">jieshouren,</if>
+            <if test="jiaofudate != null">jiaofudate,</if>
+            <if test="beizhu != null and beizhu != ''">beizhu,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="beiyong1 != null and beiyong1 != ''">beiyong1,</if>
+            <if test="beiyong2 != null and beiyong2 != ''">beiyong2,</if>
+            <if test="beiyong3 != null and beiyong3 != ''">beiyong3,</if>
+            <if test="jine != null">jine,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="customerid != null and customerid != ''">#{customerid},</if>
+            <if test="hetongid != null and hetongid != ''">#{hetongid},</if>
+            <if test="productid != null and productid != ''">#{productid},</if>
+            <if test="planid != null">#{planid},</if>
+            <if test="num != null">#{num},</if>
+            <if test="price != null">#{price},</if>
+            <if test="jieshouren != null and jieshouren != ''">#{jieshouren},</if>
+            <if test="jiaofudate != null">#{jiaofudate},</if>
+            <if test="beizhu != null and beizhu != ''">#{beizhu},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="beiyong1 != null and beiyong1 != ''">#{beiyong1},</if>
+            <if test="beiyong2 != null and beiyong2 != ''">#{beiyong2},</if>
+            <if test="beiyong3 != null and beiyong3 != ''">#{beiyong3},</if>
+            <if test="jine != null">#{jine},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSellcontractJiaofu" parameterType="CmfSellcontractJiaofu">
+        update cmf_sellcontract_jiaofu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="customerid != null and customerid != ''">customerid = #{customerid},</if>
+            <if test="hetongid != null and hetongid != ''">hetongid = #{hetongid},</if>
+            <if test="productid != null and productid != ''">productid = #{productid},</if>
+            <if test="planid != null">planid = #{planid},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="jieshouren != null and jieshouren != ''">jieshouren = #{jieshouren},</if>
+            <if test="jiaofudate != null">jiaofudate = #{jiaofudate},</if>
+            <if test="beizhu != null and beizhu != ''">beizhu = #{beizhu},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="beiyong1 != null and beiyong1 != ''">beiyong1 = #{beiyong1},</if>
+            <if test="beiyong2 != null and beiyong2 != ''">beiyong2 = #{beiyong2},</if>
+            <if test="beiyong3 != null and beiyong3 != ''">beiyong3 = #{beiyong3},</if>
+            <if test="jine != null">jine = #{jine},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSellcontractJiaofuById" parameterType="Integer">
+        delete from cmf_sellcontract_jiaofu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSellcontractJiaofuByIds" parameterType="String">
+        delete from cmf_sellcontract_jiaofu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

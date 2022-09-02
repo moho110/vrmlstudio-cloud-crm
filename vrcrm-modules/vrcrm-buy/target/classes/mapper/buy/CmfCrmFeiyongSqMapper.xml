@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.buy.mapper.CmfCrmFeiyongSqMapper">
+    
+    <resultMap type="CmfCrmFeiyongSq" id="CmfCrmFeiyongSqResult">
+        <result property="id"    column="id"    />
+        <result property="feetype"    column="feeType"    />
+        <result property="count"    column="count"    />
+        <result property="feeuse"    column="feeUse"    />
+        <result property="applydate"    column="applyDate"    />
+        <result property="clientname"    column="clientName"    />
+        <result property="reimburseman"    column="reimburseMan"    />
+        <result property="recorder"    column="recorder"    />
+        <result property="isexamine"    column="isExamine"    />
+        <result property="examinedate"    column="examineDate"    />
+        <result property="cashier"    column="cashier"    />
+        <result property="paytime"    column="payTime"    />
+        <result property="bak"    column="bak"    />
+        <result property="examineman"    column="examineMan"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfCrmFeiyongSqVo">
+        select id, feeType, count, feeUse, applyDate, clientName, reimburseMan, recorder, isExamine, examineDate, cashier, payTime, bak, examineMan, createTime from cmf_crm_feiyong_sq
+    </sql>
+
+    <select id="selectCmfCrmFeiyongSqList" parameterType="CmfCrmFeiyongSq" resultMap="CmfCrmFeiyongSqResult">
+        <include refid="selectCmfCrmFeiyongSqVo"/>
+        <where>  
+            <if test="feetype != null  and feetype != ''"> and feeType = #{feetype}</if>
+            <if test="count != null  and count != ''"> and count = #{count}</if>
+            <if test="feeuse != null  and feeuse != ''"> and feeUse = #{feeuse}</if>
+            <if test="applydate != null "> and applyDate = #{applydate}</if>
+            <if test="clientname != null "> and clientName like concat('%', #{clientname}, '%')</if>
+            <if test="reimburseman != null  and reimburseman != ''"> and reimburseMan = #{reimburseman}</if>
+            <if test="recorder != null  and recorder != ''"> and recorder = #{recorder}</if>
+            <if test="isexamine != null "> and isExamine = #{isexamine}</if>
+            <if test="examinedate != null  and examinedate != ''"> and examineDate = #{examinedate}</if>
+            <if test="cashier != null  and cashier != ''"> and cashier = #{cashier}</if>
+            <if test="paytime != null "> and payTime = #{paytime}</if>
+            <if test="bak != null  and bak != ''"> and bak = #{bak}</if>
+            <if test="examineman != null  and examineman != ''"> and examineMan = #{examineman}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCrmFeiyongSqById" parameterType="Integer" resultMap="CmfCrmFeiyongSqResult">
+        <include refid="selectCmfCrmFeiyongSqVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCrmFeiyongSq" parameterType="CmfCrmFeiyongSq" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_crm_feiyong_sq
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="feetype != null and feetype != ''">feeType,</if>
+            <if test="count != null and count != ''">count,</if>
+            <if test="feeuse != null and feeuse != ''">feeUse,</if>
+            <if test="applydate != null">applyDate,</if>
+            <if test="clientname != null">clientName,</if>
+            <if test="reimburseman != null and reimburseman != ''">reimburseMan,</if>
+            <if test="recorder != null and recorder != ''">recorder,</if>
+            <if test="isexamine != null">isExamine,</if>
+            <if test="examinedate != null and examinedate != ''">examineDate,</if>
+            <if test="cashier != null and cashier != ''">cashier,</if>
+            <if test="paytime != null">payTime,</if>
+            <if test="bak != null and bak != ''">bak,</if>
+            <if test="examineman != null and examineman != ''">examineMan,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="feetype != null and feetype != ''">#{feetype},</if>
+            <if test="count != null and count != ''">#{count},</if>
+            <if test="feeuse != null and feeuse != ''">#{feeuse},</if>
+            <if test="applydate != null">#{applydate},</if>
+            <if test="clientname != null">#{clientname},</if>
+            <if test="reimburseman != null and reimburseman != ''">#{reimburseman},</if>
+            <if test="recorder != null and recorder != ''">#{recorder},</if>
+            <if test="isexamine != null">#{isexamine},</if>
+            <if test="examinedate != null and examinedate != ''">#{examinedate},</if>
+            <if test="cashier != null and cashier != ''">#{cashier},</if>
+            <if test="paytime != null">#{paytime},</if>
+            <if test="bak != null and bak != ''">#{bak},</if>
+            <if test="examineman != null and examineman != ''">#{examineman},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCrmFeiyongSq" parameterType="CmfCrmFeiyongSq">
+        update cmf_crm_feiyong_sq
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="feetype != null and feetype != ''">feeType = #{feetype},</if>
+            <if test="count != null and count != ''">count = #{count},</if>
+            <if test="feeuse != null and feeuse != ''">feeUse = #{feeuse},</if>
+            <if test="applydate != null">applyDate = #{applydate},</if>
+            <if test="clientname != null">clientName = #{clientname},</if>
+            <if test="reimburseman != null and reimburseman != ''">reimburseMan = #{reimburseman},</if>
+            <if test="recorder != null and recorder != ''">recorder = #{recorder},</if>
+            <if test="isexamine != null">isExamine = #{isexamine},</if>
+            <if test="examinedate != null and examinedate != ''">examineDate = #{examinedate},</if>
+            <if test="cashier != null and cashier != ''">cashier = #{cashier},</if>
+            <if test="paytime != null">payTime = #{paytime},</if>
+            <if test="bak != null and bak != ''">bak = #{bak},</if>
+            <if test="examineman != null and examineman != ''">examineMan = #{examineman},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCrmFeiyongSqById" parameterType="Integer">
+        delete from cmf_crm_feiyong_sq where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCrmFeiyongSqByIds" parameterType="String">
+        delete from cmf_crm_feiyong_sq where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

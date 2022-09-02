@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengGroupMapper">
+    
+    <resultMap type="CmfEduXingzhengGroup" id="CmfEduXingzhengGroupResult">
+        <result property="id"    column="id"    />
+        <result property="departname"    column="departName"    />
+        <result property="groupname"    column="groupName"    />
+        <result property="membername"    column="memberName"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengGroupVo">
+        select id, departName, groupName, memberName, memo, creator, createTime from cmf_edu_xingzheng_group
+    </sql>
+
+    <select id="selectCmfEduXingzhengGroupList" parameterType="CmfEduXingzhengGroup" resultMap="CmfEduXingzhengGroupResult">
+        <include refid="selectCmfEduXingzhengGroupVo"/>
+        <where>  
+            <if test="departname != null  and departname != ''"> and departName like concat('%', #{departname}, '%')</if>
+            <if test="groupname != null  and groupname != ''"> and groupName like concat('%', #{groupname}, '%')</if>
+            <if test="membername != null  and membername != ''"> and memberName like concat('%', #{membername}, '%')</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengGroupById" parameterType="Integer" resultMap="CmfEduXingzhengGroupResult">
+        <include refid="selectCmfEduXingzhengGroupVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengGroup" parameterType="CmfEduXingzhengGroup" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_group
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="departname != null and departname != ''">departName,</if>
+            <if test="groupname != null and groupname != ''">groupName,</if>
+            <if test="membername != null and membername != ''">memberName,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="departname != null and departname != ''">#{departname},</if>
+            <if test="groupname != null and groupname != ''">#{groupname},</if>
+            <if test="membername != null and membername != ''">#{membername},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengGroup" parameterType="CmfEduXingzhengGroup">
+        update cmf_edu_xingzheng_group
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="departname != null and departname != ''">departName = #{departname},</if>
+            <if test="groupname != null and groupname != ''">groupName = #{groupname},</if>
+            <if test="membername != null and membername != ''">memberName = #{membername},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengGroupById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_group where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengGroupByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_group where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

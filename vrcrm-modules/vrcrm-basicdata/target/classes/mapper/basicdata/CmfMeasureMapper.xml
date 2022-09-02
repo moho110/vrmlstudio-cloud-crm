@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.basicdata.mapper.CmfMeasureMapper">
+    
+    <resultMap type="CmfMeasure" id="CmfMeasureResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="userId"    column="user_id"    />
+        <result property="code"    column="code"    />
+        <result property="userFlag"    column="user_flag"    />
+    </resultMap>
+
+    <sql id="selectCmfMeasureVo">
+        select id, name, user_id, code, user_flag from cmf_measure
+    </sql>
+
+    <select id="selectCmfMeasureList" parameterType="CmfMeasure" resultMap="CmfMeasureResult">
+        <include refid="selectCmfMeasureVo"/>
+        <where>  
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="userId != null  and userId != ''"> and user_id = #{userId}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="userFlag != null "> and user_flag = #{userFlag}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfMeasureById" parameterType="Integer" resultMap="CmfMeasureResult">
+        <include refid="selectCmfMeasureVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfMeasure" parameterType="CmfMeasure" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_measure
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="userId != null and userId != ''">user_id,</if>
+            <if test="code != null and code != ''">code,</if>
+            <if test="userFlag != null">user_flag,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="userId != null and userId != ''">#{userId},</if>
+            <if test="code != null and code != ''">#{code},</if>
+            <if test="userFlag != null">#{userFlag},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfMeasure" parameterType="CmfMeasure">
+        update cmf_measure
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="userId != null and userId != ''">user_id = #{userId},</if>
+            <if test="code != null and code != ''">code = #{code},</if>
+            <if test="userFlag != null">user_flag = #{userFlag},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfMeasureById" parameterType="Integer">
+        delete from cmf_measure where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfMeasureByIds" parameterType="String">
+        delete from cmf_measure where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

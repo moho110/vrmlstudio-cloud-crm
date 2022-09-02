@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.mytable.mapper.CmfSmsSendlistMapper">
+    
+    <resultMap type="CmfSmsSendlist" id="CmfSmsSendlistResult">
+        <result property="id"    column="id"    />
+        <result property="msg"    column="msg"    />
+        <result property="nowtime"    column="nowtime"    />
+        <result property="attime"    column="attime"    />
+        <result property="destcount"    column="destcount"    />
+        <result property="result"    column="result"    />
+        <result property="errmsg"    column="errmsg"    />
+        <result property="trytimes"    column="trytimes"    />
+        <result property="userid"    column="userid"    />
+        <result property="batchid"    column="batchid"    />
+        <result property="destid"    column="destid"    />
+        <result property="leftcount"    column="leftcount"    />
+    </resultMap>
+
+    <sql id="selectCmfSmsSendlistVo">
+        select id, msg, nowtime, attime, destcount, result, errmsg, trytimes, userid, batchid, destid, leftcount from cmf_sms_sendlist
+    </sql>
+
+    <select id="selectCmfSmsSendlistList" parameterType="CmfSmsSendlist" resultMap="CmfSmsSendlistResult">
+        <include refid="selectCmfSmsSendlistVo"/>
+        <where>  
+            <if test="msg != null  and msg != ''"> and msg = #{msg}</if>
+            <if test="nowtime != null "> and nowtime = #{nowtime}</if>
+            <if test="attime != null  and attime != ''"> and attime = #{attime}</if>
+            <if test="destcount != null "> and destcount = #{destcount}</if>
+            <if test="result != null  and result != ''"> and result = #{result}</if>
+            <if test="errmsg != null  and errmsg != ''"> and errmsg = #{errmsg}</if>
+            <if test="trytimes != null "> and trytimes = #{trytimes}</if>
+            <if test="userid != null  and userid != ''"> and userid = #{userid}</if>
+            <if test="batchid != null "> and batchid = #{batchid}</if>
+            <if test="destid != null  and destid != ''"> and destid = #{destid}</if>
+            <if test="leftcount != null "> and leftcount = #{leftcount}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfSmsSendlistById" parameterType="Integer" resultMap="CmfSmsSendlistResult">
+        <include refid="selectCmfSmsSendlistVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfSmsSendlist" parameterType="CmfSmsSendlist" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_sms_sendlist
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="msg != null and msg != ''">msg,</if>
+            <if test="nowtime != null">nowtime,</if>
+            <if test="attime != null and attime != ''">attime,</if>
+            <if test="destcount != null">destcount,</if>
+            <if test="result != null and result != ''">result,</if>
+            <if test="errmsg != null and errmsg != ''">errmsg,</if>
+            <if test="trytimes != null">trytimes,</if>
+            <if test="userid != null and userid != ''">userid,</if>
+            <if test="batchid != null">batchid,</if>
+            <if test="destid != null and destid != ''">destid,</if>
+            <if test="leftcount != null">leftcount,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="msg != null and msg != ''">#{msg},</if>
+            <if test="nowtime != null">#{nowtime},</if>
+            <if test="attime != null and attime != ''">#{attime},</if>
+            <if test="destcount != null">#{destcount},</if>
+            <if test="result != null and result != ''">#{result},</if>
+            <if test="errmsg != null and errmsg != ''">#{errmsg},</if>
+            <if test="trytimes != null">#{trytimes},</if>
+            <if test="userid != null and userid != ''">#{userid},</if>
+            <if test="batchid != null">#{batchid},</if>
+            <if test="destid != null and destid != ''">#{destid},</if>
+            <if test="leftcount != null">#{leftcount},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfSmsSendlist" parameterType="CmfSmsSendlist">
+        update cmf_sms_sendlist
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="msg != null and msg != ''">msg = #{msg},</if>
+            <if test="nowtime != null">nowtime = #{nowtime},</if>
+            <if test="attime != null and attime != ''">attime = #{attime},</if>
+            <if test="destcount != null">destcount = #{destcount},</if>
+            <if test="result != null and result != ''">result = #{result},</if>
+            <if test="errmsg != null and errmsg != ''">errmsg = #{errmsg},</if>
+            <if test="trytimes != null">trytimes = #{trytimes},</if>
+            <if test="userid != null and userid != ''">userid = #{userid},</if>
+            <if test="batchid != null">batchid = #{batchid},</if>
+            <if test="destid != null and destid != ''">destid = #{destid},</if>
+            <if test="leftcount != null">leftcount = #{leftcount},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfSmsSendlistById" parameterType="Integer">
+        delete from cmf_sms_sendlist where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfSmsSendlistByIds" parameterType="String">
+        delete from cmf_sms_sendlist where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

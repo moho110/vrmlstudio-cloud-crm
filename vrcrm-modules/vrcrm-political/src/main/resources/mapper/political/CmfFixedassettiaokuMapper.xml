@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.political.mapper.CmfFixedassettiaokuMapper">
+    
+    <resultMap type="CmfFixedassettiaoku" id="CmfFixedassettiaokuResult">
+        <result property="id"    column="id"    />
+        <result property="setname"    column="setName"    />
+        <result property="setno"    column="setNo"    />
+        <result property="oriindepartment"    column="oriInDepartment"    />
+        <result property="nowindepartment"    column="nowInDepartment"    />
+        <result property="approvalman"    column="approvalMan"    />
+        <result property="memo"    column="memo"    />
+        <result property="creator"    column="creator"    />
+        <result property="createtime"    column="createTime"    />
+        <result property="price"    column="price"    />
+        <result property="quantity"    column="quantity"    />
+        <result property="count"    column="count"    />
+    </resultMap>
+
+    <sql id="selectCmfFixedassettiaokuVo">
+        select id, setName, setNo, oriInDepartment, nowInDepartment, approvalMan, memo, creator, createTime, price, quantity, count from cmf_fixedassettiaoku
+    </sql>
+
+    <select id="selectCmfFixedassettiaokuList" parameterType="CmfFixedassettiaoku" resultMap="CmfFixedassettiaokuResult">
+        <include refid="selectCmfFixedassettiaokuVo"/>
+        <where>  
+            <if test="setname != null  and setname != ''"> and setName like concat('%', #{setname}, '%')</if>
+            <if test="setno != null  and setno != ''"> and setNo = #{setno}</if>
+            <if test="oriindepartment != null  and oriindepartment != ''"> and oriInDepartment = #{oriindepartment}</if>
+            <if test="nowindepartment != null  and nowindepartment != ''"> and nowInDepartment = #{nowindepartment}</if>
+            <if test="approvalman != null  and approvalman != ''"> and approvalMan = #{approvalman}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+            <if test="creator != null  and creator != ''"> and creator = #{creator}</if>
+            <if test="createtime != null "> and createTime = #{createtime}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="quantity != null "> and quantity = #{quantity}</if>
+            <if test="count != null "> and count = #{count}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfFixedassettiaokuById" parameterType="Integer" resultMap="CmfFixedassettiaokuResult">
+        <include refid="selectCmfFixedassettiaokuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfFixedassettiaoku" parameterType="CmfFixedassettiaoku" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_fixedassettiaoku
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName,</if>
+            <if test="setno != null and setno != ''">setNo,</if>
+            <if test="oriindepartment != null and oriindepartment != ''">oriInDepartment,</if>
+            <if test="nowindepartment != null and nowindepartment != ''">nowInDepartment,</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+            <if test="creator != null and creator != ''">creator,</if>
+            <if test="createtime != null">createTime,</if>
+            <if test="price != null">price,</if>
+            <if test="quantity != null">quantity,</if>
+            <if test="count != null">count,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="setname != null and setname != ''">#{setname},</if>
+            <if test="setno != null and setno != ''">#{setno},</if>
+            <if test="oriindepartment != null and oriindepartment != ''">#{oriindepartment},</if>
+            <if test="nowindepartment != null and nowindepartment != ''">#{nowindepartment},</if>
+            <if test="approvalman != null and approvalman != ''">#{approvalman},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+            <if test="creator != null and creator != ''">#{creator},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="price != null">#{price},</if>
+            <if test="quantity != null">#{quantity},</if>
+            <if test="count != null">#{count},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfFixedassettiaoku" parameterType="CmfFixedassettiaoku">
+        update cmf_fixedassettiaoku
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="setname != null and setname != ''">setName = #{setname},</if>
+            <if test="setno != null and setno != ''">setNo = #{setno},</if>
+            <if test="oriindepartment != null and oriindepartment != ''">oriInDepartment = #{oriindepartment},</if>
+            <if test="nowindepartment != null and nowindepartment != ''">nowInDepartment = #{nowindepartment},</if>
+            <if test="approvalman != null and approvalman != ''">approvalMan = #{approvalman},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+            <if test="creator != null and creator != ''">creator = #{creator},</if>
+            <if test="createtime != null">createTime = #{createtime},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="quantity != null">quantity = #{quantity},</if>
+            <if test="count != null">count = #{count},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfFixedassettiaokuById" parameterType="Integer">
+        delete from cmf_fixedassettiaoku where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfFixedassettiaokuByIds" parameterType="String">
+        delete from cmf_fixedassettiaoku where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

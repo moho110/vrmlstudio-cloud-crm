@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.store.mapper.CmfStoreMapper">
+    
+    <resultMap type="CmfStore" id="CmfStoreResult">
+        <result property="id"    column="id"    />
+        <result property="prodid"    column="prodid"    />
+        <result property="num"    column="num"    />
+        <result property="price"    column="price"    />
+        <result property="storeid"    column="storeid"    />
+        <result property="memo"    column="memo"    />
+    </resultMap>
+
+    <sql id="selectCmfStoreVo">
+        select id, prodid, num, price, storeid, memo from cmf_store
+    </sql>
+
+    <select id="selectCmfStoreList" parameterType="CmfStore" resultMap="CmfStoreResult">
+        <include refid="selectCmfStoreVo"/>
+        <where>  
+            <if test="prodid != null  and prodid != ''"> and prodid = #{prodid}</if>
+            <if test="num != null "> and num = #{num}</if>
+            <if test="price != null "> and price = #{price}</if>
+            <if test="storeid != null "> and storeid = #{storeid}</if>
+            <if test="memo != null  and memo != ''"> and memo = #{memo}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfStoreById" parameterType="Integer" resultMap="CmfStoreResult">
+        <include refid="selectCmfStoreVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfStore" parameterType="CmfStore" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_store
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">prodid,</if>
+            <if test="num != null">num,</if>
+            <if test="price != null">price,</if>
+            <if test="storeid != null">storeid,</if>
+            <if test="memo != null and memo != ''">memo,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">#{prodid},</if>
+            <if test="num != null">#{num},</if>
+            <if test="price != null">#{price},</if>
+            <if test="storeid != null">#{storeid},</if>
+            <if test="memo != null and memo != ''">#{memo},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfStore" parameterType="CmfStore">
+        update cmf_store
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="prodid != null and prodid != ''">prodid = #{prodid},</if>
+            <if test="num != null">num = #{num},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="storeid != null">storeid = #{storeid},</if>
+            <if test="memo != null and memo != ''">memo = #{memo},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfStoreById" parameterType="Integer">
+        delete from cmf_store where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfStoreByIds" parameterType="String">
+        delete from cmf_store where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

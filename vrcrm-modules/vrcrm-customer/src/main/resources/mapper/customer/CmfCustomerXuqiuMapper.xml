@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.customer.mapper.CmfCustomerXuqiuMapper">
+    
+    <resultMap type="CmfCustomerXuqiu" id="CmfCustomerXuqiuResult">
+        <result property="id"    column="id"    />
+        <result property="zhuti"    column="zhuti"    />
+        <result property="tigongren"    column="tigongren"    />
+        <result property="customerid"    column="customerid"    />
+        <result property="chanceid"    column="chanceid"    />
+        <result property="import"    column="import"    />
+        <result property="content"    column="content"    />
+        <result property="createman"    column="createman"    />
+        <result property="createtime"    column="createtime"    />
+        <result property="fujian"    column="fujian"    />
+        <result property="fangan"    column="fangan"    />
+    </resultMap>
+
+    <sql id="selectCmfCustomerXuqiuVo">
+        select id, zhuti, tigongren, customerid, chanceid, import, content, createman, createtime, fujian, fangan from cmf_customer_xuqiu
+    </sql>
+
+    <select id="selectCmfCustomerXuqiuList" parameterType="CmfCustomerXuqiu" resultMap="CmfCustomerXuqiuResult">
+        <include refid="selectCmfCustomerXuqiuVo"/>
+        <where>  
+            <if test="zhuti != null  and zhuti != ''"> and zhuti = #{zhuti}</if>
+            <if test="tigongren != null  and tigongren != ''"> and tigongren = #{tigongren}</if>
+            <if test="customerid != null "> and customerid = #{customerid}</if>
+            <if test="chanceid != null "> and chanceid = #{chanceid}</if>
+            <if test="import != null  and import != ''"> and import = #{import}</if>
+            <if test="content != null  and content != ''"> and content = #{content}</if>
+            <if test="createman != null  and createman != ''"> and createman = #{createman}</if>
+            <if test="createtime != null "> and createtime = #{createtime}</if>
+            <if test="fujian != null  and fujian != ''"> and fujian = #{fujian}</if>
+            <if test="fangan != null  and fangan != ''"> and fangan = #{fangan}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfCustomerXuqiuById" parameterType="Integer" resultMap="CmfCustomerXuqiuResult">
+        <include refid="selectCmfCustomerXuqiuVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfCustomerXuqiu" parameterType="CmfCustomerXuqiu" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_customer_xuqiu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti,</if>
+            <if test="tigongren != null and tigongren != ''">tigongren,</if>
+            <if test="customerid != null">customerid,</if>
+            <if test="chanceid != null">chanceid,</if>
+            <if test="import != null and import != ''">import,</if>
+            <if test="content != null and content != ''">content,</if>
+            <if test="createman != null and createman != ''">createman,</if>
+            <if test="createtime != null">createtime,</if>
+            <if test="fujian != null and fujian != ''">fujian,</if>
+            <if test="fangan != null and fangan != ''">fangan,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">#{zhuti},</if>
+            <if test="tigongren != null and tigongren != ''">#{tigongren},</if>
+            <if test="customerid != null">#{customerid},</if>
+            <if test="chanceid != null">#{chanceid},</if>
+            <if test="import != null and import != ''">#{import},</if>
+            <if test="content != null and content != ''">#{content},</if>
+            <if test="createman != null and createman != ''">#{createman},</if>
+            <if test="createtime != null">#{createtime},</if>
+            <if test="fujian != null and fujian != ''">#{fujian},</if>
+            <if test="fangan != null and fangan != ''">#{fangan},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfCustomerXuqiu" parameterType="CmfCustomerXuqiu">
+        update cmf_customer_xuqiu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="zhuti != null and zhuti != ''">zhuti = #{zhuti},</if>
+            <if test="tigongren != null and tigongren != ''">tigongren = #{tigongren},</if>
+            <if test="customerid != null">customerid = #{customerid},</if>
+            <if test="chanceid != null">chanceid = #{chanceid},</if>
+            <if test="import != null and import != ''">import = #{import},</if>
+            <if test="content != null and content != ''">content = #{content},</if>
+            <if test="createman != null and createman != ''">createman = #{createman},</if>
+            <if test="createtime != null">createtime = #{createtime},</if>
+            <if test="fujian != null and fujian != ''">fujian = #{fujian},</if>
+            <if test="fangan != null and fangan != ''">fangan = #{fangan},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfCustomerXuqiuById" parameterType="Integer">
+        delete from cmf_customer_xuqiu where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfCustomerXuqiuByIds" parameterType="String">
+        delete from cmf_customer_xuqiu where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduSchoolcalendarMapper">
+    
+    <resultMap type="CmfEduSchoolcalendar" id="CmfEduSchoolcalendarResult">
+        <result property="id"    column="id"    />
+        <result property="holiday"    column="holiday"    />
+        <result property="starttime"    column="startTime"    />
+        <result property="endtime"    column="endTime"    />
+        <result property="term"    column="term"    />
+    </resultMap>
+
+    <sql id="selectCmfEduSchoolcalendarVo">
+        select id, holiday, startTime, endTime, term from cmf_edu_schoolcalendar
+    </sql>
+
+    <select id="selectCmfEduSchoolcalendarList" parameterType="CmfEduSchoolcalendar" resultMap="CmfEduSchoolcalendarResult">
+        <include refid="selectCmfEduSchoolcalendarVo"/>
+        <where>  
+            <if test="holiday != null  and holiday != ''"> and holiday = #{holiday}</if>
+            <if test="starttime != null "> and startTime = #{starttime}</if>
+            <if test="endtime != null "> and endTime = #{endtime}</if>
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduSchoolcalendarById" parameterType="Integer" resultMap="CmfEduSchoolcalendarResult">
+        <include refid="selectCmfEduSchoolcalendarVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduSchoolcalendar" parameterType="CmfEduSchoolcalendar" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_schoolcalendar
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="holiday != null and holiday != ''">holiday,</if>
+            <if test="starttime != null">startTime,</if>
+            <if test="endtime != null">endTime,</if>
+            <if test="term != null and term != ''">term,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="holiday != null and holiday != ''">#{holiday},</if>
+            <if test="starttime != null">#{starttime},</if>
+            <if test="endtime != null">#{endtime},</if>
+            <if test="term != null and term != ''">#{term},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduSchoolcalendar" parameterType="CmfEduSchoolcalendar">
+        update cmf_edu_schoolcalendar
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="holiday != null and holiday != ''">holiday = #{holiday},</if>
+            <if test="starttime != null">startTime = #{starttime},</if>
+            <if test="endtime != null">endTime = #{endtime},</if>
+            <if test="term != null and term != ''">term = #{term},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduSchoolcalendarById" parameterType="Integer">
+        delete from cmf_edu_schoolcalendar where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduSchoolcalendarByIds" parameterType="String">
+        delete from cmf_edu_schoolcalendar where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vrcrm.hr.mapper.CmfEduXingzhengQingjiaMapper">
+    
+    <resultMap type="CmfEduXingzhengQingjia" id="CmfEduXingzhengQingjiaResult">
+        <result property="id"    column="id"    />
+        <result property="term"    column="term"    />
+        <result property="department"    column="department"    />
+        <result property="person"    column="person"    />
+        <result property="time"    column="time"    />
+        <result property="week"    column="week"    />
+        <result property="class"    column="class"    />
+        <result property="qingjiatype"    column="qingjiaType"    />
+        <result property="exstatus"    column="exStatus"    />
+        <result property="workflowid"    column="workFlowID"    />
+        <result property="exman"    column="exMan"    />
+        <result property="extime"    column="exTime"    />
+        <result property="personname"    column="personName"    />
+    </resultMap>
+
+    <sql id="selectCmfEduXingzhengQingjiaVo">
+        select id, term, department, person, time, week, class, qingjiaType, exStatus, workFlowID, exMan, exTime, personName from cmf_edu_xingzheng_qingjia
+    </sql>
+
+    <select id="selectCmfEduXingzhengQingjiaList" parameterType="CmfEduXingzhengQingjia" resultMap="CmfEduXingzhengQingjiaResult">
+        <include refid="selectCmfEduXingzhengQingjiaVo"/>
+        <where>  
+            <if test="term != null  and term != ''"> and term = #{term}</if>
+            <if test="department != null  and department != ''"> and department = #{department}</if>
+            <if test="person != null  and person != ''"> and person = #{person}</if>
+            <if test="time != null "> and time = #{time}</if>
+            <if test="week != null "> and week = #{week}</if>
+            <if test="class != null  and class != ''"> and class = #{class}</if>
+            <if test="qingjiatype != null  and qingjiatype != ''"> and qingjiaType = #{qingjiatype}</if>
+            <if test="exstatus != null "> and exStatus = #{exstatus}</if>
+            <if test="workflowid != null "> and workFlowID = #{workflowid}</if>
+            <if test="exman != null  and exman != ''"> and exMan = #{exman}</if>
+            <if test="extime != null  and extime != ''"> and exTime = #{extime}</if>
+            <if test="personname != null  and personname != ''"> and personName like concat('%', #{personname}, '%')</if>
+        </where>
+    </select>
+    
+    <select id="selectCmfEduXingzhengQingjiaById" parameterType="Integer" resultMap="CmfEduXingzhengQingjiaResult">
+        <include refid="selectCmfEduXingzhengQingjiaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertCmfEduXingzhengQingjia" parameterType="CmfEduXingzhengQingjia" useGeneratedKeys="true" keyProperty="id">
+        insert into cmf_edu_xingzheng_qingjia
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">term,</if>
+            <if test="department != null and department != ''">department,</if>
+            <if test="person != null and person != ''">person,</if>
+            <if test="time != null">time,</if>
+            <if test="week != null">week,</if>
+            <if test="class != null and class != ''">class,</if>
+            <if test="qingjiatype != null and qingjiatype != ''">qingjiaType,</if>
+            <if test="exstatus != null">exStatus,</if>
+            <if test="workflowid != null">workFlowID,</if>
+            <if test="exman != null and exman != ''">exMan,</if>
+            <if test="extime != null and extime != ''">exTime,</if>
+            <if test="personname != null and personname != ''">personName,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="term != null and term != ''">#{term},</if>
+            <if test="department != null and department != ''">#{department},</if>
+            <if test="person != null and person != ''">#{person},</if>
+            <if test="time != null">#{time},</if>
+            <if test="week != null">#{week},</if>
+            <if test="class != null and class != ''">#{class},</if>
+            <if test="qingjiatype != null and qingjiatype != ''">#{qingjiatype},</if>
+            <if test="exstatus != null">#{exstatus},</if>
+            <if test="workflowid != null">#{workflowid},</if>
+            <if test="exman != null and exman != ''">#{exman},</if>
+            <if test="extime != null and extime != ''">#{extime},</if>
+            <if test="personname != null and personname != ''">#{personname},</if>
+         </trim>
+    </insert>
+
+    <update id="updateCmfEduXingzhengQingjia" parameterType="CmfEduXingzhengQingjia">
+        update cmf_edu_xingzheng_qingjia
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="term != null and term != ''">term = #{term},</if>
+            <if test="department != null and department != ''">department = #{department},</if>
+            <if test="person != null and person != ''">person = #{person},</if>
+            <if test="time != null">time = #{time},</if>
+            <if test="week != null">week = #{week},</if>
+            <if test="class != null and class != ''">class = #{class},</if>
+            <if test="qingjiatype != null and qingjiatype != ''">qingjiaType = #{qingjiatype},</if>
+            <if test="exstatus != null">exStatus = #{exstatus},</if>
+            <if test="workflowid != null">workFlowID = #{workflowid},</if>
+            <if test="exman != null and exman != ''">exMan = #{exman},</if>
+            <if test="extime != null and extime != ''">exTime = #{extime},</if>
+            <if test="personname != null and personname != ''">personName = #{personname},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteCmfEduXingzhengQingjiaById" parameterType="Integer">
+        delete from cmf_edu_xingzheng_qingjia where id = #{id}
+    </delete>
+
+    <delete id="deleteCmfEduXingzhengQingjiaByIds" parameterType="String">
+        delete from cmf_edu_xingzheng_qingjia where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>
